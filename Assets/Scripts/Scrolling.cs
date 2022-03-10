@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 /// <summary>
 /// Auteur : Malcom Kusunga<br>
-/// Descrption : Cette classe permet la gestion du background.
+/// Description : Cette classe permet la gestion du background.
 /// </summary>
 public class Scrolling : MonoBehaviour
 {
