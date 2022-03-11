@@ -30,6 +30,13 @@ public class BoardManager : MonoBehaviour
     /// Attribut contenant la pièce courante qui est présente sur le plateau de jeu 
     /// </summary>
     [SerializeField] private Piece activePiece;
+
+     /// <summary> 
+    /// Attribut contenant la position d'apparition initiale de la pièce 
+    /// </summary>
+    [SerializeField] private Vector3Int spawnPosition;
+
+
     
     /// <summary> 
     /// Attribut contenant la pièce courante qui est présente sur le plateau de jeu 
@@ -53,9 +60,22 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     private int size;
 
-    private void Awake()
+     /// <summary> 
+    /// Tableau des données des tetrominoes
+    /// </summary>
+    [SerializeField] private TetrominoData[] tetrominoes; 
+
+
+
+
+    private async void Awake()
     {
         SetupBoard();
+        for(int i=0; i< this.tetrominoes.Length; i++)
+        {
+            this.tetrominoes[i].Build(); 
+
+        }
     }
 
     private void Start(){
@@ -75,10 +95,27 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary> 
-    /// Méthode qui permet de faire apparaître une pièce dans la grille de jeu
+    /// Méthode qui permet de générer une piece aléatoirement 
     /// </summary>
     public void SpawnPiece(){
+       int random = Random.Range(0, tetrominoes.Length);
+        TetrominoData data= this.tetrominoes[random]; 
 
+
+        this.activePiece.Initialize(this, spawnPosition, data); 
+        Set(activePiece); 
+
+
+    }
+
+    //poser la pice sur le board 
+    public void Set(Piece piece)
+    {
+        for (int i = 0; i < piece.cells.Length; i++)
+        {
+            Vector3Int tilePosition = piece.cells[i] + piece.position;
+            board.SetTile(tilePosition, piece.data.tile);
+        }
     }
 
     /// <summary> 
@@ -108,6 +145,7 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     public void SetupBoard(){
         this.board = GetComponentInChildren<Tilemap>();
+        this.activePiece=GetComponentInChildren<Piece>();
         this.nb_col = 14;
         this.nb_row = 22;
         this.size = this.nb_col*this.nb_row;
