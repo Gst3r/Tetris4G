@@ -16,7 +16,7 @@ public enum Gravity
 }
 
 /// <summary> 
-/// Auteur : Sterlingot Guillaume, Bae Jin-Young<br>
+/// Auteur : Sterlingot Guillaume, Bae Jin-Young, Nassima Seghir, Malcom Kusunga<br>
 /// Description : Cette classe permet de la gestion de l'ensemble de la grille de jeu
 /// </summary>
 public class BoardManager : MonoBehaviour
@@ -85,8 +85,6 @@ public class BoardManager : MonoBehaviour
 
     private void Update()
     {
-        chooseRandomGravity();
-        Debug.Log(this.gravity);
         if(HaveCollision()){
             ClearLine();
             SpawnPiece();
@@ -98,14 +96,11 @@ public class BoardManager : MonoBehaviour
     /// Méthode qui permet de générer une piece aléatoirement 
     /// </summary>
     public void SpawnPiece(){
-       int random = Random.Range(0, tetrominoes.Length);
+        int random = Random.Range(0, tetrominoes.Length);
         TetrominoData data= this.tetrominoes[random]; 
-
 
         this.activePiece.Initialize(this, spawnPosition, data); 
         Set(activePiece); 
-
-
     }
 
     //poser la pice sur le board 
