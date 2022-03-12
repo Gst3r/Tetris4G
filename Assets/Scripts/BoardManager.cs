@@ -17,7 +17,7 @@ public enum Gravity
 
 /// <summary> 
 /// Auteur : Sterlingot Guillaume, Bae Jin-Young<br>
-/// Description : Cette classe permet de la gestion de l'ensemble de la grille de jeu
+/// Description : Cette classe permet la gestion de l'ensemble de la grille de jeu
 /// </summary>
 public class BoardManager : MonoBehaviour
 {
@@ -39,7 +39,7 @@ public class BoardManager : MonoBehaviour
 
     
     /// <summary> 
-    /// Attribut contenant la pièce courante qui est présente sur le plateau de jeu 
+    /// Attribut contenant la gravité courante exercée
     /// </summary>
     private Gravity gravity;
 
@@ -56,14 +56,25 @@ public class BoardManager : MonoBehaviour
 
 
     /// <summary> 
-    /// Attribut indiquant la taille total du plateau de jeu
+    /// Attribut indiquant la taille totale du plateau de jeu
     /// </summary>
-    private int size;
+    private Vector2Int size;
 
-     /// <summary> 
+    /// <summary> 
     /// Tableau des données des tetrominoes
     /// </summary>
     [SerializeField] private TetrominoData[] tetrominoes; 
+
+
+    /// <summary> 
+    /// Attribut définissant le rectangle qui délimite la grille de jeu 
+    /// </summary>
+    public RectInt Bornes {
+        get{
+             Vector2Int position = new Vector2Int(-size.x / 2, -size.y / 2);
+             return new RectInt(position, size);
+        }
+    }
 
 
 
@@ -73,7 +84,7 @@ public class BoardManager : MonoBehaviour
         SetupBoard();
         for(int i=0; i< this.tetrominoes.Length; i++)
         {
-            this.tetrominoes[i].Build(); 
+           this.tetrominoes[i]=TetrominoBuilder.Build(this.tetrominoes[i]); 
 
         }
     }
@@ -98,7 +109,7 @@ public class BoardManager : MonoBehaviour
     /// Méthode qui permet de générer une piece aléatoirement 
     /// </summary>
     public void SpawnPiece(){
-       int random = Random.Range(0, tetrominoes.Length);
+        int random = Random.Range(0, tetrominoes.Length);
         TetrominoData data= this.tetrominoes[random]; 
 
 
@@ -108,7 +119,9 @@ public class BoardManager : MonoBehaviour
 
     }
 
-    //poser la pice sur le board 
+    /// <summary> 
+    /// Méthode qui permet de fixer la piece sur la grille de jeu 
+    /// </summary>
     public void Set(Piece piece)
     {
         for (int i = 0; i < piece.cells.Length; i++)
@@ -117,6 +130,19 @@ public class BoardManager : MonoBehaviour
             board.SetTile(tilePosition, piece.data.tile);
         }
     }
+
+    /// <summary> 
+    /// Méthode qui permet d'effacer la piece de la grille de jeu  
+    /// </summary>
+     public void Clear(Piece piece)
+    {
+        for (int i = 0; i < piece.cells.Length; i++)
+        {
+            Vector3Int tilePosition = piece.cells[i] + piece.position;
+            board.SetTile(tilePosition, null);
+        }
+    }
+
 
     /// <summary> 
     /// Méthode qui permet d'appliquer une des quatres gravités à la grille de jeu
@@ -148,7 +174,7 @@ public class BoardManager : MonoBehaviour
         this.activePiece=GetComponentInChildren<Piece>();
         this.nb_col = 14;
         this.nb_row = 22;
-        this.size = this.nb_col*this.nb_row;
+        this.size = new Vector2Int(14,22);
     }
 
     /// <summary> 
@@ -175,20 +201,54 @@ public class BoardManager : MonoBehaviour
     /// Auteur : Sterlingot Guillaume
     /// Description : Méthode qui permet la sélection aléatoire d'une des quatres gravités existantes
     /// </summary>
-    public void chooseRandomGravity(){
+    public static Gravity chooseRandomGravity(){
         int randomNumber = Random.Range(0,4);
         switch (randomNumber)
         {
-            case 0: this.gravity=Gravity.HAUT;
+            case 0: return Gravity.HAUT;
                     break;
-            case 1: this.gravity=Gravity.BAS;
+            case 1: return Gravity.BAS;
                     break;
-            case 2: this.gravity=Gravity.GAUCHE;
+            case 2: return Gravity.GAUCHE;
                     break;
-            case 3: this.gravity=Gravity.DROITE;
+            case 3: return Gravity.DROITE;
                     break;
-            default:this.gravity=Gravity.BAS;
+            default: return Gravity.BAS;
                     break;
         }
+    }
+
+    /// <summary> 
+    /// Auteur : Seghir Nassima 
+    /// Description : Méthode qui permet de vérifier si une position est valide 
+    /// </summary>
+    /// <returns>
+    /// un booléen qui indique FALSE si la poisition est occupée par un tetromino, 
+    /// FALSE si la position est au-dela des limites de la grille, TRUE sinon
+    /// </returns>
+
+    public bool validerPosition(Piece piece, Vector3Int position)
+    {
+        RectInt bounds = Bornes;
+
+        // la méthode vérifie la validité de chaque cellule 
+        for (int i = 0; i < piece.cells.Length; i++)
+        {
+            Vector3Int tilePosition = piece.cells[i] + position;
+
+            // au-dela des limites donc FALSE
+            if (!bounds.Contains((Vector2Int)tilePosition)) {
+                return false;
+            }
+
+            // occupé par une autre tuile donc FALSE 
+            if (board.HasTile(tilePosition)) {
+                return false;
+            }
+        }
+
+        return true;
+
+
     }
 }
