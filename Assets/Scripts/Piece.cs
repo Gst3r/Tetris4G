@@ -18,7 +18,6 @@ public class Piece : MonoBehaviour
     /// </summary>
     public TetrominoData data { get; private set; }
 
-
     /// <summary> 
     /// Attribut contenant les cellules du tetromino actuel
     /// </summary>
@@ -51,13 +50,15 @@ public class Piece : MonoBehaviour
     /// </summary>
     private float lockTime;
 
-
     /// <summary> 
     /// Attribut indiquant la gravité exércée sur la piece      
     /// </summary>
     private Gravity gravity= Gravity.BAS; 
   
-
+    /// <summary> 
+    /// Attribut indiquant le nombre de rotation réalisé en partant de la pièce initiale      
+    /// </summary>
+    private int nbRotate=0;
   
     /// <summary> 
     /// Méthode qui permet d'initialiser la piece  
@@ -77,9 +78,6 @@ public class Piece : MonoBehaviour
          for (int i = 0; i < cells.Length; i++) {
             cells[i] = (Vector3Int)data.cellules[i]; 
         }
-
-
-
     }
 
     private void Update()
@@ -93,7 +91,6 @@ public class Piece : MonoBehaviour
         }
 
          board.Set(this);
-
     }
 
     /// <summary> 
@@ -155,10 +152,77 @@ public class Piece : MonoBehaviour
     /// <summary> 
     /// Méthode qui bloque le mouvement de la piece   
     /// </summary>
-     private void Lock()
+    private void Lock()
     {
         board.Set(this);
         gravity=BoardManager.chooseRandomGravity();
         board.SpawnPiece();
+    }
+
+
+    /// <summary> 
+    /// Auteur : Malcom Kusunga
+    /// Description : Méthode qui permet le déplacement droite de la pièce de tetromino actuellement présente sur le plateau
+    /// </summary>
+    public void RightShift(){
+        
+    }
+
+    /// <summary> 
+    /// Auteur : Malcom Kusunga
+    /// Description : Méthode qui permet le déplacement gauche de la pièce de tetromino actuellement présente sur le plateau
+    /// </summary>
+    public void LeftShift(){
+        
+    }
+
+    /// <summary> 
+    /// Auteur : Malcom Kusunga
+    /// Description : Méthode qui permet le déplacement haut de la pièce de tetromino actuellement présente sur le plateau
+    /// </summary>
+    public void TopShift(){
+        
+    }
+
+    /// <summary> 
+    /// Auteur : Malcom Kusunga
+    /// Description : Méthode qui permet le déplacement bas de la pièce de tetromino actuellement présente sur le plateau
+    /// </summary>
+    public void BotShift(){
+        
+    }
+
+    /// <summary> 
+    /// Auteur : Sterlingot Guillaume
+    /// Description : Méthode qui permet la rotation de la pièce de tetromino actuellement présente sur le plateau
+    /// </summary>
+    public void Rotate(){
+        board.Clear(this);
+        Pivot();
+    }
+
+    /// <summary> 
+    /// Auteur : Sterlingot Guillaume
+    /// Description : Méthode qui permet de pivoter une pièce
+    /// </summary>
+    /// <returns> 
+    /// un booléen qui indique TRUE si la position de la pièce est valide, FALSE sinon
+    /// </returns>
+    public bool Pivot(){
+        Vector3Int newPosition = position;
+        //newPosition.x += translation.x;
+        //newPosition.y += translation.y;
+
+        bool valid = board.validerPosition(this, newPosition);
+
+        if (valid)
+        {
+            position = newPosition;
+            lockTime = 0f; // a chaque mouvement de la piece il est remis a 0, comme ça quand elle atteint 
+            //le bord et qu'elle ne bouge plus, on la lock 
+           
+        }
+
+        return valid;
     }
 }
