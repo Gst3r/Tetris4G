@@ -96,10 +96,10 @@ public class BoardManager : MonoBehaviour
 
     private void Update()
     {
-        if(HaveCollision()){
+        /*if(HaveCollision()){
             ClearLine();
             SpawnPiece();
-        }
+        }*/
     }
 
     /// <summary> 

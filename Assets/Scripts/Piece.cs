@@ -49,11 +49,6 @@ public class Piece : MonoBehaviour
     private float lockTime;
   
     /// <summary> 
-    /// Attribut indiquant le nombre de rotation réalisé en partant de la pièce initiale      
-    /// </summary>
-    private int nbRotate=0;
-  
-    /// <summary> 
     /// Méthode qui permet d'initialiser la piece  
     /// </summary>
     public void Initialize(BoardManager board, Vector3Int position, TetrominoData data)
@@ -100,7 +95,7 @@ public class Piece : MonoBehaviour
 
         bool valid = board.validerPosition(this, newPosition);
 
-        if (valid)
+        if(valid)
         {
             position = newPosition;
             lockTime = 0f; // a chaque mouvement de la piece il est remis a 0, comme ça quand elle atteint 
@@ -273,8 +268,17 @@ public class Piece : MonoBehaviour
     /// Description : Méthode qui permet la rotation de la pièce de tetromino actuellement présente sur le plateau
     /// </summary>
     public void Rotate(){
-        board.Clear(this);
-        Pivot();
+        Vector2Int pivot;
+        
+        if(data.tetromino.CompareTo(Tetromino.I)==0)
+            pivot = new Vector2Int(1,1);
+        else
+            pivot = new Vector2Int(0,0);
+       
+        if(!data.tetromino.Equals(Tetromino.O)){
+            board.Clear(this);
+            Pivot(pivot);
+        }
     }
     
     /// <summary> 
@@ -284,8 +288,46 @@ public class Piece : MonoBehaviour
     /// <returns> 
     /// un booléen qui indique TRUE si la position de la pièce est valide, FALSE sinon
     /// </returns>
-    public bool Pivot(){
-        GetComponent<RectTransform>().transform.rotation = Quaternion.Euler(GetComponent<RectTransform>().transform.rotation.x, GetComponent<RectTransform>().transform.rotation.y, GetComponent<RectTransform>().transform.rotation.z-90);
+    public bool Pivot(Vector2Int pivot){
+        for(int i=0;i<4;i++){
+            //Calcul de l'écart en x et en y entre la pièce pivot et la pièce à faire tourner autour
+            int ecartX = Mathf.Abs(pivot.x - cells[i].x);
+            int ecartY = Mathf.Abs(pivot.y - cells[i].y);
+            int newX = cells[i].x, newY = cells[i].y;
+
+            //Différenciation des quatres rotations effectifs sur le plateau avant que la pièce retourne à son point de départ
+            //Pour chaque cas, on calcul les nouvelles coordonnées de la cellules selon les coordonnées du pivot
+
+            //CAS OU ON SE SITUE DANS le VOISINAGE aligné horizontalement ou verticalement avec le pivot
+            if(cells[i].y==pivot.y&&cells[i].x<pivot.x){ //Condition qui indique la rotation a effectuer
+                newX = pivot.x;
+                newY = ecartX+cells[i].y;
+            }else if(cells[i].x==pivot.x&&cells[i].y>pivot.y){ //Condition qui indique la rotation a effectuer
+                newX = ecartY+cells[i].x;
+                newY = pivot.y;
+            }else if(cells[i].y==pivot.y&&cells[i].x>pivot.x){ //Condition qui indique la rotation a effectuer
+                newX = pivot.x;
+                newY = cells[i].y-ecartX;
+            }else if(cells[i].x==pivot.x&&cells[i].y<pivot.y){ //Condition qui indique la rotation a effectuer
+                newX = cells[i].x - ecartY;
+                newY = pivot.y;
+            }
+            //CAS OU ON SE SITUE DANS le VOISINAGE non aligné avec le pivot
+            else if(cells[i].y>pivot.y&&cells[i].x<pivot.x)
+                newX = cells[i].x+2*ecartX;
+            else if(cells[i].y>pivot.y&&cells[i].x>pivot.x)
+                newY = cells[i].y-2*ecartY;
+            else if(cells[i].y<pivot.y&&cells[i].x>pivot.x)
+                newX = cells[i].x-2*ecartX;
+            else
+                newY = cells[i].y+2*ecartY;
+
+            bool valid = board.validerPosition(this, new Vector3Int(newX,newY, 0));
+            if (valid){
+                cells[i].x = newX;
+                cells[i].y = newY;
+            }
+        }
 
         return false;
     }

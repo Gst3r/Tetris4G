@@ -46,7 +46,6 @@ public class TetrominoBuilder : MonoBehaviour
     public static TetrominoData Build(TetrominoData tetrominoData)
     {
         tetrominoData.cellules= Cells[tetrominoData.tetromino];
-
         return tetrominoData; 
     }
 }
