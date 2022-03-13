@@ -1061,7 +1061,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1719026911}
           m_TargetAssemblyTypeName: Piece, Assembly-CSharp
-          m_MethodName: IncreaseRightGravity
+          m_MethodName: ModifyGravityR
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1077,7 +1077,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1719026911}
           m_TargetAssemblyTypeName: Piece, Assembly-CSharp
-          m_MethodName: ModifyGravityR
+          m_MethodName: RestoreGravity
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
