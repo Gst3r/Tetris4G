@@ -90,7 +90,7 @@ public class BoardManager : MonoBehaviour
     }
 
     private void Start(){
-        ApplyGravity();
+        chooseRandomGravity();
         SpawnPiece();
     }
 
@@ -99,7 +99,6 @@ public class BoardManager : MonoBehaviour
         if(HaveCollision()){
             ClearLine();
             SpawnPiece();
-            ApplyGravity();
         }
     }
 
@@ -129,22 +128,13 @@ public class BoardManager : MonoBehaviour
     /// <summary> 
     /// Méthode qui permet d'effacer la piece de la grille de jeu  
     /// </summary>
-     public void Clear(Piece piece)
+    public void Clear(Piece piece)
     {
         for (int i = 0; i < piece.cells.Length; i++)
         {
             Vector3Int tilePosition = piece.cells[i] + piece.position;
             board.SetTile(tilePosition, null);
         }
-    }
-
-
-    /// <summary> 
-    /// Méthode qui permet d'appliquer une des quatres gravités à la grille de jeu
-    /// </summary>
-    // VERIFIER SI UNE PIECE EST PRESENTE DANS LA GRILLE AVANT, SINON ON INDIQUE UNE ERREURE
-    public void ApplyGravity(){
-
     }
 
     /// <summary> 
