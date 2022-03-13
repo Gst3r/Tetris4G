@@ -196,19 +196,19 @@ public class BoardManager : MonoBehaviour
     /// Auteur : Sterlingot Guillaume
     /// Description : Méthode qui permet la sélection aléatoire d'une des quatres gravités existantes
     /// </summary>
-    public static Gravity chooseRandomGravity(){
+    public void chooseRandomGravity(){
         int randomNumber = Random.Range(0,4);
         switch (randomNumber)
         {
-            case 0: return Gravity.HAUT;
+            case 0: this.gravity = Gravity.HAUT;
                     break;
-            case 1: return Gravity.BAS;
+            case 1: this.gravity = Gravity.BAS;
                     break;
-            case 2: return Gravity.GAUCHE;
+            case 2: this.gravity = Gravity.GAUCHE;
                     break;
-            case 3: return Gravity.DROITE;
+            case 3: this.gravity = Gravity.DROITE;
                     break;
-            default: return Gravity.BAS;
+            default: this.gravity = Gravity.BAS;
                     break;
         }
     }
@@ -243,7 +243,9 @@ public class BoardManager : MonoBehaviour
         }
 
         return true;
+    }
 
-
+    public Gravity GetGravity(){
+        return gravity;
     }
 }

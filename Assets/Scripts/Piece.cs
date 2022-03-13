@@ -49,11 +49,6 @@ public class Piece : MonoBehaviour
     /// Attribut indiquant l'instant ou la pice doit se fixer      
     /// </summary>
     private float lockTime;
-
-    /// <summary> 
-    /// Attribut indiquant la gravité exércée sur la piece      
-    /// </summary>
-    private Gravity gravity= Gravity.BAS; 
   
     /// <summary> 
     /// Attribut indiquant le nombre de rotation réalisé en partant de la pièce initiale      
@@ -126,23 +121,19 @@ public class Piece : MonoBehaviour
     {
         stepTime = Time.time + stepDelay;
 
-         switch (gravity)
+         switch (board.GetGravity())
         {
-            case Gravity.HAUT:   Move(Vector2Int.up); ;
+            case Gravity.HAUT:   Move(Vector2Int.up);
                                  break;
-            case Gravity.BAS:    Move(Vector2Int.down); ;
+            case Gravity.BAS:    Move(Vector2Int.down);
                                  break;
-            case Gravity.GAUCHE: Move(Vector2Int.left); ;
+            case Gravity.GAUCHE: Move(Vector2Int.left);
                                  break;
-            case Gravity.DROITE: Move(Vector2Int.right); ;
+            case Gravity.DROITE: Move(Vector2Int.right);
                                  break;
             default: Move(Vector2Int.down);
                      break;
         }
-
-        
-       
-
         
        if (lockTime >= lockDelay) {
            Lock();
@@ -155,7 +146,7 @@ public class Piece : MonoBehaviour
     private void Lock()
     {
         board.Set(this);
-        gravity=BoardManager.chooseRandomGravity();
+        board.GetGravity();
         board.SpawnPiece();
     }
 
@@ -200,7 +191,7 @@ public class Piece : MonoBehaviour
         board.Clear(this);
         Pivot();
     }
-
+    
     /// <summary> 
     /// Auteur : Sterlingot Guillaume
     /// Description : Méthode qui permet de pivoter une pièce
@@ -209,20 +200,9 @@ public class Piece : MonoBehaviour
     /// un booléen qui indique TRUE si la position de la pièce est valide, FALSE sinon
     /// </returns>
     public bool Pivot(){
-        Vector3Int newPosition = position;
-        //newPosition.x += translation.x;
-        //newPosition.y += translation.y;
+        GetComponent<RectTransform>().transform.rotation = Quaternion.Euler(GetComponent<RectTransform>().transform.rotation.x, GetComponent<RectTransform>().transform.rotation.y, GetComponent<RectTransform>().transform.rotation.z-90);
 
-        bool valid = board.validerPosition(this, newPosition);
-
-        if (valid)
-        {
-            position = newPosition;
-            lockTime = 0f; // a chaque mouvement de la piece il est remis a 0, comme ça quand elle atteint 
-            //le bord et qu'elle ne bouge plus, on la lock 
-           
-        }
-
-        return valid;
+        return false;
     }
 }
+
