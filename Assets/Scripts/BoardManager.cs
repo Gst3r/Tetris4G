@@ -163,23 +163,203 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary> 
-    /// Méthode qui permet de vérifier si une ligne a été complété dans la grille de jeu
+    /// Méthode qui permet de vérifier si une ligne a été complétée dans la grille de jeu
     /// </summary>
     /// <returns>
-    /// un booléen qui indique TRUE si une ligne a été complété sur la grille de jeu, FALSE sinon
+    /// un booléen qui indique TRUE si une ligne a été complétée sur la grille de jeu, FALSE sinon
     /// </returns>
-    public bool RowIsComplete(){
-        return false;
+    public bool RowIsComplete(int row)
+    {
+        RectInt bornes = Bornes;
+
+        for (int col = bornes.xMin; col < bornes.xMax; col++)
+        {
+            Vector3Int cur_pos = new Vector3Int(col, row, -2);
+
+            if (!board.HasTile(cur_pos))
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /// <summary> 
-    /// Méthode qui permet de vérifier si une colonne a été complété dans la grille de jeu
+    /// Méthode qui permet de détruire la ligne complétée et d'appliquer la gravité sur toute la grille
+    /// </summary>
+    public void ClearRow(int row)
+    {
+        RectInt bornes = Bornes;
+
+        //Destruction de la ligne complète 
+        for (int col = bornes.xMin; col < bornes.xMax; col++)
+        {
+            Vector3Int cur_pos = new Vector3Int(col, row, -2);
+            board.SetTile(cur_pos, null);
+        }
+
+        //Application de la gravité
+        switch (gravity)
+        {
+            //si la gravité s'applique vers le bas
+            case Gravity.BAS:
+                while (row < -2)
+                {
+                    for (int col = bornes.xMin; col < bornes.xMax; col++)
+                    {
+                        //position de la cellule à déplacer
+                        Vector3Int position = new Vector3Int(col, row + 1, -2);
+                        TileBase previous = board.GetTile(position);
+                        board.SetTile(position, null);
+
+                        //nouvelle position
+                        Vector3Int new_position = new Vector3Int(col, row, -2);
+                        board.SetTile(new_position, previous);
+                    }
+                    row++;
+                }
+                break;
+
+            // si la gravité s'applique vers le haut
+            case Gravity.HAUT:
+                while (row > 2)
+                {
+                    for (int col = bornes.xMin; col < bornes.xMax; col++)
+                    {
+                        //position de la cellule à déplacer
+                        Vector3Int position = new Vector3Int(col, row - 1, -2);
+                        TileBase previous = board.GetTile(position);
+                        board.SetTile(position, null);
+
+                        //nouvelle position
+                        Vector3Int new_position = new Vector3Int(col, row, -2);
+                        board.SetTile(new_position, previous);
+                    }
+                    row--;
+                }
+                break;
+
+        }
+    }
+
+    /// <summary> 
+    /// Méthode qui permet de vérifier si une colonne a été complétée dans la grille de jeu
     /// </summary>
     /// <returns>
-    /// un booléen qui indique TRUE si une colonne a été complété sur la grille de jeu, FALSE sinon
+    /// un booléen qui indique TRUE si une colonne a été complétée sur la grille de jeu, FALSE sinon
     /// </returns>
-    public bool ColIsComplete(){
-        return false;
+    public bool ColIsComplete(int col)
+    {
+        RectInt bornes = Bornes;
+
+        for (int row = bornes.yMin; row < bornes.yMax; row++)
+        {
+            Vector3Int cur_pos = new Vector3Int(col, row, -2);
+
+            if (!board.HasTile(cur_pos))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /// <summary> 
+    /// Méthode qui permet de détruire la colonne complétée et d'appliquer la gravité sur toute la grille
+    /// </summary>
+    public void ClearCol(int col)
+    {
+        RectInt bornes = Bornes;
+
+        // Destruction de la colonne complète
+        for (int row = bornes.yMin; row < bornes.yMax; row++)
+        {
+            Vector3Int cur_pos = new Vector3Int(col, row, -2);
+            board.SetTile(cur_pos, null);
+        }
+
+        // Application de la gravité
+        switch (gravity)
+        {
+            //si la gravité s'applique vers la gauche
+            case Gravity.GAUCHE:
+                while (col < 2)
+                {
+                    for (int row = bornes.yMin; row < bornes.yMax; row++)
+                    {
+                        //position de la cellule à déplacer
+                        Vector3Int position = new Vector3Int(col + 1, row, -2);
+                        TileBase previous = board.GetTile(position);
+                        board.SetTile(position, null);
+
+                        //nouvelle position 
+                        Vector3Int new_position = new Vector3Int(col, row, -2);
+                        board.SetTile(new_position, previous);
+                    }
+                    col++;
+                }
+                break;
+
+            //si la gravité s'applique vers la droite
+            case Gravity.DROITE:
+                while (col > -2)
+                {
+                    for (int row = bornes.yMin; row < bornes.yMax; row++)
+                    {
+                        //position de la cellule à déplacer
+                        Vector3Int position = new Vector3Int(col - 1, row, -2);
+                        TileBase previous = board.GetTile(position);
+                        board.SetTile(position, null);
+
+                        //nouvelle position
+                        Vector3Int new_position = new Vector3Int(col, row, -2);
+                        board.SetTile(new_position, previous);
+                    }
+                    col--;
+                }
+                break;
+        }
+    }
+
+    /// <summary>
+    /// Méthode permettant de détruire une ligne/colonne complétée
+    /// </summary>
+    public void ClearCompleteLine()
+    {
+        RectInt bornes = Bornes;
+
+        int row = bornes.yMin;
+        while (row < bornes.yMax)
+        {
+
+            if (RowIsComplete(row))
+            {
+                ClearRow(row);
+            }
+
+            else
+            {
+                row++;
+            }
+        }
+
+        int col = bornes.xMin;
+        while (col < bornes.xMax)
+        {
+
+            if (ColIsComplete(col))
+            {
+                ClearCol(col);
+            }
+
+            else
+            {
+                col++;
+            }
+        }
+
     }
 
     /// <summary> 
