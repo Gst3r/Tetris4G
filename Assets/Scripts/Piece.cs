@@ -322,7 +322,7 @@ public class Piece : MonoBehaviour
             else
                 newY = cells[i].y+2*ecartY;
 
-            bool valid = board.validerPosition(this, new Vector3Int(newX,newY, 0));
+            bool valid = board.ValideTilePos(new Vector3Int(newX, newY, 0));
             if (valid){
                 cells[i].x = newX;
                 cells[i].y = newY;

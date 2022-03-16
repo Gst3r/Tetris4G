@@ -235,6 +235,15 @@ public class BoardManager : MonoBehaviour
         return true;
     }
 
+    public bool ValideTilePos(Vector3Int tilePos){
+        RectInt bounds = Bornes;
+
+        if (!bounds.Contains((Vector2Int)tilePos))
+            return false;
+        
+        return true;
+    }
+
     public Gravity GetGravity(){
         return gravity;
     }
