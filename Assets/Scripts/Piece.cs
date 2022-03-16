@@ -148,7 +148,9 @@ public class Piece : MonoBehaviour
     /// Description : Méthode permettant le déplacement vers la droite du tetromino actuellement présent sur le plateau
     /// </summary>
     public void RightShift(){
+        //Vérification du sens d'application de la gravité
         if(board.GetGravity() == Gravity.HAUT || board.GetGravity() == Gravity.BAS){
+            //Suppresion de la position précédente du tétromino sur la grille
             board.Clear(this);
             Move(Vector2Int.right);
         }  
