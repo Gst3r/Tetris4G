@@ -65,7 +65,6 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     [SerializeField] private TetrominoData[] tetrominoes; 
 
-
     /// <summary> 
     /// Attribut définissant le rectangle qui délimite la grille de jeu 
     /// </summary>
@@ -75,9 +74,6 @@ public class BoardManager : MonoBehaviour
              return new RectInt(position, size);
         }
     }
-
-
-
 
     private async void Awake()
     {
@@ -211,7 +207,6 @@ public class BoardManager : MonoBehaviour
     /// un booléen qui indique FALSE si la poisition est occupée par un tetromino, 
     /// FALSE si la position est au-dela des limites de la grille, TRUE sinon
     /// </returns>
-
     public bool validerPosition(Piece piece, Vector3Int position)
     {
         RectInt bounds = Bornes;
@@ -235,12 +230,21 @@ public class BoardManager : MonoBehaviour
         return true;
     }
 
+    /// <summary> 
+    /// Auteur : Sterlingot Guillaume 
+    /// Description : Méthode qui permet de vérifier si la position d'une tile est valide 
+    /// </summary>
+    /// <returns>
+    /// un booléen qui indique FALSE si la position est occupée par un tetromino, 
+    /// FALSE si la position est au-dela des limites de la grille, TRUE sinon
+    /// </returns>
     public bool ValideTilePos(Vector3Int tilePos){
-        RectInt bounds = Bornes;
+        RectInt bounds = Bornes;// On récupère les bornes du plateau
 
-        if (!bounds.Contains((Vector2Int)tilePos))
+        //Si la position de la tile dépace les limites où se confond avec une autre tile alors on retourne FALSE pour indiquer que la position est incorrect
+        if (!bounds.Contains((Vector2Int)tilePos) || board.HasTile(tilePos)) 
             return false;
-        
+        //Sinon on retourne TRUE pour indiquer que la position est correct
         return true;
     }
 
