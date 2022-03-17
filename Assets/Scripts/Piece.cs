@@ -161,7 +161,7 @@ public class Piece : MonoBehaviour
         // Attente active que les secondes passent avant d'augmenter la vitesse de la gravité
         if(((int)Time.realtimeSinceStartup)%5==0 && justOne==0){
             Debug.Log((int)Time.realtimeSinceStartup);
-            stepDelay -= 0.05f;
+            stepDelay -= 0.01f;
             justOne=1;
         }
     }
