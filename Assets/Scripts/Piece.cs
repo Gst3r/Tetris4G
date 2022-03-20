@@ -173,7 +173,9 @@ public class Piece : MonoBehaviour
         RestoreGravity();
         board.Set(this);
         board.ClearCompleteLine();
+        board.ClearApparitionZone();
         board.chooseRandomGravity();
+        board.StopGravity();
         board.SpawnPiece();
     }
 

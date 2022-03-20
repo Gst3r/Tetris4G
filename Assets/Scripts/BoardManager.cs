@@ -139,13 +139,6 @@ public class BoardManager : MonoBehaviour
     public bool HaveCollision(){
         return false;
     }
-    
-    /// <summary> 
-    /// Méthode qui permet de détruire la ligne complété et d'appliquer la gravité sur toute la grille
-    /// </summary>
-    public bool ClearLine(){
-        return false;
-    }
 
     /// <summary> 
     /// Méthode qui permet d'initialiser les paramètres du plateau de jeu
@@ -159,6 +152,7 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary> 
+    /// Auteur : Jin-Young BAE
     /// Méthode qui permet de vérifier si une ligne a été complétée dans la grille de jeu
     /// </summary>
     /// <returns>
@@ -168,10 +162,12 @@ public class BoardManager : MonoBehaviour
     {
         RectInt bornes = Bornes;
 
+        // pour toutes les cellules d'une ligne :
         for (int col = bornes.xMin; col < bornes.xMax; col++)
         {
             Vector3Int cur_pos = new Vector3Int(col, row, -2);
 
+            // si la cellule n'est pas remplie, la ligne n'est pas complète
             if (!board.HasTile(cur_pos))
             {
                 return false;
@@ -182,6 +178,7 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary> 
+    /// Auteur : Jin-Young BAE
     /// Méthode qui permet de détruire la ligne complétée et d'appliquer la gravité sur toute la grille
     /// </summary>
     public void ClearRow(int row)
@@ -196,50 +193,51 @@ public class BoardManager : MonoBehaviour
         }
 
         //Application de la gravité
-        switch (gravity)
+
+        //si la ligne se trouve sur la partie basse de l'écran
+        if (row < 0)
         {
-            //si la gravité s'applique vers le bas
-            case Gravity.BAS:
-                while (row < -2)
+            while (row < -3)
+            {
+                for (int col = bornes.xMin; col < bornes.xMax; col++)
                 {
-                    for (int col = bornes.xMin; col < bornes.xMax; col++)
-                    {
-                        //position de la cellule à déplacer
-                        Vector3Int position = new Vector3Int(col, row + 1, -2);
-                        TileBase previous = board.GetTile(position);
-                        board.SetTile(position, null);
+                    //position de la cellule à déplacer
+                    Vector3Int position = new Vector3Int(col, row + 1, -2);
+                    TileBase previous = board.GetTile(position);
+                    board.SetTile(position, null);
 
-                        //nouvelle position
-                        Vector3Int new_position = new Vector3Int(col, row, -2);
-                        board.SetTile(new_position, previous);
-                    }
-                    row++;
+                    //nouvelle position
+                    Vector3Int new_position = new Vector3Int(col, row, -2);
+                    board.SetTile(new_position, previous);
                 }
-                break;
+                row++;
+            }
+        }
 
-            // si la gravité s'applique vers le haut
-            case Gravity.HAUT:
-                while (row > 2)
+        // si la ligne se trouve sur la partie haute de l'écran
+        if (row > 0)
+        {
+            while (row > 2)
+            {
+                for (int col = bornes.xMin; col < bornes.xMax; col++)
                 {
-                    for (int col = bornes.xMin; col < bornes.xMax; col++)
-                    {
-                        //position de la cellule à déplacer
-                        Vector3Int position = new Vector3Int(col, row - 1, -2);
-                        TileBase previous = board.GetTile(position);
-                        board.SetTile(position, null);
+                    //position de la cellule à déplacer
+                    Vector3Int position = new Vector3Int(col, row - 1, -2);
+                    TileBase previous = board.GetTile(position);
+                    board.SetTile(position, null);
 
-                        //nouvelle position
-                        Vector3Int new_position = new Vector3Int(col, row, -2);
-                        board.SetTile(new_position, previous);
-                    }
-                    row--;
+                    //nouvelle position
+                    Vector3Int new_position = new Vector3Int(col, row, -2);
+                    board.SetTile(new_position, previous);
                 }
-                break;
+                row--;
+            }
 
         }
     }
 
     /// <summary> 
+    /// Auteur : Jin-Young BAE
     /// Méthode qui permet de vérifier si une colonne a été complétée dans la grille de jeu
     /// </summary>
     /// <returns>
@@ -249,10 +247,12 @@ public class BoardManager : MonoBehaviour
     {
         RectInt bornes = Bornes;
 
+        // pour toutes les cellules d'une colonne :
         for (int row = bornes.yMin; row < bornes.yMax; row++)
         {
             Vector3Int cur_pos = new Vector3Int(col, row, -2);
 
+            // si une cellule n'est pas remplie, la colonne n'est pas complète
             if (!board.HasTile(cur_pos))
             {
                 return false;
@@ -263,6 +263,7 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary> 
+    /// Auteur : Jin-Young BAE
     /// Méthode qui permet de détruire la colonne complétée et d'appliquer la gravité sur toute la grille
     /// </summary>
     public void ClearCol(int col)
@@ -277,74 +278,78 @@ public class BoardManager : MonoBehaviour
         }
 
         // Application de la gravité
-        switch (gravity)
+
+        //si la colonne se trouve sur la partie gauche de l'écran
+        if (col < 0)
         {
-            //si la gravité s'applique vers la gauche
-            case Gravity.GAUCHE:
-                while (col < 2)
+            while (col < -3)
+            {
+                for (int row = bornes.yMin; row < bornes.yMax; row++)
                 {
-                    for (int row = bornes.yMin; row < bornes.yMax; row++)
-                    {
-                        //position de la cellule à déplacer
-                        Vector3Int position = new Vector3Int(col + 1, row, -2);
-                        TileBase previous = board.GetTile(position);
-                        board.SetTile(position, null);
+                    //position de la cellule à déplacer
+                    Vector3Int position = new Vector3Int(col + 1, row, -2);
+                    TileBase previous = board.GetTile(position);
+                    board.SetTile(position, null);
 
-                        //nouvelle position 
-                        Vector3Int new_position = new Vector3Int(col, row, -2);
-                        board.SetTile(new_position, previous);
-                    }
-                    col++;
+                    //nouvelle position 
+                    Vector3Int new_position = new Vector3Int(col, row, -2);
+                    board.SetTile(new_position, previous);
                 }
-                break;
+                col++;
+            }
+        }
 
-            //si la gravité s'applique vers la droite
-            case Gravity.DROITE:
-                while (col > -2)
+        //si la colonne se trouve sur la partie droite de l'écran
+        if (col > 0)
+        {
+            while (col > 2)
+            {
+                for (int row = bornes.yMin; row < bornes.yMax; row++)
                 {
-                    for (int row = bornes.yMin; row < bornes.yMax; row++)
-                    {
-                        //position de la cellule à déplacer
-                        Vector3Int position = new Vector3Int(col - 1, row, -2);
-                        TileBase previous = board.GetTile(position);
-                        board.SetTile(position, null);
+                    //position de la cellule à déplacer
+                    Vector3Int position = new Vector3Int(col - 1, row, -2);
+                    TileBase previous = board.GetTile(position);
+                    board.SetTile(position, null);
 
-                        //nouvelle position
-                        Vector3Int new_position = new Vector3Int(col, row, -2);
-                        board.SetTile(new_position, previous);
-                    }
-                    col--;
+                    //nouvelle position
+                    Vector3Int new_position = new Vector3Int(col, row, -2);
+                    board.SetTile(new_position, previous);
                 }
-                break;
+                col--;
+            }
         }
     }
 
     /// <summary>
+    /// Auteur : Jin-Young BAE
     /// Méthode permettant de détruire une ligne/colonne complétée
     /// </summary>
     public void ClearCompleteLine()
     {
         RectInt bornes = Bornes;
 
+        // les lignes :
         int row = bornes.yMin;
         while (row < bornes.yMax)
         {
-
+            // si une ligne est complète, elle est détruite
             if (RowIsComplete(row))
             {
                 ClearRow(row);
             }
 
+            // sinon on passe à la prochaine ligne
             else
             {
                 row++;
             }
         }
 
+        // les colonnes :
         int col = bornes.xMin;
         while (col < bornes.xMax)
         {
-
+            // si une colonne est complète, elle est détruite
             if (ColIsComplete(col))
             {
                 ClearCol(col);
@@ -355,7 +360,6 @@ public class BoardManager : MonoBehaviour
                 col++;
             }
         }
-
     }
 
     /// <summary> 
@@ -430,5 +434,130 @@ public class BoardManager : MonoBehaviour
 
     public Gravity GetGravity(){
         return gravity;
+    }
+
+    /// <summary>
+    /// Auteur : Jin-Young BAE
+    /// Description : Méthode permettant de vérifier si un côté de l'écran est rempli
+    /// </summary>
+    /// <returns>
+    /// Booléen qui return TRUE si un côté est rempli, retourne FALSE sinon
+    /// </returns>
+    public bool FullSide(int num_row_col, bool gravity_is_vertical)
+    {
+        // pour vérifier les côtés HAUT et BAS :
+        if (gravity_is_vertical)
+        {
+            int row = num_row_col;
+            // parmi les cellules se trouvant à la bordure de la zone d'apparition
+            for (int col = -2; col < 2; col++)
+            {
+                Vector3Int pos = new Vector3Int(col, row, -2);
+
+                // si une cellule est remplie alors on retourne TRUE pour bloquer la gravité
+                if (board.HasTile(pos))
+                {
+                    return true;
+                }
+
+            }
+        }
+
+        // pour vérifier les côtés DROITE et GAUCHE :
+        else
+        {
+            int col = num_row_col;
+            // parmi les cellules se trouvant à la bordure de la zone d'apparition
+            for (int row = -2; row < 2; row++)
+            {
+                Vector3Int pos = new Vector3Int(col, row, -2);
+
+                // si une cellule est remplie alors on retourne TRUE pour bloquer la gravité
+                if (board.HasTile(pos))
+                {
+                    return true;
+                }
+
+            }
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Auteur : Jin-Young BAE
+    /// Méthode permettant de bloquer les gravités pour les cîtés complets
+    /// </summary>
+    public void StopGravity()
+    {
+        // bloquer la gravité BAS :
+        if (FullSide(-3, true) && gravity == Gravity.BAS)
+        {
+            // rappel du générateur de gravité et rappel de la méthode au cas où le générateur re-sélectionne la gravité BAS
+            chooseRandomGravity();
+            StopGravity();
+        }
+
+        // bloquer la gravité HAUT:
+        else if (FullSide(2, true) && gravity == Gravity.HAUT)
+        {
+            chooseRandomGravity();
+            StopGravity();
+        }
+
+        // bloquer la gravité GAUCHE :
+        else if (FullSide(-3, false) && gravity == Gravity.GAUCHE)
+        {
+            chooseRandomGravity();
+            StopGravity();
+        }
+
+        // bloquer la gravité DROITE :
+        else if (FullSide(2, false) && gravity == Gravity.DROITE)
+        {
+            chooseRandomGravity();
+            StopGravity();
+        }
+
+    }
+
+    /// <summary>
+    /// Méthode permettant de déterminer si la partie est terminée en vérifiant si tous les côtés sont remplis
+    /// </summary>
+    /// <returns>
+    /// Booléen qui retourne TRUE si tous les côtés sont remplis, FALSE sinon
+    /// </returns>
+    public bool GameOver()
+    {
+        // un côté non rempli signifie que la partie continue :
+        if (!FullSide(-3, true) || !FullSide(2, true) || !FullSide(-3, false) || !FullSide(2, false))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    /// <summary>
+    /// Auteur : Jin-Young BAE
+    /// Méthode permettant de nettoyer la zone d'apparition pour laisser la place aux nouvelles pièces
+    /// </summary>
+    public void ClearApparitionZone()
+    {
+        // pour les lignes de la zone d'appartition
+        for (int row = -2; row < 2; row++)
+        {
+            // pour les colonnes de la zone d'apparition
+            for (int col = -2; col < 2; col++)
+            {
+                Vector3Int pos = new Vector3Int(col, row, -2);
+
+                // si une cellule est remplie, on la supprime
+                if (board.HasTile(pos))
+                {
+                    board.SetTile(pos, null);
+                }
+            }
+        }
     }
 }
