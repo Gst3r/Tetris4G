@@ -83,6 +83,7 @@ public class Piece : MonoBehaviour
     {
         this.stepDelay = 1f;
         this.justOne = -1;
+        this.bufferedStepDelay = stepDelay; 
     }
 
     private void Update()
@@ -159,7 +160,7 @@ public class Piece : MonoBehaviour
             justOne=0;
 
         // On décrémente petit à petit la gravité toute les 5 secondes selon le modulo cité dans la condition
-        if(((int)Time.realtimeSinceStartup)%5==0 && justOne==0){// Ici on rentre dans la fonction plusieurs fois car une seconde de calcul est long pour un ordinateur
+        if(((int)Time.realtimeSinceStartup)%5==0 && justOne==0){ 
             stepDelay -= 0.01f; 
             justOne=1; // On indique qu'on veut qu'il rentre une fois et on avorte la condition grace à l'attribut justOne
         }
@@ -232,6 +233,7 @@ public class Piece : MonoBehaviour
     /// </summary>
     public void ModifyGravityR()
     {
+        // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
         this.bufferedStepDelay = stepDelay;
 
         //Augmentation de la gravité
@@ -251,6 +253,7 @@ public class Piece : MonoBehaviour
     /// </summary>
     public void ModifyGravityL()
     {
+        // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
         this.bufferedStepDelay = stepDelay;
 
         //Augmenation de la gravité
@@ -270,6 +273,7 @@ public class Piece : MonoBehaviour
     /// </summary>
     public void ModifyGravityT()
     {
+        // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
         this.bufferedStepDelay = stepDelay;
 
         //Augmentation de la gravité
@@ -289,6 +293,7 @@ public class Piece : MonoBehaviour
     /// </summary>
     public void ModifyGravityB()
     {
+        // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
         this.bufferedStepDelay = stepDelay;
         
         //Augmenation de la gravité
@@ -302,7 +307,7 @@ public class Piece : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Malcom Kusunga
+    /// Auteur : Sterlingot Guillaume, Kusunga Malcom
     /// Description : Méthode permettant de restaurer la vitesse de déplacement du tetromino actuellement présent sur le plateau
     /// </summary>
     public void RestoreGravity(){
