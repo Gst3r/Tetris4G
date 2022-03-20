@@ -158,11 +158,10 @@ public class Piece : MonoBehaviour
         if(((int)Time.realtimeSinceStartup)%5!=0)
             justOne=0;
 
-        // Attente active que les secondes passent avant d'augmenter la vitesse de la gravité
-        if(((int)Time.realtimeSinceStartup)%5==0 && justOne==0){
-            Debug.Log((int)Time.realtimeSinceStartup);
-            stepDelay -= 0.01f;
-            justOne=1;
+        // On décrémente petit à petit la gravité toute les 5 secondes selon le modulo cité dans la condition
+        if(((int)Time.realtimeSinceStartup)%5==0 && justOne==0){// Ici on rentre dans la fonction plusieurs fois car une seconde de calcul est long pour un ordinateur
+            stepDelay -= 0.01f; 
+            justOne=1; // On indique qu'on veut qu'il rentre une fois et on avorte la condition grace à l'attribut justOne
         }
     }
 
