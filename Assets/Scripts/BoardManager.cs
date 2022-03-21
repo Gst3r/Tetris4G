@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
+
 
 /// <summary> 
 /// Auteur : Sterlingot Guillaume<br>
@@ -75,6 +77,19 @@ public class BoardManager : MonoBehaviour
         }
     }
 
+    /// <summary> 
+    /// Attribut contenant le score de la partie en cours 
+    /// </summary>
+    [SerializeField] private float score=0;
+
+    /// <summary> 
+    /// Attribut contenant le score de la partie en cours sous forme de texte
+    /// </summary>
+    [SerializeField] 
+    private Text scoreText;
+
+
+
     private async void Awake()
     {
         SetupBoard();
@@ -92,6 +107,8 @@ public class BoardManager : MonoBehaviour
 
     private void Update()
     {
+
+        scoreText.text= score.ToString(); //permet de mettre à jour le score affiché 
         /*if(HaveCollision()){
             ClearLine();
             SpawnPiece();
@@ -100,10 +117,13 @@ public class BoardManager : MonoBehaviour
 
     /// <summary> 
     /// Méthode qui permet de générer une piece aléatoirement 
+    /// Auteur:Seghir Nassima
     /// </summary>
     public void SpawnPiece(){
         int random = Random.Range(0, tetrominoes.Length);
         TetrominoData data= this.tetrominoes[random]; 
+
+        
 
         this.activePiece.Initialize(this, spawnPosition, data); 
         Set(activePiece); 
@@ -111,6 +131,7 @@ public class BoardManager : MonoBehaviour
 
     /// <summary> 
     /// Méthode qui permet de fixer la piece sur la grille de jeu 
+    /// Auteur:Seghir Nassima
     /// </summary>
     public void Set(Piece piece)
     {
@@ -122,7 +143,8 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary> 
-    /// Méthode qui permet d'effacer la piece de la grille de jeu  
+    /// Méthode qui permet d'effacer la piece de la grille de jeu 
+    /// Auteur:Seghir Nassima 
     /// </summary>
     public void Clear(Piece piece)
     {
@@ -319,6 +341,36 @@ public class BoardManager : MonoBehaviour
             }
         }
     }
+    /// <summary>
+    /// Auteur : Seghir Nassima 
+    /// Méthode permettant d'incrémenter le score selon le nombre de lignes éliminées
+    /// </summary>
+    public void incrementScore(int nmbLines)
+    {
+        switch(nmbLines)
+        {
+            case 1: 
+                score+=40; 
+                break; 
+
+            case 2:
+                score+=100; 
+                break; 
+
+            case 3: 
+                score+=300; 
+                break; 
+
+            case 4:
+                score+=1200; 
+                break; 
+
+            default: 
+                 break;  
+        }
+
+    }
+
 
     /// <summary>
     /// Auteur : Jin-Young BAE
@@ -327,6 +379,7 @@ public class BoardManager : MonoBehaviour
     public void ClearCompleteLine()
     {
         RectInt bornes = Bornes;
+        int nbLinesCleared=0; //correspond au nombre de lignes effacées au total
 
         // les lignes :
         int row = bornes.yMin;
@@ -336,6 +389,7 @@ public class BoardManager : MonoBehaviour
             if (RowIsComplete(row))
             {
                 ClearRow(row);
+                nbLinesCleared++; 
             }
 
             // sinon on passe à la prochaine ligne
@@ -353,6 +407,7 @@ public class BoardManager : MonoBehaviour
             if (ColIsComplete(col))
             {
                 ClearCol(col);
+                nbLinesCleared++;
             }
 
             else
@@ -360,6 +415,7 @@ public class BoardManager : MonoBehaviour
                 col++;
             }
         }
+        incrementScore(nbLinesCleared); 
     }
 
     /// <summary> 
@@ -486,7 +542,7 @@ public class BoardManager : MonoBehaviour
 
     /// <summary>
     /// Auteur : Jin-Young BAE
-    /// Méthode permettant de bloquer les gravités pour les cîtés complets
+    /// Méthode permettant de bloquer les gravités pour les cotés complets
     /// </summary>
     public void StopGravity()
     {

@@ -101,7 +101,8 @@ public class Piece : MonoBehaviour
     }
 
     /// <summary> 
-    /// Méthode qui permet de bouger la piece sur la grille de jeu  
+    /// Méthode qui permet de bouger la piece sur la grille de jeu 
+    /// Auteur: Seghir Nassima 
     /// </summary>
     /// <returns>
     /// un booléen qui indique TRUE si le mouvement a bien eu lieu, FALSE sinon
@@ -126,7 +127,8 @@ public class Piece : MonoBehaviour
     }
 
     /// <summary> 
-    /// Méthode qui controle le mouvement de la piece de ligne en ligne  
+    /// Méthode qui controle le mouvement de la piece de ligne en ligne
+    /// Auteur:Seghir Nassima  
     /// </summary>
     private void ApplyGravity()
     {
@@ -151,6 +153,7 @@ public class Piece : MonoBehaviour
         }
     }
 
+
     /// <summary> 
     /// Auteur : Sterlingot Guillaume
     /// Description : Méthode permettant d'accélérer la vitesse du tétromino avec le temps
@@ -167,7 +170,8 @@ public class Piece : MonoBehaviour
     }
 
     /// <summary> 
-    /// Méthode qui bloque le mouvement de la piece   
+    /// Méthode qui bloque le mouvement de la piece  
+    /// Auteur: Seghir Nassima 
     /// </summary>
     private void Lock()
     {
