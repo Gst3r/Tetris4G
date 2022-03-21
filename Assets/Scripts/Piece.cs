@@ -153,11 +153,8 @@ public class Piece : MonoBehaviour
         }
     }
 
+
     /// <summary> 
-<<<<<<< HEAD
-    /// Méthode qui bloque le mouvement de la piece  
-    /// Auteur: Seghir Nassima 
-=======
     /// Auteur : Sterlingot Guillaume
     /// Description : Méthode permettant d'accélérer la vitesse du tétromino avec le temps
     /// </summary>
@@ -173,8 +170,8 @@ public class Piece : MonoBehaviour
     }
 
     /// <summary> 
-    /// Méthode qui bloque le mouvement de la piece   
->>>>>>> 11c1aa62ce336973f267b55df63c59824420107e
+    /// Méthode qui bloque le mouvement de la piece  
+    /// Auteur: Seghir Nassima 
     /// </summary>
     private void Lock()
     {
