@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 /// <summary> 
 /// Auteur : Seghir Nassima<br>
@@ -31,7 +32,12 @@ public class Piece : MonoBehaviour
     /// <summary> 
     /// Attribut determinant la cadence de deplacement du tetromino 
     /// </summary>
-    [SerializeField] private float stepDelay = 1f;
+    [SerializeField] private float stepDelay;
+
+    /// <summary> 
+    /// Attribut qui permet de stocker la cadence de deplacement du tetromino dites "normal" 
+    /// </summary>
+    private float bufferedStepDelay;
 
     /// <summary> 
     /// Attribut determinant le delai avant le quel la piece se fixe définitivement sur la grille    
@@ -39,14 +45,19 @@ public class Piece : MonoBehaviour
     [SerializeField] private float lockDelay = 0.5f;
 
     /// <summary> 
-    /// Attribut indiquant l'instant ou la pice doit se deplacer     
+    /// Attribut indiquant l'instant ou la pièce doit se deplacer     
     /// </summary>
     private float stepTime;
     
     /// <summary> 
-    /// Attribut indiquant l'instant ou la pice doit se fixer      
+    /// Attribut indiquant l'instant ou la pièce doit se fixer      
     /// </summary>
     private float lockTime;
+
+    /// <summary> 
+    /// Attribut indiquant si la gravité a déjà été changé une fois ou non      
+    /// </summary>
+    private float justOne;
   
     /// <summary> 
     /// Méthode qui permet d'initialiser la piece  
@@ -63,9 +74,16 @@ public class Piece : MonoBehaviour
             cells = new Vector3Int[data.cellules.Length];
         }
 
-         for (int i = 0; i < cells.Length; i++) {
+        for (int i = 0; i < cells.Length; i++) {
             cells[i] = (Vector3Int)data.cellules[i]; 
         }
+    }
+
+    private void Start()
+    {
+        this.stepDelay = 1f;
+        this.justOne = -1;
+        this.bufferedStepDelay = stepDelay; 
     }
 
     private void Update()
@@ -78,6 +96,7 @@ public class Piece : MonoBehaviour
             ApplyGravity();
         }
 
+        AccelerateGravity();
         board.Set(this);
     }
 
@@ -135,14 +154,36 @@ public class Piece : MonoBehaviour
     }
 
     /// <summary> 
+<<<<<<< HEAD
     /// Méthode qui bloque le mouvement de la piece  
     /// Auteur: Seghir Nassima 
+=======
+    /// Auteur : Sterlingot Guillaume
+    /// Description : Méthode permettant d'accélérer la vitesse du tétromino avec le temps
+    /// </summary>
+    public void AccelerateGravity(){
+        if(((int)Time.realtimeSinceStartup)%5!=0)
+            justOne=0;
+
+        // On décrémente petit à petit la gravité toute les 5 secondes selon le modulo cité dans la condition
+        if(((int)Time.realtimeSinceStartup)%5==0 && justOne==0){ 
+            stepDelay -= 0.01f; 
+            justOne=1; // On indique qu'on veut qu'il rentre une fois et on avorte la condition grace à l'attribut justOne
+        }
+    }
+
+    /// <summary> 
+    /// Méthode qui bloque le mouvement de la piece   
+>>>>>>> 11c1aa62ce336973f267b55df63c59824420107e
     /// </summary>
     private void Lock()
     {
         RestoreGravity();
         board.Set(this);
+        board.ClearCompleteLine();
+        board.ClearApparitionZone();
         board.chooseRandomGravity();
+        board.StopGravity();
         board.SpawnPiece();
     }
 
@@ -151,7 +192,9 @@ public class Piece : MonoBehaviour
     /// Description : Méthode permettant le déplacement vers la droite du tetromino actuellement présent sur le plateau
     /// </summary>
     public void RightShift(){
+        //Vérification du sens d'application de la gravité
         if(board.GetGravity() == Gravity.HAUT || board.GetGravity() == Gravity.BAS){
+            //Suppresion de la position précédente du tétromino sur la grille
             board.Clear(this);
             Move(Vector2Int.right);
         }  
@@ -197,9 +240,12 @@ public class Piece : MonoBehaviour
     /// </summary>
     public void ModifyGravityR()
     {
-        //Augmenation de la gravité
+        // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
+        this.bufferedStepDelay = stepDelay;
+
+        //Augmentation de la gravité
         if(board.GetGravity() == Gravity.DROITE){
-            stepDelay = 0.5f;
+            stepDelay = 0.1f;
         }
         //Diminution de la gravité
         else if(board.GetGravity() == Gravity.GAUCHE){
@@ -214,9 +260,12 @@ public class Piece : MonoBehaviour
     /// </summary>
     public void ModifyGravityL()
     {
+        // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
+        this.bufferedStepDelay = stepDelay;
+
         //Augmenation de la gravité
         if(board.GetGravity() == Gravity.GAUCHE){
-            stepDelay = 0.5f;
+            stepDelay = 0.1f;
         }
         //Diminution de la gravité
         else if(board.GetGravity() == Gravity.DROITE){
@@ -231,9 +280,12 @@ public class Piece : MonoBehaviour
     /// </summary>
     public void ModifyGravityT()
     {
-        //Augmenation de la gravité
+        // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
+        this.bufferedStepDelay = stepDelay;
+
+        //Augmentation de la gravité
         if(board.GetGravity() == Gravity.HAUT){
-            stepDelay = 0.5f;
+            stepDelay = 0.1f;
         }
         //Diminution de la gravité
         else if(board.GetGravity() == Gravity.BAS){
@@ -248,9 +300,12 @@ public class Piece : MonoBehaviour
     /// </summary>
     public void ModifyGravityB()
     {
+        // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
+        this.bufferedStepDelay = stepDelay;
+        
         //Augmenation de la gravité
         if(board.GetGravity() == Gravity.BAS){
-            stepDelay = 0.5f;
+            stepDelay = 0.1f;
         }
         //Diminution de la gravité
         else if(board.GetGravity() == Gravity.HAUT){
@@ -259,11 +314,11 @@ public class Piece : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Malcom Kusunga
+    /// Auteur : Sterlingot Guillaume, Kusunga Malcom
     /// Description : Méthode permettant de restaurer la vitesse de déplacement du tetromino actuellement présent sur le plateau
     /// </summary>
     public void RestoreGravity(){
-        stepDelay = 1f;
+        stepDelay = bufferedStepDelay;
     }
 
     /// <summary> 
@@ -292,46 +347,54 @@ public class Piece : MonoBehaviour
     /// un booléen qui indique TRUE si la position de la pièce est valide, FALSE sinon
     /// </returns>
     public bool Pivot(Vector2Int pivot){
+        Vector3Int[] newCells = new Vector3Int[data.cellules.Length];
+        Array.Copy(cells, newCells, data.cellules.Length);
+
         for(int i=0;i<4;i++){
+
             //Calcul de l'écart en x et en y entre la pièce pivot et la pièce à faire tourner autour
             int ecartX = Mathf.Abs(pivot.x - cells[i].x);
             int ecartY = Mathf.Abs(pivot.y - cells[i].y);
-            int newX = cells[i].x, newY = cells[i].y;
+            int newX = newCells[i].x, newY = newCells[i].y;
 
             //Différenciation des quatres rotations effectifs sur le plateau avant que la pièce retourne à son point de départ
             //Pour chaque cas, on calcul les nouvelles coordonnées de la cellules selon les coordonnées du pivot
 
             //CAS OU ON SE SITUE DANS le VOISINAGE aligné horizontalement ou verticalement avec le pivot
-            if(cells[i].y==pivot.y&&cells[i].x<pivot.x){ //Condition qui indique la rotation a effectuer
+            if(newCells[i].y==pivot.y&&newCells[i].x<pivot.x){ //Condition qui indique la rotation a effectuer
                 newX = pivot.x;
-                newY = ecartX+cells[i].y;
-            }else if(cells[i].x==pivot.x&&cells[i].y>pivot.y){ //Condition qui indique la rotation a effectuer
-                newX = ecartY+cells[i].x;
+                newY = ecartX+newCells[i].y;
+            }else if(newCells[i].x==pivot.x&&newCells[i].y>pivot.y){ //Condition qui indique la rotation a effectuer
+                newX = ecartY+newCells[i].x;
                 newY = pivot.y;
-            }else if(cells[i].y==pivot.y&&cells[i].x>pivot.x){ //Condition qui indique la rotation a effectuer
+            }else if(newCells[i].y==pivot.y&&newCells[i].x>pivot.x){ //Condition qui indique la rotation a effectuer
                 newX = pivot.x;
-                newY = cells[i].y-ecartX;
-            }else if(cells[i].x==pivot.x&&cells[i].y<pivot.y){ //Condition qui indique la rotation a effectuer
-                newX = cells[i].x - ecartY;
+                newY = newCells[i].y-ecartX;
+            }else if(newCells[i].x==pivot.x&&newCells[i].y<pivot.y){ //Condition qui indique la rotation a effectuer
+                newX = newCells[i].x - ecartY;
                 newY = pivot.y;
             }
             //CAS OU ON SE SITUE DANS le VOISINAGE non aligné avec le pivot
-            else if(cells[i].y>pivot.y&&cells[i].x<pivot.x)
-                newX = cells[i].x+2*ecartX;
-            else if(cells[i].y>pivot.y&&cells[i].x>pivot.x)
-                newY = cells[i].y-2*ecartY;
-            else if(cells[i].y<pivot.y&&cells[i].x>pivot.x)
-                newX = cells[i].x-2*ecartX;
+            else if(newCells[i].y>pivot.y&&newCells[i].x<pivot.x)
+                newX = newCells[i].x+2*ecartX;
+            else if(newCells[i].y>pivot.y&&newCells[i].x>pivot.x)
+                newY = newCells[i].y-2*ecartY;
+            else if(newCells[i].y<pivot.y&&newCells[i].x>pivot.x)
+                newX = newCells[i].x-2*ecartX;
             else
-                newY = cells[i].y+2*ecartY;
+                newY = newCells[i].y+2*ecartY;
 
-            bool valid = board.ValideTilePos(new Vector3Int(newX, newY, 0));
+            bool valid = board.ValideTilePos(new Vector3Int(newX+position.x, newY+position.y, -2));
             if (valid){
-                cells[i].x = newX;
-                cells[i].y = newY;
+                newCells[i].x = newX;
+                newCells[i].y = newY;
+            }else{
+                return false;
             }
         }
 
-        return false;
+        cells = newCells;
+
+        return true;
     }
 }
