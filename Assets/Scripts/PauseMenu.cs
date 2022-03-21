@@ -19,6 +19,7 @@ public class PauseMenu : MonoBehaviour
 
     /// <summary> 
     /// Méthode qui permet de mettre le jeu en état de pause 
+    /// Auteur:Seghir Nassima
     /// </summary>
     public void Pause()
     {
@@ -30,21 +31,23 @@ public class PauseMenu : MonoBehaviour
 
     /// <summary> 
     /// Méthode qui permet de reprendre la partie 
+    /// Auteur:Seghir Nassima
     /// </summary>
     public void Resume()
     {
         pauseMenu.SetActive(false);
-        Time.timeScale=1f; //cette commande permet de reprendre une progression du temps normale 
+        Time.timeScale=1f; //cette commande permet de reprendre la progression normale du temps
 
 
     }
     
     /// <summary> 
     /// Méthode qui permet de commencer une nouvelle partie 
+    /// Auteur:Seghir Nassima
     /// </summary>
     public void Restart()
     {
-        Time.timeScale=1f; //cette commande permet de reprendre une progression du temps normale
+        Time.timeScale=1f; //cette commande permet de reprendre la progression normale du temps
         SceneManager.LoadScene(1); 
 
 
