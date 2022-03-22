@@ -4,19 +4,26 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary> 
-/// Auteur : Seghir Nassima<br>
+/// Auteur : Seghir Nassima, Malcom Kusunga<br>
 /// Descrption : Cette classe permet la gestion des événements liés aux boutons du menu Pause 
 /// </summary>
-
-
 public class PauseMenu : MonoBehaviour
 {
     /// <summary>
     /// Attribut contenant le menu Pause 
     /// </summary>
     [SerializeField] GameObject pauseMenu; 
-    
 
+    /// <summary>
+    /// Variable contenant l'animateur lié aux animations exécutées lors de l'appui sur un bouton.
+    /// </summary>
+    public Animator animator;
+
+    /// <summary>
+    /// Variable contenant la durée de l'animation s'activant lors d'une pression sur un bouton.
+    /// </summary>
+    private float pressTime = 0.38f;
+    
     /// <summary> 
     /// Méthode qui permet de mettre le jeu en état de pause 
     /// Auteur:Seghir Nassima
@@ -25,20 +32,41 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(true); 
         Time.timeScale=0f; //cette commande permet de d'arreter la progression du temps 
-
     }
     
-
     /// <summary> 
     /// Méthode qui permet de reprendre la partie 
     /// Auteur:Seghir Nassima
     /// </summary>
     public void Resume()
     {
+        //cette commande permet de reprendre la progression normale du temps
+        Time.timeScale=1f; 
+        
+        StartCoroutine(ResumeGame());
+    }
+
+    /// <summary>
+    /// Auteur: Malcom Kusunga
+    /// Coroutine lié au lancement de l'animation lorsque le bouton pour continuer la partie est selectionné
+    /// </summary>
+    /// <returns>
+    /// Génere une pause de 0.38 secondes.
+    /// </returns>
+    IEnumerator ResumeGame()
+    {
+        //Démarage de l'animation
+        animator.SetTrigger("Press");
+        
+        //Génération de la pause
+        float ms = Time. deltaTime;
+        while(ms <= pressTime){
+            ms += Time. deltaTime;
+            yield return null;
+        }
+        
+        //Fermeture du Menu pause
         pauseMenu.SetActive(false);
-        Time.timeScale=1f; //cette commande permet de reprendre la progression normale du temps
-
-
     }
     
     /// <summary> 
@@ -49,8 +77,5 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale=1f; //cette commande permet de reprendre la progression normale du temps
         SceneManager.LoadScene(1); 
-
-
     }
-   
 }

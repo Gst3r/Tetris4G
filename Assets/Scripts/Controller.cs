@@ -8,15 +8,43 @@ using UnityEngine;
 /// </summary>
 public class Controller : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    /// <summary> 
+    /// Attribut contenant le plateau de jeu 
+    /// </summary>
+    public BoardManager board;
+
+    /// <summary> 
+    /// Attribut contenant le panel de fin de jeu
+    /// </summary>
+    public GameObject endGamePanel;
+
+    /// <summary> 
+    /// Booléen indiquant si le Game Over a été detecter
+    /// </summary>
+    private bool gameIsOver;
+
+    private void Start() {
+        gameIsOver = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        checkGameOver();    
+    }
+
+    /// <summary> 
+    /// Méthode qui permet de vérifier si la partie est perdue 
+    /// Auteur: Malcom Kusunga
+    /// </summary>
+    private void checkGameOver(){
+        if(!gameIsOver){
+            if(board.GameOver()){
+                gameIsOver = true;
+                //Arrêt du temps lors de l'ouverture de l'interface de fin de jeu 
+                Time.timeScale=0f;
+                endGamePanel.SetActive(true);
+            }
+        }
     }
 }

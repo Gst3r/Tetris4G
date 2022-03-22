@@ -38,8 +38,6 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     [SerializeField] private Vector3Int spawnPosition;
 
-
-    
     /// <summary> 
     /// Attribut contenant la gravité courante exercée
     /// </summary>
@@ -85,11 +83,27 @@ public class BoardManager : MonoBehaviour
     /// <summary> 
     /// Attribut contenant le score de la partie en cours sous forme de texte
     /// </summary>
-    [SerializeField] 
-    private Text scoreText;
+    [SerializeField] private Text scoreText;
 
+    /// Booléen permettant de determiner si le haut de la grille est complet 
+    /// </summary>
+    private bool topIsFull { get; set; }
 
+    /// <summary> 
+    /// Booléen permettant de determiner si le bas de la grille est complet
+    /// </summary>
+    private bool botIsFull { get; set; }
 
+    /// <summary> 
+    /// Booléen permettant de determiner si la gauche de la grille est complete
+    /// </summary>
+    private bool leftIsFull { get; set; }
+
+    /// <summary> 
+    /// Booléen permettant de determiner si la droite de la grille est complete
+    /// </summary>
+    private bool rightIsFull { get; set; }
+    
     private async void Awake()
     {
         SetupBoard();
@@ -101,6 +115,10 @@ public class BoardManager : MonoBehaviour
     }
 
     private void Start(){
+        topIsFull = false;
+        botIsFull = false;
+        leftIsFull = false;
+        rightIsFull = false;
         chooseRandomGravity();
         SpawnPiece();
     }
@@ -512,10 +530,17 @@ public class BoardManager : MonoBehaviour
 
                 // si une cellule est remplie alors on retourne TRUE pour bloquer la gravité
                 if (board.HasTile(pos))
-                {
+                {   
+                    //Vérifie si il s'agit de la gravité vers le haut ou la bas
+                    if(row == -3){
+                        botIsFull = true;
+                    }
+                    else{
+                        topIsFull = true; 
+                    }    
+
                     return true;
                 }
-
             }
         }
 
@@ -530,15 +555,45 @@ public class BoardManager : MonoBehaviour
 
                 // si une cellule est remplie alors on retourne TRUE pour bloquer la gravité
                 if (board.HasTile(pos))
-                {
+                {   
+                    //Vérifie si il s'agit de la gravité vers la droite ou la gauche
+                    if(col == -3){
+                        leftIsFull = true;
+                    }
+                    else{
+                        rightIsFull = true;
+                    }
+                    
                     return true;
                 }
-
             }
         }
 
         return false;
     }
+
+    /// <summary>
+    /// Auteur : Malcom Kusunga
+    /// Description : Méthode permettant de vérifier si tous les côtés sont remplis
+    /// </summary>
+    public void FullSides(){
+        //Vérifie si le côté bas est déjà complet
+        if(!botIsFull)
+            FullSide(-3, true);
+        
+        //Vérifie si le côté haut est déjà complet
+        if(!topIsFull)
+            FullSide(2, true);
+        
+        //Vérifie si le côté gauche est déjà complet
+        if(!leftIsFull)
+            FullSide(-3, false);
+        
+        //Vérifie si le côté droit est déjà complet
+        if(!rightIsFull)
+            FullSide(2, false);
+    }
+
 
     /// <summary>
     /// Auteur : Jin-Young BAE
@@ -547,7 +602,7 @@ public class BoardManager : MonoBehaviour
     public void StopGravity()
     {
         // bloquer la gravité BAS :
-        if (FullSide(-3, true) && gravity == Gravity.BAS)
+        /*if (FullSide(-3, true) && gravity == Gravity.BAS)
         {
             // rappel du générateur de gravité et rappel de la méthode au cas où le générateur re-sélectionne la gravité BAS
             chooseRandomGravity();
@@ -573,25 +628,41 @@ public class BoardManager : MonoBehaviour
         {
             chooseRandomGravity();
             StopGravity();
-        }
+        }*/
 
+        //Selection de la gravité en fonction des gravités restantes
+        if(!topIsFull || !botIsFull || !leftIsFull || !rightIsFull){
+            do{
+                chooseRandomGravity();
+            }while( // bloquer la gravité BAS
+                    (FullSide(-3, true) && gravity == Gravity.BAS)  ||
+
+                   // bloquer la gravité HAUT
+                   (FullSide(2, true)  && gravity == Gravity.HAUT)  || 
+
+                   // bloquer la gravité GAUCHE
+                   (FullSide(-3, false)&& gravity == Gravity.GAUCHE)|| 
+
+                   // bloquer la gravité DROITE
+                   (FullSide(2, false) && gravity == Gravity.DROITE));
+        }
     }
 
     /// <summary>
-    /// Méthode permettant de déterminer si la partie est terminée en vérifiant si tous les côtés sont remplis
+    /// Auteur : Malcom Kusunga
+    /// Méthode permettant de déterminer si la partie est terminée
     /// </summary>
     /// <returns>
     /// Booléen qui retourne TRUE si tous les côtés sont remplis, FALSE sinon
     /// </returns>
     public bool GameOver()
     {
-        // un côté non rempli signifie que la partie continue :
-        if (!FullSide(-3, true) || !FullSide(2, true) || !FullSide(-3, false) || !FullSide(2, false))
+        // un côté non rempli signifie que la partie continue
+        if (topIsFull && botIsFull && leftIsFull && rightIsFull )
         {
-            return false;
-        }
-
-        return true;
+            return true;
+        }  
+        return false;
     }
 
     /// <summary>
