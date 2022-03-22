@@ -492,6 +492,10 @@ public class BoardManager : MonoBehaviour
         return gravity;
     }
 
+    public Piece GetActivePiece(){
+        return activePiece;
+    }
+
     /// <summary>
     /// Auteur : Jin-Young BAE
     /// Description : Méthode permettant de vérifier si un côté de l'écran est rempli
