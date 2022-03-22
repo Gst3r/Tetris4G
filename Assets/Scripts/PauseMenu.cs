@@ -24,6 +24,8 @@ public class PauseMenu : MonoBehaviour
     /// </summary>
     private float pressTime = 0.38f;
     
+    public Controller controller;
+
     /// <summary> 
     /// Méthode qui permet de mettre le jeu en état de pause 
     /// Auteur:Seghir Nassima
@@ -36,13 +38,10 @@ public class PauseMenu : MonoBehaviour
     
     /// <summary> 
     /// Méthode qui permet de reprendre la partie 
-    /// Auteur:Seghir Nassima
+    /// Auteur:Seghir Nassima,Malcom Kusunga
     /// </summary>
     public void Resume()
-    {
-        //cette commande permet de reprendre la progression normale du temps
-        Time.timeScale=1f; 
-        
+    {   
         StartCoroutine(ResumeGame());
     }
 
@@ -59,14 +58,16 @@ public class PauseMenu : MonoBehaviour
         animator.SetTrigger("Press");
         
         //Génération de la pause
-        float ms = Time. deltaTime;
+        float ms = Time.unscaledDeltaTime;
         while(ms <= pressTime){
-            ms += Time. deltaTime;
+            ms += Time.unscaledDeltaTime;
             yield return null;
         }
         
         //Fermeture du Menu pause
         pauseMenu.SetActive(false);
+
+        controller.LaunchCount();
     }
     
     /// <summary> 

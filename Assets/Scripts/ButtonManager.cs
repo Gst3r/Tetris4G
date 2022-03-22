@@ -59,9 +59,9 @@ public class ButtonManager : MonoBehaviour
         animator.SetTrigger("Press");
         
         //Génération de la pause
-        float ms = Time. deltaTime;
+        float ms = Time.deltaTime;
         while(ms <= pressTime){
-            ms += Time. deltaTime;
+            ms += Time.deltaTime;
             yield return null;
         }
         

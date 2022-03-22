@@ -34,6 +34,10 @@ public class Controller : MonoBehaviour
     private bool gameIsOver;
 
     private void Start() {
+        //cette commande permet de reprendre la progression normale du temps
+        Time.timeScale=0f;
+        LaunchCount();
+
         gameIsOver = false;
     }
 
@@ -118,5 +122,48 @@ public class Controller : MonoBehaviour
                 endGamePanel.SetActive(true);
             }
         }
+    }
+
+    /// <summary>
+    /// Variable contenant l'animateur lié aux animations exécutées lors de l'appui sur un bouton.
+    /// </summary>
+    public Animator animator;
+    /// <summary>
+    /// Variable contenant la durée de l'animation s'activant lors d'un chargement vers la grille de jeu.
+    /// </summary>
+    public float launchTime = 2.35f;
+    //Interface du décompte
+    public GameObject countPanel;
+
+    /// <summary>
+    /// Méthodes permettant de lancer le decompte lors d'un retour vers l'interface de la grille de jeu
+    /// </summary>
+    public void LaunchCount(){
+        StartCoroutine(LoadCount());
+    }
+
+    /// <summary>
+    /// Coroutine lié au lancement de l'animation lors du décompte
+    /// </summary>
+    /// <returns>
+    /// Génere une pause de 2.35 secondes.
+    /// </returns>
+    IEnumerator LoadCount()
+    {
+        //Démarage de l'animation
+        countPanel.SetActive(true);
+        
+        //Génération de la pause
+        float ms = Time.unscaledDeltaTime;
+        while(ms <= launchTime){
+            ms += Time.unscaledDeltaTime;
+            yield return null;
+        }
+        
+        //Fermeture de l'interface du décompte
+        countPanel.SetActive(false);
+
+        //cette commande permet de reprendre la progression normale du temps
+        Time.timeScale=1f;
     }
 }
