@@ -24,11 +24,6 @@ public class Controller : MonoBehaviour
     public Vector2 direction;
 
     /// <summary> 
-    /// Attribut contenant le plateau de jeu 
-    /// </summary>
-    public BoardManager board;
-
-    /// <summary> 
     /// Attribut contenant le panel de fin de jeu
     /// </summary>
     public GameObject endGamePanel;
@@ -47,11 +42,18 @@ public class Controller : MonoBehaviour
     {
         if(Input.touchCount>0){
             Touch touch = Input.GetTouch(0);
+            bool stayOnScreen = false;
+            Debug.Log(touch.pressure);
             switch (touch.phase)
             {
                 // Record initial touch position.
                 case TouchPhase.Began:
-                    activePiece.Rotate();
+                    if(touch.pressure>200)
+                        stayOnScreen=true;
+                        Shift(touch);
+                    }else{
+                        stayOnScreen=false;
+                    }
                     break;
 
                 // Determine direction by comparing the current touch position with the initial one.
@@ -60,6 +62,8 @@ public class Controller : MonoBehaviour
 
                 // Report that a direction has been chosen when the finger is lifted.
                 case TouchPhase.Ended:
+                    if(!stayOnScreen)
+                        activePiece.Rotate();
                     break;
             }
         }   
