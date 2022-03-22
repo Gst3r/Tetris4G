@@ -108,7 +108,7 @@ public class BoardManager : MonoBehaviour
     private void Update()
     {
 
-        scoreText.text= score.ToString(); //permet de mettre à jour le score affiché 
+        scoreText.text= "score: "+score.ToString(); //permet de mettre à jour le score affiché 
         /*if(HaveCollision()){
             ClearLine();
             SpawnPiece();
