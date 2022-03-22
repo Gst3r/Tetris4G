@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 /// <summary> 
-/// Auteur : Seghir Nassima<br>
+/// Auteur : Seghir Nassima, Kusunga Malcom, Sterlingot Guillaume, Bae Jin-Young<br>
 /// Description : Cette classe permet de controler le tetromino present sur la grille de jeu 
 /// </summary>
 public class Piece : MonoBehaviour
@@ -35,7 +35,7 @@ public class Piece : MonoBehaviour
     [SerializeField] private float stepDelay;
 
     /// <summary> 
-    /// Attribut qui permet de stocker la cadence de deplacement du tetromino dites "normal" 
+    /// Attribut qui permet de stocker la cadence de deplacement du tetromino dites "normale" 
     /// </summary>
     private float bufferedStepDelay;
 
@@ -174,9 +174,10 @@ public class Piece : MonoBehaviour
     /// Auteur: Seghir Nassima 
     /// </summary>
     private void Lock()
-    {
+    {   
         RestoreGravity();
         board.Set(this);
+        board.FullSides();
         board.ClearCompleteLine();
         board.ClearApparitionZone();
         board.chooseRandomGravity();
