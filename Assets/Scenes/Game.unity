@@ -1538,7 +1538,7 @@ Transform:
   - {fileID: 1407194111}
   - {fileID: 166199143}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &624094537
 GameObject:
@@ -3614,7 +3614,7 @@ RectTransform:
   - {fileID: 2053234500}
   - {fileID: 1702626842}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3634,6 +3634,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   board: {fileID: 1719026910}
+  activePiece: {fileID: 0}
+  startPos: {x: 0, y: 0}
+  direction: {x: 0, y: 0}
   endGamePanel: {fileID: 1702626841}
 --- !u!1 &1587509832
 GameObject:
@@ -4229,7 +4232,7 @@ RectTransform:
   m_Children:
   - {fileID: 1655345596}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5293,6 +5296,7 @@ MonoBehaviour:
   activePiece: {fileID: 1719026911}
   startPos: {x: 0, y: 0}
   direction: {x: 0, y: 0}
+  endGamePanel: {fileID: 1702626841}
 --- !u!4 &2128468588
 Transform:
   m_ObjectHideFlags: 0
@@ -5305,7 +5309,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2129197757
 GameObject:

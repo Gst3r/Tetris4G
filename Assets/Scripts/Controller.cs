@@ -48,7 +48,7 @@ public class Controller : MonoBehaviour
             {
                 // Record initial touch position.
                 case TouchPhase.Began:
-                    if(touch.pressure>200)
+                    if(touch.pressure>200){
                         stayOnScreen=true;
                         Shift(touch);
                     }else{
@@ -66,7 +66,9 @@ public class Controller : MonoBehaviour
                         activePiece.Rotate();
                     break;
             }
-        }   
+        }  
+
+        checkGameOver(); 
     }
 
     /// <summary> 
@@ -100,8 +102,7 @@ public class Controller : MonoBehaviour
                                 }
                                 break;
             default:break;
-        }*/
-        checkGameOver();    
+        }*/  
     }
 
     /// <summary> 
