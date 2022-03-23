@@ -22,7 +22,7 @@ public class ButtonManager : MonoBehaviour
     /// <summary>
     /// Variable contenant la durée de l'animation s'activant lors d'une pression sur un bouton.
     /// </summary>
-    private float pressTime = 0.38f;
+    public float pressTime = 0.38f;
 
     void Start()
     {
@@ -40,32 +40,29 @@ public class ButtonManager : MonoBehaviour
     /// <summary>
     /// Méthodes permettant de changer de scène.
     /// </summary>
-    public void LaunchScene(string scene){
-        if(Time.timeScale == 0f){
-            Time.timeScale=1f; 
-        }
-        StartCoroutine(LaodGame(scene));
+    public void launchScene(){
+        StartCoroutine(LaodGame());
     }
 
     /// <summary>
-    /// Coroutine de changement de scène lié au lancement de l'animation (menu principal vers interface de jeu ou inversement).
+    /// Coroutine de changement de scène lié au lancement de l'animation (menu principal vers interface de jeu).
     /// </summary>
     /// <returns>
     /// Génere une pause de 0.38 secondes.
     /// </returns>
-    IEnumerator LaodGame(string scene)
+    IEnumerator LaodGame()
     {
         //Démarage de l'animation
         animator.SetTrigger("Press");
         
         //Génération de la pause
-        float ms = Time.deltaTime;
+        float ms = Time. deltaTime;
         while(ms <= pressTime){
-            ms += Time.deltaTime;
+            ms += Time. deltaTime;
             yield return null;
         }
         
         //Chargement de la scène
-        SceneManager.LoadScene(scene);
+        SceneManager.LoadScene("Game");
     }
 }

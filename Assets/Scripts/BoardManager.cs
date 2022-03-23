@@ -88,25 +88,6 @@ public class BoardManager : MonoBehaviour
     [SerializeField] 
     private Text scoreText;
 
-    /// Booléen permettant de determiner si le haut de la grille est complet 
-    /// </summary>
-    private bool topIsFull { get; set; }
-
-    /// <summary> 
-    /// Booléen permettant de determiner si le bas de la grille est complet
-    /// </summary>
-    private bool botIsFull { get; set; }
-
-    /// <summary> 
-    /// Booléen permettant de determiner si la gauche de la grille est complete
-    /// </summary>
-    private bool leftIsFull { get; set; }
-
-    /// <summary> 
-    /// Booléen permettant de determiner si la droite de la grille est complete
-    /// </summary>
-    private bool rightIsFull { get; set; }
-
 
 
     private async void Awake()
@@ -119,20 +100,10 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-   private void Start(){
-        //Aucun côté n'est complet en début de partie
-        topIsFull = false;
-        botIsFull = false;
-        leftIsFull = false;
-        rightIsFull = false;
-
-        //Selection aléatoire de la gravité 
+    private void Start(){
         chooseRandomGravity();
-
-        //Apparition d'une pièce
         SpawnPiece();
     }
-
 
     private void Update()
     {
@@ -541,17 +512,10 @@ public class BoardManager : MonoBehaviour
 
                 // si une cellule est remplie alors on retourne TRUE pour bloquer la gravité
                 if (board.HasTile(pos))
-                {   
-                    //Vérifie si il s'agit de la gravité vers le haut ou la bas
-                    if(row == -3){
-                        botIsFull = true;
-                    }
-                    else{
-                        topIsFull = true; 
-                    }    
-
+                {
                     return true;
                 }
+
             }
         }
 
@@ -575,28 +539,6 @@ public class BoardManager : MonoBehaviour
 
         return false;
     }
-    /// <summary>
-    /// Auteur : Malcom Kusunga
-    /// Description : Méthode permettant de vérifier si tous les côtés sont remplis
-    /// </summary>
-    public void FullSides(){
-        //Vérifie si le côté bas est déjà complet
-        if(!botIsFull)
-            FullSide(-3, true);
-        
-        //Vérifie si le côté haut est déjà complet
-        if(!topIsFull)
-            FullSide(2, true);
-        
-        //Vérifie si le côté gauche est déjà complet
-        if(!leftIsFull)
-            FullSide(-3, false);
-        
-        //Vérifie si le côté droit est déjà complet
-        if(!rightIsFull)
-            FullSide(2, false);
-    }
-
 
     /// <summary>
     /// Auteur : Jin-Young BAE
