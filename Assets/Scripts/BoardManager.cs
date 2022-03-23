@@ -115,11 +115,16 @@ public class BoardManager : MonoBehaviour
     }
 
     private void Start(){
+        //Aucun côté n'est complet en début de partie
         topIsFull = false;
         botIsFull = false;
         leftIsFull = false;
         rightIsFull = false;
+
+        //Selection aléatoire de la gravité 
         chooseRandomGravity();
+
+        //Apparition d'une pièce
         SpawnPiece();
     }
 

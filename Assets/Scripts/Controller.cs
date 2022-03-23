@@ -26,7 +26,7 @@ public class Controller : MonoBehaviour
     /// <summary> 
     /// Attribut contenant le panel de fin de jeu
     /// </summary>
-    public GameObject endGamePanel;
+    [SerializeField] private GameObject endGamePanel;
 
     /// <summary> 
     /// Booléen indiquant si le Game Over a été detecter
@@ -34,10 +34,13 @@ public class Controller : MonoBehaviour
     private bool gameIsOver;
 
     private void Start() {
-        //cette commande permet de reprendre la progression normale du temps
+        //Arrêt du temps lors du début de partie afin de lancer le décompte
         Time.timeScale=0f;
+
+        //Lancement du décompte
         LaunchCount();
 
+        //La partie vient de commancer
         gameIsOver = false;
     }
 

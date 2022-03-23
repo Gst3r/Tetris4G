@@ -23,8 +23,11 @@ public class PauseMenu : MonoBehaviour
     /// Variable contenant la durée de l'animation s'activant lors d'une pression sur un bouton.
     /// </summary>
     private float pressTime = 0.38f;
-    
-    public Controller controller;
+
+    /// </summary>
+    /// Attribut contenant les méthodes liées au lancement du décompte
+    /// </summary>
+    [SerializeField] private Controller controller;
 
     /// <summary> 
     /// Méthode qui permet de mettre le jeu en état de pause 
@@ -67,6 +70,7 @@ public class PauseMenu : MonoBehaviour
         //Fermeture du Menu pause
         pauseMenu.SetActive(false);
 
+        //Lancement du décompte
         controller.LaunchCount();
     }
     
