@@ -653,7 +653,6 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-<<<<<<< Updated upstream:Assets/Scripts/GamePlay/BoardManager.cs
     public bool GetTopIsFull(){
         return topIsFull;
     }
@@ -668,13 +667,13 @@ public class BoardManager : MonoBehaviour
     
     public bool GetRightIsFull(){
         return rightIsFull;
-=======
+    }
+    
     public Gravity GetGravity(){
         return gravity;
     }
 
     public Piece GetActivePiece(){
         return activePiece;
->>>>>>> Stashed changes:Assets/Scripts/BoardManager.cs
     }
 }

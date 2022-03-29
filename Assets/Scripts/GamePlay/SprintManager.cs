@@ -19,6 +19,11 @@ public class SprintManager : IMode
     /// </summary>
     private static float countMax = 10f;
 
+    /// <summary> 
+    /// Panel contenant toute l'affichage conçernant le temps restant avant la fin de la partie
+    /// </summary>
+    [SerializeField]private GameObject sprintTimePanel;
+
     private void Start(){
         this.controller = GameObject.Find("GameManager").GetComponent<Controller>();
         this.board = controller.GetBoard();
@@ -26,12 +31,17 @@ public class SprintManager : IMode
         this.activePiece.SetStepDelay(0.7f);
     }
 
+    private void LastUpdate(){
+        closeSprintTimePanel();
+    }
+
     /// <summary> 
     /// Auteur : Sterlingot Guillaume<br>
     /// Description : Méthode permettant d'exécuter le mode de jeu Sprint
     /// </summary>
     public override void Execute(){
-        //CountTime();
+        CountTime();
+        displaySprintTimePanel();
         AccelerateGravity();
         CheckGameOver();
     }
@@ -58,5 +68,13 @@ public class SprintManager : IMode
         if ((board.GetTopIsFull() && board.GetBotIsFull() && board.GetLeftIsFull() && board.GetRightIsFull()) || (int)countSec==(int)countMax)
             return true;
         return false;
+    }
+
+    public void displaySprintTimePanel(){
+        sprintTimePanel.SetActive(true);
+    }
+
+    public void closeSprintTimePanel(){
+        sprintTimePanel.SetActive(false);
     }
 }

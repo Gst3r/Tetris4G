@@ -1673,7 +1673,7 @@ Transform:
   - {fileID: 1407194111}
   - {fileID: 166199143}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &624094537
 GameObject:
@@ -3665,6 +3665,7 @@ GameObject:
   - component: {fileID: 1541352173}
   - component: {fileID: 1541352172}
   - component: {fileID: 1541352171}
+  - component: {fileID: 1541352175}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3751,15 +3752,13 @@ RectTransform:
   - {fileID: 1702626842}
   - {fileID: 1595377477}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
-<<<<<<< Updated upstream
-=======
 --- !u!114 &1541352175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3774,10 +3773,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   board: {fileID: 1719026910}
   activePiece: {fileID: 0}
-  startPos: {x: 0, y: 0}
-  direction: {x: 0, y: 0}
   endGamePanel: {fileID: 1702626841}
->>>>>>> Stashed changes
+  animator: {fileID: 0}
+  launchTime: 2.35
+  countPanel: {fileID: 1595377476}
 --- !u!1 &1587509832
 GameObject:
   m_ObjectHideFlags: 0
@@ -4331,6 +4330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f21310acbdcf5b42a269dee2e40ca23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  board: {fileID: 0}
   activePiece: {fileID: 0}
   spawnPosition: {x: -1, y: -1, z: -2}
   tetrominoes:
@@ -4370,6 +4370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   board: {fileID: 0}
+  position: {x: 0, y: 0, z: 0}
   stepDelay: 1
   lockDelay: 0.5
 --- !u!483693784 &1719026912
@@ -4471,7 +4472,7 @@ RectTransform:
   m_Children:
   - {fileID: 1655345596}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5582,12 +5583,6 @@ MonoBehaviour:
   animator: {fileID: 1595377478}
   launchTime: 2
   countPanel: {fileID: 1595377476}
-  startPos: {x: 0, y: 0}
-<<<<<<< Updated upstream
-=======
-  direction: {x: 0, y: 0}
-  endGamePanel: {fileID: 0}
->>>>>>> Stashed changes
 --- !u!4 &2128468588
 Transform:
   m_ObjectHideFlags: 0
@@ -5600,7 +5595,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2128468589
 MonoBehaviour:
@@ -5626,6 +5621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bb0da45049d5934ca2c4d0ea4f25454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprintTimePanel: {fileID: 0}
 --- !u!114 &2128468591
 MonoBehaviour:
   m_ObjectHideFlags: 0

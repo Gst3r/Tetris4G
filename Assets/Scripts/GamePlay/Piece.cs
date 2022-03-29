@@ -369,7 +369,6 @@ public class Piece : MonoBehaviour
         return true;
     }
 
-<<<<<<< Updated upstream:Assets/Scripts/GamePlay/Piece.cs
     public float GetStepDelay(){
         return stepDelay;
     }
@@ -377,13 +376,8 @@ public class Piece : MonoBehaviour
     public void SetStepDelay(float stepDelay){
         this.stepDelay = stepDelay;
     }
-=======
     public float GetStepTime(){
         return stepTime;
     }
 
-    public float GetStepDelay(){
-        return stepDelay;
-    }
->>>>>>> Stashed changes:Assets/Scripts/Piece.cs
 }

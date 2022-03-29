@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -54,17 +53,44 @@ public class Controller : MonoBehaviour
 
     //-------------------------------------------------------------------------------------------------------------
 
-    public Vector2 startPos;
+    /// <summary> 
+    /// Vecteur de nombre réel à deux dimensions qui enregistre la position de départ du doigt lorsqu'il entre en contact avec l'écran
+    /// </summary>
+    private Vector2 startPos;
+
+    /// <summary> 
+    /// Vecteur de nombre entier à deux dimensions qui enregistre le mouvement des coordonnées en fonction des mouvements du doigt sur l'écran et de la position de départ
+    /// </summary>
+    private Vector2Int direction;
+
+    /// <summary> 
+    /// Vecteur de nombre entier à deux dimensions qui enregistre le mouvement des coordonnées en fonction des mouvements du doigt sur l'écran et de la position de départ
+    /// </summary>
+    private Vector2Int prevDirection;
+
+    /// <summary> 
+    /// Booléen indiquant TRUE si le joueur cherche à tourner le tetromino (analyse du comportement du doigt sur l'écran), FALSE sinon
+    /// </summary>
+    private bool wantToRotate;
 
     private void Start() {
         SetController();
         LaunchCount();
+        /*this.gameIsOver = false;
+        this.wantToRotate = true;
+        this.direction = new Vector2Int();
+        this.prevDirection = new Vector2Int();
+        this.startPos = new Vector2();*/
     }
 
     // Update is called once per frame
     void Update()
     {
         mode.Execute();
+        /*board.Clear(activePiece);
+        touchSensitiveRotate();
+        touchSensitiveShift();
+        board.Set(activePiece);*/
     }
 
     /// <summary> 
@@ -159,86 +185,7 @@ public class Controller : MonoBehaviour
         Time.timeScale=1f;
     }
 
-    public Piece GetActivePiece(){
-        return activePiece;
-    }
-
-    public BoardManager GetBoard(){
-        return board;
-    }
-=======
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-/// <summary> 
-/// Auteur : Sterlingot Guillaume, Kusunga Malcom, Bae Jin-Young, Seghir Nassima<br>
-/// Descrption : Cette classe permet la gestion des interrations liées aux différentes actions du joueur.
-/// </summary>
-public class Controller : MonoBehaviour
-{
-
-    /// <summary> 
-    /// Attribut contenant le plateau de jeu 
-    /// </summary>
-    [SerializeField] private BoardManager board;
-    
-    /// <summary> 
-    /// Attribut contenant la pièce courante qui est présente sur le plateau de jeu 
-    /// </summary>
-    [SerializeField] private Piece activePiece;
-
-    /// <summary> 
-    /// Attribut contenant le panel de fin de jeu
-    /// </summary>
-    public GameObject endGamePanel;
-
-    /// <summary> 
-    /// Booléen indiquant si le Game Over a été detecter
-    /// </summary>
-    private bool gameIsOver;
-
-    /// <summary> 
-    /// Vecteur de nombre réel à deux dimensions qui enregistre la position de départ du doigt lorsqu'il entre en contact avec l'écran
-    /// </summary>
-    private Vector2 startPos;
-
-    /// <summary> 
-    /// Vecteur de nombre entier à deux dimensions qui enregistre le mouvement des coordonnées en fonction des mouvements du doigt sur l'écran et de la position de départ
-    /// </summary>
-    private Vector2Int direction;
-
-    /// <summary> 
-    /// Vecteur de nombre entier à deux dimensions qui enregistre le mouvement des coordonnées en fonction des mouvements du doigt sur l'écran et de la position de départ
-    /// </summary>
-    private Vector2Int prevDirection;
-
-    /// <summary> 
-    /// Booléen indiquant TRUE si le joueur cherche à tourner le tetromino (analyse du comportement du doigt sur l'écran), FALSE sinon
-    /// </summary>
-    private bool wantToRotate;
-
-    private void Awake(){
-        //Application.targetFrameRate = /*activePiece.GetStepDelay()*/60;
-    }
-
-    private void Start() {
-        this.gameIsOver = false;
-        this.wantToRotate = true;
-        this.direction = new Vector2Int();
-        this.prevDirection = new Vector2Int();
-        this.startPos = new Vector2();
-    }
-
-    // Update is called once per frame
-    private void Update(){
-        board.Clear(activePiece);
-        touchSensitiveRotate();
-        touchSensitiveShift();
-        board.Set(activePiece);
-    }
-
-    /// <summary> 
+    /*    /// <summary> 
     /// Auteur : Sterlingot Guillaume
     /// Description : Méthode permettant de choisir automatiquement le déplacement adapté selon la gravité (fonctionnalités tactile)
     /// </summary>
@@ -356,6 +303,13 @@ public class Controller : MonoBehaviour
     /// </returns>
     public Vector2 Abs(Vector2 vector){
         return new Vector2(Mathf.Abs(vector.x), Mathf.Abs(vector.y));
-    }  
->>>>>>> Stashed changes
+    } */
+
+    public Piece GetActivePiece(){
+        return activePiece;
+    }
+
+    public BoardManager GetBoard(){
+        return board;
+    }
 }
