@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -165,4 +166,196 @@ public class Controller : MonoBehaviour
     public BoardManager GetBoard(){
         return board;
     }
+=======
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+/// <summary> 
+/// Auteur : Sterlingot Guillaume, Kusunga Malcom, Bae Jin-Young, Seghir Nassima<br>
+/// Descrption : Cette classe permet la gestion des interrations liées aux différentes actions du joueur.
+/// </summary>
+public class Controller : MonoBehaviour
+{
+
+    /// <summary> 
+    /// Attribut contenant le plateau de jeu 
+    /// </summary>
+    [SerializeField] private BoardManager board;
+    
+    /// <summary> 
+    /// Attribut contenant la pièce courante qui est présente sur le plateau de jeu 
+    /// </summary>
+    [SerializeField] private Piece activePiece;
+
+    /// <summary> 
+    /// Attribut contenant le panel de fin de jeu
+    /// </summary>
+    public GameObject endGamePanel;
+
+    /// <summary> 
+    /// Booléen indiquant si le Game Over a été detecter
+    /// </summary>
+    private bool gameIsOver;
+
+    /// <summary> 
+    /// Vecteur de nombre réel à deux dimensions qui enregistre la position de départ du doigt lorsqu'il entre en contact avec l'écran
+    /// </summary>
+    private Vector2 startPos;
+
+    /// <summary> 
+    /// Vecteur de nombre entier à deux dimensions qui enregistre le mouvement des coordonnées en fonction des mouvements du doigt sur l'écran et de la position de départ
+    /// </summary>
+    private Vector2Int direction;
+
+    /// <summary> 
+    /// Vecteur de nombre entier à deux dimensions qui enregistre le mouvement des coordonnées en fonction des mouvements du doigt sur l'écran et de la position de départ
+    /// </summary>
+    private Vector2Int prevDirection;
+
+    /// <summary> 
+    /// Booléen indiquant TRUE si le joueur cherche à tourner le tetromino (analyse du comportement du doigt sur l'écran), FALSE sinon
+    /// </summary>
+    private bool wantToRotate;
+
+    private void Awake(){
+        //Application.targetFrameRate = /*activePiece.GetStepDelay()*/60;
+    }
+
+    private void Start() {
+        this.gameIsOver = false;
+        this.wantToRotate = true;
+        this.direction = new Vector2Int();
+        this.prevDirection = new Vector2Int();
+        this.startPos = new Vector2();
+    }
+
+    // Update is called once per frame
+    private void Update(){
+        board.Clear(activePiece);
+        touchSensitiveRotate();
+        touchSensitiveShift();
+        board.Set(activePiece);
+    }
+
+    /// <summary> 
+    /// Auteur : Sterlingot Guillaume
+    /// Description : Méthode permettant de choisir automatiquement le déplacement adapté selon la gravité (fonctionnalités tactile)
+    /// </summary>
+    public void touchSensitiveShift(){
+        if(Input.touchCount>0){
+            Touch touch = Input.GetTouch(0);
+            
+            switch (touch.phase)
+            {
+                // Record initial touch position.
+                case TouchPhase.Began:
+                    startPos = touch.position;
+                    break;
+
+                case TouchPhase.Stationary:
+                    break;
+
+                // Determine direction by comparing the current touch position with the initial one.
+                case TouchPhase.Moved:
+                    Vector2Int diff = Vector2Int.FloorToInt(touch.position - startPos);
+                    if(diff.x>0){
+                        print(touch.deltaTime);
+                        if(Time.frameCount%touch.deltaTime*Time.time==0){
+                            print(diff);
+                            activePiece.RightShift();
+                        }
+                    }else{
+                        if(Time.frameCount%10==0){
+                            print(diff);
+                            activePiece.LeftShift();
+                        }
+                    }
+                    //Shift(direction, touch);
+                    this.wantToRotate=false;
+                    break;
+
+                // Report that a direction has been chosen when the finger is lifted.
+                case TouchPhase.Ended:
+                    break;
+            }
+        }else
+            this.wantToRotate=true;
+    }
+
+        /// <summary> 
+    /// Auteur : Sterlingot Guillaume
+    /// Description : Méthode permettant de tourner le tetromino courant (fonctionnalités tactile)
+    /// </summary>
+    public void touchSensitiveRotate(){
+        if(Input.touchCount>0){
+            Touch touch = Input.GetTouch(0);
+            
+            if(touch.phase.Equals(TouchPhase.Ended)){
+                Debug.Log("carré");
+                if(this.wantToRotate)
+                    activePiece.Rotate();
+            }
+        }
+    }
+
+    /// <summary> 
+    /// Auteur : Sterlingot Guillaume
+    /// Description : Méthode permettant de choisir automatiquement le déplacement adapté selon la gravité (fonctionnalités tactile)
+    /// </summary>
+    public void Shift(Vector2Int direction, Touch touch){
+        switch(board.GetGravity()){
+            case Gravity.HAUT:  if(touch.altitudeAngle==0f)
+                                    activePiece.Move(new Vector2Int(direction.x, 0));
+                                else 
+                                    activePiece.Move(new Vector2Int(0, direction.y));
+                                break;
+            case Gravity.BAS:   if(touch.altitudeAngle==0f)
+                                    activePiece.Move(new Vector2Int(direction.x, 0));
+                                else 
+                                    activePiece.Move(new Vector2Int(0, direction.y));
+                                break;
+            case Gravity.GAUCHE:if(touch.altitudeAngle==0f)
+                                    activePiece.Move(new Vector2Int(direction.x, 0));
+                                else 
+                                    activePiece.Move(new Vector2Int(0, direction.y));
+                                break;
+            case Gravity.DROITE:if(touch.altitudeAngle==0f)
+                                    activePiece.Move(new Vector2Int(direction.x, 0));
+                                else 
+                                    activePiece.Move(new Vector2Int(0, direction.y));
+                                break;
+            default:break;
+        }
+    }
+
+    /// <summary> 
+    /// Méthode qui permet de vérifier si la partie est perdue 
+    /// Auteur: Malcom Kusunga
+    /// </summary>
+    private void checkGameOver(){
+        if(!gameIsOver){
+            if(board.GameOver()){
+                gameIsOver = true;
+                //Arrêt du temps lors de l'ouverture de l'interface de fin de jeu 
+                Time.timeScale=0f;
+                endGamePanel.SetActive(true);
+            }
+        }
+    }
+
+    /// <summary> 
+    /// Auteur : Sterlingot Guillaume
+    /// Description : Méthode permettant de calculeer la valeur absolue d'un vecteur de réel à deux dimensions
+    /// </summary>
+    /// <param name='vector'> 
+    /// un vecteur de réel à deux dimensions correspondant à la valeur absolue de chaque coordonnée
+    /// </param>
+    /// <returns> 
+    /// un vecteur de réel à deux dimensions
+    /// </returns>
+    public Vector2 Abs(Vector2 vector){
+        return new Vector2(Mathf.Abs(vector.x), Mathf.Abs(vector.y));
+    }  
+>>>>>>> Stashed changes
 }

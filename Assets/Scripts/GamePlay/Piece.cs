@@ -27,7 +27,7 @@ public class Piece : MonoBehaviour
     /// <summary> 
     /// Attribut contenant la position de la piece actuelle 
     /// </summary>
-    public Vector3Int position { get; private set; }
+    public Vector3Int position;
 
     /// <summary> 
     /// Attribut determinant la cadence de deplacement du tetromino 
@@ -100,7 +100,7 @@ public class Piece : MonoBehaviour
     /// <returns>
     /// un booléen qui indique TRUE si le mouvement a bien eu lieu, FALSE sinon
     /// </returns>
-    private bool Move(Vector2Int translation)
+    public bool Move(Vector2Int translation)
     {
         Vector3Int newPosition = position;
         newPosition.x += translation.x;
@@ -112,7 +112,7 @@ public class Piece : MonoBehaviour
         {
             position = newPosition;
             lockTime = 0f; // a chaque mouvement de la piece il est remis a 0, comme ça quand elle atteint 
-            //le bord et qu'elle ne bouge plus, on la lock
+            // le bord et qu'elle ne bouge plus, on la lock
            
         }
 
@@ -148,7 +148,7 @@ public class Piece : MonoBehaviour
 
     /// <summary> 
     /// Méthode qui bloque le mouvement de la piece  
-    /// Auteur: Seghir Nassima 
+    /// Auteur: Seghir Nassima, Kusunga Malcom, Sterlingot Guillaume, Bae Jin-Young 
     /// </summary>
     private void Lock()
     {   
@@ -166,26 +166,12 @@ public class Piece : MonoBehaviour
     /// Auteur : Malcom Kusunga
     /// Description : Méthode permettant le déplacement vers la droite du tetromino actuellement présent sur le plateau
     /// </summary>
-    public void Shift(){
-        //Vérification du sens d'application de la gravité
-        if(board.GetGravity() == Gravity.HAUT || board.GetGravity() == Gravity.BAS){
-            //Suppresion de la position précédente du tétromino sur la grille
-            board.Clear(this);
-            Move(Vector2Int.right);
-        }  
-    }
-
-    /// <summary> 
-    /// Auteur : Malcom Kusunga
-    /// Description : Méthode permettant le déplacement vers la droite du tetromino actuellement présent sur le plateau
-    /// </summary>
     public void RightShift(){
         //Vérification du sens d'application de la gravité
         if(board.GetGravity() == Gravity.HAUT || board.GetGravity() == Gravity.BAS){
             //Suppresion de la position précédente du tétromino sur la grille
-            board.Clear(this);
             Move(Vector2Int.right);
-        }  
+        } 
     }
 
     /// <summary> 
@@ -194,7 +180,6 @@ public class Piece : MonoBehaviour
     /// </summary>
     public void LeftShift(){
         if(board.GetGravity() == Gravity.HAUT || board.GetGravity() == Gravity.BAS){
-            board.Clear(this);
             Move(Vector2Int.left);
         }
     }
@@ -205,7 +190,6 @@ public class Piece : MonoBehaviour
     /// </summary>
     public void TopShift(){
         if(board.GetGravity() == Gravity.GAUCHE || board.GetGravity() == Gravity.DROITE){
-            board.Clear(this);
             Move(Vector2Int.up);
         }
     }
@@ -216,7 +200,6 @@ public class Piece : MonoBehaviour
     /// </summary>
     public void BotShift(){
         if(board.GetGravity() == Gravity.GAUCHE || board.GetGravity() == Gravity.DROITE){
-            board.Clear(this);
             Move(Vector2Int.down);
         }
     }
@@ -386,6 +369,7 @@ public class Piece : MonoBehaviour
         return true;
     }
 
+<<<<<<< Updated upstream:Assets/Scripts/GamePlay/Piece.cs
     public float GetStepDelay(){
         return stepDelay;
     }
@@ -393,4 +377,13 @@ public class Piece : MonoBehaviour
     public void SetStepDelay(float stepDelay){
         this.stepDelay = stepDelay;
     }
+=======
+    public float GetStepTime(){
+        return stepTime;
+    }
+
+    public float GetStepDelay(){
+        return stepDelay;
+    }
+>>>>>>> Stashed changes:Assets/Scripts/Piece.cs
 }

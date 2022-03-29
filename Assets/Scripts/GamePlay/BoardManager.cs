@@ -26,7 +26,7 @@ public class BoardManager : MonoBehaviour
     /// <summary> 
     /// Attribut contenant le plateau de jeu 
     /// </summary>
-    [SerializeField] private Tilemap board { get; set; }
+    [SerializeField] private Tilemap board;
 
     /// <summary> 
     /// Attribut contenant la pièce courante qui est présente sur le plateau de jeu 
@@ -492,14 +492,6 @@ public class BoardManager : MonoBehaviour
         return true;
     }
 
-    public Gravity GetGravity(){
-        return gravity;
-    }
-
-    public Piece GetActivePiece(){
-        return activePiece;
-    }
-
     /// <summary>
     /// Auteur : Jin-Young BAE
     /// Description : Méthode permettant de vérifier si un côté de l'écran est rempli
@@ -661,6 +653,7 @@ public class BoardManager : MonoBehaviour
         }
     }
 
+<<<<<<< Updated upstream:Assets/Scripts/GamePlay/BoardManager.cs
     public bool GetTopIsFull(){
         return topIsFull;
     }
@@ -675,5 +668,13 @@ public class BoardManager : MonoBehaviour
     
     public bool GetRightIsFull(){
         return rightIsFull;
+=======
+    public Gravity GetGravity(){
+        return gravity;
+    }
+
+    public Piece GetActivePiece(){
+        return activePiece;
+>>>>>>> Stashed changes:Assets/Scripts/BoardManager.cs
     }
 }
