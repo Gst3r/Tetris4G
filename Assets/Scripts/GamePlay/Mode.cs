@@ -47,6 +47,7 @@ public abstract class IMode : MonoBehaviour
 
     public void Start(){
         this.justOne = -1;
+        this.activePiece.SetStepDelay(1f);
     }
 
     public abstract void Execute();

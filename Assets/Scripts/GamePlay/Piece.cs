@@ -170,6 +170,7 @@ public class Piece : MonoBehaviour
         //Vérification du sens d'application de la gravité
         if(board.GetGravity() == Gravity.HAUT || board.GetGravity() == Gravity.BAS){
             //Suppresion de la position précédente du tétromino sur la grille
+            board.Clear(this);
             Move(Vector2Int.right);
         } 
     }
@@ -180,6 +181,7 @@ public class Piece : MonoBehaviour
     /// </summary>
     public void LeftShift(){
         if(board.GetGravity() == Gravity.HAUT || board.GetGravity() == Gravity.BAS){
+            board.Clear(this);
             Move(Vector2Int.left);
         }
     }
@@ -190,6 +192,7 @@ public class Piece : MonoBehaviour
     /// </summary>
     public void TopShift(){
         if(board.GetGravity() == Gravity.GAUCHE || board.GetGravity() == Gravity.DROITE){
+            board.Clear(this);
             Move(Vector2Int.up);
         }
     }
@@ -200,19 +203,21 @@ public class Piece : MonoBehaviour
     /// </summary>
     public void BotShift(){
         if(board.GetGravity() == Gravity.GAUCHE || board.GetGravity() == Gravity.DROITE){
+            board.Clear(this);
             Move(Vector2Int.down);
         }
     }
 
     /// <summary> 
     /// Auteur : Malcom Kusunga
-    /// Description : Méthode permettant de modifier la force de la graivté du tetromino actuellement présent sur le plateau 
+    /// Description : Méthode permettant de modifier la force de la gravité du tetromino actuellement présent sur le plateau 
     ///               Bouton Droit  
     /// </summary>
     public void ModifyGravityR()
     {
         // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
         this.bufferedStepDelay = stepDelay;
+        board.Clear(this);
 
         //Augmentation de la gravité
         if(board.GetGravity() == Gravity.DROITE){
@@ -233,6 +238,7 @@ public class Piece : MonoBehaviour
     {
         // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
         this.bufferedStepDelay = stepDelay;
+        board.Clear(this);
 
         //Augmenation de la gravité
         if(board.GetGravity() == Gravity.GAUCHE){
@@ -246,13 +252,14 @@ public class Piece : MonoBehaviour
 
     /// <summary> 
     /// Auteur : Malcom Kusunga
-    /// Description : Méthode permettant de modifier la force de la graivté du tetromino actuellement présent sur le plateau 
+    /// Description : Méthode permettant de modifier la force de la gravité du tetromino actuellement présent sur le plateau 
     ///               Bouton Haut
     /// </summary>
     public void ModifyGravityT()
     {
         // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
         this.bufferedStepDelay = stepDelay;
+        board.Clear(this);
 
         //Augmentation de la gravité
         if(board.GetGravity() == Gravity.HAUT){
@@ -266,14 +273,15 @@ public class Piece : MonoBehaviour
 
     /// <summary> 
     /// Auteur : Malcom Kusunga
-    /// Description : Méthode permettant de modifier la force de la graivté du tetromino actuellement présent sur le plateau 
+    /// Description : Méthode permettant de modifier la force de la gravité du tetromino actuellement présent sur le plateau 
     ///               Bouton Bas
     /// </summary>
     public void ModifyGravityB()
     {
         // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
         this.bufferedStepDelay = stepDelay;
-        
+        board.Clear(this);
+
         //Augmenation de la gravité
         if(board.GetGravity() == Gravity.BAS){
             stepDelay = 0.1f;

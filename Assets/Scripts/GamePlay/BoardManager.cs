@@ -22,7 +22,9 @@ public enum Gravity
 /// Description : Cette classe permet de la gestion de l'ensemble de la grille de jeu
 /// </summary>
 public class BoardManager : MonoBehaviour
-{
+{    
+//------------------------------------------------------------------BOARD------------------------------------------------
+
     /// <summary> 
     /// Attribut contenant le plateau de jeu 
     /// </summary>
@@ -63,6 +65,9 @@ public class BoardManager : MonoBehaviour
         }
     }
 
+    
+//------------------------------------------------------------------SCORE-------------------------------------------------
+
     /// <summary> 
     /// Attribut contenant le score de la partie en cours 
     /// </summary>
@@ -73,6 +78,8 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     [SerializeField] private Text scoreText;
 
+//------------------------------------------------------------------COTE COMPLET-----------------------------------------
+   
     /// Booléen permettant de determiner si le haut de la grille est complet 
     /// </summary>
     private bool topIsFull { get; set; }
@@ -91,7 +98,9 @@ public class BoardManager : MonoBehaviour
     /// Booléen permettant de determiner si la droite de la grille est complete
     /// </summary>
     private bool rightIsFull { get; set; }
-    
+   
+//---------------------------------------------------------------------------------------------------------------------
+
     private async void Awake()
     {
         SetupBoard();
@@ -120,6 +129,8 @@ public class BoardManager : MonoBehaviour
             SpawnPiece();
         }*/
     }
+
+//-------------------------------------------------------------------------------------------------------------
 
     /// <summary> 
     /// Méthode qui permet de générer une piece aléatoirement 
@@ -174,7 +185,7 @@ public class BoardManager : MonoBehaviour
     public void SetupBoard(){
         this.board = GetComponentInChildren<Tilemap>();
         this.activePiece=GetComponentInChildren<Piece>();
-        this.size = new Vector2Int(14,22);
+        this.size = new Vector2Int(16,22);
     }
 
     /// <summary> 
@@ -652,6 +663,8 @@ public class BoardManager : MonoBehaviour
             }
         }
     }
+
+// Getters
 
     public bool GetTopIsFull(){
         return topIsFull;

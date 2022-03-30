@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
 /// Auteur : Sterlingot Guillaume<br>
@@ -12,12 +14,12 @@ public class SprintManager : IMode
     /// <summary> 
     /// Temps en seconde qui s'est écoulé depuis le début de la partie
     /// </summary>
-    private static float countSec;
+    private static float countSec = 0f;
 
     /// <summary> 
     /// Temps en seconde dont dispose le joueur pour scorer
     /// </summary>
-    private static float countMax = 10f;
+    private static float countMax = 11f;
 
     /// <summary> 
     /// Panel contenant toute l'affichage conçernant le temps restant avant la fin de la partie
@@ -28,6 +30,7 @@ public class SprintManager : IMode
         this.controller = GameObject.Find("GameManager").GetComponent<Controller>();
         this.board = controller.GetBoard();
         this.activePiece = controller.GetActivePiece();
+        countSec = 0;
         this.activePiece.SetStepDelay(0.7f);
     }
 
@@ -50,9 +53,10 @@ public class SprintManager : IMode
     /// Auteur : Sterlingot Guillaume<br>
     /// Méthode permettant la gestion du compteur du Sprint mode
     /// </summary>
-    public static void CountTime(){
+    public void CountTime(){
         if(!PauseMenu.GetGameIsPausing()){
             countSec+=Time.deltaTime;
+            this.sprintTimePanel.GetComponent<Text>().text = ((int)(countMax-countSec)).ToString();
         }
     }
 
@@ -65,7 +69,7 @@ public class SprintManager : IMode
     /// </returns>
     public override bool GameOver(){
         // un côté non rempli signifie que la partie continue
-        if ((board.GetTopIsFull() && board.GetBotIsFull() && board.GetLeftIsFull() && board.GetRightIsFull()) || (int)countSec==(int)countMax)
+        if ((board.GetTopIsFull() && board.GetBotIsFull() && board.GetLeftIsFull() && board.GetRightIsFull()) || (int)countSec>=(int)countMax)
             return true;
         return false;
     }
