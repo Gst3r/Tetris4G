@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -48,7 +48,7 @@ public class ButtonManager : MonoBehaviour
         if(Time.timeScale == 0f){
             Time.timeScale=1f; 
         }
-        StartCoroutine(LaodGame(scene));
+        StartCoroutine(LoadGame(scene));
     }
 
     /// <summary>
@@ -57,7 +57,7 @@ public class ButtonManager : MonoBehaviour
     /// <returns>
     /// Génere une pause de 0.38 secondes.
     /// </returns>
-    IEnumerator LaodGame(string scene)
+    IEnumerator LoadGame(string scene)
     {
         //Démarage de l'animation
         animator.SetTrigger("Press");

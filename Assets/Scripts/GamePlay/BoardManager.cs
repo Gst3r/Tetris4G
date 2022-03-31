@@ -71,7 +71,7 @@ public class BoardManager : MonoBehaviour
     /// <summary> 
     /// Attribut contenant le score de la partie en cours 
     /// </summary>
-    [SerializeField] private float score=0;
+    [SerializeField] private static float score=0;
 
     /// <summary> 
     /// Attribut contenant le score de la partie en cours sous forme de texte
@@ -117,7 +117,8 @@ public class BoardManager : MonoBehaviour
         leftIsFull = false;
         rightIsFull = false;
         chooseRandomGravity();
-        SpawnPiece();
+        int random = Random.Range(0, tetrominoes.Length);
+        SpawnPiece(random);
     }
 
     private void Update()
@@ -134,16 +135,14 @@ public class BoardManager : MonoBehaviour
 
     /// <summary> 
     /// Méthode qui permet de générer une piece aléatoirement 
-    /// Auteur:Seghir Nassima
+    /// Auteur:Seghir Nassima, Bae Jin-Young
     /// </summary>
-    public void SpawnPiece(){
-        int random = Random.Range(0, tetrominoes.Length);
-        TetrominoData data= this.tetrominoes[random]; 
+    public void SpawnPiece(int random)
+    {
+        TetrominoData data = this.tetrominoes[random];
 
-        
-
-        this.activePiece.Initialize(this, spawnPosition, data); 
-        Set(activePiece); 
+        this.activePiece.Initialize(this, spawnPosition, data);
+        Set(activePiece);
     }
 
     /// <summary> 
@@ -642,6 +641,10 @@ public class BoardManager : MonoBehaviour
         return size;
     }
 
+    public static float GetScore()
+    {
+        return score; 
+    }
 
     /// <summary>
     /// Méthode permettant de retourner un booleen indiquant lorsque le haut de la grille est complet
