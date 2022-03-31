@@ -53,7 +53,12 @@ public class Piece : MonoBehaviour
     /// Attribut indiquant l'instant ou la pièce doit se fixer      
     /// </summary>
     private float lockTime;
-  
+
+    /// <summary>
+    /// Attribut contenant le gestionnaire de la zone de prévisualisation
+    /// </summary>
+    private PreviewManager previewManager;
+
     /// <summary> 
     /// Méthode qui permet d'initialiser la piece  
     /// </summary>
@@ -77,7 +82,8 @@ public class Piece : MonoBehaviour
     private void Start()
     {
         this.stepDelay = 1f;
-        this.bufferedStepDelay = stepDelay; 
+        this.bufferedStepDelay = stepDelay;
+        this.previewManager = FindObjectOfType<PreviewManager>();
     }
 
     private void Update()
@@ -159,7 +165,8 @@ public class Piece : MonoBehaviour
         board.ClearApparitionZone();
         board.chooseRandomGravity();
         board.StopGravity();
-        board.SpawnPiece();
+        board.SpawnPiece(previewManager.GetNextPiece());
+        previewManager.ChangePreview();
     }
 
     /// <summary> 

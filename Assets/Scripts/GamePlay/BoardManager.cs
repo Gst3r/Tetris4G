@@ -117,7 +117,9 @@ public class BoardManager : MonoBehaviour
         leftIsFull = false;
         rightIsFull = false;
         chooseRandomGravity();
-        SpawnPiece();
+
+        int random = Random.Range(0, tetrominoes.Length);
+        SpawnPiece(random);
     }
 
     private void Update()
@@ -130,20 +132,18 @@ public class BoardManager : MonoBehaviour
         }*/
     }
 
-//-------------------------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------------------
 
     /// <summary> 
     /// Méthode qui permet de générer une piece aléatoirement 
-    /// Auteur:Seghir Nassima
+    /// Auteur:Seghir Nassima, Bae Jin-Young
     /// </summary>
-    public void SpawnPiece(){
-        int random = Random.Range(0, tetrominoes.Length);
-        TetrominoData data= this.tetrominoes[random]; 
+    public void SpawnPiece(int random)
+    {
+        TetrominoData data = this.tetrominoes[random];
 
-        
-
-        this.activePiece.Initialize(this, spawnPosition, data); 
-        Set(activePiece); 
+        this.activePiece.Initialize(this, spawnPosition, data);
+        Set(activePiece);
     }
 
     /// <summary> 
@@ -186,6 +186,7 @@ public class BoardManager : MonoBehaviour
         this.board = GetComponentInChildren<Tilemap>();
         this.activePiece=GetComponentInChildren<Piece>();
         this.size = new Vector2Int(16,22);
+        this.spawnPosition = new Vector3Int(-1, -1, -2);
     }
 
     /// <summary> 
