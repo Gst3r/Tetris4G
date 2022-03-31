@@ -22,11 +22,13 @@ public enum Gravity
 /// Description : Cette classe permet de la gestion de l'ensemble de la grille de jeu
 /// </summary>
 public class BoardManager : MonoBehaviour
-{
+{    
+//------------------------------------------------------------------BOARD------------------------------------------------
+
     /// <summary> 
     /// Attribut contenant le plateau de jeu 
     /// </summary>
-    [SerializeField] private Tilemap board { get; set; }
+    [SerializeField] private Tilemap board;
 
     /// <summary> 
     /// Attribut contenant la pièce courante qui est présente sur le plateau de jeu 
@@ -42,18 +44,6 @@ public class BoardManager : MonoBehaviour
     /// Attribut contenant la gravité courante exercée
     /// </summary>
     private Gravity gravity;
-
-    /// <summary> 
-    /// Attribut indiquant le nombre de ligne du plateau de jeu 
-    /// </summary>
-    private int nb_row;
-
-    
-    /// <summary> 
-    /// Attribut indiquant le nombre de colonne du plateau de jeu 
-    /// </summary>
-    private int nb_col;
-
 
     /// <summary> 
     /// Attribut indiquant la taille totale du plateau de jeu
@@ -75,16 +65,21 @@ public class BoardManager : MonoBehaviour
         }
     }
 
+    
+//------------------------------------------------------------------SCORE-------------------------------------------------
+
     /// <summary> 
     /// Attribut contenant le score de la partie en cours 
     /// </summary>
-    [SerializeField] private static float score=0;
+    [SerializeField] private float score=0;
 
     /// <summary> 
     /// Attribut contenant le score de la partie en cours sous forme de texte
     /// </summary>
-    [SerializeField] private static Text scoreText;
+    [SerializeField] private Text scoreText;
 
+//------------------------------------------------------------------COTE COMPLET-----------------------------------------
+   
     /// Booléen permettant de determiner si le haut de la grille est complet 
     /// </summary>
     private bool topIsFull { get; set; }
@@ -103,7 +98,9 @@ public class BoardManager : MonoBehaviour
     /// Booléen permettant de determiner si la droite de la grille est complete
     /// </summary>
     private bool rightIsFull { get; set; }
-    
+   
+//---------------------------------------------------------------------------------------------------------------------
+
     private async void Awake()
     {
         SetupBoard();
@@ -115,7 +112,6 @@ public class BoardManager : MonoBehaviour
     }
 
     private void Start(){
-       
         topIsFull = false;
         botIsFull = false;
         leftIsFull = false;
@@ -134,12 +130,13 @@ public class BoardManager : MonoBehaviour
         }*/
     }
 
+//-------------------------------------------------------------------------------------------------------------
+
     /// <summary> 
     /// Méthode qui permet de générer une piece aléatoirement 
     /// Auteur:Seghir Nassima
     /// </summary>
     public void SpawnPiece(){
-
         int random = Random.Range(0, tetrominoes.Length);
         TetrominoData data= this.tetrominoes[random]; 
 
@@ -188,9 +185,7 @@ public class BoardManager : MonoBehaviour
     public void SetupBoard(){
         this.board = GetComponentInChildren<Tilemap>();
         this.activePiece=GetComponentInChildren<Piece>();
-        this.nb_col = 14;
-        this.nb_row = 22;
-        this.size = new Vector2Int(14,22);
+        this.size = new Vector2Int(16,22);
     }
 
     /// <summary> 
@@ -391,17 +386,6 @@ public class BoardManager : MonoBehaviour
 
     }
 
-    /// <summary>
-    /// Auteur : Seghir Nassima 
-    /// Méthode permettant de récupérer le score de la partie 
-    /// </summary>
-    public static float getScore()
-    {
-        return score; 
-
-    }
-
-
 
     /// <summary>
     /// Auteur : Jin-Young BAE
@@ -517,14 +501,6 @@ public class BoardManager : MonoBehaviour
             return false;
         //Sinon on retourne TRUE pour indiquer que la position est correct
         return true;
-    }
-
-    public Gravity GetGravity(){
-        return gravity;
-    }
-
-    public Piece GetActivePiece(){
-        return activePiece;
     }
 
     /// <summary>
@@ -666,23 +642,6 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Auteur : Malcom Kusunga
-    /// Méthode permettant de déterminer si la partie est terminée
-    /// </summary>
-    /// <returns>
-    /// Booléen qui retourne TRUE si tous les côtés sont remplis, FALSE sinon
-    /// </returns>
-    public bool GameOver()
-    {
-        // un côté non rempli signifie que la partie continue
-        if (topIsFull && botIsFull && leftIsFull && rightIsFull )
-        {
-            return true;
-        }  
-        return false;
-    }
-
-    /// <summary>
     /// Auteur : Jin-Young BAE
     /// Méthode permettant de nettoyer la zone d'apparition pour laisser la place aux nouvelles pièces
     /// </summary>
@@ -703,5 +662,35 @@ public class BoardManager : MonoBehaviour
                 }
             }
         }
+    }
+// Getters
+
+    public static float getScore()
+    {
+        return score; 
+    }
+
+    public bool GetTopIsFull(){
+        return topIsFull;
+    }
+    
+    public bool GetBotIsFull(){
+        return botIsFull;
+    }
+
+    public bool GetLeftIsFull(){
+        return leftIsFull;
+    }
+    
+    public bool GetRightIsFull(){
+        return rightIsFull;
+    }
+    
+    public Gravity GetGravity(){
+        return gravity;
+    }
+
+    public Piece GetActivePiece(){
+        return activePiece;
     }
 }
