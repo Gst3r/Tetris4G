@@ -78,12 +78,12 @@ public class BoardManager : MonoBehaviour
     /// <summary> 
     /// Attribut contenant le score de la partie en cours 
     /// </summary>
-    [SerializeField] private float score=0;
+    [SerializeField] private static float score=0;
 
     /// <summary> 
     /// Attribut contenant le score de la partie en cours sous forme de texte
     /// </summary>
-    [SerializeField] private Text scoreText;
+    [SerializeField] private static Text scoreText;
 
     /// Booléen permettant de determiner si le haut de la grille est complet 
     /// </summary>
@@ -115,6 +115,7 @@ public class BoardManager : MonoBehaviour
     }
 
     private void Start(){
+       
         topIsFull = false;
         botIsFull = false;
         leftIsFull = false;
@@ -138,6 +139,7 @@ public class BoardManager : MonoBehaviour
     /// Auteur:Seghir Nassima
     /// </summary>
     public void SpawnPiece(){
+
         int random = Random.Range(0, tetrominoes.Length);
         TetrominoData data= this.tetrominoes[random]; 
 
@@ -388,6 +390,17 @@ public class BoardManager : MonoBehaviour
         }
 
     }
+
+    /// <summary>
+    /// Auteur : Seghir Nassima 
+    /// Méthode permettant de récupérer le score de la partie 
+    /// </summary>
+    public static float getScore()
+    {
+        return score; 
+
+    }
+
 
 
     /// <summary>

@@ -24,6 +24,8 @@ public class ButtonManager : MonoBehaviour
     /// </summary>
     private float pressTime = 0.38f;
 
+    
+
     void Start()
     {
         //Récupétation de la source audio en relation avec le bouton
@@ -68,4 +70,5 @@ public class ButtonManager : MonoBehaviour
         //Chargement de la scène
         SceneManager.LoadScene(scene);
     }
+  
 }
