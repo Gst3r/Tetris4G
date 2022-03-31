@@ -71,7 +71,7 @@ public class BoardManager : MonoBehaviour
     /// <summary> 
     /// Attribut contenant le score de la partie en cours 
     /// </summary>
-    [SerializeField] private float score=0;
+    [SerializeField] private static float score=0;
 
     /// <summary> 
     /// Attribut contenant le score de la partie en cours sous forme de texte
@@ -665,7 +665,7 @@ public class BoardManager : MonoBehaviour
     }
 // Getters
 
-    public static float getScore()
+    public static float GetScore()
     {
         return score; 
     }

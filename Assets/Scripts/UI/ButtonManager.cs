@@ -44,7 +44,7 @@ public class ButtonManager : MonoBehaviour
         if(Time.timeScale == 0f){
             Time.timeScale=1f; 
         }
-        StartCoroutine(LaodGame(scene));
+        StartCoroutine(LoadGame(scene));
     }
 
     /// <summary>
