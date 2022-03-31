@@ -16,7 +16,7 @@ public enum Gravity
     GAUCHE,
     DROITE
 }
-
+ 
 /// <summary> 
 /// Auteur : Sterlingot Guillaume, Bae Jin-Young, Nassima Seghir, Malcom Kusunga<br>
 /// Description : Cette classe permet de la gestion de l'ensemble de la grille de jeu
@@ -462,7 +462,7 @@ public class BoardManager : MonoBehaviour
     /// un booléen qui indique FALSE si la poisition est occupée par un tetromino, 
     /// FALSE si la position est au-dela des limites de la grille, TRUE sinon
     /// </returns>
-    public bool validerPosition(Piece piece, Vector3Int position)
+    public bool ValiderPosition(Piece piece, Vector3Int position)
     {
         RectInt bounds = Bornes;
 
@@ -594,35 +594,6 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     public void StopGravity()
     {
-        // bloquer la gravité BAS :
-        /*if (FullSide(-3, true) && gravity == Gravity.BAS)
-        {
-            // rappel du générateur de gravité et rappel de la méthode au cas où le générateur re-sélectionne la gravité BAS
-            chooseRandomGravity();
-            StopGravity();
-        }
-
-        // bloquer la gravité HAUT:
-        else if (FullSide(2, true) && gravity == Gravity.HAUT)
-        {
-            chooseRandomGravity();
-            StopGravity();
-        }
-
-        // bloquer la gravité GAUCHE :
-        else if (FullSide(-3, false) && gravity == Gravity.GAUCHE)
-        {
-            chooseRandomGravity();
-            StopGravity();
-        }
-
-        // bloquer la gravité DROITE :
-        else if (FullSide(2, false) && gravity == Gravity.DROITE)
-        {
-            chooseRandomGravity();
-            StopGravity();
-        }*/
-
         //Selection de la gravité en fonction des gravités restantes
         if(!topIsFull || !botIsFull || !leftIsFull || !rightIsFull){
             do{
@@ -664,28 +635,52 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-// Getters
+    /// <summary>
+    /// Méthode permettant de retourner la taille de la grille
+    /// </summary>
+    public Vector2Int GetSize(){
+        return size;
+    }
 
+
+    /// <summary>
+    /// Méthode permettant de retourner un booleen indiquant lorsque le haut de la grille est complet
+    /// </summary>
     public bool GetTopIsFull(){
         return topIsFull;
     }
     
+    /// <summary>
+    /// Méthode permettant de retourner un booleen indiquant lorsque le bas de la grille est complet
+    /// </summary>
     public bool GetBotIsFull(){
         return botIsFull;
     }
 
+    /// <summary>
+    /// Méthode permettant de retourner un booleen indiquant lorsque la gauche de la grille est complet
+    /// </summary>
     public bool GetLeftIsFull(){
         return leftIsFull;
     }
     
+    /// <summary>
+    /// Méthode permettant de retourner un booleen indiquant lorsque la droite de la grille est complet
+    /// </summary>
     public bool GetRightIsFull(){
         return rightIsFull;
     }
     
+    /// <summary>
+    /// Méthode permettant de retourner la grivité qui s'exerce
+    /// </summary>
     public Gravity GetGravity(){
         return gravity;
     }
 
+    /// <summary>
+    /// Méthode permettant de retourner la pièce actuellement présente sur la grille
+    /// </summary>
     public Piece GetActivePiece(){
         return activePiece;
     }

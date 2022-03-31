@@ -24,6 +24,10 @@ public class ButtonManager : MonoBehaviour
     /// </summary>
     private float pressTime = 0.38f;
 
+    [SerializeField] private GameObject startButton;
+    
+    [SerializeField] private GameObject modePanel;
+
     void Start()
     {
         //Récupétation de la source audio en relation avec le bouton
@@ -67,5 +71,39 @@ public class ButtonManager : MonoBehaviour
         
         //Chargement de la scène
         SceneManager.LoadScene(scene);
+    }
+
+
+    /// <summary>
+    /// Méthodes permettant de lancer une animation pour les boutons.
+    /// </summary>
+    public void LaunchAnim(){
+        if(Time.timeScale == 0f){
+            Time.timeScale=1f; 
+        }
+        StartCoroutine(LaodAnim());
+    }
+
+    /// <summary>
+    /// Coroutine de changement de scène lié au lancement de l'animation (menu principal vers interface de jeu ou inversement).
+    /// </summary>
+    /// <returns>
+    /// Génere une pause de 0.38 secondes.
+    /// </returns>
+    IEnumerator LaodAnim()
+    {
+        //Démarage de l'animation
+        animator.SetTrigger("Press");
+        
+        //Génération de la pause
+        float ms = Time.deltaTime;
+        while(ms <= pressTime){
+            ms += Time.deltaTime;
+            yield return null;
+        }
+
+        //Modification de l'interface
+        startButton.SetActive(false);
+        modePanel.SetActive(true);
     }
 }
