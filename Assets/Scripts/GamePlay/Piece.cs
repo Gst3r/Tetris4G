@@ -177,6 +177,7 @@ public class Piece : MonoBehaviour
         if(board.GetGravity() == Gravity.HAUT || board.GetGravity() == Gravity.BAS){
             //Suppresion de la position précédente du tétromino sur la grille
             board.Clear(this);
+            Controller.SetWantToRotate(false);
             Move(Vector2Int.right);
         } 
     }
@@ -188,6 +189,7 @@ public class Piece : MonoBehaviour
     public void LeftShift(){
         if(board.GetGravity() == Gravity.HAUT || board.GetGravity() == Gravity.BAS){
             board.Clear(this);
+            Controller.SetWantToRotate(false);
             Move(Vector2Int.left);
         }
     }
@@ -199,6 +201,7 @@ public class Piece : MonoBehaviour
     public void TopShift(){
         if(board.GetGravity() == Gravity.GAUCHE || board.GetGravity() == Gravity.DROITE){
             board.Clear(this);
+            Controller.SetWantToRotate(false);
             Move(Vector2Int.up);
         }
     }
@@ -210,6 +213,7 @@ public class Piece : MonoBehaviour
     public void BotShift(){
         if(board.GetGravity() == Gravity.GAUCHE || board.GetGravity() == Gravity.DROITE){
             board.Clear(this);
+            Controller.SetWantToRotate(false);
             Move(Vector2Int.down);
         }
     }
@@ -223,6 +227,7 @@ public class Piece : MonoBehaviour
     {
         // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
         this.bufferedStepDelay = stepDelay;
+        Controller.SetWantToRotate(false);
 
         //Augmentation de la gravité
         if(board.GetGravity() == Gravity.DROITE){
@@ -243,6 +248,7 @@ public class Piece : MonoBehaviour
     {
         // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
         this.bufferedStepDelay = stepDelay;
+        Controller.SetWantToRotate(false);
 
         //Augmenation de la gravité
         if(board.GetGravity() == Gravity.GAUCHE){
@@ -263,6 +269,7 @@ public class Piece : MonoBehaviour
     {
         // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
         this.bufferedStepDelay = stepDelay;
+        Controller.SetWantToRotate(false);
 
         //Augmentation de la gravité
         if(board.GetGravity() == Gravity.HAUT){
@@ -283,6 +290,7 @@ public class Piece : MonoBehaviour
     {
         // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
         this.bufferedStepDelay = stepDelay;
+        Controller.SetWantToRotate(false);
 
         //Augmenation de la gravité
         if(board.GetGravity() == Gravity.BAS){

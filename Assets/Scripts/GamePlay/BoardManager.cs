@@ -184,7 +184,7 @@ public class BoardManager : MonoBehaviour
     public void SetupBoard(){
         this.board = GetComponentInChildren<Tilemap>();
         this.activePiece=GetComponentInChildren<Piece>();
-        this.size = new Vector2Int(16,22);
+        this.size = new Vector2Int(18,28);
     }
 
     /// <summary> 
