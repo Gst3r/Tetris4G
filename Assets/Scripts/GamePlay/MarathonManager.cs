@@ -22,4 +22,12 @@ public class MarathonManager : IMode
         AccelerateGravity();
         CheckGameOver();
     }
+
+
+
+    public static float GetScore()
+    {
+        return BoardManager.GetScore(); 
+
+    }
 }

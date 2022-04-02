@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
 
 /// <summary> 
 /// Auteur : Seghir Nassima<br>
 /// Description : Cette classe permet de gérér le profil d'un joueur 
 /// </summary>
 
-[System.Serializable]
-public class Joueur : MonoBehaviour
+[Serializable]
+public class Joueur 
 {
     /// <summary> 
     /// Attribut contenant le pseudonyme du joueur 

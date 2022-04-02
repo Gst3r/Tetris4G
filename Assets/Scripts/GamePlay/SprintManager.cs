@@ -81,4 +81,10 @@ public class SprintManager : IMode
     public void closeSprintTimePanel(){
         sprintTimePanel.SetActive(false);
     }
+
+
+    public static int GetScore()
+    {
+        return BoardManager.GetTotalLinesCleared(); 
+    }
 }

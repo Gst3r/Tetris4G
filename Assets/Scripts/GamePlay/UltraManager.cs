@@ -45,7 +45,7 @@ public class UltraManager : IMode
         CheckGameOver();
     }
 
-    /* PARLER AVEC NASSIMA POUR LE SCORE
+    
     /// <summary>
     /// Auteur : Sterlingot Guillaume<br>
     /// Méthode permettant la gestion du compteur du Sprint mode
@@ -53,9 +53,9 @@ public class UltraManager : IMode
     public void CountScore(){
         if(!PauseMenu.GetGameIsPausing()){
             countScore+=Time.deltaTime;
-            this.sprintTimePanel.GetComponent<Text>().text = ((int)(countMax-countSec)).ToString();
+            //this.sprintTimePanel.GetComponent<Text>().text = ((int)(countMax-countSec)).ToString();
         }
-    }*/
+    }
 
     /// <summary>
     /// Auteur : Kusunga Malcom, Sterlingot Guillaume<br>
@@ -77,5 +77,11 @@ public class UltraManager : IMode
 
     public void closeUltraGoalPanel(){
         ultraGoalPanel.SetActive(false);
+    }
+
+    public static float getScore()
+    {
+        return countScore; 
+
     }
 }

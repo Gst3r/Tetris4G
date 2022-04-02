@@ -78,6 +78,15 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     [SerializeField] private Text scoreText;
 
+    /// <summary> 
+    /// Attribut contenant le nombre de lignes éliminéesau total 
+    /// </summary>
+    [SerializeField] private static int totalLinesCleared;
+
+
+
+
+
 //------------------------------------------------------------------COTE COMPLET-----------------------------------------
    
     /// Booléen permettant de determiner si le haut de la grille est complet 
@@ -432,6 +441,7 @@ public class BoardManager : MonoBehaviour
             }
         }
         incrementScore(nbLinesCleared); 
+        totalLinesCleared+=nbLinesCleared; 
     }
 
     /// <summary> 
@@ -694,4 +704,11 @@ public class BoardManager : MonoBehaviour
     public Piece GetActivePiece(){
         return activePiece;
     }
+
+    public static int GetTotalLinesCleared(){
+        return totalLinesCleared;
+    }
+
+
+
 }
