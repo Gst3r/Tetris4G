@@ -24,6 +24,26 @@ public class ButtonManager : MonoBehaviour
     /// </summary>
     private float pressTime = 0.38f;
 
+    /// <summary>
+    /// Variable contenant le bouton start.
+    /// </summary>
+    [SerializeField] private GameObject startButton;
+
+    /// <summary>
+    /// Variable contenant le bouton highscores.
+    /// </summary>
+    [SerializeField] private GameObject HighScoresButton;
+
+    /// <summary>
+    /// Variable contenant le panel des modes.
+    /// </summary>
+    [SerializeField] private GameObject modePanel;
+
+    /// <summary>
+    /// Variable contenant le panel highscores.
+    /// </summary>
+    [SerializeField] private GameObject HighScoresPanel;
+
     void Start()
     {
         //Récupétation de la source audio en relation avec le bouton
@@ -67,5 +87,75 @@ public class ButtonManager : MonoBehaviour
         
         //Chargement de la scène
         SceneManager.LoadScene(scene);
+    }
+
+
+    /// <summary>
+    /// Méthodes permettant de lancer une animation pour les boutons.
+    /// </summary>
+    public void LaunchStart(){
+        if(Time.timeScale == 0f){
+            Time.timeScale=1f; 
+        }
+        StartCoroutine(LaodStart());
+    }
+
+    /// <summary>
+    /// Coroutine de changement de scène lié au lancement de l'animation (menu principal vers interface de jeu ou inversement).
+    /// </summary>
+    /// <returns>
+    /// Génere une pause de 0.38 secondes.
+    /// </returns>
+    IEnumerator LaodStart()
+    {
+        //Démarage de l'animation
+        animator.SetTrigger("Press");
+        
+        //Génération de la pause
+        float ms = Time.deltaTime;
+        while(ms <= pressTime){
+            ms += Time.deltaTime;
+            yield return null;
+        }
+
+        //Modification de l'interface
+        startButton.SetActive(false);
+        HighScoresButton.SetActive(false);
+        modePanel.SetActive(true);
+    }
+
+
+    /// <summary>
+    /// Méthodes permettant de lancer une animation pour les boutons.
+    /// </summary>
+    public void LaunchHighscores(){
+        if(Time.timeScale == 0f){
+            Time.timeScale=1f; 
+        }
+        StartCoroutine(LaodHighscores());
+    }
+
+    /// <summary>
+    /// Coroutine de changement de scène lié au lancement de l'animation (menu principal vers interface de jeu ou inversement).
+    /// </summary>
+    /// <returns>
+    /// Génere une pause de 0.38 secondes.
+    /// </returns>
+    IEnumerator LaodHighscores()
+    {
+        //Démarage de l'animation
+        animator.SetTrigger("Press");
+        
+        //Génération de la pause
+        float ms = Time.deltaTime;
+        while(ms <= pressTime){
+            ms += Time.deltaTime;
+            yield return null;
+        }
+
+        //Modification de l'interface
+        startButton.SetActive(false);
+        HighScoresButton.SetActive(false);
+        HighScoresPanel.SetActive(true); 
     }
 }

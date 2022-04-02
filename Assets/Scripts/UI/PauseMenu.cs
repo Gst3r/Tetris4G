@@ -34,7 +34,7 @@ public class PauseMenu : MonoBehaviour
     public void Start(){
         gameIsPausing=false;
     }
-
+ 
     /// <summary> 
     /// Méthode qui permet de mettre le jeu en état de pause 
     /// Auteur:Seghir Nassima

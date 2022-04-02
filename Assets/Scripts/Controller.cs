@@ -71,13 +71,13 @@ public class Controller : MonoBehaviour
     /// <summary> 
     /// Booléen indiquant TRUE si le joueur cherche à tourner le tetromino (analyse du comportement du doigt sur l'écran), FALSE sinon
     /// </summary>
-    private bool wantToRotate;
+    private static bool wantToRotate;
 
     private void Start() {
         SetController();
         LaunchCount();
+        wantToRotate = true;
         /*this.gameIsOver = false;
-        this.wantToRotate = true;
         this.direction = new Vector2Int();
         this.prevDirection = new Vector2Int();
         this.startPos = new Vector2();*/
@@ -87,10 +87,10 @@ public class Controller : MonoBehaviour
     void Update()
     {
         mode.Execute();
-        /*board.Clear(activePiece);
+        board.Clear(activePiece);
         touchSensitiveRotate();
         touchSensitiveShift();
-        board.Set(activePiece);*/
+        board.Set(activePiece);
     }
 
     /// <summary> 
@@ -185,7 +185,7 @@ public class Controller : MonoBehaviour
         Time.timeScale=1f;
     }
 
-    /*    /// <summary> 
+    /// <summary> 
     /// Auteur : Sterlingot Guillaume
     /// Description : Méthode permettant de choisir automatiquement le déplacement adapté selon la gravité (fonctionnalités tactile)
     /// </summary>
@@ -219,7 +219,7 @@ public class Controller : MonoBehaviour
                         }
                     }
                     //Shift(direction, touch);
-                    this.wantToRotate=false;
+                    wantToRotate=false;
                     break;
 
                 // Report that a direction has been chosen when the finger is lifted.
@@ -227,10 +227,10 @@ public class Controller : MonoBehaviour
                     break;
             }
         }else
-            this.wantToRotate=true;
+            wantToRotate=true;
     }
 
-        /// <summary> 
+    /// <summary> 
     /// Auteur : Sterlingot Guillaume
     /// Description : Méthode permettant de tourner le tetromino courant (fonctionnalités tactile)
     /// </summary>
@@ -238,14 +238,13 @@ public class Controller : MonoBehaviour
         if(Input.touchCount>0){
             Touch touch = Input.GetTouch(0);
             
-            if(touch.phase.Equals(TouchPhase.Ended)){
-                Debug.Log("carré");
-                if(this.wantToRotate)
-                    activePiece.Rotate();
+            if(touch.phase.Equals(TouchPhase.Ended)&&wantToRotate){
+                activePiece.Rotate();
             }
         }
     }
 
+/*
     /// <summary> 
     /// Auteur : Sterlingot Guillaume
     /// Description : Méthode permettant de choisir automatiquement le déplacement adapté selon la gravité (fonctionnalités tactile)
@@ -277,21 +276,6 @@ public class Controller : MonoBehaviour
     }
 
     /// <summary> 
-    /// Méthode qui permet de vérifier si la partie est perdue 
-    /// Auteur: Malcom Kusunga
-    /// </summary>
-    private void checkGameOver(){
-        if(!gameIsOver){
-            if(board.GameOver()){
-                gameIsOver = true;
-                //Arrêt du temps lors de l'ouverture de l'interface de fin de jeu 
-                Time.timeScale=0f;
-                endGamePanel.SetActive(true);
-            }
-        }
-    }
-
-    /// <summary> 
     /// Auteur : Sterlingot Guillaume
     /// Description : Méthode permettant de calculeer la valeur absolue d'un vecteur de réel à deux dimensions
     /// </summary>
@@ -311,5 +295,9 @@ public class Controller : MonoBehaviour
 
     public BoardManager GetBoard(){
         return board;
+    }
+
+    public static void SetWantToRotate(bool wantToRot){
+        wantToRotate = wantToRot;
     }
 }

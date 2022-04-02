@@ -112,7 +112,7 @@ public class Piece : MonoBehaviour
         newPosition.x += translation.x;
         newPosition.y += translation.y;
 
-        bool valid = board.validerPosition(this, newPosition);
+        bool valid = board.ValiderPosition(this, newPosition);
 
         if(valid)
         {
@@ -153,8 +153,8 @@ public class Piece : MonoBehaviour
     }
 
     /// <summary> 
+    /// Auteurs : Seghir Nassima, Kusunga Malcom, Bae Jin-Young, Sterlingot Guillaume
     /// Méthode qui bloque le mouvement de la piece  
-    /// Auteur: Seghir Nassima, Kusunga Malcom, Sterlingot Guillaume, Bae Jin-Young 
     /// </summary>
     private void Lock()
     {   
@@ -163,7 +163,6 @@ public class Piece : MonoBehaviour
         board.FullSides();
         board.ClearCompleteLine();
         board.ClearApparitionZone();
-        board.chooseRandomGravity();
         board.StopGravity();
         board.SpawnPiece(previewManager.GetNextPiece());
         previewManager.ChangePreview();
@@ -178,6 +177,7 @@ public class Piece : MonoBehaviour
         if(board.GetGravity() == Gravity.HAUT || board.GetGravity() == Gravity.BAS){
             //Suppresion de la position précédente du tétromino sur la grille
             board.Clear(this);
+            Controller.SetWantToRotate(false);
             Move(Vector2Int.right);
         } 
     }
@@ -189,6 +189,7 @@ public class Piece : MonoBehaviour
     public void LeftShift(){
         if(board.GetGravity() == Gravity.HAUT || board.GetGravity() == Gravity.BAS){
             board.Clear(this);
+            Controller.SetWantToRotate(false);
             Move(Vector2Int.left);
         }
     }
@@ -200,6 +201,7 @@ public class Piece : MonoBehaviour
     public void TopShift(){
         if(board.GetGravity() == Gravity.GAUCHE || board.GetGravity() == Gravity.DROITE){
             board.Clear(this);
+            Controller.SetWantToRotate(false);
             Move(Vector2Int.up);
         }
     }
@@ -211,6 +213,7 @@ public class Piece : MonoBehaviour
     public void BotShift(){
         if(board.GetGravity() == Gravity.GAUCHE || board.GetGravity() == Gravity.DROITE){
             board.Clear(this);
+            Controller.SetWantToRotate(false);
             Move(Vector2Int.down);
         }
     }
@@ -224,7 +227,7 @@ public class Piece : MonoBehaviour
     {
         // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
         this.bufferedStepDelay = stepDelay;
-        board.Clear(this);
+        Controller.SetWantToRotate(false);
 
         //Augmentation de la gravité
         if(board.GetGravity() == Gravity.DROITE){
@@ -245,7 +248,7 @@ public class Piece : MonoBehaviour
     {
         // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
         this.bufferedStepDelay = stepDelay;
-        board.Clear(this);
+        Controller.SetWantToRotate(false);
 
         //Augmenation de la gravité
         if(board.GetGravity() == Gravity.GAUCHE){
@@ -266,7 +269,7 @@ public class Piece : MonoBehaviour
     {
         // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
         this.bufferedStepDelay = stepDelay;
-        board.Clear(this);
+        Controller.SetWantToRotate(false);
 
         //Augmentation de la gravité
         if(board.GetGravity() == Gravity.HAUT){
@@ -287,7 +290,7 @@ public class Piece : MonoBehaviour
     {
         // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
         this.bufferedStepDelay = stepDelay;
-        board.Clear(this);
+        Controller.SetWantToRotate(false);
 
         //Augmenation de la gravité
         if(board.GetGravity() == Gravity.BAS){
@@ -394,5 +397,5 @@ public class Piece : MonoBehaviour
     public float GetStepTime(){
         return stepTime;
     }
-
+    
 }

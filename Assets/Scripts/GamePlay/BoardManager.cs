@@ -1,9 +1,8 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.UI;
-
 
 /// <summary> 
 /// Auteur : Sterlingot Guillaume<br>
@@ -16,7 +15,7 @@ public enum Gravity
     GAUCHE,
     DROITE
 }
-
+ 
 /// <summary> 
 /// Auteur : Sterlingot Guillaume, Bae Jin-Young, Nassima Seghir, Malcom Kusunga<br>
 /// Description : Cette classe permet de la gestion de l'ensemble de la grille de jeu
@@ -35,7 +34,12 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     [SerializeField] private Piece activePiece;
 
-     /// <summary> 
+    /// <summary> 
+    /// Attribut contenant la position d'apparition initiale de la pièce 
+    /// </summary>
+    [SerializeField] private ScoreManager scoreManager;
+
+    /// <summary> 
     /// Attribut contenant la position d'apparition initiale de la pièce 
     /// </summary>
     [SerializeField] private Vector3Int spawnPosition;
@@ -64,28 +68,6 @@ public class BoardManager : MonoBehaviour
              return new RectInt(position, size);
         }
     }
-
-    
-//------------------------------------------------------------------SCORE-------------------------------------------------
-
-    /// <summary> 
-    /// Attribut contenant le score de la partie en cours 
-    /// </summary>
-    [SerializeField] private static float score=0;
-
-    /// <summary> 
-    /// Attribut contenant le score de la partie en cours sous forme de texte
-    /// </summary>
-    [SerializeField] private Text scoreText;
-
-    /// <summary> 
-    /// Attribut contenant le nombre de lignes éliminéesau total 
-    /// </summary>
-    [SerializeField] private static int totalLinesCleared;
-
-
-
-
 
 //------------------------------------------------------------------COTE COMPLET-----------------------------------------
    
@@ -126,22 +108,19 @@ public class BoardManager : MonoBehaviour
         leftIsFull = false;
         rightIsFull = false;
         chooseRandomGravity();
-
         int random = Random.Range(0, tetrominoes.Length);
         SpawnPiece(random);
     }
 
     private void Update()
     {
-
-        //scoreText.text= score.ToString(); //permet de mettre à jour le score affiché 
         /*if(HaveCollision()){
             ClearLine();
             SpawnPiece();
         }*/
     }
 
-    //-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
 
     /// <summary> 
     /// Méthode qui permet de générer une piece aléatoirement 
@@ -195,7 +174,6 @@ public class BoardManager : MonoBehaviour
         this.board = GetComponentInChildren<Tilemap>();
         this.activePiece=GetComponentInChildren<Piece>();
         this.size = new Vector2Int(16,22);
-        this.spawnPosition = new Vector3Int(-1, -1, -2);
     }
 
     /// <summary> 
@@ -279,7 +257,6 @@ public class BoardManager : MonoBehaviour
                 }
                 row--;
             }
-
         }
     }
 
@@ -366,36 +343,6 @@ public class BoardManager : MonoBehaviour
             }
         }
     }
-    /// <summary>
-    /// Auteur : Seghir Nassima 
-    /// Méthode permettant d'incrémenter le score selon le nombre de lignes éliminées
-    /// </summary>
-    public void incrementScore(int nmbLines)
-    {
-        switch(nmbLines)
-        {
-            case 1: 
-                score+=40; 
-                break; 
-
-            case 2:
-                score+=100; 
-                break; 
-
-            case 3: 
-                score+=300; 
-                break; 
-
-            case 4:
-                score+=1200; 
-                break; 
-
-            default: 
-                 break;  
-        }
-
-    }
-
 
     /// <summary>
     /// Auteur : Jin-Young BAE
@@ -440,8 +387,8 @@ public class BoardManager : MonoBehaviour
                 col++;
             }
         }
-        incrementScore(nbLinesCleared); 
-        totalLinesCleared+=nbLinesCleared; 
+        scoreManager.IncrementScore(nbLinesCleared); 
+        scoreManager.ChangeScore();
     }
 
     /// <summary> 
@@ -473,7 +420,7 @@ public class BoardManager : MonoBehaviour
     /// un booléen qui indique FALSE si la poisition est occupée par un tetromino, 
     /// FALSE si la position est au-dela des limites de la grille, TRUE sinon
     /// </returns>
-    public bool validerPosition(Piece piece, Vector3Int position)
+    public bool ValiderPosition(Piece piece, Vector3Int position)
     {
         RectInt bounds = Bornes;
 
@@ -605,35 +552,6 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     public void StopGravity()
     {
-        // bloquer la gravité BAS :
-        /*if (FullSide(-3, true) && gravity == Gravity.BAS)
-        {
-            // rappel du générateur de gravité et rappel de la méthode au cas où le générateur re-sélectionne la gravité BAS
-            chooseRandomGravity();
-            StopGravity();
-        }
-
-        // bloquer la gravité HAUT:
-        else if (FullSide(2, true) && gravity == Gravity.HAUT)
-        {
-            chooseRandomGravity();
-            StopGravity();
-        }
-
-        // bloquer la gravité GAUCHE :
-        else if (FullSide(-3, false) && gravity == Gravity.GAUCHE)
-        {
-            chooseRandomGravity();
-            StopGravity();
-        }
-
-        // bloquer la gravité DROITE :
-        else if (FullSide(2, false) && gravity == Gravity.DROITE)
-        {
-            chooseRandomGravity();
-            StopGravity();
-        }*/
-
         //Selection de la gravité en fonction des gravités restantes
         if(!topIsFull || !botIsFull || !leftIsFull || !rightIsFull){
             do{
@@ -674,41 +592,58 @@ public class BoardManager : MonoBehaviour
             }
         }
     }
-// Getters
 
-    public static float GetScore()
-    {
-        return score; 
+    /// <summary>
+    /// Méthode permettant de retourner la taille de la grille
+    /// </summary>
+    public Vector2Int GetSize(){
+        return size;
     }
 
+    /// <summary>
+    /// Méthode permettant de retourner un booleen indiquant lorsque le haut de la grille est complet
+    /// </summary>
     public bool GetTopIsFull(){
         return topIsFull;
     }
     
+    /// <summary>
+    /// Méthode permettant de retourner un booleen indiquant lorsque le bas de la grille est complet
+    /// </summary>
     public bool GetBotIsFull(){
         return botIsFull;
     }
 
+    /// <summary>
+    /// Méthode permettant de retourner un booleen indiquant lorsque la gauche de la grille est complet
+    /// </summary>
     public bool GetLeftIsFull(){
         return leftIsFull;
     }
     
+    /// <summary>
+    /// Méthode permettant de retourner un booleen indiquant lorsque la droite de la grille est complet
+    /// </summary>
     public bool GetRightIsFull(){
         return rightIsFull;
     }
     
+    /// <summary>
+    /// Méthode permettant de retourner la grivité qui s'exerce
+    /// </summary>
     public Gravity GetGravity(){
         return gravity;
     }
 
+    /// <summary>
+    /// Méthode permettant de retourner la pièce actuellement présente sur la grille
+    /// </summary>
     public Piece GetActivePiece(){
         return activePiece;
     }
 
-    public static int GetTotalLinesCleared(){
+     public static int GetTotalLinesCleared(){
         return totalLinesCleared;
     }
-
-
 
 }

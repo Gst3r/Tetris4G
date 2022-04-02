@@ -1,91 +1,91 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 /// <summary>
 /// Auteur : Jin-Young BAE
-/// Classe permettant de contrôler la zone de prévisualisation
+/// Classe permettant de contrï¿½ler la zone de prï¿½visualisation
 /// </summary>
 public class PreviewManager : MonoBehaviour
 {
     /// <summary>
-    /// Tableau des sprites des tétrominos
+    /// Tableau des sprites des tï¿½trominos
     /// </summary>
     public Sprite[] next;
 
     /// <summary>
-    /// Le sprite actuel de la troisième pièce prévisualisée
+    /// Le sprite actuel de la troisiï¿½me piï¿½ce prï¿½visualisï¿½e
     /// </summary>
     private GameObject preview3;
 
     /// <summary>
-    /// Le sprite actuel de la deuxième pièce prévisualisée
+    /// Le sprite actuel de la deuxiï¿½me piï¿½ce prï¿½visualisï¿½e
     /// </summary>
     private GameObject preview2;
 
     /// <summary>
-    /// Le sprite actuel de la première pièce prévisualisée
+    /// Le sprite actuel de la premiï¿½re piï¿½ce prï¿½visualisï¿½e
     /// </summary>
     private GameObject preview1;
 
     /// <summary>
-    /// L'indice du prochain tétromino à jouer 
+    /// L'indice du prochain tï¿½tromino ï¿½ jouer 
     /// </summary>
     private int nextPiece;
 
     /// <summary>
-    /// L'indice de la deuxième pièce prévisualisée
+    /// L'indice de la deuxiï¿½me piï¿½ce prï¿½visualisï¿½e
     /// </summary>
     private int indice_preview2;
 
     /// <summary>
-    /// L'indice de la troisième pièce prévisualisée
+    /// L'indice de la troisiï¿½me piï¿½ce prï¿½visualisï¿½e
     /// </summary>
     private int indice_preview3;
 
 
     void Start()
     {
-        //première apparition de la troisième pièce prévisualisée
+        //premiï¿½re apparition de la troisiï¿½me piï¿½ce prï¿½visualisï¿½e
         preview3 = GameObject.Find("Preview3");
         RandomSprite(preview3);
-        //Debug.Log(indice_preview3);
+        Debug.Log(indice_preview3);
 
-        //première apparition de la deuxième pièce prévisualisée
+        //premiï¿½re apparition de la deuxiï¿½me piï¿½ce prï¿½visualisï¿½e
         preview2 = GameObject.Find("Preview2");
         RandomSprite(preview2);
 
-        //première apparition de la première pièce prévisualisée
+        //premiï¿½re apparition de la premiï¿½re piï¿½ce prï¿½visualisï¿½e
         preview1 = GameObject.Find("Preview1");
         RandomSprite(preview1);
-        Debug.Log(nextPiece);
 
     }
 
     /// <summary>
-    /// Méthode permettant la génération et l'affichage d'un sprite aléatoire dans le tableau next
+    /// Mï¿½thode permettant la gï¿½nï¿½ration et l'affichage d'un sprite alï¿½atoire dans le tableau next
     /// </summary>
     /// <param name="preview">
-    /// Le GameObject dont le sprite sera modifié
+    /// Le GameObject dont le sprite sera modifiï¿½
     /// </param>
     public void RandomSprite(GameObject preview)
     {
-        //génération d'un nombre aléatoire
+        //gï¿½nï¿½ration d'un nombre alï¿½atoire
         int random = Random.Range(0, next.Length);
 
-        //récuperer l'indice du sprite correspondant :
-        //si preview est la première pièce prévisualisée
+        //rï¿½cuperer l'indice du sprite correspondant :
+        //si preview est la premiï¿½re piï¿½ce prï¿½visualisï¿½e
         if (preview.Equals(preview1))
         {
             nextPiece = random;
         }
-        //si preview est la deuxième pièce prévisualisée
+        //si preview est la deuxiï¿½me piï¿½ce prï¿½visualisï¿½e
         else if (preview.Equals(preview2))
         {
             indice_preview2 = random;
         }
-        //si preview est la troisième pièce prévisualisée
+        //si preview est la troisiï¿½me piï¿½ce prï¿½visualisï¿½e
         else if (preview.Equals(preview3))
         {
             indice_preview3 = random;
@@ -97,35 +97,35 @@ public class PreviewManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Méthode permettant de changer le sprite d'un GameObject par un autre
+    /// Mï¿½thode permettant de changer le sprite d'un GameObject par un autre
     /// </summary>
     /// <param name="preview">
-    /// Le GameObject dont le Sprite sera modifié
+    /// Le GameObject dont le Sprite sera modifiï¿½
     /// </param>
     /// <param name="sprite">
     /// Le Sprite qui remplacera celui du preview
     /// </param>
     public void ChangeSprite(GameObject preview, Sprite sprite)
     {
-        preview.GetComponent<SpriteRenderer>().sprite = sprite;
+        preview.GetComponent<Image>().sprite = sprite;
     }
 
     /// <summary>
-    /// Methode permettant de changer les sprites de la zone de prévisualisation
+    /// Methode permettant de changer les sprites de la zone de prï¿½visualisation
     /// </summary>
     public void ChangePreview()
     {
-        //on récupère l'indice du preview2 dans nextPiece
+        //on rï¿½cupï¿½re l'indice du preview2 dans nextPiece
         nextPiece = indice_preview2;
         //on change le sprite du preview1 par celui du preview2
-        ChangeSprite(preview1, preview2.GetComponent<SpriteRenderer>().sprite);
+        ChangeSprite(preview1, preview2.GetComponent<Image>().sprite);
 
         //on remplace l'indice du preview2 par celui du preview3
         indice_preview2 = indice_preview3;
         //on change le sprite du preview2 par celui du preview3
-        ChangeSprite(preview2, preview3.GetComponent<SpriteRenderer>().sprite);
+        ChangeSprite(preview2, preview3.GetComponent<Image>().sprite);
 
-        //génération aléatoire de la troisième pièce prévisualisée
+        //gï¿½nï¿½ration alï¿½atoire de la troisiï¿½me piï¿½ce prï¿½visualisï¿½e
         RandomSprite(preview3);
 
     }
@@ -134,7 +134,7 @@ public class PreviewManager : MonoBehaviour
     /// Getter du nombre nextPiece
     /// </summary>
     /// <returns>
-    /// nextPiece l'indice du prochain tétromino à apparaitre sur le board
+    /// nextPiece l'indice du prochain tï¿½tromino ï¿½ apparaitre sur le board
     /// </returns>
     public int GetNextPiece()
     {
