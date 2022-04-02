@@ -398,7 +398,6 @@ public class BoardManager : MonoBehaviour
             }
         }
         scoreManager.IncrementScore(nbLinesCleared); 
-        scoreManager.ChangeScore();
         totalLinesCleared+=nbLinesCleared; 
     }
 
