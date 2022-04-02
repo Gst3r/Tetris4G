@@ -19,7 +19,7 @@ public class SprintManager : IMode
     /// <summary> 
     /// Temps en seconde dont dispose le joueur pour scorer
     /// </summary>
-    private static float countMax = 11f;
+    private static float countMax = 181f;
 
     /// <summary> 
     /// Panel contenant toute l'affichage conçernant le temps restant avant la fin de la partie
@@ -30,8 +30,10 @@ public class SprintManager : IMode
         this.controller = GameObject.Find("GameManager").GetComponent<Controller>();
         this.board = controller.GetBoard();
         this.activePiece = controller.GetActivePiece();
+
         countSec = 0;
         this.activePiece.SetStepDelay(0.7f);
+        this.sprintTimePanel.GetComponent<Text>().text = "3:00";
     }
 
     private void LastUpdate(){
@@ -56,7 +58,9 @@ public class SprintManager : IMode
     public void CountTime(){
         if(!PauseMenu.GetGameIsPausing()){
             countSec+=Time.deltaTime;
-            this.sprintTimePanel.GetComponent<Text>().text = ((int)(countMax-countSec)).ToString();
+            if((int)countSec!=0){
+                this.sprintTimePanel.GetComponent<Text>().text = ((int)(countMax-countSec)/60).ToString()+":"+((int)(countMax-countSec)%60).ToString();  
+            }
         }
     }
 

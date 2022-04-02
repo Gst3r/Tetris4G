@@ -46,7 +46,7 @@ public class EndGame : MonoBehaviour
         textScore= transform.Find("TextScore").GetComponent<TextMeshProUGUI>();
 
         //affichage du score
-        textScore.text="Score: "+BoardManager.GetScore().ToString();
+        textScore.text = "Score: " + ScoreManager.GetScore().ToString();
 
       
 
@@ -62,7 +62,7 @@ public class EndGame : MonoBehaviour
     {
         
         Scoring.pseudo[Scoring.i]=(inputField.text);
-        Scoring.score[Scoring.i]=(BoardManager.GetScore());
+        Scoring.score[Scoring.i]=ScoreManager.GetScore();
         Scoring.i++; 
         
       

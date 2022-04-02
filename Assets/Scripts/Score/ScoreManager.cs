@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 /// <summary> 
 /// Auteur : Nassima Seghir<br>
@@ -11,9 +11,18 @@ using UnityEngine;
 /// </summary>
 public class ScoreManager : MonoBehaviour
 {
+
+    /// <summary> 
+    /// Attribut contenant le score de la partie en cours 
+    /// </summary>
+    [SerializeField] private static float score=0;
+
+    /// <summary> 
+    /// Attribut contenant le score de la partie en cours sous forme de texte
+    /// </summary>
+    [SerializeField] private Text scoreText;
+
     public ScoreManager() { }
-
-
       
     /// <summary> 
     /// Attribut contenant une référence de la liste des scores 
@@ -33,8 +42,35 @@ public class ScoreManager : MonoBehaviour
        
     }
    
+    /// <summary>
+    /// Auteur : Seghir Nassima 
+    /// Méthode permettant d'incrémenter le score selon le nombre de lignes éliminées
+    /// </summary>
+    public void IncrementScore(int nmbLines)
+    {
+        switch(nmbLines)
+        {
+            case 1: 
+                score+=40; 
+                break; 
 
-    
+            case 2:
+                score+=100; 
+                break; 
+
+            case 3: 
+                score+=300; 
+                break; 
+
+            case 4:
+                score+=1200; 
+                break; 
+
+            default: 
+                 break;  
+        }
+    }
+
     /// <summary> 
     /// Méthode qui retourne la liste des scores dans l'ordre decroissant 
     /// Auteur:Seghir Nassima  
@@ -62,6 +98,16 @@ public class ScoreManager : MonoBehaviour
     }
 
     /// <summary> 
+    /// Méthode qui permet de changer l'affichage du score sur l'interface
+    /// Auteur: Sterlingot Guillaume
+    /// </summary>
+    public void ChangeScore()
+    {
+        scoreText.text= score.ToString(); //permet de mettre à jour le score affiché 
+    }
+     
+
+    /// <summary> 
     /// Méthode qui permet l'enregitrement du score 
     /// Auteur: Seghir Nassima  
     /// </summary>
@@ -72,5 +118,15 @@ public class ScoreManager : MonoBehaviour
         Debug.Log(json);
         PlayerPrefs.SetString("scores", json);
         PlayerPrefs.Save(); 
+    }
+
+    public static float GetScore()
+    {
+        return score; 
+    }
+
+    public Text GetScoreText()
+    {
+        return scoreText; 
     }
 }
