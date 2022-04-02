@@ -682,7 +682,9 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   animator: {fileID: 274758288}
   startButton: {fileID: 0}
+  HighScoresButton: {fileID: 0}
   modePanel: {fileID: 0}
+  HighScoresPanel: {fileID: 0}
 --- !u!114 &274758290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -948,7 +950,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 868975507}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1825,7 +1827,9 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   animator: {fileID: 419200848}
   startButton: {fileID: 0}
+  HighScoresButton: {fileID: 0}
   modePanel: {fileID: 0}
+  HighScoresPanel: {fileID: 0}
 --- !u!95 &419200848
 Animator:
   serializedVersion: 3
@@ -2039,7 +2043,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 868975507}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3249,7 +3253,9 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   animator: {fileID: 861497480}
   startButton: {fileID: 0}
+  HighScoresButton: {fileID: 0}
   modePanel: {fileID: 0}
+  HighScoresPanel: {fileID: 0}
 --- !u!114 &861497477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3394,11 +3400,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2006673689}
-  - {fileID: 301162765}
   - {fileID: 455498823}
+  - {fileID: 301162765}
   - {fileID: 312762192}
-  - {fileID: 1587509833}
   - {fileID: 2021723294}
+  - {fileID: 1587509833}
   m_Father: {fileID: 1541352174}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3962,7 +3968,9 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   animator: {fileID: 1002427767}
   startButton: {fileID: 0}
+  HighScoresButton: {fileID: 0}
   modePanel: {fileID: 0}
+  HighScoresPanel: {fileID: 0}
 --- !u!114 &1002427764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4977,7 +4985,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1300821556
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5515,7 +5523,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 868975507}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -6907,7 +6915,9 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   animator: {fileID: 0}
   startButton: {fileID: 0}
+  HighScoresButton: {fileID: 0}
   modePanel: {fileID: 0}
+  HighScoresPanel: {fileID: 0}
 --- !u!82 &2006673694
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7051,7 +7061,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 868975507}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -7493,7 +7503,9 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   animator: {fileID: 2049082116}
   startButton: {fileID: 0}
+  HighScoresButton: {fileID: 0}
   modePanel: {fileID: 0}
+  HighScoresPanel: {fileID: 0}
 --- !u!95 &2049082116
 Animator:
   serializedVersion: 3
