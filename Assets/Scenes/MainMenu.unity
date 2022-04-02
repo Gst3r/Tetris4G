@@ -894,7 +894,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &416172122
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2954,6 +2954,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rowUi: {fileID: 7726034046570721225, guid: d35b0194f2504db86a7a5d31549d2963, type: 3}
   scoreManager: {fileID: 838924771}
+  mode: 0
 --- !u!1 &971886840
 GameObject:
   m_ObjectHideFlags: 0

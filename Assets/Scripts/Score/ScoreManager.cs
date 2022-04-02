@@ -138,4 +138,17 @@ public class ScoreManager : MonoBehaviour
     {
         return sd; 
     }  
+
+    /// <summary> 
+    /// getter de l'objet sd
+    /// </summary>
+    public static float GetScore()
+    {
+        return score; 
+    } 
+
+
+
+
+
 }

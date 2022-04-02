@@ -83,9 +83,9 @@ public class EndGame : MonoBehaviour
             //et que le nouveau highscore est meilleur, on écrase son dernier score 
             if(joueur.name == inputField.text)
             {
-                if(joueur.highscore<BoardManager.GetScore())
+                if(joueur.highscore<ScoreManager.GetScore())
                 {
-                    joueur.highscore=BoardManager.GetScore(); 
+                    joueur.highscore=ScoreManager.GetScore(); 
                     scoreManager.GetScoreData().scores=list; 
                     Debug.Log("It already exists");
                     changed = true; 
@@ -99,7 +99,7 @@ public class EndGame : MonoBehaviour
                 {    
                   
                     Debug.Log("première occurence."); 
-                    scoreManager.AddScore(new Joueur(name:inputField.text, highscore:BoardManager.GetScore()));
+                    scoreManager.AddScore(new Joueur(name:inputField.text, highscore:ScoreManager.GetScore()));
 
                 }
 

@@ -27,7 +27,7 @@ public class MarathonManager : IMode
 
     public static float GetScore()
     {
-        return BoardManager.GetScore(); 
+        return ScoreManager.GetScore(); 
 
     }
 }

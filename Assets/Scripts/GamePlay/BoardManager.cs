@@ -89,6 +89,16 @@ public class BoardManager : MonoBehaviour
     /// Booléen permettant de determiner si la droite de la grille est complete
     /// </summary>
     private bool rightIsFull { get; set; }
+
+
+    /// <summary> 
+    /// Attribut contenant le nombre de lignes élinminées au total
+    /// </summary>
+    private static int  totalLinesCleared =0; 
+
+
+
+
    
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -389,6 +399,7 @@ public class BoardManager : MonoBehaviour
         }
         scoreManager.IncrementScore(nbLinesCleared); 
         scoreManager.ChangeScore();
+        totalLinesCleared+=nbLinesCleared; 
     }
 
     /// <summary> 
