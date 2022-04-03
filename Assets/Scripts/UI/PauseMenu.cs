@@ -52,7 +52,7 @@ public class PauseMenu : MonoBehaviour
     /// </summary>
     public void Resume()
     {   
-        gameIsPausing=false;
+        gameIsPausing = false;
         StartCoroutine(ResumeGame());
     }
 

@@ -20,7 +20,12 @@ public class ScoreManager : MonoBehaviour
     /// <summary> 
     /// Attribut contenant le score de la partie en cours sous forme de texte
     /// </summary>
-    [SerializeField] private Text scoreText;
+    [SerializeField] private Text scoreTextInGame;
+
+    /// <summary> 
+    /// Attribut contenant le score de la partie en cours sous forme de texte
+    /// </summary>
+    [SerializeField] private Text scoreTextEndGame;
 
     public ScoreManager() { }
       
@@ -102,7 +107,9 @@ public class ScoreManager : MonoBehaviour
     /// </summary>
     public void ChangeScore()
     {
-        scoreText.text= score.ToString(); //permet de mettre à jour le score affiché 
+        scoreTextInGame.text= score.ToString(); //permet de mettre à jour le score affiché en jeu 
+        scoreTextEndGame.text= score.ToString(); //permet de mettre à jour le score affiché à la fin de la partie
+    
     }
      
 

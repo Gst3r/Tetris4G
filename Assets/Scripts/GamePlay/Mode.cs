@@ -38,7 +38,7 @@ public abstract class IMode : MonoBehaviour
     /// <summary> 
     /// Booléen indiquant si le Game Over a été detecter
     /// </summary>
-    protected bool gameIsOver;
+    protected static bool gameIsOver;
 
     /// <summary> 
     /// Attribut indiquant si la gravité a déjà été changé une fois ou non      
@@ -97,6 +97,10 @@ public abstract class IMode : MonoBehaviour
         if (board.GetTopIsFull() && board.GetBotIsFull() && board.GetLeftIsFull() && board.GetRightIsFull())
             return true;
         return false;
+    }
+
+    public static bool GetGameIsOver(){
+        return gameIsOver;
     }
 }
 

@@ -21,7 +21,6 @@ public class EndGame : MonoBehaviour
     /// </summary>
     [SerializeField] private TextMeshProUGUI textScore; 
 
-
     /// <summary> 
     /// Attribut qui permettra de modifier la liste des scores
     /// </summary>
@@ -124,9 +123,6 @@ public class EndGame : MonoBehaviour
                 scoreManager.SaveScore("marathon");
                 break; 
         }
-
-
-     
     }
 
 }
