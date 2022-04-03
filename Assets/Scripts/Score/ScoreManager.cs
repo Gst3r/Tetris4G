@@ -15,7 +15,7 @@ public class ScoreManager : MonoBehaviour
     /// <summary> 
     /// Attribut contenant le score de la partie en cours 
     /// </summary>
-    [SerializeField] private static float score=0;
+    [SerializeField] private static int score;
 
     /// <summary> 
     /// Attribut contenant le score de la partie en cours sous forme de texte
@@ -26,14 +26,17 @@ public class ScoreManager : MonoBehaviour
     /// Attribut contenant le score de la partie en cours sous forme de texte
     /// </summary>
     [SerializeField] private Text scoreTextEndGame;
-
-    public ScoreManager() { }
       
     /// <summary> 
     /// Attribut contenant une référence de la liste des scores 
     /// </summary>
     private ScoreData sd ; 
 
+    public ScoreManager(){}
+
+    private void Start(){
+        score = 0;
+    }
  
     /// <summary> 
     /// Méthode qui permet de charger les scores
@@ -136,7 +139,7 @@ public class ScoreManager : MonoBehaviour
     /// <summary> 
     /// getter du score
     /// </summary>
-    public static float GetScore()
+    public static int GetScore()
     {
         return score; 
     } 

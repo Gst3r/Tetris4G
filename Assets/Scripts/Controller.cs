@@ -59,16 +59,6 @@ public class Controller : MonoBehaviour
     private Vector2 startPos;
 
     /// <summary> 
-    /// Vecteur de nombre entier à deux dimensions qui enregistre le mouvement des coordonnées en fonction des mouvements du doigt sur l'écran et de la position de départ
-    /// </summary>
-    private Vector2Int direction;
-
-    /// <summary> 
-    /// Vecteur de nombre entier à deux dimensions qui enregistre le mouvement des coordonnées en fonction des mouvements du doigt sur l'écran et de la position de départ
-    /// </summary>
-    private Vector2Int prevDirection;
-
-    /// <summary> 
     /// Booléen indiquant TRUE si le joueur cherche à tourner le tetromino (analyse du comportement du doigt sur l'écran), FALSE sinon
     /// </summary>
     private static bool wantToRotate;
@@ -83,6 +73,7 @@ public class Controller : MonoBehaviour
         LaunchCount();
         wantToRotate = true;
         this.fast = 0f;
+        mode.StartExecute();
         /*this.gameIsOver = false;
         this.direction = new Vector2Int();
         this.prevDirection = new Vector2Int();
