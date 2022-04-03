@@ -29,20 +29,6 @@ public class ScoreManager : MonoBehaviour
     /// </summary>
     private ScoreData sd ; 
 
-
-   
-
-
-   /* void Awake()
-    { 
-       
-        //chargement du json 
-        var json = PlayerPrefs.GetString("scores", "{}"); 
-        Debug.Log(json);
-        //initialisation de la liste des scores à partir du json 
-        sd = JsonUtility.FromJson<ScoreData>(json); 
-    }*/
-
  
     /// <summary> 
     /// Méthode qui permet de charger les scores
@@ -140,7 +126,7 @@ public class ScoreManager : MonoBehaviour
     }  
 
     /// <summary> 
-    /// getter de l'objet sd
+    /// getter du score
     /// </summary>
     public static float GetScore()
     {

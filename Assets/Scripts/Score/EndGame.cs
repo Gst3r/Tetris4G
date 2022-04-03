@@ -52,7 +52,7 @@ public class EndGame : MonoBehaviour
          switch(ModeController.GetMode()){ 
             case Mode.MARATHON:
               
-               scoreManager.Loading("scores"); 
+               scoreManager.Loading("marathon"); 
 
                break; 
             case Mode.SPRINT:
@@ -64,7 +64,8 @@ public class EndGame : MonoBehaviour
                 scoreManager.Loading("ultra"); 
                break; 
             default:    
-                Debug.Log("t'as pris marathon");
+                scoreManager.Loading("marathon"); 
+
                break; 
         }
 
@@ -108,21 +109,20 @@ public class EndGame : MonoBehaviour
 
          switch(ModeController.GetMode()){ 
             case Mode.MARATHON:
-               Debug.Log("t'as pris marathon");
-               scoreManager.SaveScore("scores"); ; 
-
-               break; 
+                scoreManager.SaveScore("marathon"); 
+                break; 
+              
             case Mode.SPRINT:
-                Debug.Log("t'as pris sprint");
                 scoreManager.SaveScore("sprint"); 
-                
-               break; 
+                break;
+               
             case Mode.ULTRA:
-                 Debug.Log("t'as pris ultra");
-               break; 
+                scoreManager.SaveScore("ultra"); 
+                break;    
+            
             default:    
-                Debug.Log("t'as pris marathon");
-               break; 
+                scoreManager.SaveScore("marathon");
+                break; 
         }
 
 

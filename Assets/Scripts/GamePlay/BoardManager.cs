@@ -35,7 +35,7 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private Piece activePiece;
 
     /// <summary> 
-    /// Attribut contenant la position d'apparition initiale de la pièce 
+    /// Attribut contenant le manager du score  
     /// </summary>
     [SerializeField] private ScoreManager scoreManager;
 
