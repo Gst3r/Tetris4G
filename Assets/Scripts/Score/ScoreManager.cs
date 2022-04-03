@@ -72,6 +72,7 @@ public class ScoreManager : MonoBehaviour
             default: 
                  break;  
         }
+        ChangeScore();
     }
 
     /// <summary> 
@@ -97,7 +98,7 @@ public class ScoreManager : MonoBehaviour
 
     /// <summary> 
     /// Méthode qui permet de changer l'affichage du score sur l'interface
-    /// Auteur: Sterlingot Guillaume
+    /// Auteur: Seghir Nassima
     /// </summary>
     public void ChangeScore()
     {
