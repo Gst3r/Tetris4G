@@ -51,7 +51,6 @@ public class PreviewManager : MonoBehaviour
         //premi�re apparition de la troisi�me pi�ce pr�visualis�e
         preview3 = GameObject.Find("Preview3");
         RandomSprite(preview3);
-        Debug.Log(indice_preview3);
 
         //premi�re apparition de la deuxi�me pi�ce pr�visualis�e
         preview2 = GameObject.Find("Preview2");

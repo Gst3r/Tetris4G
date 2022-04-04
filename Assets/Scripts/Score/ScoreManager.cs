@@ -18,6 +18,11 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private static int score;
 
     /// <summary> 
+    /// Attribut contenant le noombre de ligne détruite de la partie en cours 
+    /// </summary>
+    [SerializeField] private static int nbLines;
+
+    /// <summary> 
     /// Attribut contenant le score de la partie en cours sous forme de texte
     /// </summary>
     [SerializeField] private Text scoreTextInGame;
@@ -36,6 +41,7 @@ public class ScoreManager : MonoBehaviour
 
     private void Start(){
         score = 0;
+        nbLines = 0;
     }
  
     /// <summary> 
@@ -57,12 +63,12 @@ public class ScoreManager : MonoBehaviour
     /// Auteur : Seghir Nassima 
     /// Méthode permettant d'incrémenter le score selon le nombre de lignes éliminées
     /// </summary>
-    public void IncrementScore(int nmbLines)
+    public void IncrementScore(int nbLinesCleared)
     {
-        switch(nmbLines)
+        switch(nbLinesCleared)
         {
             case 1: 
-                score+=40; 
+                score+=40;
                 break; 
 
             case 2:
@@ -80,6 +86,7 @@ public class ScoreManager : MonoBehaviour
             default: 
                  break;  
         }
+        nbLines += nbLinesCleared;
         ChangeScore();
     }
 
@@ -144,8 +151,11 @@ public class ScoreManager : MonoBehaviour
         return score; 
     } 
 
-
-
-
-
+    /// <summary> 
+    /// getter du nomre de ligne
+    /// </summary>
+    public static int GetNbLines()
+    {
+        return nbLines; 
+    } 
 }

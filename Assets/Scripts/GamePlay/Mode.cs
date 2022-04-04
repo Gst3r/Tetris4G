@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 /// <summary>
 /// Auteur : Sterlingot Guillaume<br>
 /// Description : Cette enumération permet de distinguer les différents modes de jeu diponible

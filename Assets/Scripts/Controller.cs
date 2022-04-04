@@ -8,7 +8,7 @@ using UnityEngine;
 /// </summary>
 public class Controller : MonoBehaviour
 {
-
+    //-----------------------------------------IN GAME----------------------------------------------------------
     /// <summary> 
     /// Attribut contenant le plateau de jeu 
     /// </summary>
@@ -19,14 +19,14 @@ public class Controller : MonoBehaviour
     /// </summary>
     [SerializeField] private Piece activePiece;
 
-    //-----------------------------------------FIN DE JEU--------------------------------------------------------
+    //-----------------------------------------END GAME-------------------------------------------------------
 
     /// <summary> 
     /// Attribut contenant le panel de fin de jeu
     /// </summary>
     public GameObject endGamePanel;
 
-    //-----------------------------------------COMPTEUR--------------------------------------------------------
+    //-----------------------------------------COUNT--------------------------------------------------------
 
     /// <summary>
     /// Variable contenant l'animateur lié aux animations exécutées lors de l'appui sur un bouton.
@@ -39,7 +39,7 @@ public class Controller : MonoBehaviour
     //Interface du décompte
     public GameObject countPanel;
 
-    //-----------------------------------------MODE DE JEU--------------------------------------------------------
+    //-----------------------------------------GAME MODE---------------------------------------------------------------------
 
     /// <summary>
     /// Interface permettant d'utiliser la méthode qui lance le mode de jeu peut importe le mode choisit
@@ -49,9 +49,9 @@ public class Controller : MonoBehaviour
     /// <summary>
     /// Attribut permettant de différencier les différents modes de jeu
     /// </summary>
-    private Mode gameMode;
+    private static Mode gameMode;
 
-    //-------------------------------------------------------------------------------------------------------------
+    //------------------------------------------TOUCH SENSITIVE------------------------------------------------------------
 
     /// <summary> 
     /// Vecteur de nombre réel à deux dimensions qui enregistre la position de départ du doigt lorsqu'il entre en contact avec l'écran
@@ -68,11 +68,18 @@ public class Controller : MonoBehaviour
     /// </summary>
     private float fast;
 
+    //----------------------------------------------GOALS--------------------------------------------------------------------
+
+    /// <summary> 
+    /// Attribut contenant le gestionnaire des objectifs et donc toutes les méthodes qui permettent de le faire
+    /// </summary>
+    [SerializeField] private GoalsManager goalsManager;
+
+    //---------------------------------------------------------------------------------------------------------------------
+
     private void Start() {
         SetController();
         LaunchCount();
-        wantToRotate = true;
-        this.fast = 0f;
         mode.StartExecute();
         /*this.gameIsOver = false;
         this.direction = new Vector2Int();
@@ -84,6 +91,7 @@ public class Controller : MonoBehaviour
     void Update()
     {
         mode.Execute();
+        goalsManager.GoalsController();
         touchSensitive();
         board.Clear(activePiece);
         board.Set(activePiece);
@@ -96,6 +104,8 @@ public class Controller : MonoBehaviour
     public void SetController(){
         Time.timeScale=0f; //Cette commande permet de reprendre la progression normale du temps
         gameMode = ModeController.GetMode();
+        wantToRotate = true;
+        this.fast = 0f;
 
         // Initialisation du mode de jeu 
         switch(gameMode){ // On récupère le mode de jeu qui a été paramétré dans la classe Select mode de la scène "Menu Principale"
@@ -145,6 +155,7 @@ public class Controller : MonoBehaviour
 
         //cette commande permet de reprendre la progression normale du temps
         Time.timeScale=1f;
+        PauseMenu.SetGameIsPausing(false);
     }
 
     /// <summary> 
@@ -271,6 +282,10 @@ public class Controller : MonoBehaviour
 
     public BoardManager GetBoard(){
         return board;
+    }
+
+    public static Mode GetGameMode(){
+        return gameMode;    
     }
 
     public static void SetWantToRotate(bool wantToRot){
