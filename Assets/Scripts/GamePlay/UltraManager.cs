@@ -22,17 +22,21 @@ public class UltraManager : IMode
     /// Panel contenant toute l'affichage conçernant le temps restant avant la fin de la partie
     /// </summary>
     [SerializeField]private GameObject ultraGoalPanel;
+    
+    private void LastUpdate(){
+        closeUltraGoalPanel();
+    }
 
-    private void Start(){
+    /// <summary> 
+    /// Auteur : Sterlingot Guillaume<br>
+    /// Description : Méthode de départ du mode de jeu Ultra qui initialise les paramètres du mode de jeu
+    /// </summary>
+    public override void StartExecute(){
         this.controller = GameObject.Find("GameManager").GetComponent<Controller>();
         this.board = controller.GetBoard();
         this.activePiece = controller.GetActivePiece();
         countScore = 0;
         this.activePiece.SetStepDelay(0.7f);
-    }
-    
-    private void LastUpdate(){
-        closeUltraGoalPanel();
     }
 
     /// <summary> 

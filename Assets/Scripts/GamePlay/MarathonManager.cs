@@ -8,10 +8,16 @@ using UnityEngine;
 /// </summary>
 public class MarathonManager : IMode
 {
-    private void Start(){
+
+    /// <summary> 
+    /// Auteur : Sterlingot Guillaume<br>
+    /// Description : Méthode de départ du mode de jeu Marathon qui initialise les paramètres du mode de jeu
+    /// </summary>
+    public override void StartExecute(){
         this.controller = GameObject.Find("GameManager").GetComponent<Controller>();
         this.board = controller.GetBoard();
         this.activePiece = controller.GetActivePiece();
+        this.activePiece.SetStepDelay(0.8f);
     }
 
     /// <summary> 

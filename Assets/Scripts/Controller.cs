@@ -59,24 +59,21 @@ public class Controller : MonoBehaviour
     private Vector2 startPos;
 
     /// <summary> 
-    /// Vecteur de nombre entier à deux dimensions qui enregistre le mouvement des coordonnées en fonction des mouvements du doigt sur l'écran et de la position de départ
-    /// </summary>
-    private Vector2Int direction;
-
-    /// <summary> 
-    /// Vecteur de nombre entier à deux dimensions qui enregistre le mouvement des coordonnées en fonction des mouvements du doigt sur l'écran et de la position de départ
-    /// </summary>
-    private Vector2Int prevDirection;
-
-    /// <summary> 
     /// Booléen indiquant TRUE si le joueur cherche à tourner le tetromino (analyse du comportement du doigt sur l'écran), FALSE sinon
     /// </summary>
     private static bool wantToRotate;
+
+    /// <summary> 
+    /// Un nombre réel qui indique une échelle de vitesse du doigt qui se déplace sur l'écran
+    /// </summary>
+    private float fast;
 
     private void Start() {
         SetController();
         LaunchCount();
         wantToRotate = true;
+        this.fast = 0f;
+        mode.StartExecute();
         /*this.gameIsOver = false;
         this.direction = new Vector2Int();
         this.prevDirection = new Vector2Int();
@@ -87,9 +84,8 @@ public class Controller : MonoBehaviour
     void Update()
     {
         mode.Execute();
+        touchSensitive();
         board.Clear(activePiece);
-        touchSensitiveRotate();
-        touchSensitiveShift();
         board.Set(activePiece);
     }
 
@@ -116,40 +112,6 @@ public class Controller : MonoBehaviour
                 mode = GetComponent<MarathonManager>(); // En cas d'erreur de transmission, le script lancé automatiquement est celui des règles classique du Tetris4G  
                 break;
         }
-    }
-
-    /// <summary> 
-    /// Auteur : Sterlingot Guillaume<br>
-    /// Description : Méthode permettant de choisir automatiquement le déplacement adapté selon la gravité (fonctionnalités tactile)
-    /// </summary>
-    public void Shift(Touch touch){
-        /*switch(board.GetGravity()){
-            case Gravity.HAUT:  if(){
-
-                                }else{
-
-                                }
-                                 break;
-            case Gravity.BAS:   if(){
-
-                                }else{
-
-                                }
-                                break;
-            case Gravity.GAUCHE:if(){
-
-                                }else{
-
-                                }
-                                break;
-            case Gravity.DROITE:if(){
-
-                                }else{
-
-                                }
-                                break;
-            default:break;
-        }*/  
     }
 
     /// <summary>
@@ -187,6 +149,17 @@ public class Controller : MonoBehaviour
 
     /// <summary> 
     /// Auteur : Sterlingot Guillaume
+    /// Description : Méthode condensant les fonctionnalités tactiles
+    /// </summary>
+    public void touchSensitive(){
+        if(!PauseMenu.GetGameIsPausing()&&!IMode.GetGameIsOver()){
+            touchSensitiveRotate();
+            touchSensitiveShift();
+        }
+    }
+
+    /// <summary> 
+    /// Auteur : Sterlingot Guillaume
     /// Description : Méthode permettant de choisir automatiquement le déplacement adapté selon la gravité (fonctionnalités tactile)
     /// </summary>
     public void touchSensitiveShift(){
@@ -206,15 +179,32 @@ public class Controller : MonoBehaviour
                 // Determine direction by comparing the current touch position with the initial one.
                 case TouchPhase.Moved:
                     Vector2Int diff = Vector2Int.FloorToInt(touch.position - startPos);
-                    if(diff.x>0){
-                        print(touch.deltaTime);
-                        if(Time.frameCount%touch.deltaTime*Time.time==0){
-                            print(diff);
+                    float compareFast = Mathf.Abs(touch.deltaPosition.x);
+                    if(compareFast>19)
+                        fast = 19;
+                    else if(compareFast>17)
+                        fast = 17;
+                    else if(compareFast>15)
+                        fast = 15;
+                    else if(compareFast>13)
+                        fast = 13;
+                    else if(compareFast>11)
+                        fast = 11;
+                    else if(compareFast>9)
+                        fast = 9;
+                    else if(compareFast>7)
+                        fast = 7;
+                    else
+                        fast = 3;
+
+                    Debug.Log(fast);
+
+                    if(touch.deltaPosition.x>0){
+                        if(Time.frameCount%(21-Mathf.Abs((int)fast))==0){
                             activePiece.RightShift();
                         }
                     }else{
-                        if(Time.frameCount%10==0){
-                            print(diff);
+                        if(Time.frameCount%(21-Mathf.Abs((int)fast))==0){
                             activePiece.LeftShift();
                         }
                     }
@@ -273,21 +263,7 @@ public class Controller : MonoBehaviour
                                 break;
             default:break;
         }
-    }
-
-    /// <summary> 
-    /// Auteur : Sterlingot Guillaume
-    /// Description : Méthode permettant de calculeer la valeur absolue d'un vecteur de réel à deux dimensions
-    /// </summary>
-    /// <param name='vector'> 
-    /// un vecteur de réel à deux dimensions correspondant à la valeur absolue de chaque coordonnée
-    /// </param>
-    /// <returns> 
-    /// un vecteur de réel à deux dimensions
-    /// </returns>
-    public Vector2 Abs(Vector2 vector){
-        return new Vector2(Mathf.Abs(vector.x), Mathf.Abs(vector.y));
-    } */
+    }*/
 
     public Piece GetActivePiece(){
         return activePiece;

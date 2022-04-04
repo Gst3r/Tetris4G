@@ -22,7 +22,6 @@ public class EndGame : MonoBehaviour
     /// </summary>
     [SerializeField] private TextMeshProUGUI textScore; 
 
-
     /// <summary> 
     /// Attribut qui permettra de modifier la liste des scores
     /// </summary>
@@ -118,24 +117,22 @@ public class EndGame : MonoBehaviour
 
          switch(ModeController.GetMode()){ 
             case Mode.MARATHON:
-                scoreManager.SaveScore("marathon"); 
-                break; 
-              
+               Debug.Log("t'as pris marathon");
+               scoreManager.SaveScore("scores"); ; 
+
+               break; 
             case Mode.SPRINT:
+                Debug.Log("t'as pris sprint");
                 scoreManager.SaveScore("sprint"); 
-                break;
-               
+                
+               break; 
             case Mode.ULTRA:
-                scoreManager.SaveScore("ultra"); 
-                break;    
-            
+                 Debug.Log("t'as pris ultra");
+               break; 
             default:    
-                scoreManager.SaveScore("marathon");
-                break; 
+                Debug.Log("t'as pris marathon");
+               break; 
         }
-
-
-     
     }
 
     /// <summary> 

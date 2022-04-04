@@ -19,25 +19,29 @@ public class SprintManager : IMode
     /// <summary> 
     /// Temps en seconde dont dispose le joueur pour scorer
     /// </summary>
-    private static float countMax = 181f;
+    private static float countMax = 301f;
 
     /// <summary> 
     /// Panel contenant toute l'affichage conçernant le temps restant avant la fin de la partie
     /// </summary>
     [SerializeField]private GameObject sprintTimePanel;
 
-    private void Start(){
+    private void LastUpdate(){
+        closeSprintTimePanel();
+    }
+     
+    /// <summary> 
+    /// Auteur : Sterlingot Guillaume<br>
+    /// Description : Méthode de départ du mode de jeu Sprint qui initialise les paramètres du mode de jeu
+    /// </summary>
+    public override void StartExecute(){
         this.controller = GameObject.Find("GameManager").GetComponent<Controller>();
         this.board = controller.GetBoard();
         this.activePiece = controller.GetActivePiece();
 
         countSec = 0;
-        this.activePiece.SetStepDelay(0.7f);
-        this.sprintTimePanel.GetComponent<Text>().text = "3:00";
-    }
-
-    private void LastUpdate(){
-        closeSprintTimePanel();
+        this.activePiece.SetStepDelay(0.4f);
+        this.sprintTimePanel.GetComponent<Text>().text = "5:00";
     }
 
     /// <summary> 
@@ -47,7 +51,6 @@ public class SprintManager : IMode
     public override void Execute(){
         CountTime();
         displaySprintTimePanel();
-        AccelerateGravity();
         CheckGameOver();
     }
     
