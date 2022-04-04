@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.UI; 
 using TMPro; 
+using System.IO; 
 
 /// <summary> 
 /// Auteur : Nassima Seghir<br>
@@ -27,6 +28,19 @@ public class EndGame : MonoBehaviour
     /// </summary>
     private ScoreManager scoreManager; 
 
+
+    /// <summary> 
+    /// Attribut contenant le message affiché lors du partage de la capture du score 
+    /// </summary>
+    private string shareMessage; 
+
+
+
+
+
+
+
+
     private void Awake()
     {
       
@@ -49,29 +63,21 @@ public class EndGame : MonoBehaviour
     /// </summary>
     public void Submit()
     {
+        //on commence par load laliste des scoresselon le mode:
          switch(ModeController.GetMode()){ 
             case Mode.MARATHON:
-              
-               scoreManager.Loading("marathon"); 
-
-               break; 
-            case Mode.SPRINT:
-               
+                scoreManager.Loading("marathon"); 
+                break; 
+            case Mode.SPRINT:  
                 scoreManager.Loading("sprint");
-
-               break; 
+                break; 
             case Mode.ULTRA:
                 scoreManager.Loading("ultra"); 
-               break; 
+                break; 
             default:    
                 scoreManager.Loading("marathon"); 
-
-               break; 
+                break; 
         }
-
-
-        //On commence par charger la liste des scores: 
-        //scoreManager.Loading("scores"); 
 
         //la variable list va contenir la liste des Joueur 
         List<Joueur> list= scoreManager.GetScoreData().scores; 
@@ -80,18 +86,21 @@ public class EndGame : MonoBehaviour
 
         foreach (Joueur joueur in list.ToList())
         {
+            Debug.Log(inputField.text); 
             //si jamais le joueur introduit un pseudo déja present dans la liste
             //et que le nouveau highscore est meilleur, on écrase son dernier score 
             if(joueur.name == inputField.text)
             {
+                Debug.Log("It already exists");
                 if(joueur.highscore<ScoreManager.GetScore())
                 {
                     joueur.highscore=ScoreManager.GetScore(); 
                     scoreManager.GetScoreData().scores=list; 
-                    Debug.Log("It already exists");
+                   
                     changed = true; 
                     break; 
                 }
+                changed=true; 
             }
            
            
@@ -128,5 +137,41 @@ public class EndGame : MonoBehaviour
 
      
     }
+
+    /// <summary> 
+    /// Méthode qui s'execute lors d'un clique sur le bouton share 
+    /// Auteur:Seghir Nassima
+    /// </summary>
+    public void share()
+    {
+        shareMessage= "I can't believe I scored "+ ScoreManager.GetScore().ToString()+" points in Tetris4G!";
+
+        StartCoroutine(TakeScreenshotAndShare());
+
+
+    }
+
+
+    private IEnumerator TakeScreenshotAndShare()
+{
+	yield return new WaitForEndOfFrame();
+
+	Texture2D ss = new Texture2D( Screen.width, Screen.height, TextureFormat.RGB24, false );
+	ss.ReadPixels( new Rect( 0, 0, Screen.width, Screen.height ), 0, 0 );
+	ss.Apply();
+
+	string filePath = Path.Combine( Application.temporaryCachePath, "shared img.png" );
+	File.WriteAllBytes( filePath, ss.EncodeToPNG() );
+
+	// To avoid memory leaks
+	Destroy( ss );
+
+	new NativeShare().AddFile( filePath )
+		.SetSubject( "Tetris4G" ).SetText(shareMessage)
+		.SetCallback( ( result, shareTarget ) => Debug.Log( "Share result: " + result + ", selected app: " + shareTarget ) )
+		.Share();
+
+	
+}
 
 }

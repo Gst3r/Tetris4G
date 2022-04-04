@@ -138,7 +138,7 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     public void SpawnPiece(int random)
     {
-        TetrominoData data = this.tetrominoes[random];
+        TetrominoData data = this.tetrominoes[1];
 
         this.activePiece.Initialize(this, spawnPosition, data);
         Set(activePiece);
