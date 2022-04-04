@@ -43,8 +43,10 @@ public abstract class IMode : MonoBehaviour
     /// </summary>
     private float justOne;
 
+
     public void Start(){
         this.justOne = -1;
+        BoardManager.SetLockSpeed(false);
     }
 
     public abstract void StartExecute();
@@ -55,16 +57,21 @@ public abstract class IMode : MonoBehaviour
     /// Description : Méthode permettant d'accélérer la vitesse du tétromino avec le temps
     /// </summary>
     public void AccelerateGravity(){
-        float stepDelay = this.activePiece.GetStepDelay();
-        
-        if(((int)Time.realtimeSinceStartup)%5!=0)
-            justOne=0;
+        if(!BoardManager.GetLockSpeed())
+        {   
+            //Debug.Log($"STEP DELAY : {this.activePiece.GetStepDelay()}");
 
-        // On décrémente petit à petit la gravité toute les 5 secondes selon le modulo cité dans la condition
-        if(((int)Time.realtimeSinceStartup)%5==0 && justOne==0){ 
-            stepDelay -= 0.01f; 
-            justOne=1; // On indique qu'on veut qu'il rentre une fois et on avorte la condition grace à l'attribut justOne
-        }
+            float stepDelay = this.activePiece.GetStepDelay(); 
+            if(((int)Time.realtimeSinceStartup)%5!=0)
+                justOne=0;
+
+            // On décrémente petit à petit la gravité toute les 5 secondes selon le modulo cité dans la condition
+            if(((int)Time.realtimeSinceStartup)%5==0 && justOne==0){ 
+                stepDelay -= 0.01f; 
+                this.activePiece.SetStepDelay(stepDelay);
+                justOne=1; // On indique qu'on veut qu'il rentre une fois et on avorte la condition grace à l'attribut justOne
+            }
+        } 
     }
 
     /// <summary> 
@@ -101,5 +108,3 @@ public abstract class IMode : MonoBehaviour
         return gameIsOver;
     }
 }
-
-

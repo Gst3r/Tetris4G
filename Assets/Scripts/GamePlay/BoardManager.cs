@@ -96,9 +96,10 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     private static int  totalLinesCleared =0; 
 
-
-
-
+    /// <summary> 
+    /// Attribut indiquant si l'accelération de la gravité est veoruillée    
+    /// </summary>
+    private static bool lockSpeed;
    
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -124,10 +125,7 @@ public class BoardManager : MonoBehaviour
 
     private void Update()
     {
-        /*if(HaveCollision()){
-            ClearLine();
-            SpawnPiece();
-        }*/
+        
     }
 
 //-------------------------------------------------------------------------------------------------------------
@@ -652,8 +650,15 @@ public class BoardManager : MonoBehaviour
         return activePiece;
     }
 
-     public static int GetTotalLinesCleared(){
+    public static int GetTotalLinesCleared(){
         return totalLinesCleared;
     }
 
+    public static bool GetLockSpeed(){
+        return lockSpeed;
+    }
+    
+    public static void SetLockSpeed(bool lockState){
+        lockSpeed = lockState;
+    }
 }

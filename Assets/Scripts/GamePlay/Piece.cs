@@ -81,7 +81,6 @@ public class Piece : MonoBehaviour
 
     private void Start()
     {
-        this.stepDelay = 1f;
         this.bufferedStepDelay = stepDelay;
         this.previewManager = FindObjectOfType<PreviewManager>();
     }
@@ -393,9 +392,9 @@ public class Piece : MonoBehaviour
     
     public void SetStepDelay(float stepDelay){
         this.stepDelay = stepDelay;
+        bufferedStepDelay = stepDelay;
     }
     public float GetStepTime(){
         return stepTime;
     }
-    
 }
