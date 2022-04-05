@@ -327,5 +327,4 @@ public class GoalsManager : MonoBehaviour
         intitule="";
         return false;
     }
-
 }

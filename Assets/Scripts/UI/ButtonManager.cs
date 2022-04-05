@@ -35,6 +35,11 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private GameObject HighScoresButton;
 
     /// <summary>
+    /// Variable contenant le bouton Goals.
+    /// </summary>
+    [SerializeField] private GameObject GoalsButton;
+
+    /// <summary>
     /// Variable contenant le panel des modes.
     /// </summary>
     [SerializeField] private GameObject modePanel;
@@ -45,7 +50,12 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private GameObject HighScoresPanel;
 
     /// <summary>
-    /// Variable contenant le panel highscores.
+    /// Variable contenant le panel Goals.
+    /// </summary>
+    [SerializeField] private GameObject GoalsPanel;
+
+    /// <summary>
+    /// Variable contenant le panel paramètres.
     /// </summary>
     [SerializeField] private GameObject ParametersPanel;
 
@@ -129,6 +139,7 @@ public class ButtonManager : MonoBehaviour
         //Modification de l'interface
         startButton.SetActive(false);
         HighScoresButton.SetActive(false);
+        GoalsButton.SetActive(false);
         modePanel.SetActive(true);
     }
 
@@ -137,9 +148,15 @@ public class ButtonManager : MonoBehaviour
     /// Méthodes permettant de lancer une animation pour les boutons.
     /// </summary>
     public void LaunchHighscores(){
-        StartCoroutine(LaodHighscores());
+        StartCoroutine(LoadHighscores());
     }
 
+    /// <summary>
+    /// Méthodes permettant de lancer une animation pour les boutons.
+    /// </summary>
+    public void LaunchGoals(){
+        StartCoroutine(LoadGoals());
+    }
 
     /// <summary>
     /// Coroutine de changement de scène lié au lancement de l'animation (menu principal vers interface de jeu ou inversement).
@@ -147,7 +164,7 @@ public class ButtonManager : MonoBehaviour
     /// <returns>
     /// Génere une pause de 0.38 secondes.
     /// </returns>
-    IEnumerator LaodHighscores()
+    IEnumerator LoadHighscores()
     {
         //Démarage de l'animation
         animator.SetTrigger("Press");
@@ -162,7 +179,34 @@ public class ButtonManager : MonoBehaviour
         //Modification de l'interface
         startButton.SetActive(false);
         HighScoresButton.SetActive(false);
+        GoalsButton.SetActive(false);
         HighScoresPanel.SetActive(true);
+    }
+
+
+    /// <summary>
+    /// Coroutine de changement de scène lié au lancement de l'animation (menu principal vers interface de jeu ou inversement).
+    /// </summary>
+    /// <returns>
+    /// Génere une pause de 0.38 secondes.
+    /// </returns>
+    IEnumerator LoadGoals()
+    {
+        //Démarage de l'animation
+        animator.SetTrigger("Press");
+        
+        //Génération de la pause
+        float ms = Time.deltaTime;
+        while(ms <= pressTime){
+            ms += Time.deltaTime;
+            yield return null;
+        }
+
+        //Modification de l'interface
+        startButton.SetActive(false);
+        HighScoresButton.SetActive(false);
+        GoalsButton.SetActive(false);
+        GoalsPanel.SetActive(true);
     }
 
     /// <summary>

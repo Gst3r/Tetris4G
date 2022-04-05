@@ -166,7 +166,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &120666399
 GameObject:
@@ -524,7 +524,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 205.021, y: -138.3855}
+  m_AnchoredPosition: {x: 204.75, y: -139.163}
   m_SizeDelta: {x: 370.488, y: 110.244}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &274758288
@@ -707,8 +707,10 @@ MonoBehaviour:
   animator: {fileID: 274758288}
   startButton: {fileID: 0}
   HighScoresButton: {fileID: 0}
+  GoalsButton: {fileID: 0}
   modePanel: {fileID: 0}
   HighScoresPanel: {fileID: 0}
+  GoalsPanel: {fileID: 0}
   ParametersPanel: {fileID: 0}
 --- !u!1 &294095062
 GameObject:
@@ -1361,10 +1363,10 @@ RectTransform:
   m_Father: {fileID: 916912189}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 1.5750122, y: 267.081}
-  m_SizeDelta: {x: -212.5, y: -595.438}
+  m_SizeDelta: {x: 409.5, y: 200.56201}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &346319183
 MonoBehaviour:
@@ -1875,8 +1877,10 @@ MonoBehaviour:
   animator: {fileID: 419200848}
   startButton: {fileID: 0}
   HighScoresButton: {fileID: 0}
+  GoalsButton: {fileID: 0}
   modePanel: {fileID: 0}
   HighScoresPanel: {fileID: 0}
+  GoalsPanel: {fileID: 0}
   ParametersPanel: {fileID: 0}
 --- !u!95 &419200848
 Animator:
@@ -1931,10 +1935,10 @@ RectTransform:
   m_Father: {fileID: 1702626842}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: 547.188}
-  m_SizeDelta: {x: -177.049, y: -1404.373}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0.000061035156, y: -253.31201}
+  m_SizeDelta: {x: 722.951, y: 196.62695}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &451950974
 MonoBehaviour:
@@ -2155,7 +2159,7 @@ RectTransform:
   m_Children:
   - {fileID: 586568168}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2600,7 +2604,7 @@ Transform:
   - {fileID: 1407194111}
   - {fileID: 166199143}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &586568167
 GameObject:
@@ -3633,8 +3637,10 @@ MonoBehaviour:
   animator: {fileID: 861497480}
   startButton: {fileID: 0}
   HighScoresButton: {fileID: 0}
+  GoalsButton: {fileID: 0}
   modePanel: {fileID: 0}
   HighScoresPanel: {fileID: 0}
+  GoalsPanel: {fileID: 0}
   ParametersPanel: {fileID: 0}
 --- !u!114 &861497477
 MonoBehaviour:
@@ -4363,8 +4369,10 @@ MonoBehaviour:
   animator: {fileID: 1002427767}
   startButton: {fileID: 0}
   HighScoresButton: {fileID: 0}
+  GoalsButton: {fileID: 0}
   modePanel: {fileID: 0}
   HighScoresPanel: {fileID: 0}
+  GoalsPanel: {fileID: 0}
   ParametersPanel: {fileID: 0}
 --- !u!114 &1002427764
 MonoBehaviour:
@@ -5648,7 +5656,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 205.021, y: -38.62283}
+  m_AnchoredPosition: {x: 204.75, y: -38.882}
   m_SizeDelta: {x: 292.034, y: 65.21}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1371312998
@@ -6093,8 +6101,10 @@ MonoBehaviour:
   animator: {fileID: 1397927547}
   startButton: {fileID: 0}
   HighScoresButton: {fileID: 0}
+  GoalsButton: {fileID: 0}
   modePanel: {fileID: 0}
   HighScoresPanel: {fileID: 0}
+  GoalsPanel: {fileID: 0}
   ParametersPanel: {fileID: 0}
 --- !u!114 &1397927549
 MonoBehaviour:
@@ -6383,7 +6393,7 @@ RectTransform:
   - {fileID: 1702626842}
   - {fileID: 1595377477}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -6743,6 +6753,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1596352606}
   m_CullTransparentMesh: 1
+--- !u!1 &1611016404
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1611016406}
+  - component: {fileID: 1611016405}
+  m_Layer: 0
+  m_Name: GoalsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1611016405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611016404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69a62bc406c7af44986f7307e15a48b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goals: []
+--- !u!4 &1611016406
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611016404}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1635081502
 GameObject:
   m_ObjectHideFlags: 0
@@ -7312,7 +7366,7 @@ RectTransform:
   m_Children:
   - {fileID: 1655345596}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7799,8 +7853,10 @@ MonoBehaviour:
   animator: {fileID: 0}
   startButton: {fileID: 0}
   HighScoresButton: {fileID: 0}
+  GoalsButton: {fileID: 0}
   modePanel: {fileID: 0}
   HighScoresPanel: {fileID: 0}
+  GoalsPanel: {fileID: 0}
   ParametersPanel: {fileID: 0}
 --- !u!82 &2006673694
 AudioSource:
@@ -8388,8 +8444,10 @@ MonoBehaviour:
   animator: {fileID: 2049082116}
   startButton: {fileID: 0}
   HighScoresButton: {fileID: 0}
+  GoalsButton: {fileID: 0}
   modePanel: {fileID: 0}
   HighScoresPanel: {fileID: 0}
+  GoalsPanel: {fileID: 0}
   ParametersPanel: {fileID: 0}
 --- !u!95 &2049082116
 Animator:
@@ -8756,7 +8814,7 @@ MonoBehaviour:
   animator: {fileID: 1595377478}
   launchTime: 2
   countPanel: {fileID: 1595377476}
-  goalsManager: {fileID: 0}
+  goalsManager: {fileID: 1611016405}
 --- !u!4 &2128468588
 Transform:
   m_ObjectHideFlags: 0
