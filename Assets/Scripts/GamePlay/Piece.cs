@@ -59,14 +59,25 @@ public class Piece : MonoBehaviour
     /// </summary>
     private PreviewManager previewManager;
 
+    /// <summary>
+    /// l'indice de la piece active
+    /// </summary>
+    private int indice_piece;
+
+    /// <summary>
+    /// Le gestionnaire de la zone de hold
+    /// </summary>
+    private HoldManager holdManager;
+
     /// <summary> 
     /// Méthode qui permet d'initialiser la piece  
     /// </summary>
-    public void Initialize(BoardManager board, Vector3Int position, TetrominoData data)
+    public void Initialize(BoardManager board, Vector3Int position, TetrominoData data, int indice)
     {
         this.data = data;
         this.board = board;
         this.position = position;
+        this.indice_piece = indice;
         stepTime = Time.time + stepDelay;
         lockTime = 0f;
 
@@ -83,6 +94,7 @@ public class Piece : MonoBehaviour
     {
         this.bufferedStepDelay = stepDelay;
         this.previewManager = FindObjectOfType<PreviewManager>();
+        this.holdManager = FindObjectOfType<HoldManager>();
     }
 
     private void Update()
@@ -163,8 +175,22 @@ public class Piece : MonoBehaviour
         board.ClearCompleteLine();
         board.ClearApparitionZone();
         board.StopGravity();
-        board.SpawnPiece(previewManager.GetNextPiece());
+        holdManager.SetStatusHold();
+        board.SpawnPiece(previewManager.GetNextPiece(), board.GetSpawnPosition());
         previewManager.ChangePreview();
+    }
+
+    /// <summary>
+    /// Methode permettant d'effacer une piece
+    /// </summary>
+    public void Remove()
+    {
+        for (int i = 0; i < cells.Length; i++)
+        {
+            Vector3Int tilePosition = cells[i] + position;
+            board.GetBoard().SetTile(tilePosition, null);
+        }
+
     }
 
     /// <summary> 
@@ -386,15 +412,29 @@ public class Piece : MonoBehaviour
         return true;
     }
 
-    public float GetStepDelay(){
+    public float GetStepDelay()
+    {
         return stepDelay;
     }
     
-    public void SetStepDelay(float stepDelay){
+    public void SetStepDelay(float stepDelay)
+    {
         this.stepDelay = stepDelay;
         bufferedStepDelay = stepDelay;
     }
-    public float GetStepTime(){
+
+    public float GetStepTime()
+    {
         return stepTime;
+    }
+
+    public int GetIndice()
+    {
+        return indice_piece;
+    }
+
+    public Vector3Int GetPiecePosition()
+    {
+        return position;
     }
 }

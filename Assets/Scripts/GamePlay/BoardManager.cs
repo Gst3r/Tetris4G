@@ -120,7 +120,7 @@ public class BoardManager : MonoBehaviour
         rightIsFull = false;
         chooseRandomGravity();
         int random = Random.Range(0, tetrominoes.Length);
-        SpawnPiece(random);
+        SpawnPiece(random, spawnPosition);
     }
 
     private void Update()
@@ -134,11 +134,11 @@ public class BoardManager : MonoBehaviour
     /// Méthode qui permet de générer une piece aléatoirement 
     /// Auteur:Seghir Nassima, Bae Jin-Young
     /// </summary>
-    public void SpawnPiece(int random)
+    public void SpawnPiece(int random, Vector3Int position)
     {
         TetrominoData data = this.tetrominoes[random];
 
-        this.activePiece.Initialize(this, spawnPosition, data);
+        this.activePiece.Initialize(this, position, data, random);
         Set(activePiece);
     }
 
@@ -646,19 +646,33 @@ public class BoardManager : MonoBehaviour
     /// <summary>
     /// Méthode permettant de retourner la pièce actuellement présente sur la grille
     /// </summary>
-    public Piece GetActivePiece(){
+    public Piece GetActivePiece()
+    {
         return activePiece;
     }
 
-    public static int GetTotalLinesCleared(){
+    public static int GetTotalLinesCleared()
+    {
         return totalLinesCleared;
     }
 
-    public static bool GetLockSpeed(){
+    public static bool GetLockSpeed()
+    {
         return lockSpeed;
     }
     
-    public static void SetLockSpeed(bool lockState){
+    public static void SetLockSpeed(bool lockState)
+    {
         lockSpeed = lockState;
+    }
+
+    public Tilemap GetBoard()
+    {
+        return board;
+    }
+
+    public Vector3Int GetSpawnPosition()
+    {
+        return spawnPosition;
     }
 }
