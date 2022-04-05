@@ -53,8 +53,8 @@ public class GoalsUI : MonoBehaviour
     }
 
     public void FillPanel(){
-        string jsonFilePath = /*Application.persistentDataPath*/Application.dataPath+/*"/Assets*/"/Scripts/Goals/goals.json";
-        string jsonString = File.ReadAllText(jsonFilePath);
+        var data = Resources.Load<TextAsset>($"goals");
+        string jsonString = data.text;
         string jsonData = jsonString.Split('{')[1].Split('}')[0];
         string[] jsonDicoData = jsonData.Split(',');
         

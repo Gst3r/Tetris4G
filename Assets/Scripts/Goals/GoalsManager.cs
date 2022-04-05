@@ -55,8 +55,9 @@ public class GoalsManager : MonoBehaviour
     /// </summary>
     public void FillGoals(){
         // PEUT ETRE CHANGER POUR ANDROID
-        string jsonFilePath = /*Application.persistentDataPath*/Application.dataPath+/*"/Assets*/"/Scripts/goals.json";
-        string jsonString = File.ReadAllText(jsonFilePath);
+        var data = Resources.Load<TextAsset>($"goals");
+        Debug.Log(data);
+        string jsonString = data.text;
         string jsonData = jsonString.Split('{')[1].Split('}')[0];
         this.jsonDicoData = jsonData.Split(',');
          
@@ -100,8 +101,9 @@ public class GoalsManager : MonoBehaviour
     public void RegisterGoal(string intitule){        
         // ATTENTION ICI LA TABULATION ET LE RETOUR A LA LIGNE DES FICHIERS EST LUE !!!!!
         // Réecriture du fichier json à partir de l'ancien mais en prenant en compte le changement effectué
-        // PEUT ETRE CHANGER POUR ANDROID
-        string jsonFilePath = /*Application.persistentDataPath*/Application.dataPath+/*"/Assets*/"/Scripts/goals.json";
+        var data = Resources.Load<TextAsset>($"goals");
+        string jsonString = data.text;
+       
         string contents = "{";
         for(int i=0; i<jsonDicoData.Length; i++){
             string[] jsonLineDicoData = jsonDicoData[i].Split(':');
@@ -114,7 +116,7 @@ public class GoalsManager : MonoBehaviour
         }
 
         contents += "}";
-        File.WriteAllText(jsonFilePath, contents);
+        JsonUtility.FromJsonOverwrite(jsonString, contents);
     }
 
     /// <summary>
