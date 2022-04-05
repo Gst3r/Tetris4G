@@ -55,14 +55,13 @@ public class GoalsManager : MonoBehaviour
     /// </summary>
     public void FillGoals(){
         // PEUT ETRE CHANGER POUR ANDROID
-        var data = Resources.Load<TextAsset>($"goals");
-        Debug.Log(data);
-        string jsonString = data.text;
+        string path = Application.persistentDataPath + "/goals.json";
+        string jsonString = File.ReadAllText(path);
         string jsonData = jsonString.Split('{')[1].Split('}')[0];
         this.jsonDicoData = jsonData.Split(',');
          
         // ATTENTION ICI LA TABULATION ET LE RETOUR A LA LIGNE DES FICHIERS EST LUE !!!!!
-        for(int i=0; i<jsonDicoData.Length-1; i++){
+        for(int i=0; i<jsonDicoData.Length; i++){
             string[] jsonLineDicoData = jsonDicoData[i].Split(':');
             successDico.Add(jsonLineDicoData[0], (jsonLineDicoData[1]=="true")?true:false);
             goals[i] = jsonLineDicoData[0];
@@ -101,9 +100,6 @@ public class GoalsManager : MonoBehaviour
     public void RegisterGoal(string intitule){        
         // ATTENTION ICI LA TABULATION ET LE RETOUR A LA LIGNE DES FICHIERS EST LUE !!!!!
         // Réecriture du fichier json à partir de l'ancien mais en prenant en compte le changement effectué
-        var data = Resources.Load<TextAsset>($"goals");
-        string jsonString = data.text;
-       
         string contents = "{";
         for(int i=0; i<jsonDicoData.Length; i++){
             string[] jsonLineDicoData = jsonDicoData[i].Split(':');
@@ -116,7 +112,9 @@ public class GoalsManager : MonoBehaviour
         }
 
         contents += "}";
-        JsonUtility.FromJsonOverwrite(jsonString, contents);
+
+        string path = Application.persistentDataPath + "/goals.json";
+        File.WriteAllText(path, contents);
     }
 
     /// <summary>
@@ -134,7 +132,6 @@ public class GoalsManager : MonoBehaviour
 
         if(CheckFirstGame(out goalIntitule) || CheckMarathonGoal(out goalIntitule) || CheckSprintGoal(out goalIntitule) || CheckUltraGoal(out goalIntitule) || CheckFullGoal(out goalIntitule)){
             intitule = goalIntitule;
-            Debug.Log(goalIntitule);
             return true;
         }else{
             intitule = "";
@@ -242,11 +239,12 @@ public class GoalsManager : MonoBehaviour
     /// Un booléen qui indique TRUE si tout les objectifs du jeu sont remplis, FALSE sinon
     /// </return>
     public bool CheckFullGoal(out string intitule){
-        foreach(bool state in successDico.Values)
-            if(!state && successDico[goals[25]] == false){        
-                intitule = goals[25];
+        foreach(bool state in successDico.Values){
+            if(!state && successDico[goals[24]] == false){    
+                intitule = goals[24];
                 return false;
             }
+        }
         intitule = "";
         return true;
     }

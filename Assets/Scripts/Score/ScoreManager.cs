@@ -50,10 +50,8 @@ public class ScoreManager : MonoBehaviour
     /// </summary>
     public ScoreManager Loading(String key)
     {
-       
         //chargement du json    
         var json = PlayerPrefs.GetString(key, "{}"); 
-        Debug.Log(json);
         //initialisation de la liste des scores à partir du json 
         this.sd = JsonUtility.FromJson<ScoreData>(json);
         return this; 

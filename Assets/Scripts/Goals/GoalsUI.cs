@@ -8,25 +8,61 @@ using System.IO;
 public class GoalsUI : MonoBehaviour
 {
 
+    /// <summary>
+    /// Tableau de panel représentant les fils du Container qui contient le script GoalsUI
+    /// </summary>
     [SerializeField] private Transform[] goalsLine;
 
+    /// <summary>
+    /// Tableau des intitulés des objectifs dans le cadre de l'affichage dans un panel
+    /// </summary>
     [SerializeField] private TMP_Text[] goalsText;
 
+    /// <summary>
+    /// Tableau d'image contenant l'ensemble des images de l'affichage des objectifs dans un panel 
+    /// </summary>
     [SerializeField] private Image[] goalsState;
 
+    /// <summary>
+    /// Sprite qui représente un rond vert signe que l'objectif est validé 
+    /// </summary>
     [SerializeField] private Sprite valideSprite;
 
+    /// <summary>
+    /// sprite qui représente un rond rouge signe que l'objectif n'est pas validé
+    /// </summary>
     [SerializeField] private Sprite unvalideSprite;
 
+    /// <summary>
+    /// Sprite qui représente le contour validé d'un objectif remplit dans l'interface
+    /// </summary>
     [SerializeField] private Sprite valideZone;
 
     // Start is called before the first frame update
     void Start()
     {
+        CreateJsonFile();
         InitializeElements();
         FillPanel();
     }
 
+    /// <summary>
+    /// Auteur : Sterlingot Guillaume<br>
+    /// Description : Cette méthode permet de créer un fichier json dans les données du téléphone si il n'existe pas déjà<br>
+    /// </summary>
+    public void CreateJsonFile(){
+        string path = Application.persistentDataPath + "/goals.json";
+        if(!File.Exists(path)){
+            var data = Resources.Load<TextAsset>($"goals");
+            string jsonContents = data.text;
+            File.WriteAllText(path, jsonContents);
+        }
+    }
+
+    /// <summary>
+    /// Auteur : Sterlingot Guillaume<br>
+    /// Description : Méthode permettant l'initialisation des attributs de la classe qui sont les GameObjects manipulés par la classe
+    /// </summary>
     public void InitializeElements(){
         goalsLine = new Transform[25];
         goalsText = new TMP_Text[25];
@@ -52,9 +88,13 @@ public class GoalsUI : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Auteur : Sterlingot Guillaume<br>
+    /// Description : Méthode permettant de remplir le panneau d'affichage contenant les intitulés et les états des objectifs 
+    /// </summary>
     public void FillPanel(){
-        var data = Resources.Load<TextAsset>($"goals");
-        string jsonString = data.text;
+        string path = Application.persistentDataPath + "/goals.json";
+        string jsonString = File.ReadAllText(path);
         string jsonData = jsonString.Split('{')[1].Split('}')[0];
         string[] jsonDicoData = jsonData.Split(',');
         
