@@ -58,17 +58,13 @@ public abstract class IMode : MonoBehaviour
     /// </summary>
     public void AccelerateGravity(){
         if(!BoardManager.GetLockSpeed())
-        {   
-            //Debug.Log($"STEP DELAY : {this.activePiece.GetStepDelay()}");
-
-            float stepDelay = this.activePiece.GetStepDelay(); 
+        {    
             if(((int)Time.realtimeSinceStartup)%5!=0)
                 justOne=0;
 
             // On décrémente petit à petit la gravité toute les 5 secondes selon le modulo cité dans la condition
             if(((int)Time.realtimeSinceStartup)%5==0 && justOne==0){ 
-                stepDelay -= 0.01f; 
-                this.activePiece.SetStepDelay(stepDelay);
+                this.activePiece.SetStepDelay(this.activePiece.GetStepDelay()-0.1f);
                 justOne=1; // On indique qu'on veut qu'il rentre une fois et on avorte la condition grace à l'attribut justOne
             }
         } 

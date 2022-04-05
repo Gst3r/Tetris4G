@@ -92,7 +92,6 @@ public class Piece : MonoBehaviour
 
     private void Start()
     {
-        this.bufferedStepDelay = stepDelay;
         this.previewManager = FindObjectOfType<PreviewManager>();
         this.holdManager = FindObjectOfType<HoldManager>();
     }
@@ -100,13 +99,9 @@ public class Piece : MonoBehaviour
     private void Update()
     {
         board.Clear(this);
-
         lockTime += Time.deltaTime;
-
-        if (Time.time > stepTime) {
+        if (Time.time > stepTime)
             ApplyGravity();
-        }
-
         board.Set(this);
     }
 
@@ -178,6 +173,7 @@ public class Piece : MonoBehaviour
         holdManager.SetStatusHold();
         board.SpawnPiece(previewManager.GetNextPiece(), board.GetSpawnPosition());
         previewManager.ChangePreview();
+        Controller.SetStayOnScreen(true);
     }
 
     /// <summary>
@@ -251,7 +247,6 @@ public class Piece : MonoBehaviour
     public void ModifyGravityR()
     {
         // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
-        this.bufferedStepDelay = stepDelay;
         Controller.SetWantToRotate(false);
 
         //Augmentation de la gravité
@@ -272,7 +267,6 @@ public class Piece : MonoBehaviour
     public void ModifyGravityL()
     {
         // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
-        this.bufferedStepDelay = stepDelay;
         Controller.SetWantToRotate(false);
 
         //Augmenation de la gravité
@@ -293,7 +287,6 @@ public class Piece : MonoBehaviour
     public void ModifyGravityT()
     {
         // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
-        this.bufferedStepDelay = stepDelay;
         Controller.SetWantToRotate(false);
 
         //Augmentation de la gravité
@@ -314,7 +307,6 @@ public class Piece : MonoBehaviour
     public void ModifyGravityB()
     {
         // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
-        this.bufferedStepDelay = stepDelay;
         Controller.SetWantToRotate(false);
 
         //Augmenation de la gravité
@@ -332,7 +324,7 @@ public class Piece : MonoBehaviour
     /// Description : Méthode permettant de restaurer la vitesse de déplacement du tetromino actuellement présent sur le plateau
     /// </summary>
     public void RestoreGravity(){
-        stepDelay = bufferedStepDelay;
+        this.stepDelay = this.bufferedStepDelay;
     }
 
     /// <summary> 
@@ -420,7 +412,7 @@ public class Piece : MonoBehaviour
     public void SetStepDelay(float stepDelay)
     {
         this.stepDelay = stepDelay;
-        bufferedStepDelay = stepDelay;
+        this.bufferedStepDelay = stepDelay;
     }
 
     public float GetStepTime()

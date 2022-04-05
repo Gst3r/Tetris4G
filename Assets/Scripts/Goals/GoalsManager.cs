@@ -54,7 +54,6 @@ public class GoalsManager : MonoBehaviour
     /// Description : Cette méthode permet de remplir le tableau contenant les intitulés des objectifs à accomplir en jeu aainsi que le dictionnaire d'état des objectifs
     /// </summary>
     public void FillGoals(){
-        // PEUT ETRE CHANGER POUR ANDROID
         string path = Application.persistentDataPath + "/goals.json";
         string jsonString = File.ReadAllText(path);
         string jsonData = jsonString.Split('{')[1].Split('}')[0];

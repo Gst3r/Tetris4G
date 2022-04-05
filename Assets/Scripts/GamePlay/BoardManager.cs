@@ -123,11 +123,6 @@ public class BoardManager : MonoBehaviour
         SpawnPiece(random, spawnPosition);
     }
 
-    private void Update()
-    {
-        
-    }
-
 //-------------------------------------------------------------------------------------------------------------
 
     /// <summary> 
@@ -141,6 +136,7 @@ public class BoardManager : MonoBehaviour
         this.activePiece.Initialize(this, position, data, random);
         Set(activePiece);
     }
+
 
     /// <summary> 
     /// Méthode qui permet de fixer la piece sur la grille de jeu 
@@ -646,33 +642,28 @@ public class BoardManager : MonoBehaviour
     /// <summary>
     /// Méthode permettant de retourner la pièce actuellement présente sur la grille
     /// </summary>
-    public Piece GetActivePiece()
-    {
+    public Piece GetActivePiece(){
         return activePiece;
     }
 
-    public static int GetTotalLinesCleared()
-    {
+    public static int GetTotalLinesCleared(){
         return totalLinesCleared;
     }
 
-    public static bool GetLockSpeed()
-    {
+    public static bool GetLockSpeed(){
         return lockSpeed;
     }
     
-    public static void SetLockSpeed(bool lockState)
-    {
+    public static void SetLockSpeed(bool lockState){
         lockSpeed = lockState;
     }
 
-    public Tilemap GetBoard()
-    {
-        return board;
+    public Vector3Int GetSpawnPosition(){
+        return spawnPosition;
     }
 
-    public Vector3Int GetSpawnPosition()
-    {
-        return spawnPosition;
+    
+    public Tilemap GetBoard(){
+        return board;
     }
 }

@@ -68,6 +68,11 @@ public class Controller : MonoBehaviour
     /// </summary>
     private float fast;
 
+    /// <summary> 
+    /// Booléen qui indique TRUE si le joueur reste appuyé sur l'écran après qu'une pièce ce soit posé, sinon FALSE
+    /// </summary>
+    private static bool stayOnScreen;
+
     //----------------------------------------------GOALS--------------------------------------------------------------------
 
     /// <summary> 
@@ -81,20 +86,17 @@ public class Controller : MonoBehaviour
         SetController();
         LaunchCount();
         mode.StartExecute();
-        /*this.gameIsOver = false;
-        this.direction = new Vector2Int();
-        this.prevDirection = new Vector2Int();
-        this.startPos = new Vector2();*/
+        /*this.gameIsOver = false;*/
     }
 
     // Update is called once per frame
     void Update()
     {
+        board.Set(activePiece);
         mode.Execute();
         goalsManager.GoalsController();
         touchSensitive();
         board.Clear(activePiece);
-        board.Set(activePiece);
     }
 
     /// <summary> 
@@ -105,6 +107,7 @@ public class Controller : MonoBehaviour
         Time.timeScale=0f; //Cette commande permet de reprendre la progression normale du temps
         gameMode = ModeController.GetMode();
         wantToRotate = true;
+        stayOnScreen = false;
         this.fast = 0f;
 
         // Initialisation du mode de jeu 
@@ -181,7 +184,7 @@ public class Controller : MonoBehaviour
             {
                 // Record initial touch position.
                 case TouchPhase.Began:
-                    startPos = touch.position;
+                    stayOnScreen=false;
                     break;
 
                 case TouchPhase.Stationary:
@@ -189,42 +192,16 @@ public class Controller : MonoBehaviour
 
                 // Determine direction by comparing the current touch position with the initial one.
                 case TouchPhase.Moved:
-                    Vector2Int diff = Vector2Int.FloorToInt(touch.position - startPos);
-                    float compareFast = Mathf.Abs(touch.deltaPosition.x);
-                    if(compareFast>19)
-                        fast = 19;
-                    else if(compareFast>17)
-                        fast = 17;
-                    else if(compareFast>15)
-                        fast = 15;
-                    else if(compareFast>13)
-                        fast = 13;
-                    else if(compareFast>11)
-                        fast = 11;
-                    else if(compareFast>9)
-                        fast = 9;
-                    else if(compareFast>7)
-                        fast = 7;
-                    else
-                        fast = 3;
-
-                    Debug.Log(fast);
-
-                    if(touch.deltaPosition.x>0){
-                        if(Time.frameCount%(21-Mathf.Abs((int)fast))==0){
-                            activePiece.RightShift();
-                        }
-                    }else{
-                        if(Time.frameCount%(21-Mathf.Abs((int)fast))==0){
-                            activePiece.LeftShift();
-                        }
+                    if(!stayOnScreen){
+                        Shift(touch);
                     }
-                    //Shift(direction, touch);
                     wantToRotate=false;
                     break;
 
                 // Report that a direction has been chosen when the finger is lifted.
                 case TouchPhase.Ended:
+                    activePiece.RestoreGravity();
+                    stayOnScreen=false;
                     break;
             }
         }else
@@ -245,36 +222,81 @@ public class Controller : MonoBehaviour
         }
     }
 
-/*
+
     /// <summary> 
     /// Auteur : Sterlingot Guillaume
     /// Description : Méthode permettant de choisir automatiquement le déplacement adapté selon la gravité (fonctionnalités tactile)
     /// </summary>
-    public void Shift(Vector2Int direction, Touch touch){
+    public void Shift(Touch touch){
+        int compareFastX = (int)Mathf.Abs(touch.deltaPosition.x);
+        int fastX = FindFast(compareFastX);
+
+        int compareFastY = (int)Mathf.Abs(touch.deltaPosition.y);
+        int fastY = FindFast(compareFastY);
+
         switch(board.GetGravity()){
-            case Gravity.HAUT:  if(touch.altitudeAngle==0f)
-                                    activePiece.Move(new Vector2Int(direction.x, 0));
-                                else 
-                                    activePiece.Move(new Vector2Int(0, direction.y));
-                                break;
-            case Gravity.BAS:   if(touch.altitudeAngle==0f)
-                                    activePiece.Move(new Vector2Int(direction.x, 0));
-                                else 
-                                    activePiece.Move(new Vector2Int(0, direction.y));
-                                break;
-            case Gravity.GAUCHE:if(touch.altitudeAngle==0f)
-                                    activePiece.Move(new Vector2Int(direction.x, 0));
-                                else 
-                                    activePiece.Move(new Vector2Int(0, direction.y));
-                                break;
-            case Gravity.DROITE:if(touch.altitudeAngle==0f)
-                                    activePiece.Move(new Vector2Int(direction.x, 0));
-                                else 
-                                    activePiece.Move(new Vector2Int(0, direction.y));
-                                break;
+            case Gravity.HAUT: 
+                fast = fastX;
+                if(touch.deltaPosition.y>0)
+                    activePiece.ModifyGravityT();
+                else if(touch.deltaPosition.x>0 && Time.frameCount%(20-fast)==0)
+                    activePiece.RightShift();
+                else if(touch.deltaPosition.x<0 && Time.frameCount%(20-fast)==0)
+                    activePiece.LeftShift();
+                break;
+            case Gravity.BAS:
+                fast = fastX;             
+                if(touch.deltaPosition.y<0)
+                    activePiece.ModifyGravityB();      
+                else if(touch.deltaPosition.x>0 && Time.frameCount%(20-fast)==0)
+                    activePiece.RightShift();
+                else if(touch.deltaPosition.x<0 && Time.frameCount%(20-fast)==0)
+                    activePiece.LeftShift();
+                break;
+            case Gravity.GAUCHE:
+                fast = fastY;
+                if(touch.deltaPosition.y>0 && Time.frameCount%(18-fast)==0)
+                    activePiece.TopShift();
+                else if(Time.frameCount%(18-fast)==0)
+                    activePiece.BotShift();
+                break;
+            case Gravity.DROITE:
+                fast = fastY;
+                if(touch.deltaPosition.y>0 && Time.frameCount%(18-fast)==0)
+                    activePiece.TopShift();
+                else if(Time.frameCount%(18-fast)==0)
+                    activePiece.BotShift();
+                break;
             default:break;
         }
-    }*/
+    }
+
+    /// <summary> 
+    /// Auteur : Sterlingot Guillaume
+    /// Description : Méthode permettant de déterminer une vitesse pour le tactile
+    /// </summary>
+    public int FindFast(int compareFast){
+        int localFast;
+
+        if(compareFast>19)
+            localFast = 19;
+        else if(compareFast>17)
+            localFast = 17;
+        else if(compareFast>15)
+            localFast = 15;
+        else if(compareFast>13)
+            localFast = 13;
+        else if(compareFast>11)
+            localFast = 11;
+        else if(compareFast>9)
+            localFast= 9;
+        else if(compareFast>7)
+            localFast = 7;
+        else
+            localFast = 3;
+
+        return localFast;
+    }
 
     public Piece GetActivePiece(){
         return activePiece;
@@ -290,5 +312,9 @@ public class Controller : MonoBehaviour
 
     public static void SetWantToRotate(bool wantToRot){
         wantToRotate = wantToRot;
+    }
+
+    public static void SetStayOnScreen(bool value){
+        stayOnScreen=value;
     }
 }
