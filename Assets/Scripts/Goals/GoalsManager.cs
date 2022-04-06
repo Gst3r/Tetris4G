@@ -54,12 +54,13 @@ public class GoalsManager : MonoBehaviour
     /// Description : Cette méthode permet de remplir le tableau contenant les intitulés des objectifs à accomplir en jeu aainsi que le dictionnaire d'état des objectifs
     /// </summary>
     public void FillGoals(){
-        string path = Application.persistentDataPath + "/goals.json";
-        string jsonString = File.ReadAllText(path);
-        string jsonData = jsonString.Split('{')[1].Split('}')[0];
-        this.jsonDicoData = jsonData.Split(',');
+        string path = Application.persistentDataPath + "/goals.json"; //Récupération du fichier json
+        string jsonString = File.ReadAllText(path);//Lecture du fichier json
+        string jsonData = jsonString.Split('{')[1].Split('}')[0];//Récupération des lignes du dictionnaire dans un string
+        this.jsonDicoData = jsonData.Split(',');//Récupération ligne par ligne des objectifs dans un dictionnaire
          
-        // ATTENTION ICI LA TABULATION ET LE RETOUR A LA LIGNE DES FICHIERS EST LUE !!!!!
+
+        //Remplissage du dictionnaire d'objectif présent dans le script et du tableau de nom d'objectif
         for(int i=0; i<jsonDicoData.Length; i++){
             string[] jsonLineDicoData = jsonDicoData[i].Split(':');
             successDico.Add(jsonLineDicoData[0], (jsonLineDicoData[1]=="true")?true:false);

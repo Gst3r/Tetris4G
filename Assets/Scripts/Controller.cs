@@ -193,6 +193,8 @@ public class Controller : MonoBehaviour
                 // Determine direction by comparing the current touch position with the initial one.
                 case TouchPhase.Moved:
                     if(!stayOnScreen){
+                        Debug.Log("stepdelay : "+activePiece.GetStepDelay());
+                        Debug.Log("bufferedstepdelay : "+activePiece.GetBufferedStepDelay());
                         Shift(touch);
                     }
                     wantToRotate=false;

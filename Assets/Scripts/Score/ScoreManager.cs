@@ -16,7 +16,7 @@ public class ScoreManager : MonoBehaviour
     /// Attribut contenant le score de la partie en cours 
     /// </summary>
     [SerializeField] private static int score;
-
+    
     /// <summary> 
     /// Attribut contenant le noombre de ligne détruite de la partie en cours 
     /// </summary>
@@ -50,8 +50,10 @@ public class ScoreManager : MonoBehaviour
     /// </summary>
     public ScoreManager Loading(String key)
     {
+       
         //chargement du json    
         var json = PlayerPrefs.GetString(key, "{}"); 
+        Debug.Log(json);
         //initialisation de la liste des scores à partir du json 
         this.sd = JsonUtility.FromJson<ScoreData>(json);
         return this; 
@@ -61,12 +63,12 @@ public class ScoreManager : MonoBehaviour
     /// Auteur : Seghir Nassima 
     /// Méthode permettant d'incrémenter le score selon le nombre de lignes éliminées
     /// </summary>
-    public void IncrementScore(int nbLinesCleared)
+    public void IncrementScore(int nmbLines)
     {
-        switch(nbLinesCleared)
+        switch(nmbLines)
         {
             case 1: 
-                score+=40;
+                score+=40; 
                 break; 
 
             case 2:
@@ -84,7 +86,6 @@ public class ScoreManager : MonoBehaviour
             default: 
                  break;  
         }
-        nbLines += nbLinesCleared;
         ChangeScore();
     }
 
@@ -148,7 +149,7 @@ public class ScoreManager : MonoBehaviour
     {
         return score; 
     } 
-
+    
     /// <summary> 
     /// getter du nomre de ligne
     /// </summary>

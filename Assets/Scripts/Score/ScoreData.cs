@@ -5,6 +5,8 @@ using System.Collections.Generic;
 /// Auteur : Nassima Seghir<br>
 /// Description : Cette classe permet de stocker la liste des scores 
 /// </summary>
+
+
 [Serializable]
 public class ScoreData
 {

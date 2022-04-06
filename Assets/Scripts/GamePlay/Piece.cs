@@ -408,6 +408,12 @@ public class Piece : MonoBehaviour
     {
         return stepDelay;
     }
+
+    public float GetBufferedStepDelay()
+    {
+        return bufferedStepDelay;
+    }
+    
     
     public void SetStepDelay(float stepDelay)
     {

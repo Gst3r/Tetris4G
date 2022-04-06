@@ -47,7 +47,7 @@ public class ScoreUI : MonoBehaviour
        
        
         //chargement de la liste des scores 
-        scoreManager.Loading("marathon");  
+        scoreManager.Loading("marathonn");  
        
 
         //partie qui permet de modifier l'interface et ajouter des lignes dans le tableau des scores

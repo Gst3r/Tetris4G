@@ -169,7 +169,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 13503026}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf095ea65288a11dab82f56e34bac889, type: 3}
+  m_Script: {fileID: 11500000, guid: 295acedd0d3c47d3f89e695605c4098a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rowUi: {fileID: 7726034046570721225, guid: d35b0194f2504db86a7a5d31549d2963, type: 3}
@@ -680,7 +680,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 946378027}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UltraUI, Assembly-CSharp
         m_MethodName: HandleInputData
         m_Mode: 0
@@ -10038,7 +10038,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 838924770}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d455b6384c91f2bd7990de7fdf58cd9a, type: 3}
+  m_Script: {fileID: 11500000, guid: 27d39a785949a184388d0027e674cd49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   scoreTextInGame: {fileID: 0}
@@ -11147,7 +11147,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 946378025}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e7538a56aba26233a79ba51241c3a5f, type: 3}
+  m_Script: {fileID: 11500000, guid: 295acedd0d3c47d3f89e695605c4098a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rowUi: {fileID: 7726034046570721225, guid: d35b0194f2504db86a7a5d31549d2963, type: 3}
