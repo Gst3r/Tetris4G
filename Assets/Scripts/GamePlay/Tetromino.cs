@@ -19,6 +19,17 @@ public enum Tetromino{
     
 }
 
+/// <summary>
+/// Auteurs : Nassima Seghir, Jin-Young Bae
+/// Description : Cette enumération permet de distinguer les différents pouvoirs des tetrominoes
+/// </summary>
+public enum Pouvoir
+{
+    Standard,
+    Bonus,
+    Malus
+}
+
 /// <summary> 
 /// Auteur : Seghir Nassima<br>
 /// Description : Cette classe permet de gérer la construction des tetrominoes 
@@ -65,7 +76,17 @@ public struct TetrominoData
     /// <summary> 
     /// Attribut contenant la tuile utilisée pour construire le tetromino  
     /// </summary>
-    public Tile tile; 
+    public Tile tile;
+
+    /// <summary>
+    /// Attribut contenant la tuile bonus rapportant plus de points
+    /// </summary>
+    public Tile bonus_tile;
+
+    /// <summary>
+    /// Attribut contenant la tuile malus rapportant des points negatifs
+    /// </summary>
+    public Tile malus_tile;
 
     /// <summary> 
     /// Tableau contenant les positions des cellules du tetromino  

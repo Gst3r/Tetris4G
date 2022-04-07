@@ -109,7 +109,7 @@ public class GhostPiece : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Kusunga Malcom
+    /// Auteur : Kusunga Malcom, Seghir Nassima, Bae Jin-Young
     /// Méthode permettant de projeter la ghost piece dans le sens exercé par la gravité  
     /// </summary>
     public void ProjectPiece()
@@ -142,7 +142,18 @@ public class GhostPiece : MonoBehaviour
             }
 
             //Replace la piece actuelle dans la grille de jeu
-            this.board.Set(this.pieceOnBoard);
+            if (this.pieceOnBoard.GetPouvoir() == Pouvoir.Standard)
+            {
+                this.board.Set(this.pieceOnBoard, this.pieceOnBoard.GetData().tile);
+            }
+            else if (this.pieceOnBoard.GetPouvoir() == Pouvoir.Malus)
+            {
+                this.board.Set(this.pieceOnBoard, this.pieceOnBoard.GetData().malus_tile);
+            }
+            else
+            {
+                this.board.Set(this.pieceOnBoard, this.pieceOnBoard.GetData().bonus_tile);
+            }
         }
 
         //GRAVITE HAUT
@@ -170,7 +181,18 @@ public class GhostPiece : MonoBehaviour
             }
 
             //Replace la piece actuelle dans la grille de jeu
-            this.board.Set(this.pieceOnBoard);
+            if (this.pieceOnBoard.GetPouvoir() == Pouvoir.Standard)
+            {
+                this.board.Set(this.pieceOnBoard, this.pieceOnBoard.GetData().tile);
+            }
+            else if (this.pieceOnBoard.GetPouvoir() == Pouvoir.Malus)
+            {
+                this.board.Set(this.pieceOnBoard, this.pieceOnBoard.GetData().malus_tile);
+            }
+            else
+            {
+                this.board.Set(this.pieceOnBoard, this.pieceOnBoard.GetData().bonus_tile);
+            }
         }
 
         //GRAVITE GAUCHE
@@ -198,7 +220,18 @@ public class GhostPiece : MonoBehaviour
             }
 
             //Replace la piece actuelle dans la grille de jeu
-            this.board.Set(this.pieceOnBoard);
+            if (this.pieceOnBoard.GetPouvoir() == Pouvoir.Standard)
+            {
+                this.board.Set(this.pieceOnBoard, this.pieceOnBoard.GetData().tile);
+            }
+            else if (this.pieceOnBoard.GetPouvoir() == Pouvoir.Malus)
+            {
+                this.board.Set(this.pieceOnBoard, this.pieceOnBoard.GetData().malus_tile);
+            }
+            else
+            {
+                this.board.Set(this.pieceOnBoard, this.pieceOnBoard.GetData().bonus_tile);
+            }
         }
 
         //GRAVITE DROITE
@@ -226,7 +259,18 @@ public class GhostPiece : MonoBehaviour
             }
 
             //Replace la piece actuelle dans la grille de jeu
-            this.board.Set(this.pieceOnBoard);
+            if (this.pieceOnBoard.GetPouvoir() == Pouvoir.Standard)
+            {
+                this.board.Set(this.pieceOnBoard, this.pieceOnBoard.GetData().tile);
+            }
+            else if (this.pieceOnBoard.GetPouvoir() == Pouvoir.Malus)
+            {
+                this.board.Set(this.pieceOnBoard, this.pieceOnBoard.GetData().malus_tile);
+            }
+            else
+            {
+                this.board.Set(this.pieceOnBoard, this.pieceOnBoard.GetData().bonus_tile);
+            }
         }
     }
 }

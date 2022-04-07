@@ -7581,24 +7581,38 @@ MonoBehaviour:
   tetrominoes:
   - tetromino: 0
     tile: {fileID: 11400000, guid: 56f79ef3aa4599b4a8e1100e268e9b52, type: 2}
+    bonus_tile: {fileID: 11400000, guid: aaad4e987b6633d40a7e41d3bca9f4c1, type: 2}
+    malus_tile: {fileID: 11400000, guid: b1384e7f88ceff24492267afb212eef4, type: 2}
     cellules: []
   - tetromino: 1
     tile: {fileID: 11400000, guid: 1f47e8f79f014b648bdf42d888b35936, type: 2}
+    bonus_tile: {fileID: 11400000, guid: aaad4e987b6633d40a7e41d3bca9f4c1, type: 2}
+    malus_tile: {fileID: 11400000, guid: b1384e7f88ceff24492267afb212eef4, type: 2}
     cellules: []
   - tetromino: 2
     tile: {fileID: 11400000, guid: a808dabe3909ec641a8b030e5a14bee4, type: 2}
+    bonus_tile: {fileID: 11400000, guid: aaad4e987b6633d40a7e41d3bca9f4c1, type: 2}
+    malus_tile: {fileID: 11400000, guid: b1384e7f88ceff24492267afb212eef4, type: 2}
     cellules: []
   - tetromino: 3
     tile: {fileID: 11400000, guid: ae6bda9caf97a194fa86b01a6433931f, type: 2}
+    bonus_tile: {fileID: 11400000, guid: aaad4e987b6633d40a7e41d3bca9f4c1, type: 2}
+    malus_tile: {fileID: 11400000, guid: b1384e7f88ceff24492267afb212eef4, type: 2}
     cellules: []
   - tetromino: 6
     tile: {fileID: 11400000, guid: bee0f167c718320488ec2321fbdb0327, type: 2}
+    bonus_tile: {fileID: 11400000, guid: aaad4e987b6633d40a7e41d3bca9f4c1, type: 2}
+    malus_tile: {fileID: 11400000, guid: b1384e7f88ceff24492267afb212eef4, type: 2}
     cellules: []
   - tetromino: 4
     tile: {fileID: 11400000, guid: 801c22ccdcdbe264695bde35c5cb8b35, type: 2}
+    bonus_tile: {fileID: 11400000, guid: aaad4e987b6633d40a7e41d3bca9f4c1, type: 2}
+    malus_tile: {fileID: 11400000, guid: b1384e7f88ceff24492267afb212eef4, type: 2}
     cellules: []
   - tetromino: 5
     tile: {fileID: 11400000, guid: 3f1ce3ad610839746b1236acdc700f56, type: 2}
+    bonus_tile: {fileID: 11400000, guid: aaad4e987b6633d40a7e41d3bca9f4c1, type: 2}
+    malus_tile: {fileID: 11400000, guid: b1384e7f88ceff24492267afb212eef4, type: 2}
     cellules: []
 --- !u!114 &1719026911
 MonoBehaviour:
