@@ -140,9 +140,9 @@ public class BoardManager : MonoBehaviour
     /// </param>
     public void SpawnPiece(int random, Vector3Int position, Pouvoir pouvoir)
     {
-        TetrominoData data = this.tetrominoes[1];
+        TetrominoData data = this.tetrominoes[random];
 
-        this.activePiece.Initialize(this, position, data, 1, pouvoir);
+        this.activePiece.Initialize(this, position, data, random, pouvoir);
 
         if (pouvoir == Pouvoir.Standard)
         {
