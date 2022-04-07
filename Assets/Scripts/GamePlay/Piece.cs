@@ -59,14 +59,25 @@ public class Piece : MonoBehaviour
     /// </summary>
     private PreviewManager previewManager;
 
+    /// <summary>
+    /// l'indice de la piece active
+    /// </summary>
+    private int indice_piece;
+
+    /// <summary>
+    /// Le gestionnaire de la zone de hold
+    /// </summary>
+    private HoldManager holdManager;
+
     /// <summary> 
     /// Méthode qui permet d'initialiser la piece  
     /// </summary>
-    public void Initialize(BoardManager board, Vector3Int position, TetrominoData data)
+    public void Initialize(BoardManager board, Vector3Int position, TetrominoData data, int indice)
     {
         this.data = data;
         this.board = board;
         this.position = position;
+        this.indice_piece = indice;
         stepTime = Time.time + stepDelay;
         lockTime = 0f;
 
@@ -81,21 +92,16 @@ public class Piece : MonoBehaviour
 
     private void Start()
     {
-        this.stepDelay = 1f;
-        this.bufferedStepDelay = stepDelay;
         this.previewManager = FindObjectOfType<PreviewManager>();
+        this.holdManager = FindObjectOfType<HoldManager>();
     }
 
     private void Update()
     {
         board.Clear(this);
-
         lockTime += Time.deltaTime;
-
-        if (Time.time > stepTime) {
+        if (Time.time > stepTime)
             ApplyGravity();
-        }
-
         board.Set(this);
     }
 
@@ -164,8 +170,23 @@ public class Piece : MonoBehaviour
         board.ClearCompleteLine();
         board.ClearApparitionZone();
         board.StopGravity();
-        board.SpawnPiece(previewManager.GetNextPiece());
+        holdManager.SetStatusHold();
+        board.SpawnPiece(previewManager.GetNextPiece(), board.GetSpawnPosition());
         previewManager.ChangePreview();
+        Controller.SetStayOnScreen(true);
+    }
+
+    /// <summary>
+    /// Methode permettant d'effacer une piece
+    /// </summary>
+    public void Remove()
+    {
+        for (int i = 0; i < cells.Length; i++)
+        {
+            Vector3Int tilePosition = cells[i] + position;
+            board.GetBoard().SetTile(tilePosition, null);
+        }
+
     }
 
     /// <summary> 
@@ -226,7 +247,6 @@ public class Piece : MonoBehaviour
     public void ModifyGravityR()
     {
         // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
-        this.bufferedStepDelay = stepDelay;
         Controller.SetWantToRotate(false);
 
         //Augmentation de la gravité
@@ -247,7 +267,6 @@ public class Piece : MonoBehaviour
     public void ModifyGravityL()
     {
         // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
-        this.bufferedStepDelay = stepDelay;
         Controller.SetWantToRotate(false);
 
         //Augmenation de la gravité
@@ -268,7 +287,6 @@ public class Piece : MonoBehaviour
     public void ModifyGravityT()
     {
         // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
-        this.bufferedStepDelay = stepDelay;
         Controller.SetWantToRotate(false);
 
         //Augmentation de la gravité
@@ -289,7 +307,6 @@ public class Piece : MonoBehaviour
     public void ModifyGravityB()
     {
         // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
-        this.bufferedStepDelay = stepDelay;
         Controller.SetWantToRotate(false);
 
         //Augmenation de la gravité
@@ -307,7 +324,7 @@ public class Piece : MonoBehaviour
     /// Description : Méthode permettant de restaurer la vitesse de déplacement du tetromino actuellement présent sur le plateau
     /// </summary>
     public void RestoreGravity(){
-        stepDelay = bufferedStepDelay;
+        this.stepDelay = this.bufferedStepDelay;
     }
 
     /// <summary> 
@@ -387,15 +404,35 @@ public class Piece : MonoBehaviour
         return true;
     }
 
-    public float GetStepDelay(){
+    public float GetStepDelay()
+    {
         return stepDelay;
     }
-    
-    public void SetStepDelay(float stepDelay){
-        this.stepDelay = stepDelay;
+
+    public float GetBufferedStepDelay()
+    {
+        return bufferedStepDelay;
     }
-    public float GetStepTime(){
+    
+    
+    public void SetStepDelay(float stepDelay)
+    {
+        this.stepDelay = stepDelay;
+        this.bufferedStepDelay = stepDelay;
+    }
+
+    public float GetStepTime()
+    {
         return stepTime;
     }
-    
+
+    public int GetIndice()
+    {
+        return indice_piece;
+    }
+
+    public Vector3Int GetPiecePosition()
+    {
+        return position;
+    }
 }

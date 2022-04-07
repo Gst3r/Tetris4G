@@ -95,4 +95,8 @@ public class PauseMenu : MonoBehaviour
     public static bool GetGameIsPausing(){
         return gameIsPausing;
     }
+    
+    public static void SetGameIsPausing(bool value){
+        gameIsPausing = value;
+    }
 }

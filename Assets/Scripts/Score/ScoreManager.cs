@@ -16,6 +16,11 @@ public class ScoreManager : MonoBehaviour
     /// Attribut contenant le score de la partie en cours 
     /// </summary>
     [SerializeField] private static int score;
+    
+    /// <summary> 
+    /// Attribut contenant le noombre de ligne détruite de la partie en cours 
+    /// </summary>
+    [SerializeField] private static int nbLines;
 
     /// <summary> 
     /// Attribut contenant le score de la partie en cours sous forme de texte
@@ -36,6 +41,7 @@ public class ScoreManager : MonoBehaviour
 
     private void Start(){
         score = 0;
+        nbLines = 0;
     }
  
     /// <summary> 
@@ -143,9 +149,12 @@ public class ScoreManager : MonoBehaviour
     {
         return score; 
     } 
-
-
-
-
-
+    
+    /// <summary> 
+    /// getter du nomre de ligne
+    /// </summary>
+    public static int GetNbLines()
+    {
+        return nbLines; 
+    } 
 }

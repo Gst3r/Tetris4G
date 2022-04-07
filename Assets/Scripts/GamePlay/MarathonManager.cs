@@ -29,8 +29,6 @@ public class MarathonManager : IMode
         CheckGameOver();
     }
 
-
-
     public static float GetScore()
     {
         return ScoreManager.GetScore(); 

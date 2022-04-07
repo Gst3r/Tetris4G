@@ -96,9 +96,10 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     private static int  totalLinesCleared =0; 
 
-
-
-
+    /// <summary> 
+    /// Attribut indiquant si l'accelération de la gravité est veoruillée    
+    /// </summary>
+    private static bool lockSpeed;
    
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -119,15 +120,7 @@ public class BoardManager : MonoBehaviour
         rightIsFull = false;
         chooseRandomGravity();
         int random = Random.Range(0, tetrominoes.Length);
-        SpawnPiece(random);
-    }
-
-    private void Update()
-    {
-        /*if(HaveCollision()){
-            ClearLine();
-            SpawnPiece();
-        }*/
+        SpawnPiece(random, spawnPosition);
     }
 
 //-------------------------------------------------------------------------------------------------------------
@@ -136,13 +129,14 @@ public class BoardManager : MonoBehaviour
     /// Méthode qui permet de générer une piece aléatoirement 
     /// Auteur:Seghir Nassima, Bae Jin-Young
     /// </summary>
-    public void SpawnPiece(int random)
+    public void SpawnPiece(int random, Vector3Int position)
     {
         TetrominoData data = this.tetrominoes[random];
 
-        this.activePiece.Initialize(this, spawnPosition, data);
+        this.activePiece.Initialize(this, position, data, random);
         Set(activePiece);
     }
+
 
     /// <summary> 
     /// Méthode qui permet de fixer la piece sur la grille de jeu 
@@ -652,8 +646,24 @@ public class BoardManager : MonoBehaviour
         return activePiece;
     }
 
-     public static int GetTotalLinesCleared(){
+    public static int GetTotalLinesCleared(){
         return totalLinesCleared;
     }
 
+    public static bool GetLockSpeed(){
+        return lockSpeed;
+    }
+    
+    public static void SetLockSpeed(bool lockState){
+        lockSpeed = lockState;
+    }
+
+    public Vector3Int GetSpawnPosition(){
+        return spawnPosition;
+    }
+
+    
+    public Tilemap GetBoard(){
+        return board;
+    }
 }
