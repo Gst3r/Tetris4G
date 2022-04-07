@@ -4,10 +4,6 @@ using System.Linq;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-
-
-
-
 /// <summary> 
 /// Auteur : Nassima Seghir<br>
 /// Description : Cette classe permet de générer les lignes du tableau de scores   
@@ -47,7 +43,7 @@ public class ScoreUI : MonoBehaviour
        
        
         //chargement de la liste des scores 
-        scoreManager.Loading("marathon");  
+        scoreManager.Loading("marathonn");  
        
 
         //partie qui permet de modifier l'interface et ajouter des lignes dans le tableau des scores

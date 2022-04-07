@@ -17,10 +17,15 @@ public class EndGame : MonoBehaviour
     /// </summary>
     [SerializeField] private TMP_InputField inputField; 
 
+
     /// <summary> 
     /// Attribut faisant référence au text d'affichage du score
     /// </summary>
-    [SerializeField] private TextMeshProUGUI textScore; 
+    [SerializeField] private Text scoreValue; 
+
+
+
+
 
     /// <summary> 
     /// Attribut qui permettra de modifier la liste des scores
@@ -47,10 +52,10 @@ public class EndGame : MonoBehaviour
         
         //initialisation des composants 
         inputField= transform.Find("InputFieldPseudo").GetComponent<TMP_InputField>();
-        textScore= transform.Find("TextScore").GetComponent<TextMeshProUGUI>();
+       
 
         //affichage du score
-        textScore.text = "Score: " + ScoreManager.GetScore().ToString();
+        scoreValue.text=" "+ScoreManager.GetScore().ToString();
 
       
 
@@ -62,10 +67,10 @@ public class EndGame : MonoBehaviour
     /// </summary>
     public void Submit()
     {
-        //on commence par load laliste des scoresselon le mode:
+        //on commence par load la liste des scores selon le mode:
          switch(ModeController.GetMode()){ 
             case Mode.MARATHON:
-                scoreManager.Loading("marathon"); 
+                scoreManager.Loading("marathonn"); 
                 break; 
             case Mode.SPRINT:  
                 scoreManager.Loading("sprint");
@@ -90,7 +95,7 @@ public class EndGame : MonoBehaviour
             //et que le nouveau highscore est meilleur, on écrase son dernier score 
             if(joueur.name == inputField.text)
             {
-                Debug.Log("It already exists");
+               
                 if(joueur.highscore<ScoreManager.GetScore())
                 {
                     joueur.highscore=ScoreManager.GetScore(); 
@@ -107,7 +112,7 @@ public class EndGame : MonoBehaviour
         } if(!changed) //si il s'agit d'un nouveau pseudo, on crée une nouvelle entrée     
                 {    
                   
-                    Debug.Log("première occurence."); 
+                   
                     scoreManager.AddScore(new Joueur(name:inputField.text, highscore:ScoreManager.GetScore()));
 
                 }
@@ -117,21 +122,20 @@ public class EndGame : MonoBehaviour
 
          switch(ModeController.GetMode()){ 
             case Mode.MARATHON:
-               Debug.Log("t'as pris marathon");
-               scoreManager.SaveScore("scores"); ; 
-
-               break; 
+                scoreManager.SaveScore("marathonn"); 
+                break; 
+              
             case Mode.SPRINT:
-                Debug.Log("t'as pris sprint");
                 scoreManager.SaveScore("sprint"); 
-                
-               break; 
+                break;
+               
             case Mode.ULTRA:
-                 Debug.Log("t'as pris ultra");
-               break; 
+                scoreManager.SaveScore("ultra"); 
+                break;    
+            
             default:    
-                Debug.Log("t'as pris marathon");
-               break; 
+                scoreManager.SaveScore("marathon");
+                break; 
         }
     }
 
@@ -141,7 +145,7 @@ public class EndGame : MonoBehaviour
     /// </summary>
     public void share()
     {
-        shareMessage= "I can't believe I scored "+ ScoreManager.GetScore().ToString()+" points in Tetris4G!";
+        shareMessage= "I can't believe I scored "+ ScoreManager.GetScore().ToString()+" points in Tetris4G!!!";
 
         StartCoroutine(TakeScreenshotAndShare());
 
@@ -149,6 +153,11 @@ public class EndGame : MonoBehaviour
     }
 
 
+
+    /// <summary> 
+    /// Méthode qui permet d'effectuer une capture d'écran 
+    /// Auteur:Seghir Nassima
+    /// </summary>
     private IEnumerator TakeScreenshotAndShare()
 {
 	yield return new WaitForEndOfFrame();
