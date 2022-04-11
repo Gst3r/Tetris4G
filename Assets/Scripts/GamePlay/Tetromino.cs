@@ -18,6 +18,15 @@ public enum Tetromino{
     Z
     
 }
+/// <summary> 
+/// Description : Cette enumération permet de lister les différents actions d'une pièce
+/// </summary>
+public enum Pouvoir{
+    Standard, 
+    Bonus, 
+    Malus
+    
+}
 
 /// <summary>
 /// Auteurs : Nassima Seghir, Jin-Young Bae
@@ -88,8 +97,25 @@ public struct TetrominoData
     /// </summary>
     public Tile malus_tile;
 
+     /// <summary> 
+    /// Attribut contenant la tuile utilisée pour construire le tetromino  
+    /// </summary>
+    public Tile tileoption; 
+
+
+
     /// <summary> 
     /// Tableau contenant les positions des cellules du tetromino  
     /// </summary>
     public Vector2Int[] cellules ; 
+
+    /// <summary> 
+    /// Tableau contenant l'action du tetromino
+    /// </summary>
+    public Pouvoir pouvoir ; 
+
+
+
+
+
 }
