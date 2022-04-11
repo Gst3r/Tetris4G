@@ -49,7 +49,6 @@ public class HoldManager : MonoBehaviour
     void Start()
     {
         //recherche des différents éléments nécessaires à ce script
-        //hold = GameObject.Find("HoldPiece");
         activePiece = FindObjectOfType<Piece>();
         previewManager = FindObjectOfType<PreviewManager>();
         board = FindObjectOfType<BoardManager>();
@@ -64,29 +63,38 @@ public class HoldManager : MonoBehaviour
     /// </summary>
     public void ChangeHold()
     {
+        //si le joueur n'a pas deja change la piece de la zone de hold
         if (changed == false)
         {
+            //si la case du hold ne contient aucune piece
             if (hold.GetComponent<Image>().sprite == tetrominoes[7])
             {
-                //Debug.Log("1");
+                //stockage de l'indice de la piece active dans hold_indice
                 hold_indice = activePiece.GetIndice();
+                //changement du sprite du hold
                 ChangeSprite(hold_indice);
 
+                //generation de la prochaine piece de la zone de previsualisation
                 NewSpawn(previewManager.GetNextPiece());
                 previewManager.ChangePreview();
 
             }
 
+            //si la case contient une piece
             else
             {
+                //on recupere l'indice de la piece active dans une variable
                 int indice_activePiece = activePiece.GetIndice();
+                //changement du sprite du hold
                 ChangeSprite(indice_activePiece);
 
+                //generation de la piece qui etait dans le hold
                 NewSpawn(hold_indice);
                 hold_indice = indice_activePiece;
 
             }
 
+            //le joueur a change la piece du hold, il ne peut plus le refaire tant qu'une piece soit posee
             changed = true;
         }
     }
@@ -111,7 +119,7 @@ public class HoldManager : MonoBehaviour
     public void NewSpawn(int indice)
     {
         activePiece.Remove();
-        board.SpawnPiece(indice, activePiece.GetPiecePosition());
+        board.SpawnPiece(indice, activePiece.GetPiecePosition(), Pouvoir.Standard);
     }
 
     /// <summary>

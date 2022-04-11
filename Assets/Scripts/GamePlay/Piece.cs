@@ -69,24 +69,37 @@ public class Piece : MonoBehaviour
     /// </summary>
     private HoldManager holdManager;
 
+    /// <summary>
+    /// Tableau de booleens pour les pieces "speciales"
+    /// </summary>
+    private bool[] paliers_booleen;
+
+    /// <summary>
+    /// Le pouvoir de la piece
+    /// </summary>
+    private Pouvoir pouvoir;
+
     /// <summary> 
     /// Méthode qui permet d'initialiser la piece  
     /// </summary>
-    public void Initialize(BoardManager board, Vector3Int position, TetrominoData data, int indice)
+    public void Initialize(BoardManager board, Vector3Int position, TetrominoData data, int indice, Pouvoir pouvoir)
     {
         this.data = data;
         this.board = board;
         this.position = position;
         this.indice_piece = indice;
+        this.pouvoir = pouvoir;
         stepTime = Time.time + stepDelay;
         lockTime = 0f;
 
-        if (cells == null) {
+        if (cells == null)
+        {
             cells = new Vector3Int[data.cellules.Length];
         }
 
-        for (int i = 0; i < cells.Length; i++) {
-            cells[i] = (Vector3Int)data.cellules[i]; 
+        for (int i = 0; i < cells.Length; i++)
+        {
+            cells[i] = (Vector3Int)data.cellules[i];
         }
     }
 
@@ -94,6 +107,13 @@ public class Piece : MonoBehaviour
     {
         this.previewManager = FindObjectOfType<PreviewManager>();
         this.holdManager = FindObjectOfType<HoldManager>();
+
+        paliers_booleen = new bool[3];
+
+        for (int i = 0; i < 3; i++)
+        {
+            this.paliers_booleen[i] = false;
+        }
     }
 
     private void Update()
@@ -102,7 +122,19 @@ public class Piece : MonoBehaviour
         lockTime += Time.deltaTime;
         if (Time.time > stepTime)
             ApplyGravity();
-        board.Set(this);
+
+        if (pouvoir == Pouvoir.Standard)
+        {
+            board.Set(this, data.tile);
+        }
+        else if (pouvoir == Pouvoir.Malus)
+        {
+            board.Set(this, data.malus_tile);
+        }
+        else
+        {
+            board.Set(this, data.bonus_tile);
+        }
     }
 
     /// <summary> 
@@ -165,18 +197,50 @@ public class Piece : MonoBehaviour
     private void Lock()
     {   
         RestoreGravity();
-        board.Set(this);
+
+        //selon le pouvoir de la piece, la tuile utilisee est differente
+        if (pouvoir == Pouvoir.Standard)
+        {
+            board.Set(this, data.tile);
+        }
+        else if (pouvoir == Pouvoir.Malus)
+        {
+            board.Set(this, data.malus_tile);
+        }
+        else
+        {
+            board.Set(this, data.bonus_tile);
+        }
+
+        //verification les cotes remplis et des lignes completes
         board.FullSides();
         board.ClearCompleteLine();
         board.ClearApparitionZone();
         board.StopGravity();
         holdManager.SetStatusHold();
-        board.SpawnPiece(previewManager.GetNextPiece(), board.GetSpawnPosition());
+
+        //generation de la prochaine piece selon le score
+        if (ScoreManager.GetScore() >= 100 && paliers_booleen[0] == false)
+        {
+            board.SpawnPiece(previewManager.GetNextPiece(), board.GetSpawnPosition(), Pouvoir.Bonus);
+            paliers_booleen[0] = true;
+        }
+        else if (ScoreManager.GetScore() >= 200 && paliers_booleen[1] == false)
+        {
+            board.SpawnPiece(previewManager.GetNextPiece(), board.GetSpawnPosition(), Pouvoir.Malus);
+            paliers_booleen[1] = true;
+        }
+        else
+        {
+            board.SpawnPiece(previewManager.GetNextPiece(), board.GetSpawnPosition(), Pouvoir.Standard);
+        }
+
         previewManager.ChangePreview();
         Controller.SetStayOnScreen(true);
     }
 
     /// <summary>
+    /// Auteur : Bae Jin-Young
     /// Methode permettant d'effacer une piece
     /// </summary>
     public void Remove()
@@ -190,7 +254,7 @@ public class Piece : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Malcom Kusunga
+    /// Auteur : Kusunga Malcom 
     /// Description : Méthode permettant le déplacement vers la droite du tetromino actuellement présent sur le plateau
     /// </summary>
     public void RightShift(){
@@ -204,7 +268,7 @@ public class Piece : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Malcom Kusunga
+    /// Auteur : Kusunga Malcom
     /// Description : Méthode permettant le déplacement vers la gauche du tetromino actuellement présent sur le plateau
     /// </summary>
     public void LeftShift(){
@@ -216,7 +280,7 @@ public class Piece : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Malcom Kusunga
+    /// Auteur : Kusunga Malcom
     /// Description : Méthode permettant le déplacement vers le haut du tetromino actuellement présent sur le plateau
     /// </summary>
     public void TopShift(){
@@ -228,7 +292,7 @@ public class Piece : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Malcom Kusunga
+    /// Auteur : Kusunga Malcom 
     /// Description : Méthode permettant le déplacement vers le bas du tetromino actuellement présent sur le plateau
     /// </summary>
     public void BotShift(){
@@ -240,7 +304,7 @@ public class Piece : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Malcom Kusunga
+    /// Auteur : Kusunga Malcom
     /// Description : Méthode permettant de modifier la force de la gravité du tetromino actuellement présent sur le plateau 
     ///               Bouton Droit  
     /// </summary>
@@ -260,7 +324,7 @@ public class Piece : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Malcom Kusunga
+    /// Auteur : Kusunga Malcom
     /// Description : Méthode permettant de modifier la force de la graivté du tetromino actuellement présent sur le plateau 
     ///               Bouton Gauche
     /// </summary>
@@ -280,7 +344,7 @@ public class Piece : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Malcom Kusunga
+    /// Auteur : Kusunga Malcom
     /// Description : Méthode permettant de modifier la force de la gravité du tetromino actuellement présent sur le plateau 
     ///               Bouton Haut
     /// </summary>
@@ -300,7 +364,7 @@ public class Piece : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Malcom Kusunga
+    /// Auteur : Kusunga Malcom
     /// Description : Méthode permettant de modifier la force de la gravité du tetromino actuellement présent sur le plateau 
     ///               Bouton Bas
     /// </summary>
@@ -434,5 +498,15 @@ public class Piece : MonoBehaviour
     public Vector3Int GetPiecePosition()
     {
         return position;
+    }
+
+    public Pouvoir GetPouvoir()
+    {
+        return pouvoir;
+    }
+
+    public TetrominoData GetData()
+    {
+        return data;
     }
 }

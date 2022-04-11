@@ -120,21 +120,43 @@ public class BoardManager : MonoBehaviour
         rightIsFull = false;
         chooseRandomGravity();
         int random = Random.Range(0, tetrominoes.Length);
-        SpawnPiece(random, spawnPosition);
+        SpawnPiece(random, spawnPosition, Pouvoir.Standard);
     }
 
-//-------------------------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------------------
 
     /// <summary> 
     /// Méthode qui permet de générer une piece aléatoirement 
     /// Auteur:Seghir Nassima, Bae Jin-Young
     /// </summary>
-    public void SpawnPiece(int random, Vector3Int position)
+    /// <param name="random">
+    /// l'indice du tetromino dans le tableau de tetrominoes
+    /// </param>
+    /// <param name="position">
+    /// la position à laquelle le tetromino sera generee
+    /// </param>
+    /// <param name="pouvoir">
+    /// le pouvoir de la piece
+    /// </param>
+    public void SpawnPiece(int random, Vector3Int position, Pouvoir pouvoir)
     {
         TetrominoData data = this.tetrominoes[random];
 
-        this.activePiece.Initialize(this, position, data, random);
-        Set(activePiece);
+        this.activePiece.Initialize(this, position, data, random, pouvoir);
+
+        if (pouvoir == Pouvoir.Standard)
+        {
+            Set(activePiece, data.tile);
+        }
+        else if (pouvoir == Pouvoir.Malus)
+        {
+            Set(activePiece, data.malus_tile);
+        }
+        else
+        {
+            Set(activePiece, data.bonus_tile);
+        }
+
     }
 
 
@@ -142,12 +164,12 @@ public class BoardManager : MonoBehaviour
     /// Méthode qui permet de fixer la piece sur la grille de jeu 
     /// Auteur:Seghir Nassima
     /// </summary>
-    public void Set(Piece piece)
+    public void Set(Piece piece, Tile tile)
     {
         for (int i = 0; i < piece.cells.Length; i++)
         {
             Vector3Int tilePosition = piece.cells[i] + piece.position;
-            board.SetTile(tilePosition, piece.data.tile);
+            board.SetTile(tilePosition, tile);
         }
     }
 
@@ -181,7 +203,7 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Jin-Young BAE
+    /// Auteur : Bae Jin-Young
     /// Méthode qui permet de vérifier si une ligne a été complétée dans la grille de jeu
     /// </summary>
     /// <returns>
@@ -207,7 +229,7 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Jin-Young BAE
+    /// Auteur : Bae Jin-Young
     /// Méthode qui permet de détruire la ligne complétée et d'appliquer la gravité sur toute la grille
     /// </summary>
     public void ClearRow(int row)
@@ -265,7 +287,7 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Jin-Young BAE
+    /// Auteur : Bae Jin-Young
     /// Méthode qui permet de vérifier si une colonne a été complétée dans la grille de jeu
     /// </summary>
     /// <returns>
@@ -291,7 +313,7 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Jin-Young BAE
+    /// Auteur : Bae Jin-Young
     /// Méthode qui permet de détruire la colonne complétée et d'appliquer la gravité sur toute la grille
     /// </summary>
     public void ClearCol(int col)
@@ -349,7 +371,7 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Auteur : Jin-Young BAE
+    /// Auteur : Bae Jin-Young
     /// Méthode permettant de détruire une ligne/colonne complétée
     /// </summary>
     public void ClearCompleteLine()
@@ -466,7 +488,7 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Auteur : Jin-Young BAE
+    /// Auteur : Bae Jin-Young
     /// Description : Méthode permettant de vérifier si un côté de l'écran est rempli
     /// </summary>
     /// <returns>
@@ -486,7 +508,7 @@ public class BoardManager : MonoBehaviour
                 // si une cellule est remplie alors on retourne TRUE pour bloquer la gravité
                 if (board.HasTile(pos))
                 {   
-                    //Vérifie si il s'agit de la gravité vers le haut ou la bas
+                    //Vérifie s'il s'agit de la gravité vers le haut ou le bas
                     if(row == -3){
                         botIsFull = true;
                     }
@@ -511,7 +533,7 @@ public class BoardManager : MonoBehaviour
                 // si une cellule est remplie alors on retourne TRUE pour bloquer la gravité
                 if (board.HasTile(pos))
                 {   
-                    //Vérifie si il s'agit de la gravité vers la droite ou la gauche
+                    //Vérifie s'il s'agit de la gravité vers la droite ou la gauche
                     if(col == -3){
                         leftIsFull = true;
                     }
@@ -528,7 +550,7 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Auteur : Malcom Kusunga
+    /// Auteur : Kusunga Malcom 
     /// Description : Méthode permettant de vérifier si tous les côtés sont remplis
     /// </summary>
     public void FullSides(){
@@ -551,7 +573,7 @@ public class BoardManager : MonoBehaviour
 
 
     /// <summary>
-    /// Auteur : Jin-Young BAE
+    /// Auteur : Bae Jin-Young, Kusunga Malcom
     /// Méthode permettant de bloquer les gravités pour les cotés complets
     /// </summary>
     public void StopGravity()
@@ -575,7 +597,7 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Auteur : Jin-Young BAE
+    /// Auteur : Bae Jin-Young
     /// Méthode permettant de nettoyer la zone d'apparition pour laisser la place aux nouvelles pièces
     /// </summary>
     public void ClearApparitionZone()

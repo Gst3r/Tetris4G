@@ -92,7 +92,19 @@ public class Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        board.Set(activePiece);
+        if (activePiece.GetPouvoir() == Pouvoir.Standard)
+        {
+            board.Set(activePiece, activePiece.GetData().tile);
+        }
+        else if (activePiece.GetPouvoir() == Pouvoir.Malus)
+        {
+            board.Set(activePiece, activePiece.GetData().malus_tile);
+        }
+        else
+        {
+            board.Set(activePiece, activePiece.GetData().bonus_tile);
+        }
+
         mode.Execute();
         goalsManager.GoalsController();
         touchSensitive();
