@@ -18,15 +18,7 @@ public enum Tetromino{
     Z
     
 }
-/// <summary> 
-/// Description : Cette enumération permet de lister les différents actions d'une pièce
-/// </summary>
-public enum Pouvoir{
-    Standard, 
-    Bonus, 
-    Malus
-    
-}
+
 
 /// <summary>
 /// Auteurs : Nassima Seghir, Jin-Young Bae
