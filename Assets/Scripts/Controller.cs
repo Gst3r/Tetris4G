@@ -106,6 +106,7 @@ public class Controller : MonoBehaviour
         }
 
         mode.Execute();
+        board.CountTime();
         goalsManager.GoalsController();
         touchSensitive();
         board.Clear(activePiece);
