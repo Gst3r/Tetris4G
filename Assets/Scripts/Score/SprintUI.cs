@@ -20,12 +20,7 @@ public class SprintUI : MonoBehaviour
     /// </summary>
     public ScoreManager scoreManager; 
 
-    [SerializeField] GameObject PanelUltra; 
-
-    [SerializeField] GameObject PanelSprint;
-
-    [SerializeField] GameObject PanelMarathon;
-
+   
     
 
   
@@ -50,38 +45,7 @@ public class SprintUI : MonoBehaviour
 
 
 
-    /// <summary> 
-    /// Méthode qui permet de gérer les événements liés à laséléction d'un mode dans la liste
-    /// Auteur:Seghir Nassima
-    /// </summary>
-    public void HandleInputData(int val)
-    {
-        if(val==0)
-        {
-         
-           
-           //il ne se passe rien on reste sur le meme panel 
-
-            
-
-        }
-        if(val==1)
-        {
-           PanelUltra.SetActive(true);  
-           PanelSprint.SetActive(false);
-           
-           
-        }
-        if(val==2)
-        {
-           PanelMarathon.SetActive(true);  
-           PanelSprint.SetActive(false);
-           
-           
-        }
-       
-        
-    }
+   
 
    
 }

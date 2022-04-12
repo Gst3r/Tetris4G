@@ -20,21 +20,7 @@ public class ScoreUI : MonoBehaviour
     /// </summary>
     public ScoreManager scoreManager; 
 
-    /// <summary> 
-    /// Attribut faisant référence au panel ultra
-    /// </summary>
-    [SerializeField] GameObject PanelUltra; 
-    
-    /// <summary> 
-    /// Attribut faisant référence au panel sprint
-    /// </summary>
-    [SerializeField] GameObject PanelSprint;
-     
-    /// <summary> 
-    /// Attribut faisant référence au panel marathon
-    /// </summary>
-    [SerializeField] GameObject PanelMarathon; 
-
+   
 
     void Start()
     {
@@ -58,34 +44,9 @@ public class ScoreUI : MonoBehaviour
     }
 
 
-    /// <summary> 
-    /// Méthode qui permet de gérer les événements liés à laséléction d'un mode dans la liste
-    /// Auteur:Seghir Nassima
-    /// </summary>
-    public void HandleInputData(int val)
-    {
-        if(val==0)
-        {
-             //il ne se passe rien on reste sur le meme panel 
-        }
-        if(val==1)
-        {
-            
-            PanelSprint.SetActive(true);  
-            PanelMarathon.SetActive(false);
-             
-        }
-        if(val==2)
-        {
-            
-            PanelUltra.SetActive(true);
-            PanelMarathon.SetActive(false);
-
-        }
-           
-    }
+  
        
         
-    }
+}
 
    

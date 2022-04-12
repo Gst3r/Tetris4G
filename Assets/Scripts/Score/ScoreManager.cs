@@ -16,11 +16,12 @@ public class ScoreManager : MonoBehaviour
     /// Attribut contenant le score de la partie en cours 
     /// </summary>
     [SerializeField] private static int score;
-    
+
     /// <summary> 
     /// Attribut contenant le noombre de ligne détruite de la partie en cours 
     /// </summary>
     [SerializeField] private static int nbLines;
+
 
     /// <summary> 
     /// Attribut contenant le score de la partie en cours sous forme de texte
@@ -59,94 +60,85 @@ public class ScoreManager : MonoBehaviour
         return this; 
     }
    
-    /// <summary>
+     /// <summary>
     /// Auteur : Seghir Nassima, Bae Jin-Young
     /// Méthode permettant d'incrémenter le score selon le nombre de lignes éliminées
     /// </summary>
-    public void IncrementScore(int nmbLines, bool isBonus, bool isMalus)
+     public void IncrementScore(int nmbLines, bool isBonus, bool isMalus)
     {
-        if (!isBonus && !isMalus)
+
+          if (!isBonus && !isMalus)
         {
             switch (nmbLines)
             {
                 case -1:
                     score += -40;
                     break;
-
                 case 1:
                     score += 40;
                     break;
-
                 case 2:
                     score += 100;
                     break;
-
                 case 3:
                     score += 300;
                     break;
-
                 case 4:
                     score += 1200;
                     break;
-
                 default:
                     break;
             }
         }
-        
-        if (isBonus)
+
+         if (isBonus)
         {
             switch (nmbLines)
             {
-
                 case 1:
                     score += 80;
                     break;
-
                 case 2:
                     score += 200;
                     break;
-
                 case 3:
                     score += 600;
                     break;
-
                 case 4:
                     score += 2400;
                     break;
-
                 default:
                     break;
             }
         }
 
-        if (isMalus)
+         if (isMalus)
         {
             switch (nmbLines)
             {
-
                 case 1:
                     score -= 40;
                     break;
-
                 case 2:
                     score -= 100;
                     break;
-
                 case 3:
                     score -= 300;
                     break;
-
                 case 4:
                     score -= 1200;
                     break;
-
                 default:
                     break;
             }
         }
 
-        ChangeScore();
+          ChangeScore();
+
+
+
+
+       
     }
 
     /// <summary> 
@@ -190,7 +182,7 @@ public class ScoreManager : MonoBehaviour
     {
        
         var json = JsonUtility.ToJson(sd);
-        Debug.Log(json);
+        //Debug.Log(json);
         PlayerPrefs.SetString(key, json);
         
     }
@@ -209,7 +201,7 @@ public class ScoreManager : MonoBehaviour
     {
         return score; 
     } 
-    
+
     /// <summary> 
     /// getter du nomre de ligne
     /// </summary>
@@ -217,4 +209,9 @@ public class ScoreManager : MonoBehaviour
     {
         return nbLines; 
     } 
+
+
+
+
+
 }
