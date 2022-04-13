@@ -38,6 +38,11 @@ public class ButtonManager : MonoBehaviour
     /// Variable contenant le bouton Goals.
     /// </summary>
     [SerializeField] private GameObject GoalsButton;
+    
+    /// <summary>
+    /// Variable contenant le bouton Goals.
+    /// </summary>
+    [SerializeField] private GameObject TutorialButton;
 
     /// <summary>
     /// Variable contenant le panel des modes.
@@ -58,6 +63,11 @@ public class ButtonManager : MonoBehaviour
     /// Variable contenant le panel paramètres.
     /// </summary>
     [SerializeField] private GameObject ParametersPanel;
+
+    /// <summary>
+    /// Variable contenant le dropdown des modes de jeu
+    /// </summary>
+    [SerializeField] private GameObject modeDropDown;
 
     /// <summary>
     /// Booléen indiquant TRUE si le jeu est lancé, FALSE sinon
@@ -186,7 +196,9 @@ public class ButtonManager : MonoBehaviour
         startButton.SetActive(false);
         HighScoresButton.SetActive(false);
         GoalsButton.SetActive(false);
+        TutorialButton.SetActive(false);
         HighScoresPanel.SetActive(true);
+        modeDropDown.SetActive(true);
     }
 
 
@@ -212,6 +224,7 @@ public class ButtonManager : MonoBehaviour
         startButton.SetActive(false);
         HighScoresButton.SetActive(false);
         GoalsButton.SetActive(false);
+        TutorialButton.SetActive(false);
         GoalsPanel.SetActive(true);
     }
 

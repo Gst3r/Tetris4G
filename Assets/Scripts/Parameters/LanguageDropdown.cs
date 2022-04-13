@@ -34,12 +34,7 @@ public class LanguageDropdown : MonoBehaviour
         if(PlayerPrefs.GetString("Language").CompareTo("French") == 0)
         {
             dd.ClearOptions();
-            List<string> options = new List<string> {"French", "English", "Korean"};
-            dd.AddOptions(options);
-        }else if(PlayerPrefs.GetString("Language").CompareTo("Korean") == 0)
-        {
-            dd.ClearOptions();
-            List<string> options = new List<string> {"Korean", "English", "French"};
+            List<string> options = new List<string> {"French", "English"};
             dd.AddOptions(options);
         }
     }

@@ -802,9 +802,4 @@ public class BoardManager : MonoBehaviour
     public Tilemap GetBoard(){
         return board;
     }
-
-    public float GetTime()
-    {
-        return time;
-    }
 }

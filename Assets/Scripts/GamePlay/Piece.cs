@@ -80,7 +80,6 @@ public class Piece : MonoBehaviour
     private Pouvoir pouvoir;
     private static bool gravityIsModified;
 
-
     /// <summary> 
     /// Méthode qui permet d'initialiser la piece  
     /// </summary>
@@ -110,10 +109,9 @@ public class Piece : MonoBehaviour
         this.previewManager = FindObjectOfType<PreviewManager>();
         this.holdManager = FindObjectOfType<HoldManager>();
 
+        paliers_booleen = new bool[3];
 
-        paliers_booleen = new bool[100];
-
-        for (int i = 0; i < paliers_booleen.Length; i++)
+        for (int i = 0; i < 3; i++)
         {
             this.paliers_booleen[i] = false;
         }
@@ -221,36 +219,22 @@ public class Piece : MonoBehaviour
         board.ClearApparitionZone();
         board.StopGravity();
         holdManager.SetStatusHold();
-        
-        if (Controller.GetGameMode() == Mode.MARATHON)
+
+        //generation de la prochaine piece selon le score
+        if (ScoreManager.GetScore() >= 100 && paliers_booleen[0] == false)
         {
-            int tps = (int)board.GetTime() / 50;
-
-            if (tps % 2 == 0 && paliers_booleen[tps] == false && tps != 0)
-            {
-                board.SpawnPiece(previewManager.GetNextPiece(), board.GetSpawnPosition(), Pouvoir.Malus);
-                paliers_booleen[tps] = true;
-
-            }
-
-            else if (tps % 2 == 1 && paliers_booleen[tps] == false)
-            {
-                board.SpawnPiece(previewManager.GetNextPiece(), board.GetSpawnPosition(), Pouvoir.Bonus);
-                paliers_booleen[tps] = true;
-
-            }
-
-            else
-            {
-                board.SpawnPiece(previewManager.GetNextPiece(), board.GetSpawnPosition(), Pouvoir.Standard);
-            }
+            board.SpawnPiece(previewManager.GetNextPiece(), board.GetSpawnPosition(), Pouvoir.Bonus);
+            paliers_booleen[0] = true;
         }
-
+        else if (ScoreManager.GetScore() >= 200 && paliers_booleen[1] == false)
+        {
+            board.SpawnPiece(previewManager.GetNextPiece(), board.GetSpawnPosition(), Pouvoir.Malus);
+            paliers_booleen[1] = true;
+        }
         else
         {
             board.SpawnPiece(previewManager.GetNextPiece(), board.GetSpawnPosition(), Pouvoir.Standard);
         }
-        
 
         previewManager.ChangePreview();
     }

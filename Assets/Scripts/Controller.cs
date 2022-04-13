@@ -108,7 +108,7 @@ public class Controller : MonoBehaviour
     /// Description : Méthode permettant de paramétrer certains attributs de la classe "Controller"
     /// </summary>
     public void SetController(){
-        gameMode = ModeController.GetMode();
+        gameMode = MenuController.GetMode();
         wantToRotate = true;
         this.fast = 0f;
 

@@ -1492,9 +1492,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Submit
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: adaf542325ca71944b62b25206dc5c64, type: 2}
-  m_sharedMaterial: {fileID: 2035942275054797115, guid: adaf542325ca71944b62b25206dc5c64,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1640,9 +1639,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Menu
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: adaf542325ca71944b62b25206dc5c64, type: 2}
-  m_sharedMaterial: {fileID: 2035942275054797115, guid: adaf542325ca71944b62b25206dc5c64,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2557,9 +2555,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Continue
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: adaf542325ca71944b62b25206dc5c64, type: 2}
-  m_sharedMaterial: {fileID: 2035942275054797115, guid: adaf542325ca71944b62b25206dc5c64,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2892,9 +2889,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Menu
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: adaf542325ca71944b62b25206dc5c64, type: 2}
-  m_sharedMaterial: {fileID: 2035942275054797115, guid: adaf542325ca71944b62b25206dc5c64,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3591,9 +3587,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Restart
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: adaf542325ca71944b62b25206dc5c64, type: 2}
-  m_sharedMaterial: {fileID: 2035942275054797115, guid: adaf542325ca71944b62b25206dc5c64,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4351,9 +4346,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Restart
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: adaf542325ca71944b62b25206dc5c64, type: 2}
-  m_sharedMaterial: {fileID: 2035942275054797115, guid: adaf542325ca71944b62b25206dc5c64,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5741,9 +5735,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'SCORE :'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: adaf542325ca71944b62b25206dc5c64, type: 2}
-  m_sharedMaterial: {fileID: 2035942275054797115, guid: adaf542325ca71944b62b25206dc5c64,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6213,9 +6206,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Share
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: adaf542325ca71944b62b25206dc5c64, type: 2}
-  m_sharedMaterial: {fileID: 2035942275054797115, guid: adaf542325ca71944b62b25206dc5c64,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7591,51 +7583,37 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 56f79ef3aa4599b4a8e1100e268e9b52, type: 2}
     bonus_tile: {fileID: 11400000, guid: aaad4e987b6633d40a7e41d3bca9f4c1, type: 2}
     malus_tile: {fileID: 11400000, guid: b1384e7f88ceff24492267afb212eef4, type: 2}
-    tileoption: {fileID: 0}
     cellules: []
-    pouvoir: 0
   - tetromino: 1
     tile: {fileID: 11400000, guid: 1f47e8f79f014b648bdf42d888b35936, type: 2}
     bonus_tile: {fileID: 11400000, guid: aaad4e987b6633d40a7e41d3bca9f4c1, type: 2}
     malus_tile: {fileID: 11400000, guid: b1384e7f88ceff24492267afb212eef4, type: 2}
-    tileoption: {fileID: 0}
     cellules: []
-    pouvoir: 0
   - tetromino: 2
     tile: {fileID: 11400000, guid: a808dabe3909ec641a8b030e5a14bee4, type: 2}
     bonus_tile: {fileID: 11400000, guid: aaad4e987b6633d40a7e41d3bca9f4c1, type: 2}
     malus_tile: {fileID: 11400000, guid: b1384e7f88ceff24492267afb212eef4, type: 2}
-    tileoption: {fileID: 0}
     cellules: []
-    pouvoir: 0
   - tetromino: 3
     tile: {fileID: 11400000, guid: ae6bda9caf97a194fa86b01a6433931f, type: 2}
     bonus_tile: {fileID: 11400000, guid: aaad4e987b6633d40a7e41d3bca9f4c1, type: 2}
     malus_tile: {fileID: 11400000, guid: b1384e7f88ceff24492267afb212eef4, type: 2}
-    tileoption: {fileID: 0}
     cellules: []
-    pouvoir: 0
   - tetromino: 6
     tile: {fileID: 11400000, guid: bee0f167c718320488ec2321fbdb0327, type: 2}
     bonus_tile: {fileID: 11400000, guid: aaad4e987b6633d40a7e41d3bca9f4c1, type: 2}
     malus_tile: {fileID: 11400000, guid: b1384e7f88ceff24492267afb212eef4, type: 2}
-    tileoption: {fileID: 0}
     cellules: []
-    pouvoir: 0
   - tetromino: 4
     tile: {fileID: 11400000, guid: 801c22ccdcdbe264695bde35c5cb8b35, type: 2}
     bonus_tile: {fileID: 11400000, guid: aaad4e987b6633d40a7e41d3bca9f4c1, type: 2}
     malus_tile: {fileID: 11400000, guid: b1384e7f88ceff24492267afb212eef4, type: 2}
-    tileoption: {fileID: 0}
     cellules: []
-    pouvoir: 0
   - tetromino: 5
     tile: {fileID: 11400000, guid: 3f1ce3ad610839746b1236acdc700f56, type: 2}
     bonus_tile: {fileID: 11400000, guid: aaad4e987b6633d40a7e41d3bca9f4c1, type: 2}
     malus_tile: {fileID: 11400000, guid: b1384e7f88ceff24492267afb212eef4, type: 2}
-    tileoption: {fileID: 0}
     cellules: []
-    pouvoir: 0
 --- !u!114 &1719026911
 MonoBehaviour:
   m_ObjectHideFlags: 0
