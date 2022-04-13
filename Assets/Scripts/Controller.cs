@@ -68,11 +68,6 @@ public class Controller : MonoBehaviour
     /// </summary>
     private float fast;
 
-    /// <summary> 
-    /// Booléen qui indique TRUE si le joueur reste appuyé sur l'écran après qu'une pièce ce soit posé, sinon FALSE
-    /// </summary>
-    private static bool stayOnScreen;
-
     //----------------------------------------------GOALS--------------------------------------------------------------------
 
     /// <summary> 
@@ -90,7 +85,7 @@ public class Controller : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (activePiece.GetPouvoir() == Pouvoir.Standard)
         {
@@ -106,9 +101,6 @@ public class Controller : MonoBehaviour
         }
 
         mode.Execute();
-        goalsManager.GoalsController();
-        touchSensitive();
-        board.Clear(activePiece);
     }
 
     /// <summary> 
@@ -116,10 +108,8 @@ public class Controller : MonoBehaviour
     /// Description : Méthode permettant de paramétrer certains attributs de la classe "Controller"
     /// </summary>
     public void SetController(){
-        Time.timeScale=0f; //Cette commande permet de reprendre la progression normale du temps
         gameMode = ModeController.GetMode();
         wantToRotate = true;
-        stayOnScreen = false;
         this.fast = 0f;
 
         // Initialisation du mode de jeu 
@@ -155,9 +145,10 @@ public class Controller : MonoBehaviour
     /// </returns>
     IEnumerator LoadCount()
     {
+        Time.timeScale=0f;
         //Démarage de l'animation
         countPanel.SetActive(true);
-        
+    
         //Génération de la pause
         float ms = Time.unscaledDeltaTime;
         while(ms <= launchTime){
@@ -170,146 +161,8 @@ public class Controller : MonoBehaviour
 
         //cette commande permet de reprendre la progression normale du temps
         Time.timeScale=1f;
+        ButtonManager.SetGameIsLoad(true);
         PauseMenu.SetGameIsPausing(false);
-    }
-
-    /// <summary> 
-    /// Auteur : Sterlingot Guillaume
-    /// Description : Méthode condensant les fonctionnalités tactiles
-    /// </summary>
-    public void touchSensitive(){
-        if(!PauseMenu.GetGameIsPausing()&&!IMode.GetGameIsOver()){
-            touchSensitiveRotate();
-            touchSensitiveShift();
-        }
-    }
-
-    /// <summary> 
-    /// Auteur : Sterlingot Guillaume
-    /// Description : Méthode permettant de choisir automatiquement le déplacement adapté selon la gravité (fonctionnalités tactile)
-    /// </summary>
-    public void touchSensitiveShift(){
-        if(Input.touchCount>0){
-            Touch touch = Input.GetTouch(0);
-            
-            switch (touch.phase)
-            {
-                // Record initial touch position.
-                case TouchPhase.Began:
-                    stayOnScreen=false;
-                    break;
-
-                case TouchPhase.Stationary:
-                    break;
-
-                // Determine direction by comparing the current touch position with the initial one.
-                case TouchPhase.Moved:
-                    if(!stayOnScreen){
-                        Debug.Log("stepdelay : "+activePiece.GetStepDelay());
-                        Debug.Log("bufferedstepdelay : "+activePiece.GetBufferedStepDelay());
-                        Shift(touch);
-                    }
-                    wantToRotate=false;
-                    break;
-
-                // Report that a direction has been chosen when the finger is lifted.
-                case TouchPhase.Ended:
-                    activePiece.RestoreGravity();
-                    stayOnScreen=false;
-                    break;
-            }
-        }else
-            wantToRotate=true;
-    }
-
-    /// <summary> 
-    /// Auteur : Sterlingot Guillaume
-    /// Description : Méthode permettant de tourner le tetromino courant (fonctionnalités tactile)
-    /// </summary>
-    public void touchSensitiveRotate(){
-        if(Input.touchCount>0){
-            Touch touch = Input.GetTouch(0);
-            
-            if(touch.phase.Equals(TouchPhase.Ended)&&wantToRotate){
-                activePiece.Rotate();
-            }
-        }
-    }
-
-
-    /// <summary> 
-    /// Auteur : Sterlingot Guillaume
-    /// Description : Méthode permettant de choisir automatiquement le déplacement adapté selon la gravité (fonctionnalités tactile)
-    /// </summary>
-    public void Shift(Touch touch){
-        int compareFastX = (int)Mathf.Abs(touch.deltaPosition.x);
-        int fastX = FindFast(compareFastX);
-
-        int compareFastY = (int)Mathf.Abs(touch.deltaPosition.y);
-        int fastY = FindFast(compareFastY);
-
-        switch(board.GetGravity()){
-            case Gravity.HAUT: 
-                fast = fastX;
-                if(touch.deltaPosition.y>0)
-                    activePiece.ModifyGravityT();
-                else if(touch.deltaPosition.x>0 && Time.frameCount%(20-fast)==0)
-                    activePiece.RightShift();
-                else if(touch.deltaPosition.x<0 && Time.frameCount%(20-fast)==0)
-                    activePiece.LeftShift();
-                break;
-            case Gravity.BAS:
-                fast = fastX;             
-                if(touch.deltaPosition.y<0)
-                    activePiece.ModifyGravityB();      
-                else if(touch.deltaPosition.x>0 && Time.frameCount%(20-fast)==0)
-                    activePiece.RightShift();
-                else if(touch.deltaPosition.x<0 && Time.frameCount%(20-fast)==0)
-                    activePiece.LeftShift();
-                break;
-            case Gravity.GAUCHE:
-                fast = fastY;
-                if(touch.deltaPosition.y>0 && Time.frameCount%(18-fast)==0)
-                    activePiece.TopShift();
-                else if(Time.frameCount%(18-fast)==0)
-                    activePiece.BotShift();
-                break;
-            case Gravity.DROITE:
-                fast = fastY;
-                if(touch.deltaPosition.y>0 && Time.frameCount%(18-fast)==0)
-                    activePiece.TopShift();
-                else if(Time.frameCount%(18-fast)==0)
-                    activePiece.BotShift();
-                break;
-            default:break;
-        }
-    }
-
-    /// <summary> 
-    /// Auteur : Sterlingot Guillaume
-    /// Description : Méthode permettant de déterminer une vitesse pour le tactile
-    /// </summary>
-    public int FindFast(int compareFast){
-        int localFast;
-
-        if(compareFast>19)
-            localFast = 19;
-        else if(compareFast>17)
-            localFast = 17;
-        else if(compareFast>15)
-            localFast = 15;
-        else if(compareFast>13)
-            localFast = 13;
-        else if(compareFast>11)
-            localFast = 11;
-        else if(compareFast>9)
-            localFast= 9;
-        else if(compareFast>7)
-            localFast = 7;
-        else
-            localFast = 3;
-
-        return localFast;
     }
 
     public Piece GetActivePiece(){
@@ -322,13 +175,5 @@ public class Controller : MonoBehaviour
 
     public static Mode GetGameMode(){
         return gameMode;    
-    }
-
-    public static void SetWantToRotate(bool wantToRot){
-        wantToRotate = wantToRot;
-    }
-
-    public static void SetStayOnScreen(bool value){
-        stayOnScreen=value;
     }
 }

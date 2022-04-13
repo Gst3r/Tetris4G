@@ -31,6 +31,10 @@ public class GoalsManager : MonoBehaviour
         FillGoals(); //Remplir le tableau des objectifs non remplit et le dictionnaire avec le fichier json si il existe, manuellement sinon 
     }
 
+    private void Update(){
+        GoalsController();
+    }
+
     /// <summary>
     /// Auteur : Sterlingot Guillaume<br>
     /// Description : Cette méthode condense toute les méthodes qui permettent de controller les objectifs du jeu<br>

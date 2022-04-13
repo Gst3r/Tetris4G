@@ -11,6 +11,11 @@ public class GoalsUI : MonoBehaviour
     /// <summary>
     /// Tableau de panel représentant les fils du Container qui contient le script GoalsUI
     /// </summary>
+    [SerializeField] private GameObject goalsPanel;
+
+    /// <summary>
+    /// Tableau de panel représentant les fils du Container qui contient le script GoalsUI
+    /// </summary>
     [SerializeField] private Transform[] goalsLine;
 
     /// <summary>
@@ -39,11 +44,9 @@ public class GoalsUI : MonoBehaviour
     [SerializeField] private Sprite valideZone;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         CreateJsonFile();
-        InitializeElements();
-        FillPanel();
     }
 
     /// <summary>
@@ -69,7 +72,7 @@ public class GoalsUI : MonoBehaviour
         goalsState = new Image[25];
 
         int j=0;
-        foreach (Transform child in transform)
+        foreach (Transform child in goalsPanel.GetComponent<Transform>())
         {
             goalsLine[j] = child;
             j++;

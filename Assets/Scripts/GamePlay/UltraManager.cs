@@ -52,8 +52,9 @@ public class UltraManager : IMode
         this.board = controller.GetBoard();
         this.activePiece = controller.GetActivePiece();
         countTime=0f;
-        maxLine=40;
+        countLine=0;
         this.activePiece.SetStepDelay(0.5f);
+        this.activePiece.SetBufferedStepDelay(this.activePiece.GetStepDelay());
     }
 
     /// <summary> 

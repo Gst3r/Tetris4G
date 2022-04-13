@@ -18,6 +18,7 @@ public class MarathonManager : IMode
         this.board = controller.GetBoard();
         this.activePiece = controller.GetActivePiece();
         this.activePiece.SetStepDelay(0.8f);
+        this.activePiece.SetBufferedStepDelay(this.activePiece.GetStepDelay());
     }
 
     /// <summary> 
