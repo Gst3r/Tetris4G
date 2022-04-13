@@ -60,32 +60,92 @@ public class ScoreManager : MonoBehaviour
     }
    
     /// <summary>
-    /// Auteur : Seghir Nassima 
+    /// Auteur : Seghir Nassima, Bae Jin-Young
     /// Méthode permettant d'incrémenter le score selon le nombre de lignes éliminées
     /// </summary>
-    public void IncrementScore(int nmbLines)
+    public void IncrementScore(int nmbLines, bool isBonus, bool isMalus)
     {
-        switch(nmbLines)
+        if (!isBonus && !isMalus)
         {
-            case 1: 
-                score+=40; 
-                break; 
+            switch (nmbLines)
+            {
+                case -1:
+                    score += -40;
+                    break;
 
-            case 2:
-                score+=100; 
-                break; 
+                case 1:
+                    score += 40;
+                    break;
 
-            case 3: 
-                score+=300; 
-                break; 
+                case 2:
+                    score += 100;
+                    break;
 
-            case 4:
-                score+=1200; 
-                break; 
+                case 3:
+                    score += 300;
+                    break;
 
-            default: 
-                 break;  
+                case 4:
+                    score += 1200;
+                    break;
+
+                default:
+                    break;
+            }
         }
+        
+        if (isBonus)
+        {
+            switch (nmbLines)
+            {
+
+                case 1:
+                    score += 80;
+                    break;
+
+                case 2:
+                    score += 200;
+                    break;
+
+                case 3:
+                    score += 600;
+                    break;
+
+                case 4:
+                    score += 2400;
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        if (isMalus)
+        {
+            switch (nmbLines)
+            {
+
+                case 1:
+                    score -= 40;
+                    break;
+
+                case 2:
+                    score -= 100;
+                    break;
+
+                case 3:
+                    score -= 300;
+                    break;
+
+                case 4:
+                    score -= 1200;
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
         ChangeScore();
     }
 

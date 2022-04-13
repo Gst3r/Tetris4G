@@ -12,7 +12,7 @@ public sealed class Translation : MonoBehaviour
     /// <summary> 
     /// Tableau contenant les differentes langues possibles
     /// </summary>
-    public static readonly SystemLanguage[] Languages = { SystemLanguage.English, SystemLanguage.French };
+    public static readonly SystemLanguage[] Languages = { SystemLanguage.English, SystemLanguage.French, SystemLanguage.Korean};
 
     /// <summary> 
     /// Dictionnaire contenant l'ensemble des traductions
@@ -67,8 +67,10 @@ public sealed class Translation : MonoBehaviour
             if(actualLanguage.CompareTo("French") == 0)
             {
                 language = SystemLanguage.French;
-            }else{
+            }else if (actualLanguage.CompareTo("English") == 0){
                 language = SystemLanguage.English;
+            }else{
+                language = SystemLanguage.Korean;
             }
 
         }else{
@@ -99,9 +101,12 @@ public sealed class Translation : MonoBehaviour
                 {
                     PlayerPrefs.SetString("Language","French");
                     language = SystemLanguage.French;
-                }else{
+                }else if(actualLanguage.CompareTo("English") == 0){
                     PlayerPrefs.SetString("Language","English");
                     language = SystemLanguage.English;
+                }else{
+                    PlayerPrefs.SetString("Language","Korean");
+                    language = SystemLanguage.Korean;
                 }
 
                 previousLanguage = actualLanguage;
