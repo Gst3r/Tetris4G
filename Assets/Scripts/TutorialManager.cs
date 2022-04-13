@@ -27,6 +27,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField]private TMP_Text pauseGoalText; 
     [SerializeField]private GameObject pauseGoalPanel;
 
+//-------------------------------------MANAGEMENT AND SCHEDULING---------------------------------------------------
     private bool screenIsTouch = false;
 
     public static bool scriptIsActive = false;

@@ -68,7 +68,7 @@ public class EndGame : MonoBehaviour
     public void Submit()
     {
         //on commence par load la liste des scores selon le mode:
-         switch(ModeController.GetMode()){ 
+         switch(MenuController.GetMode()){ 
             case Mode.MARATHON:
                 scoreManager.Loading("marathonn"); 
                 break; 
@@ -119,7 +119,7 @@ public class EndGame : MonoBehaviour
         //on termine par enregistrer les modifications : 
         //scoreManager.SaveScore("scores"); 
 
-         switch(ModeController.GetMode()){ 
+         switch(MenuController.GetMode()){ 
             case Mode.MARATHON:
                 scoreManager.SaveScore("marathonn"); 
                 break; 
