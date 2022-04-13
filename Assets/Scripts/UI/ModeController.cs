@@ -8,7 +8,7 @@ public class ModeController : MonoBehaviour
     /// <summary>
     /// Attribut permettant de différencier les différents modes de jeu
     /// </summary>
-    protected static Mode gameMode;
+    protected static Mode gameMode = Mode.MARATHON;
 
     public void SetModeMarathon(){
         gameMode = Mode.MARATHON;

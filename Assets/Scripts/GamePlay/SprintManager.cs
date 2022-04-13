@@ -41,6 +41,7 @@ public class SprintManager : IMode
 
         countSec = 0;
         this.activePiece.SetStepDelay(0.4f);
+        this.activePiece.SetBufferedStepDelay(this.activePiece.GetStepDelay());
         this.sprintTimePanel.GetComponent<Text>().text = "5:00";
     }
 

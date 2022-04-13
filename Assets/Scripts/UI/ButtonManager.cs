@@ -59,10 +59,16 @@ public class ButtonManager : MonoBehaviour
     /// </summary>
     [SerializeField] private GameObject ParametersPanel;
 
+    /// <summary>
+    /// Booléen indiquant TRUE si le jeu est lancé, FALSE sinon
+    /// </summary>
+    private static bool gameIsLoad;
+
     void Start()
     {
         //Récupétation de la source audio en relation avec le bouton
         audioSource = GetComponent<AudioSource>();    
+        gameIsLoad=false;
     }
     
     /// <summary>
@@ -237,5 +243,13 @@ public class ButtonManager : MonoBehaviour
 
         //Modification de l'interface
         ParametersPanel.SetActive(false);
+    }
+
+    public static void SetGameIsLoad(bool value){
+        gameIsLoad=value;
+    }
+
+    public static bool GetGameIsLoad(){
+        return gameIsLoad;
     }
 }

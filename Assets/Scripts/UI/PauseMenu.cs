@@ -52,7 +52,6 @@ public class PauseMenu : MonoBehaviour
     /// </summary>
     public void Resume()
     {   
-        gameIsPausing = false;
         StartCoroutine(ResumeGame());
     }
 
@@ -67,7 +66,6 @@ public class PauseMenu : MonoBehaviour
     {
         //Démarage de l'animation
         animator.SetTrigger("Press");
-        
         //Génération de la pause
         float ms = Time.unscaledDeltaTime;
         while(ms <= pressTime){

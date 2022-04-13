@@ -78,6 +78,7 @@ public class Piece : MonoBehaviour
     /// Le pouvoir de la piece
     /// </summary>
     private Pouvoir pouvoir;
+    private static bool gravityIsModified;
 
 
     /// <summary> 
@@ -104,8 +105,8 @@ public class Piece : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
+    private void Start(){
+        gravityIsModified=false;
         this.previewManager = FindObjectOfType<PreviewManager>();
         this.holdManager = FindObjectOfType<HoldManager>();
 
@@ -252,7 +253,6 @@ public class Piece : MonoBehaviour
         
 
         previewManager.ChangePreview();
-        Controller.SetStayOnScreen(true);
     }
 
     /// <summary>
@@ -278,7 +278,7 @@ public class Piece : MonoBehaviour
         if(board.GetGravity() == Gravity.HAUT || board.GetGravity() == Gravity.BAS){
             //Suppresion de la position précédente du tétromino sur la grille
             board.Clear(this);
-            Controller.SetWantToRotate(false);
+            TouchSensitive.SetWantToRotate(false);
             Move(Vector2Int.right);
         } 
     }
@@ -290,7 +290,7 @@ public class Piece : MonoBehaviour
     public void LeftShift(){
         if(board.GetGravity() == Gravity.HAUT || board.GetGravity() == Gravity.BAS){
             board.Clear(this);
-            Controller.SetWantToRotate(false);
+            TouchSensitive.SetWantToRotate(false);
             Move(Vector2Int.left);
         }
     }
@@ -302,7 +302,7 @@ public class Piece : MonoBehaviour
     public void TopShift(){
         if(board.GetGravity() == Gravity.GAUCHE || board.GetGravity() == Gravity.DROITE){
             board.Clear(this);
-            Controller.SetWantToRotate(false);
+            TouchSensitive.SetWantToRotate(false);
             Move(Vector2Int.up);
         }
     }
@@ -314,7 +314,7 @@ public class Piece : MonoBehaviour
     public void BotShift(){
         if(board.GetGravity() == Gravity.GAUCHE || board.GetGravity() == Gravity.DROITE){
             board.Clear(this);
-            Controller.SetWantToRotate(false);
+            TouchSensitive.SetWantToRotate(false);
             Move(Vector2Int.down);
         }
     }
@@ -326,8 +326,9 @@ public class Piece : MonoBehaviour
     /// </summary>
     public void ModifyGravityR()
     {
+        gravityIsModified=true;
         // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
-        Controller.SetWantToRotate(false);
+        TouchSensitive.SetWantToRotate(false);
 
         //Augmentation de la gravité
         if(board.GetGravity() == Gravity.DROITE){
@@ -346,8 +347,9 @@ public class Piece : MonoBehaviour
     /// </summary>
     public void ModifyGravityL()
     {
+        gravityIsModified=true;
         // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
-        Controller.SetWantToRotate(false);
+        TouchSensitive.SetWantToRotate(false);
 
         //Augmenation de la gravité
         if(board.GetGravity() == Gravity.GAUCHE){
@@ -366,8 +368,9 @@ public class Piece : MonoBehaviour
     /// </summary>
     public void ModifyGravityT()
     {
+        gravityIsModified=true;
         // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
-        Controller.SetWantToRotate(false);
+        TouchSensitive.SetWantToRotate(false);
 
         //Augmentation de la gravité
         if(board.GetGravity() == Gravity.HAUT){
@@ -386,8 +389,9 @@ public class Piece : MonoBehaviour
     /// </summary>
     public void ModifyGravityB()
     {
+        gravityIsModified=true;
         // Conserver la valeur normale de la vitesse des tétrominos pour pouvoir la remettre une fois que le déplacement ou la rotation sont finis
-        Controller.SetWantToRotate(false);
+        TouchSensitive.SetWantToRotate(false);
 
         //Augmenation de la gravité
         if(board.GetGravity() == Gravity.BAS){
@@ -405,6 +409,7 @@ public class Piece : MonoBehaviour
     /// </summary>
     public void RestoreGravity(){
         this.stepDelay = this.bufferedStepDelay;
+        gravityIsModified=false;
     }
 
     /// <summary> 
@@ -412,19 +417,53 @@ public class Piece : MonoBehaviour
     /// Description : Méthode qui permet la rotation de la pièce de tetromino actuellement présente sur le plateau
     /// </summary>
     public void Rotate(){
-        Vector2Int pivot;
-        
+        Vector2Int/*[]*/ pivot; //On initialise un tableau de pivot
+        //pivots = FillPivot(); //On remplie le tableau de pivot dans le bonne ordre
+
         if(data.tetromino.CompareTo(Tetromino.I)==0)
             pivot = new Vector2Int(1,1);
+            //pivots[0] = new Vector2Int(1,1);
         else
             pivot = new Vector2Int(0,0);
-       
+            //pivots[0] = new Vector2Int(0,0);
+
+        //On vérifie si le tétromino O est présent en pièce active
         if(!data.tetromino.Equals(Tetromino.O)){
+            /*int j=0;
+            while(!Pivot(pivots[j])){
+                Debug.Log(pivots[j]);
+                j++;
+            }*/
             board.Clear(this);
             Pivot(pivot);
         }
     }
-    
+
+    /// <summary> 
+    /// Auteur : Sterlingot Guillaume
+    /// Description : Méthode qui permet de remplir le tableau de pivot de la pièce courante sur le board
+    /// </summary>
+    /// <returns> 
+    /// un tableau de vecteur d'entier à deux dimensions contenant les positions de chaque tuile du tétromino qui correspondent à un tableau de pivots
+    /// </returns>
+    /*public Vector2Int[] FillPivot(){
+        Vector2Int[] pivots = new Vector2Int[4];
+
+        if(data.tetromino.CompareTo(Tetromino.I)==0)
+            pivots[0] = new Vector2Int(1,1);
+        else
+            pivots[0] = new Vector2Int(0,0);
+        
+        int i=1;
+        foreach(Vector2Int tile in data.cellules){
+            if(!tile.Equals(pivots[0])){
+                pivots[i] = tile;
+                i++;
+            }
+        }
+        return pivots;
+    }*/
+
     /// <summary> 
     /// Auteur : Sterlingot Guillaume
     /// Description : Méthode qui permet de pivoter une pièce
@@ -480,7 +519,7 @@ public class Piece : MonoBehaviour
         }
 
         cells = newCells;
-
+        
         return true;
     }
 
@@ -493,12 +532,19 @@ public class Piece : MonoBehaviour
     {
         return bufferedStepDelay;
     }
+
+    public static bool GetGravityIsModified(){
+        return gravityIsModified;
+    }
     
     
     public void SetStepDelay(float stepDelay)
     {
         this.stepDelay = stepDelay;
-        this.bufferedStepDelay = stepDelay;
+    }
+
+    public void SetBufferedStepDelay(float bufferedStepDelay){
+        this.bufferedStepDelay = bufferedStepDelay;
     }
 
     public float GetStepTime()

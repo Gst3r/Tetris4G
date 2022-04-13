@@ -47,7 +47,7 @@ public class BoardManager : MonoBehaviour
     /// <summary> 
     /// Attribut contenant la gravité courante exercée
     /// </summary>
-    private Gravity gravity;
+    private static Gravity gravity;
 
     /// <summary> 
     /// Attribut indiquant la taille totale du plateau de jeu
@@ -122,8 +122,13 @@ public class BoardManager : MonoBehaviour
         rightIsFull = false;
         time = 0f;
         chooseRandomGravity();
-        int random = Random.Range(0, tetrominoes.Length);
-        SpawnPiece(random, spawnPosition, Pouvoir.Standard);
+        if(TutorialManager.scriptIsActive!){
+            int random = Random.Range(0, tetrominoes.Length);
+            SpawnPiece(random, spawnPosition, Pouvoir.Standard);
+        }else{
+            SpawnPiece(3, spawnPosition, Pouvoir.Standard);
+        }
+        
     }
 
     //-------------------------------------------------------------------------------------------------------------
@@ -528,15 +533,15 @@ public class BoardManager : MonoBehaviour
         int randomNumber = Random.Range(0,4);
         switch (randomNumber)
         {
-            case 0: this.gravity = Gravity.HAUT;
+            case 0: gravity = Gravity.HAUT;
                     break;
-            case 1: this.gravity = Gravity.BAS;
+            case 1: gravity = Gravity.BAS;
                     break;
-            case 2: this.gravity = Gravity.GAUCHE;
+            case 2: gravity = Gravity.GAUCHE;
                     break;
-            case 3: this.gravity = Gravity.DROITE;
+            case 3: gravity = Gravity.DROITE;
                     break;
-            default: this.gravity = Gravity.BAS;
+            default: gravity = Gravity.BAS;
                     break;
         }
     }
@@ -762,6 +767,13 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     public Gravity GetGravity(){
         return gravity;
+    }
+
+    /// <summary>
+    /// Méthode permettant de retourner la grivité qui s'exerce
+    /// </summary>
+    public static void SetGravity(Gravity grav){
+        gravity = grav;
     }
 
     /// <summary>
