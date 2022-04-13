@@ -90,7 +90,6 @@ public class EndGame : MonoBehaviour
 
         foreach (Joueur joueur in list.ToList())
         {
-            Debug.Log(inputField.text); 
             //si jamais le joueur introduit un pseudo déja present dans la liste
             //et que le nouveau highscore est meilleur, on écrase son dernier score 
             if(joueur.name == inputField.text)

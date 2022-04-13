@@ -34,7 +34,16 @@ public class ScoreUI : MonoBehaviour
 
         //partie qui permet de modifier l'interface et ajouter des lignes dans le tableau des scores
         var scores = scoreManager.GetHighScores().ToArray();
-        for (int i = 0; i < scores.Length; i++)
+        int max=0; 
+
+        if(scores.Length>10)
+        {
+            max=10; 
+        }
+        else{
+            max=scores.Length; 
+        }
+        for (int i = 0; i < max; i++)
         {
             var row = Instantiate(rowUi, transform).GetComponent<RowUI>();
             row.rank.text = (i + 1).ToString();
