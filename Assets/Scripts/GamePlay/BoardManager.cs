@@ -69,8 +69,6 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-    private static float time;
-
 //------------------------------------------------------------------COTE COMPLET-----------------------------------------
    
     /// Booléen permettant de determiner si le haut de la grille est complet 
@@ -110,7 +108,7 @@ public class BoardManager : MonoBehaviour
         SetupBoard();
         for(int i=0; i< this.tetrominoes.Length; i++)
         {
-           this.tetrominoes[i]=TetrominoBuilder.Build(this.tetrominoes[i]);
+           this.tetrominoes[i]=TetrominoBuilder.Build(this.tetrominoes[i]); 
 
         }
     }
@@ -120,7 +118,6 @@ public class BoardManager : MonoBehaviour
         botIsFull = false;
         leftIsFull = false;
         rightIsFull = false;
-        time = 0f;
         chooseRandomGravity();
         if(TutorialManager.scriptIsActive!){
             int random = Random.Range(0, tetrominoes.Length);
@@ -210,15 +207,6 @@ public class BoardManager : MonoBehaviour
         this.size = new Vector2Int(16,22);
     }
 
-    public void CountTime()
-    {
-        if (!PauseMenu.GetGameIsPausing())
-        {
-            time += Time.deltaTime;
-   
-        }
-    }
-
     /// <summary> 
     /// Auteur : Bae Jin-Young
     /// Méthode qui permet de vérifier si une ligne a été complétée dans la grille de jeu
@@ -257,7 +245,6 @@ public class BoardManager : MonoBehaviour
         for (int col = bornes.xMin; col < bornes.xMax; col++)
         {
             Vector3Int cur_pos = new Vector3Int(col, row, -2);
-
             board.SetTile(cur_pos, null);
         }
 
@@ -342,7 +329,6 @@ public class BoardManager : MonoBehaviour
         for (int row = bornes.yMin; row < bornes.yMax; row++)
         {
             Vector3Int cur_pos = new Vector3Int(col, row, -2);
-
             board.SetTile(cur_pos, null);
         }
 
@@ -390,70 +376,23 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Auteur : Bae Jin-Young, Seghir Nassima
+    /// Auteur : Bae Jin-Young
     /// Méthode permettant de détruire une ligne/colonne complétée
     /// </summary>
     public void ClearCompleteLine()
     {
         RectInt bornes = Bornes;
         int nbLinesCleared=0; //correspond au nombre de lignes effacées au total
-        
-
-        int nbLinesBonus = 0;
-        int nbLinesMalus = 0;
 
         // les lignes :
         int row = bornes.yMin;
         while (row < bornes.yMax)
         {
-            /*bool isBonus = false;
-            bool isMalus = false;*/
-
             // si une ligne est complète, elle est détruite
             if (RowIsComplete(row))
             {
-                int nbTileBonus = 0;
-                int nbTileMalus = 0;
-                int nbTileNormal = 0;
-                for (int colonne = bornes.xMin; colonne < bornes.xMax; colonne++)
-                {
-                    Vector3Int cur_pos = new Vector3Int(colonne, row, -2);
-
-                    if (board.GetTile(cur_pos) == activePiece.GetData().bonus_tile)
-                    {
-                        nbTileBonus++;
-                  
-                    }
-
-                    else if (board.GetTile(cur_pos) == activePiece.GetData().malus_tile)
-                    {
-                        nbTileMalus++;
-                        
-                    }
-
-                    else 
-                    {
-                        nbTileNormal++;
-                    }
-                }
-
                 ClearRow(row);
-
-                if (nbTileNormal == 16)
-                {
-                    nbLinesCleared++;
-                }
-
-                if (nbTileMalus > 0)
-                {
-                    nbLinesMalus++;
-                }
-
-                if (nbTileBonus > 0)
-                {
-                    nbLinesBonus++;
-                }
-                 
+                nbLinesCleared++; 
             }
 
             // sinon on passe à la prochaine ligne
@@ -470,48 +409,8 @@ public class BoardManager : MonoBehaviour
             // si une colonne est complète, elle est détruite
             if (ColIsComplete(col))
             {
-                int nbTileBonus = 0;
-                int nbTileMalus = 0;
-                int nbTileNormal = 0;
-                for (int ligne = bornes.yMin; ligne < bornes.yMax; ligne++)
-                {
-                    Vector3Int cur_pos = new Vector3Int(col, ligne, -2);
-
-                    if (board.GetTile(cur_pos) == activePiece.GetData().bonus_tile)
-                    {
-                        nbTileBonus++;
-
-                    }
-
-                    else if (board.GetTile(cur_pos) == activePiece.GetData().malus_tile)
-                    {
-                        nbTileMalus++;
-
-                    }
-
-                    else
-                    {
-                        nbTileNormal++;
-                    }
-                }
-
                 ClearCol(col);
-
-
-                if (nbTileNormal == 22)
-                {
-                    nbLinesCleared++;
-                }
-
-                if (nbTileMalus > 0)
-                {
-                    nbLinesMalus++;
-                }
-
-                if (nbTileBonus > 0)
-                {
-                    nbLinesBonus++;
-                }
+                nbLinesCleared++;
             }
 
             else
@@ -519,10 +418,8 @@ public class BoardManager : MonoBehaviour
                 col++;
             }
         }
-        scoreManager.IncrementScore(nbLinesCleared, false, false);
-        scoreManager.IncrementScore(nbLinesBonus, true, false);
-        scoreManager.IncrementScore(nbLinesMalus, false, true);
-        totalLinesCleared +=nbLinesCleared; 
+        scoreManager.IncrementScore(nbLinesCleared); 
+        totalLinesCleared+=nbLinesCleared; 
     }
 
     /// <summary> 
@@ -802,10 +699,5 @@ public class BoardManager : MonoBehaviour
     
     public Tilemap GetBoard(){
         return board;
-    }
-
-    public float GetTime()
-    {
-        return time;
     }
 }
