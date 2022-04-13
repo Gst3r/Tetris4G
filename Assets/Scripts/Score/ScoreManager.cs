@@ -60,7 +60,7 @@ public class ScoreManager : MonoBehaviour
         return this; 
     }
    
-     /// <summary>
+    /// <summary>
     /// Auteur : Seghir Nassima, Bae Jin-Young
     /// Méthode permettant d'incrémenter le score selon le nombre de lignes éliminées
     /// </summary>
