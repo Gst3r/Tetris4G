@@ -4868,9 +4868,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1025598254}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27d39a785949a184388d0027e674cd49, type: 3}
+  m_Script: {fileID: 11500000, guid: 4108c5edd301026fe854a9ade0426528, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreTextInGame: {fileID: 0}
+  scoreTextEndGame: {fileID: 0}
 --- !u!1 &1026216419
 GameObject:
   m_ObjectHideFlags: 0
@@ -7584,7 +7586,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   board: {fileID: 0}
   activePiece: {fileID: 0}
-  scoreManager: {fileID: 2057006985}
+  scoreManager: {fileID: 2057006987}
   spawnPosition: {x: -1, y: -1, z: -2}
   tetrominoes:
   - tetromino: 0
@@ -8973,7 +8975,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2057006986}
-  - component: {fileID: 2057006985}
   - component: {fileID: 2057006987}
   m_Layer: 0
   m_Name: ScoreManager
@@ -8982,18 +8983,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2057006985
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2057006984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27d39a785949a184388d0027e674cd49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2057006986
 Transform:
   m_ObjectHideFlags: 0
@@ -9020,8 +9009,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4108c5edd301026fe854a9ade0426528, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreTextInGame: {fileID: 0}
-  scoreTextEndGame: {fileID: 0}
+  scoreTextInGame: {fileID: 634952189}
+  scoreTextEndGame: {fileID: 635713189}
 --- !u!1 &2057492391
 GameObject:
   m_ObjectHideFlags: 0
@@ -9320,7 +9309,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   board: {fileID: 1719026910}
   activePiece: {fileID: 1719026911}
-  endGamePanel: {fileID: 1702626841}
   animator: {fileID: 1595377478}
   launchTime: 2
   countPanel: {fileID: 1595377476}
@@ -9351,6 +9339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7acda2e074430b6418f7013a5e8613d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endGamePanel: {fileID: 1702626841}
   ultraTimePanel: {fileID: 1185206721}
   ultraLinePanel: {fileID: 742824621}
 --- !u!114 &2128468590
@@ -9365,6 +9354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bb0da45049d5934ca2c4d0ea4f25454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endGamePanel: {fileID: 1702626841}
   sprintTimePanel: {fileID: 1300821555}
 --- !u!114 &2128468591
 MonoBehaviour:
@@ -9378,3 +9368,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb76170200d181e4db33a4cddeec174b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endGamePanel: {fileID: 1702626841}
