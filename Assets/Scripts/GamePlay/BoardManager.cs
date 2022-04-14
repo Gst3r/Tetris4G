@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -406,7 +405,8 @@ public class BoardManager : MonoBehaviour
         int row = bornes.yMin;
         while (row < bornes.yMax)
         {
-          
+            /*bool isBonus = false;
+            bool isMalus = false;*/
 
             // si une ligne est complète, elle est détruite
             if (RowIsComplete(row))
@@ -801,5 +801,10 @@ public class BoardManager : MonoBehaviour
     
     public Tilemap GetBoard(){
         return board;
+    }
+
+    public float GetTime()
+    {
+        return time;
     }
 }

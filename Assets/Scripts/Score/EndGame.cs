@@ -123,7 +123,7 @@ public class EndGame : MonoBehaviour
                 break;    
             
             default:    
-                scoreManager.SaveScore("marathon");
+                scoreManager.SaveScore("marathonn");
                 break; 
         }
     }

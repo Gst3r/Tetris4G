@@ -8858,7 +8858,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 838924770}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27d39a785949a184388d0027e674cd49, type: 3}
+  m_Script: {fileID: 11500000, guid: 4108c5edd301026fe854a9ade0426528, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   scoreTextInGame: {fileID: 0}
@@ -10188,7 +10188,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 958353525}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 295acedd0d3c47d3f89e695605c4098a, type: 3}
+  m_Script: {fileID: 11500000, guid: 0784038b3b6076e448a8fd64580aa957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rowUi: {fileID: 7726034046570721225, guid: d35b0194f2504db86a7a5d31549d2963, type: 3}
