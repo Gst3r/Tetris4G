@@ -42,6 +42,8 @@ public abstract class IMode : MonoBehaviour
     /// Attribut indiquant si la gravité a déjà été changé une fois ou non      
     /// </summary>
     private float justOne;
+    
+    [SerializeField] protected GameObject endGamePanel;
 
 
     public void Start(){
@@ -82,7 +84,7 @@ public abstract class IMode : MonoBehaviour
                 gameIsOver = true;
                 //Arrêt du temps lors de l'ouverture de l'interface de fin de jeu 
                 Time.timeScale=0f;
-                controller.endGamePanel.SetActive(true);
+                endGamePanel.SetActive(true);
             }
         }
     }
@@ -104,5 +106,9 @@ public abstract class IMode : MonoBehaviour
 
     public static bool GetGameIsOver(){
         return gameIsOver;
+    }
+
+    public static void SetGameIsOver(bool value){
+        gameIsOver=value;
     }
 }

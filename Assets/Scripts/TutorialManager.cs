@@ -17,15 +17,21 @@ public class TutorialManager : MonoBehaviour
     [SerializeField]private TMP_Text goalText;
     [SerializeField]private Button continueButton;
     [SerializeField]private TMP_Text explainText;
+    [SerializeField]private GameObject coverPauseMenuPanel;
+    [SerializeField]private GameObject coverHoldPanel;
 
 //-------------------------------PAUSE------------------------------------------------------
     [SerializeField]private GameObject explainPausePanel;
-    [SerializeField]private GameObject coverPauseMenuPanel;
     [SerializeField]private GameObject hideUIPanel;
     [SerializeField]private TMP_Text explainMenuPauseText;
     [SerializeField]private GameObject continuePauseButtonAsGameObject;   
     [SerializeField]private TMP_Text pauseGoalText; 
     [SerializeField]private GameObject pauseGoalPanel;
+    
+    /// <summary> 
+    /// Attribut contenant le panel de fin de jeu
+    /// </summary>
+    [SerializeField] private GameObject endGamePanel;
 
 //-------------------------------------MANAGEMENT AND SCHEDULING---------------------------------------------------
     private bool screenIsTouch = false;
@@ -36,9 +42,12 @@ public class TutorialManager : MonoBehaviour
 
     public static int startUpdate = 0;
 
+    public static int choose = 0;
+
     // Start is called before the first frame update
     void Start()
     {
+        choose=0;
         canTouchSensitive=false;
         scriptIsActive = true;
         SetTutorial();
@@ -46,7 +55,13 @@ public class TutorialManager : MonoBehaviour
     }
 
     void Update(){
-        BoardManager.SetGravity(Gravity.BAS);
+
+        if(ScoreManager.GetScore()==0)
+            BoardManager.SetGravity(Gravity.BAS);
+        else if(ScoreManager.GetScore()==40){
+            BoardManager.SetGravity(Gravity.HAUT);
+        }
+
         if(Input.touchCount>0){
             Touch touch = Input.GetTouch(0);
             
@@ -94,18 +109,18 @@ public class TutorialManager : MonoBehaviour
         
         if(startUpdate==3 && ScoreManager.GetScore()>=40){
             startUpdate=0;
-            StartCoroutine(TutoCoroutine(0.7f,delegate{Explain2Direction();}));
+            StartCoroutine(TutoCoroutine(0.4f,delegate{Explain2Direction();}));
         }
 
         if(startUpdate==4 && ScoreManager.GetScore()>=80){
             startUpdate=0;
-            StartCoroutine(TutoCoroutine(0.7f,delegate{Explain4Direction();}));
+            StartCoroutine(TutoCoroutine(0.4f,delegate{Explain4Direction();}));
         }
 
         if(startUpdate==5 && ScoreManager.GetScore()>=120){
             startUpdate=0;
             ExplainEndGame();
-        }
+        }              
     }
 
     public void SetTutorial(){
@@ -115,6 +130,7 @@ public class TutorialManager : MonoBehaviour
         goalPanel.SetActive(false);
         explainPausePanel.SetActive(false);
         coverPauseMenuPanel.SetActive(false);
+        pauseGoalPanel.SetActive(false);
         for(int i=0;i<showPanel.Length;i++){
             showPanel[i].SetActive(false);
         }
@@ -214,17 +230,9 @@ public class TutorialManager : MonoBehaviour
         showPanel[3].SetActive(false);
         showPanel[4].SetActive(true);
         coverPauseMenuPanel.SetActive(true);
-        hidePanel.SetActive(true);
-        goalPanel.SetActive(false);  
-    } 
-
-    /// <summary>
-    /// Auteur : Sterlingot Guillaume<br>
-    /// Description : Cette méthode permet de 
-    /// </summary>
-    public void ExplainModeInformation(){
-
-    } 
+        coverHoldPanel.SetActive(true);
+        goalPanel.SetActive(false);
+    }
 
     /// <summary>
     /// Auteur : Sterlingot Guillaume<br>
@@ -244,6 +252,7 @@ public class TutorialManager : MonoBehaviour
         continueButtonAsGameObject.SetActive(true);
         showPanel[5].SetActive(true);
         coverPauseMenuPanel.SetActive(true);
+        coverHoldPanel.SetActive(true);
         hidePanel.SetActive(true);
         goalPanel.SetActive(false);
     } 
@@ -273,6 +282,7 @@ public class TutorialManager : MonoBehaviour
         explainMenuPauseText.text = "From the pause menu, you can continue the tutorial, restart the tutorial or back to main menu to play a real game. You have also an option which allow you to stop the tetrominoes speed.";
         hidePanel.SetActive(false);
         explainPausePanel.SetActive(true);
+        explainPanel.SetActive(false);
         continuePauseButtonAsGameObject.SetActive(false);
         coverPauseMenuPanel.SetActive(false);
         goalPanel.SetActive(false);
@@ -307,8 +317,8 @@ public class TutorialManager : MonoBehaviour
             explainPanel.SetActive(false);
             hidePanel.SetActive(false);
             coverPauseMenuPanel.SetActive(false);
-            canTouchSensitive=true;
-            Goal2();
+            canTouchSensitive=false;
+            StartCoroutine(TutoCoroutine(0.4f,delegate{Goal2();}));
         });
         StopGame();
         explainText.text = "Our analyse tell us that pieces can also spawn in a different gravity... The gravity can be to the top or to the bottom.";
@@ -345,8 +355,8 @@ public class TutorialManager : MonoBehaviour
             explainPanel.SetActive(false);
             hidePanel.SetActive(false);
             coverPauseMenuPanel.SetActive(false);
-            canTouchSensitive=true;
-            Goal3();
+            canTouchSensitive=false;
+            StartCoroutine(TutoCoroutine(0.4f,delegate{Goal3();}));
         });
         StopGame();
         explainText.text = "We come with bad news... Unfortunately, the piece can sustain 4 gravities, to the top, to the bottom, to the right and to the left. Good luck to stop there progress.";
@@ -378,15 +388,22 @@ public class TutorialManager : MonoBehaviour
     /// Description : Cette méthode permet de 
     /// </summary>
     public void ExplainEndGame(){
+        pauseGoalText.text = "Press one of the menu's button";
+        explainMenuPauseText.text = "From the end game menu, you restart the tutorial or back to main menu to play a real game. You have also an option which allow you to register and share your score out of the game.";
+        explainPanel.SetActive(false);
+        continueButtonAsGameObject.SetActive(true);
+        hidePanel.SetActive(true);
+        hidePanel.SetActive(false);
+        explainPausePanel.SetActive(true);
+        continuePauseButtonAsGameObject.SetActive(false);
+        coverPauseMenuPanel.SetActive(false);
+        goalPanel.SetActive(false);
+        pauseGoalPanel.SetActive(true);
 
-    }
-
-    /// <summary>
-    /// Auteur : Sterlingot Guillaume<br>
-    /// Description : Cette méthode permet de 
-    /// </summary>
-    public void EndTutorial(){
-
+        IMode.SetGameIsOver(true);
+        //Arrêt du temps lors de l'ouverture de l'interface de fin de jeu 
+        Time.timeScale=0f;
+        endGamePanel.SetActive(true);
     }
 
     /// <summary>

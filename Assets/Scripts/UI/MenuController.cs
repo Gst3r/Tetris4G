@@ -10,12 +10,10 @@ public class MenuController : MonoBehaviour
     /// Attribut permettant de différencdier les différents modes de jeu
     /// </summary>
     protected static Mode gameMode = Mode.MARATHON;
-    public static bool firstGame;
 
     void Awake(){
-        Debug.Log(firstGame);
-        if(firstGame==null){
-            firstGame=false;
+        if(PlayerPrefs.GetInt("firstGame", 0)!=1){
+            PlayerPrefs.SetInt("firstGame",1);
             SceneManager.LoadScene("Tutorial");
         }
     }

@@ -26,7 +26,7 @@ public class GoalsManager : MonoBehaviour
     private Dictionary<string,bool> successDico;
 
     private void Start(){
-        goals = new string[26];
+        goals = new string[24];
         successDico = new Dictionary<string,bool>();
         FillGoals(); //Remplir le tableau des objectifs non remplit et le dictionnaire avec le fichier json si il existe, manuellement sinon 
     }
@@ -55,7 +55,7 @@ public class GoalsManager : MonoBehaviour
 
     /// <summary>
     /// Auteur : Sterlingot Guillaume<br>
-    /// Description : Cette méthode permet de remplir le tableau contenant les intitulés des objectifs à accomplir en jeu aainsi que le dictionnaire d'état des objectifs
+    /// Description : Cette méthode permet de remplir le tableau contenant les intitulés des objectifs à accomplir en jeu ainsi que le dictionnaire d'état des objectifs
     /// </summary>
     public void FillGoals(){
         string path = Application.persistentDataPath + "/goals.json"; //Récupération du fichier json
@@ -154,14 +154,18 @@ public class GoalsManager : MonoBehaviour
     /// Un booléen qui indique TRUE si un des objectifs de première partie de jeu est atteind, FALSE sinon
     /// </return>
     public bool CheckFirstGame(out string intitule){
-        if(Controller.GetGameMode()==Mode.MARATHON && successDico[goals[0]] == false){
+        
+        if(PlayerPrefs.GetInt("firstGame", 0)!=1){
             intitule=goals[0];
             return true;
-        }else if(Controller.GetGameMode()==Mode.SPRINT && successDico[goals[1]] == false){
+        }else if(Controller.GetGameMode()==Mode.MARATHON && successDico[goals[0]] == false){
             intitule=goals[1];
             return true;
-        }else if(Controller.GetGameMode()==Mode.ULTRA && successDico[goals[2]] == false){
+        }else if(Controller.GetGameMode()==Mode.SPRINT && successDico[goals[1]] == false){
             intitule=goals[2];
+            return true;
+        }else if(Controller.GetGameMode()==Mode.ULTRA && successDico[goals[2]] == false){
+            intitule=goals[3];
             return true;
         }
         
@@ -244,8 +248,8 @@ public class GoalsManager : MonoBehaviour
     /// </return>
     public bool CheckFullGoal(out string intitule){
         foreach(bool state in successDico.Values){
-            if(!state && successDico[goals[24]] == false){    
-                intitule = goals[24];
+            if(!state && successDico[goals[22]] == false){    
+                intitule = goals[22];
                 return false;
             }
         }
@@ -264,10 +268,10 @@ public class GoalsManager : MonoBehaviour
     /// Un booléen qui indique TRUE si tout les objectifs de score du mode Marathon sont remplis, FALSE sinon
     /// </return>
     public bool CheckScoreGoal(out string intitule){
-        int[] goalScores = {0, 0, 0, 50, 125, 250, 500, 750, 1000, 1500, 2000};
+        int[] goalScores = {0, 0, 0, 0, 40, 120, 200, 360, 520, 760, 1000, 1200};
 
         //On parcourt les intitulés de goals
-        for(int i=3;i<11;i++){
+        for(int i=4;i<13;i++){
             //La première condition permet de vérifier si le score visé est atteind ou non
             //La deuxième condition permet de vérifier si l'objectif de scorer précédent a été atteind avant de valider l'objectif (synchro)
             if(ScoreManager.GetScore()>=goalScores[i] && (i==3 || successDico[goals[i-1]] == true) && successDico[goals[i]] == false){
@@ -291,10 +295,10 @@ public class GoalsManager : MonoBehaviour
     /// </return>
     public bool CheckTimeGoal(out string intitule){
         // A ECRIRE
-        //int[] goalTime = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        //int[] goalTime = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, dfqfsqfqsdqsd};
 
         //On parcourt les intitulés de goals
-        /*for(int i=17;i<15;i++){
+        /*for(int i=19;i<22;i++){
             //La première condition permet de vérifier si le score visé est atteind ou non
             //La deuxième condition permet de vérifier si l'objectif de scorer précédent a été atteind avant de valider l'objectif (synchro)
             if(ScoreManager.GetNbLines()>=goalLines[i] && (i==11 || successDico[goals[i-1]] == true) && successDico[goals[i]] == false){
@@ -308,19 +312,19 @@ public class GoalsManager : MonoBehaviour
 
     /// <summary>
     /// Auteur : Sterlingot Guillaume<br>
-    /// Description : Cette méthode permet de déterminer si un des objectifs de ligne du mode ultra a été atteind
+    /// Description : Cette méthode permet de déterminer si un des objectifs de ligne du mode sprint a été atteind
     /// </summary>
     /// <param name="intitule">
     /// une chaîne de caractère correspondant à l'intitule de l'objectif atteind
     /// </param>
     /// <return>
-    /// Un booléen qui indique TRUE si tout les objectifs de ligne du mode ultra sont remplis, FALSE sinon
+    /// Un booléen qui indique TRUE si tout les objectifs de ligne du mode sprint sont remplis, FALSE sinon
     /// </return>
     public bool CheckLineGoal(out string intitule){
-         int[] goalLines = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 10, 15, 20, 30, 40};
+         int[] goalLines = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 5, 8, 13, 18, 23};
 
         //On parcourt les intitulés de goals
-        for(int i=11;i<17;i++){
+        for(int i=13;i<19;i++){
             //La première condition permet de vérifier si le nombre de ligne visé est atteind ou non
             //La deuxième condition permet de vérifier si l'objectif de scorer précédent a été atteind avant de valider l'objectif (synchro)
             if(ScoreManager.GetNbLines()>=goalLines[i] && (i==11 || successDico[goals[i-1]] == true) && successDico[goals[i]] == false){

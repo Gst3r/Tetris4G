@@ -154,6 +154,7 @@ public class ButtonManager : MonoBehaviour
 
         //Modification de l'interface
         startButton.SetActive(false);
+        TutorialButton.SetActive(false);
         HighScoresButton.SetActive(false);
         GoalsButton.SetActive(false);
         modePanel.SetActive(true);

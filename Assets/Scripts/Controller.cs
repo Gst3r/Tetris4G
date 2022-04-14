@@ -19,13 +19,6 @@ public class Controller : MonoBehaviour
     /// </summary>
     [SerializeField] private Piece activePiece;
 
-    //-----------------------------------------END GAME-------------------------------------------------------
-
-    /// <summary> 
-    /// Attribut contenant le panel de fin de jeu
-    /// </summary>
-    public GameObject endGamePanel;
-
     //-----------------------------------------COUNT--------------------------------------------------------
 
     /// <summary>

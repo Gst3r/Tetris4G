@@ -12,7 +12,7 @@ public class UltraManager : IMode
     /// <summary> 
     /// Nombre entier qui représente le nombre de ligne restante à détruire
     /// </summary>
-    private static int maxLine=40;
+    private static int maxLine=20;
 
     /// <summary> 
     /// Nombre entier qui représente le nombre de ligne détruite
