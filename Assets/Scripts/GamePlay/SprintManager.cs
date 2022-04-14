@@ -19,7 +19,7 @@ public class SprintManager : IMode
     /// <summary> 
     /// Temps en seconde dont dispose le joueur pour scorer
     /// </summary>
-    private static float countMax = 301f;
+    private static float countMax = 421f;
 
     /// <summary> 
     /// Panel contenant toute l'affichage conçernant le temps restant avant la fin de la partie
@@ -42,7 +42,7 @@ public class SprintManager : IMode
         countSec = 0;
         this.activePiece.SetStepDelay(0.4f);
         this.activePiece.SetBufferedStepDelay(this.activePiece.GetStepDelay());
-        this.sprintTimePanel.GetComponent<Text>().text = "5:00";
+        this.sprintTimePanel.GetComponent<Text>().text = "7:00";
     }
 
     /// <summary> 
