@@ -34,8 +34,6 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private GameObject endGamePanel;
 
 //-------------------------------------MANAGEMENT AND SCHEDULING---------------------------------------------------
-    private bool screenIsTouch = false;
-
     public static bool scriptIsActive = false;
 
     public static bool canTouchSensitive=true;

@@ -154,6 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputField: {fileID: 1371312998}
   scoreValue: {fileID: 635713189}
+  scoreManager: {fileID: 2057006985}
 --- !u!4 &75104128
 Transform:
   m_ObjectHideFlags: 0
@@ -602,18 +603,6 @@ MonoBehaviour:
           m_StringArgument: Game
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 346319181}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 274758294}
         m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
         m_MethodName: PlaySound
@@ -691,6 +680,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputField: {fileID: 1371312998}
   scoreValue: {fileID: 0}
+  scoreManager: {fileID: 0}
 --- !u!114 &274758294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -708,10 +698,12 @@ MonoBehaviour:
   startButton: {fileID: 0}
   HighScoresButton: {fileID: 0}
   GoalsButton: {fileID: 0}
+  TutorialButton: {fileID: 0}
   modePanel: {fileID: 0}
   HighScoresPanel: {fileID: 0}
   GoalsPanel: {fileID: 0}
   ParametersPanel: {fileID: 0}
+  modeDropDown: {fileID: 0}
 --- !u!1 &294095062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1954,10 +1946,12 @@ MonoBehaviour:
   startButton: {fileID: 0}
   HighScoresButton: {fileID: 0}
   GoalsButton: {fileID: 0}
+  TutorialButton: {fileID: 0}
   modePanel: {fileID: 0}
   HighScoresPanel: {fileID: 0}
   GoalsPanel: {fileID: 0}
   ParametersPanel: {fileID: 0}
+  modeDropDown: {fileID: 0}
 --- !u!95 &419200848
 Animator:
   serializedVersion: 3
@@ -3842,10 +3836,12 @@ MonoBehaviour:
   startButton: {fileID: 0}
   HighScoresButton: {fileID: 0}
   GoalsButton: {fileID: 0}
+  TutorialButton: {fileID: 0}
   modePanel: {fileID: 0}
   HighScoresPanel: {fileID: 0}
   GoalsPanel: {fileID: 0}
   ParametersPanel: {fileID: 0}
+  modeDropDown: {fileID: 0}
 --- !u!114 &861497477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4573,10 +4569,12 @@ MonoBehaviour:
   startButton: {fileID: 0}
   HighScoresButton: {fileID: 0}
   GoalsButton: {fileID: 0}
+  TutorialButton: {fileID: 0}
   modePanel: {fileID: 0}
   HighScoresPanel: {fileID: 0}
   GoalsPanel: {fileID: 0}
   ParametersPanel: {fileID: 0}
+  modeDropDown: {fileID: 0}
 --- !u!114 &1002427764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6371,10 +6369,12 @@ MonoBehaviour:
   startButton: {fileID: 0}
   HighScoresButton: {fileID: 0}
   GoalsButton: {fileID: 0}
+  TutorialButton: {fileID: 0}
   modePanel: {fileID: 0}
   HighScoresPanel: {fileID: 0}
   GoalsPanel: {fileID: 0}
   ParametersPanel: {fileID: 0}
+  modeDropDown: {fileID: 0}
 --- !u!114 &1397927549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6483,6 +6483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputField: {fileID: 0}
   scoreValue: {fileID: 0}
+  scoreManager: {fileID: 0}
 --- !u!1 &1407194110
 GameObject:
   m_ObjectHideFlags: 0
@@ -8262,10 +8263,12 @@ MonoBehaviour:
   startButton: {fileID: 0}
   HighScoresButton: {fileID: 0}
   GoalsButton: {fileID: 0}
+  TutorialButton: {fileID: 0}
   modePanel: {fileID: 0}
   HighScoresPanel: {fileID: 0}
   GoalsPanel: {fileID: 0}
   ParametersPanel: {fileID: 0}
+  modeDropDown: {fileID: 0}
 --- !u!82 &2006673694
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8853,10 +8856,12 @@ MonoBehaviour:
   startButton: {fileID: 0}
   HighScoresButton: {fileID: 0}
   GoalsButton: {fileID: 0}
+  TutorialButton: {fileID: 0}
   modePanel: {fileID: 0}
   HighScoresPanel: {fileID: 0}
   GoalsPanel: {fileID: 0}
   ParametersPanel: {fileID: 0}
+  modeDropDown: {fileID: 0}
 --- !u!95 &2049082116
 Animator:
   serializedVersion: 3
@@ -9295,7 +9300,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   board: {fileID: 1719026910}
   activePiece: {fileID: 1719026911}
-  endGamePanel: {fileID: 1702626841}
   animator: {fileID: 1595377478}
   launchTime: 2
   countPanel: {fileID: 1595377476}
@@ -9326,6 +9330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7acda2e074430b6418f7013a5e8613d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endGamePanel: {fileID: 1702626841}
   ultraTimePanel: {fileID: 1185206721}
   ultraLinePanel: {fileID: 742824621}
 --- !u!114 &2128468590
@@ -9340,6 +9345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bb0da45049d5934ca2c4d0ea4f25454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endGamePanel: {fileID: 1702626841}
   sprintTimePanel: {fileID: 1300821555}
 --- !u!114 &2128468591
 MonoBehaviour:
@@ -9353,3 +9359,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb76170200d181e4db33a4cddeec174b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endGamePanel: {fileID: 1702626841}

@@ -15,12 +15,12 @@ public class ScoreManager : MonoBehaviour
     /// <summary> 
     /// Attribut contenant le score de la partie en cours 
     /// </summary>
-    [SerializeField] private static int score;
+    [SerializeField] private static int score = 0;
 
     /// <summary> 
     /// Attribut contenant le noombre de ligne détruite de la partie en cours 
     /// </summary>
-    [SerializeField] private static int nbLines;
+    [SerializeField] private static int nbLines = 0;
 
 
     /// <summary> 
@@ -38,8 +38,6 @@ public class ScoreManager : MonoBehaviour
     /// </summary>
     private ScoreData sd ; 
 
-    public ScoreManager(){}
-
     private void Start(){
         score = 0;
         nbLines = 0;
@@ -54,7 +52,6 @@ public class ScoreManager : MonoBehaviour
        
         //chargement du json    
         var json = PlayerPrefs.GetString(key, "{}"); 
-        Debug.Log(json);
         //initialisation de la liste des scores à partir du json 
         this.sd = JsonUtility.FromJson<ScoreData>(json);
         return this; 

@@ -44,23 +44,6 @@ public class Controller : MonoBehaviour
     /// </summary>
     private static Mode gameMode;
 
-    //------------------------------------------TOUCH SENSITIVE------------------------------------------------------------
-
-    /// <summary> 
-    /// Vecteur de nombre réel à deux dimensions qui enregistre la position de départ du doigt lorsqu'il entre en contact avec l'écran
-    /// </summary>
-    private Vector2 startPos;
-
-    /// <summary> 
-    /// Booléen indiquant TRUE si le joueur cherche à tourner le tetromino (analyse du comportement du doigt sur l'écran), FALSE sinon
-    /// </summary>
-    private static bool wantToRotate;
-
-    /// <summary> 
-    /// Un nombre réel qui indique une échelle de vitesse du doigt qui se déplace sur l'écran
-    /// </summary>
-    private float fast;
-
     //----------------------------------------------GOALS--------------------------------------------------------------------
 
     /// <summary> 
@@ -102,8 +85,6 @@ public class Controller : MonoBehaviour
     /// </summary>
     public void SetController(){
         gameMode = MenuController.GetMode();
-        wantToRotate = true;
-        this.fast = 0f;
 
         // Initialisation du mode de jeu 
         switch(gameMode){ // On récupère le mode de jeu qui a été paramétré dans la classe Select mode de la scène "Menu Principale"

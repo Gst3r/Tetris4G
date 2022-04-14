@@ -66,8 +66,8 @@ public abstract class IMode : MonoBehaviour
                 justOne=0;
 
             // On décrémente petit à petit la gravité toute les 5 secondes selon le modulo cité dans la condition
-            if(((int)Time.realtimeSinceStartup)%5==0 && justOne==0){ 
-                this.activePiece.SetStepDelay(this.activePiece.GetStepDelay()-0.005f);
+            if(((int)Time.realtimeSinceStartup)%5==0 && justOne==0 && this.activePiece.GetStepDelay()>=0.45f){
+                this.activePiece.SetStepDelay(this.activePiece.GetStepDelay()-0.0025f);
                 this.activePiece.SetBufferedStepDelay(this.activePiece.GetStepDelay());
                 justOne=1; // On indique qu'on veut qu'il rentre une fois et on avorte la condition grace à l'attribut justOne
             }

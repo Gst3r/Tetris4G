@@ -154,17 +154,19 @@ public class TouchSensitive : MonoBehaviour
         else if(compareFast>17)
             localFast = 17;
         else if(compareFast>15)
-            localFast = 15;
+            localFast = 14;
         else if(compareFast>13)
-            localFast = 13;
+            localFast = 12;
         else if(compareFast>11)
-            localFast = 11;
+            localFast = 9;
         else if(compareFast>9)
-            localFast= 9;
+            localFast= 6;
         else if(compareFast>7)
-            localFast = 7;
+            localFast = 2;
+        else if(compareFast>5)
+            localFast= -5;
         else
-            localFast = 3;
+            localFast = -10;
 
         return localFast;
     }

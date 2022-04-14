@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Auteur : Sterlingot Guillaume<br>
@@ -65,7 +66,7 @@ public class GoalsManager : MonoBehaviour
          
 
         //Remplissage du dictionnaire d'objectif présent dans le script et du tableau de nom d'objectif
-        for(int i=0; i<jsonDicoData.Length; i++){
+        for(int i=0; i<jsonDicoData.Length-1; i++){
             string[] jsonLineDicoData = jsonDicoData[i].Split(':');
             successDico.Add(jsonLineDicoData[0], (jsonLineDicoData[1]=="true")?true:false);
             goals[i] = jsonLineDicoData[0];
@@ -155,16 +156,16 @@ public class GoalsManager : MonoBehaviour
     /// </return>
     public bool CheckFirstGame(out string intitule){
         
-        if(PlayerPrefs.GetInt("firstGame", 0)!=1){
+        if(PlayerPrefs.GetInt("firstGame", 0)!=1 && successDico[goals[0]] == false){
             intitule=goals[0];
             return true;
-        }else if(Controller.GetGameMode()==Mode.MARATHON && successDico[goals[0]] == false){
+        }else if(Controller.GetGameMode()==Mode.MARATHON && SceneManager.GetActiveScene().name=="Game" && successDico[goals[1]] == false){
             intitule=goals[1];
             return true;
-        }else if(Controller.GetGameMode()==Mode.SPRINT && successDico[goals[1]] == false){
+        }else if(Controller.GetGameMode()==Mode.SPRINT && successDico[goals[2]] == false){
             intitule=goals[2];
             return true;
-        }else if(Controller.GetGameMode()==Mode.ULTRA && successDico[goals[2]] == false){
+        }else if(Controller.GetGameMode()==Mode.ULTRA && successDico[goals[3]] == false){
             intitule=goals[3];
             return true;
         }
@@ -271,7 +272,7 @@ public class GoalsManager : MonoBehaviour
         int[] goalScores = {0, 0, 0, 0, 40, 120, 200, 360, 520, 760, 1000, 1200};
 
         //On parcourt les intitulés de goals
-        for(int i=4;i<13;i++){
+        for(int i=4;i<12;i++){
             //La première condition permet de vérifier si le score visé est atteind ou non
             //La deuxième condition permet de vérifier si l'objectif de scorer précédent a été atteind avant de valider l'objectif (synchro)
             if(ScoreManager.GetScore()>=goalScores[i] && (i==3 || successDico[goals[i-1]] == true) && successDico[goals[i]] == false){
@@ -324,7 +325,7 @@ public class GoalsManager : MonoBehaviour
          int[] goalLines = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 5, 8, 13, 18, 23};
 
         //On parcourt les intitulés de goals
-        for(int i=13;i<19;i++){
+        for(int i=12;i<19;i++){
             //La première condition permet de vérifier si le nombre de ligne visé est atteind ou non
             //La deuxième condition permet de vérifier si l'objectif de scorer précédent a été atteind avant de valider l'objectif (synchro)
             if(ScoreManager.GetNbLines()>=goalLines[i] && (i==11 || successDico[goals[i-1]] == true) && successDico[goals[i]] == false){

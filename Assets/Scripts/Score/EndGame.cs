@@ -30,7 +30,7 @@ public class EndGame : MonoBehaviour
     /// <summary> 
     /// Attribut qui permettra de modifier la liste des scores
     /// </summary>
-    private ScoreManager scoreManager; 
+    [SerializeField]private ScoreManager scoreManager; 
 
 
     /// <summary> 
@@ -46,19 +46,9 @@ public class EndGame : MonoBehaviour
 
 
     private void Awake()
-    {
-      
-        scoreManager= new ScoreManager(); 
-        
-        //initialisation des composants 
-        inputField= transform.Find("InputFieldPseudo").GetComponent<TMP_InputField>();
-       
-
+    {   
         //affichage du score
         scoreValue.text=" "+ScoreManager.GetScore().ToString();
-
-      
-
     }
 
     /// <summary> 

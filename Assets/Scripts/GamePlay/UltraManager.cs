@@ -27,7 +27,7 @@ public class UltraManager : IMode
     /// <summary> 
     /// Temps en seconde dont dispose le joueur pour scorer
     /// </summary>
-    private static float goalScore = 11f;
+    private static int goalScore = 601;
 
     /// <summary> 
     /// Panel contenant toute l'affichage conçernant le temps restant avant la fin de la partie
@@ -102,7 +102,7 @@ public class UltraManager : IMode
     /// </returns>
     public override bool GameOver(){
         // un côté non rempli signifie que la partie continue
-        if ((board.GetTopIsFull() && board.GetBotIsFull() && board.GetLeftIsFull() && board.GetRightIsFull()) || (int)BoardManager.GetTotalLinesCleared()>=(int)maxLine || countTime>=600)
+        if ((board.GetTopIsFull() && board.GetBotIsFull() && board.GetLeftIsFull() && board.GetRightIsFull()) || (int)BoardManager.GetTotalLinesCleared()>=(int)maxLine || countTime>=goalScore)
             return true;
         return false;
     }

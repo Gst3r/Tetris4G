@@ -105,7 +105,7 @@ public class BoardManager : MonoBehaviour
    
 //---------------------------------------------------------------------------------------------------------------------
 
-    private async void Awake()
+    private void Awake()
     {
         SetupBoard();
         for(int i=0; i< this.tetrominoes.Length; i++)

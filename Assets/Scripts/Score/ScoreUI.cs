@@ -23,11 +23,7 @@ public class ScoreUI : MonoBehaviour
    
 
     void Start()
-    {
-        
-        scoreManager = new ScoreManager();
-       
-       
+    {  
         //chargement de la liste des scores 
         scoreManager.Loading("marathonn");  
        
