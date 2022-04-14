@@ -708,10 +708,12 @@ MonoBehaviour:
   startButton: {fileID: 0}
   HighScoresButton: {fileID: 0}
   GoalsButton: {fileID: 0}
+  TutorialButton: {fileID: 0}
   modePanel: {fileID: 0}
   HighScoresPanel: {fileID: 0}
   GoalsPanel: {fileID: 0}
   ParametersPanel: {fileID: 0}
+  modeDropDown: {fileID: 0}
 --- !u!1 &294095062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1954,10 +1956,12 @@ MonoBehaviour:
   startButton: {fileID: 0}
   HighScoresButton: {fileID: 0}
   GoalsButton: {fileID: 0}
+  TutorialButton: {fileID: 0}
   modePanel: {fileID: 0}
   HighScoresPanel: {fileID: 0}
   GoalsPanel: {fileID: 0}
   ParametersPanel: {fileID: 0}
+  modeDropDown: {fileID: 0}
 --- !u!95 &419200848
 Animator:
   serializedVersion: 3
@@ -3842,10 +3846,12 @@ MonoBehaviour:
   startButton: {fileID: 0}
   HighScoresButton: {fileID: 0}
   GoalsButton: {fileID: 0}
+  TutorialButton: {fileID: 0}
   modePanel: {fileID: 0}
   HighScoresPanel: {fileID: 0}
   GoalsPanel: {fileID: 0}
   ParametersPanel: {fileID: 0}
+  modeDropDown: {fileID: 0}
 --- !u!114 &861497477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4573,10 +4579,12 @@ MonoBehaviour:
   startButton: {fileID: 0}
   HighScoresButton: {fileID: 0}
   GoalsButton: {fileID: 0}
+  TutorialButton: {fileID: 0}
   modePanel: {fileID: 0}
   HighScoresPanel: {fileID: 0}
   GoalsPanel: {fileID: 0}
   ParametersPanel: {fileID: 0}
+  modeDropDown: {fileID: 0}
 --- !u!114 &1002427764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4863,8 +4871,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27d39a785949a184388d0027e674cd49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreTextInGame: {fileID: 0}
-  scoreTextEndGame: {fileID: 0}
 --- !u!1 &1026216419
 GameObject:
   m_ObjectHideFlags: 0
@@ -6371,10 +6377,12 @@ MonoBehaviour:
   startButton: {fileID: 0}
   HighScoresButton: {fileID: 0}
   GoalsButton: {fileID: 0}
+  TutorialButton: {fileID: 0}
   modePanel: {fileID: 0}
   HighScoresPanel: {fileID: 0}
   GoalsPanel: {fileID: 0}
   ParametersPanel: {fileID: 0}
+  modeDropDown: {fileID: 0}
 --- !u!114 &1397927549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8262,10 +8270,12 @@ MonoBehaviour:
   startButton: {fileID: 0}
   HighScoresButton: {fileID: 0}
   GoalsButton: {fileID: 0}
+  TutorialButton: {fileID: 0}
   modePanel: {fileID: 0}
   HighScoresPanel: {fileID: 0}
   GoalsPanel: {fileID: 0}
   ParametersPanel: {fileID: 0}
+  modeDropDown: {fileID: 0}
 --- !u!82 &2006673694
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8853,10 +8863,12 @@ MonoBehaviour:
   startButton: {fileID: 0}
   HighScoresButton: {fileID: 0}
   GoalsButton: {fileID: 0}
+  TutorialButton: {fileID: 0}
   modePanel: {fileID: 0}
   HighScoresPanel: {fileID: 0}
   GoalsPanel: {fileID: 0}
   ParametersPanel: {fileID: 0}
+  modeDropDown: {fileID: 0}
 --- !u!95 &2049082116
 Animator:
   serializedVersion: 3
@@ -8962,6 +8974,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2057006986}
   - component: {fileID: 2057006985}
+  - component: {fileID: 2057006987}
   m_Layer: 0
   m_Name: ScoreManager
   m_TagString: Untagged
@@ -8981,8 +8994,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27d39a785949a184388d0027e674cd49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreTextInGame: {fileID: 634952189}
-  scoreTextEndGame: {fileID: 635713189}
 --- !u!4 &2057006986
 Transform:
   m_ObjectHideFlags: 0
@@ -8997,6 +9008,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2057006987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2057006984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4108c5edd301026fe854a9ade0426528, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreTextInGame: {fileID: 0}
+  scoreTextEndGame: {fileID: 0}
 --- !u!1 &2057492391
 GameObject:
   m_ObjectHideFlags: 0
