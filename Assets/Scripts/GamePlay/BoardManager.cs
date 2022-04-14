@@ -406,8 +406,7 @@ public class BoardManager : MonoBehaviour
         int row = bornes.yMin;
         while (row < bornes.yMax)
         {
-            /*bool isBonus = false;
-            bool isMalus = false;*/
+          
 
             // si une ligne est complète, elle est détruite
             if (RowIsComplete(row))
