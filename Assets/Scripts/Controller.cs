@@ -54,10 +54,10 @@ public class Controller : MonoBehaviour
     //---------------------------------------------------------------------------------------------------------------------
 
     private void Start() {
+        
         SetController();
         LaunchCount();
         mode.StartExecute();
-        /*this.gameIsOver = false;*/
     }
 
     // Update is called once per frame

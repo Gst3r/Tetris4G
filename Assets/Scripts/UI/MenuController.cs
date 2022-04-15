@@ -17,6 +17,9 @@ public class MenuController : MonoBehaviour
             SceneManager.LoadScene("Tutorial");
         }
     }
+    void Start(){
+        TutorialManager.canTouchSensitive = true;
+    }
     
     public void SetModeMarathon(){
         gameMode = Mode.MARATHON;

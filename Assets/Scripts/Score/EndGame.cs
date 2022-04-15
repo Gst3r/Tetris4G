@@ -23,10 +23,6 @@ public class EndGame : MonoBehaviour
     /// </summary>
     [SerializeField] private Text scoreValue; 
 
-
-
-
-
     /// <summary> 
     /// Attribut qui permettra de modifier la liste des scores
     /// </summary>
@@ -37,13 +33,6 @@ public class EndGame : MonoBehaviour
     /// Attribut contenant le message affiché lors du partage de la capture du score 
     /// </summary>
     private string shareMessage; 
-
-
-
-
-
-
-
 
     private void Awake()
     {   
@@ -135,10 +124,7 @@ public class EndGame : MonoBehaviour
     public void share()
     {
         shareMessage= "I can't believe I scored "+ ScoreManager.GetScore().ToString()+" points in Tetris4G!!!";
-
         StartCoroutine(TakeScreenshotAndShare());
-
-
     }
 
 
@@ -148,7 +134,7 @@ public class EndGame : MonoBehaviour
     /// Auteur:Seghir Nassima
     /// </summary>
     private IEnumerator TakeScreenshotAndShare()
-{
+    {
 	yield return new WaitForEndOfFrame();
 
 	Texture2D ss = new Texture2D( Screen.width, Screen.height, TextureFormat.RGB24, false );
@@ -166,7 +152,5 @@ public class EndGame : MonoBehaviour
 		.SetCallback( ( result, shareTarget ) => Debug.Log( "Share result: " + result + ", selected app: " + shareTarget ) )
 		.Share();
 
-	
-}
-
+    }
 }

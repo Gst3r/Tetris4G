@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.SceneManagement;
 
 /// <summary> 
 /// Auteur : Sterlingot Guillaume<br>
@@ -121,11 +122,11 @@ public class BoardManager : MonoBehaviour
         rightIsFull = false;
         time = 0f;
         chooseRandomGravity();
-        if(TutorialManager.scriptIsActive!){
+        if(SceneManager.GetActiveScene().name=="Tutorial"){
+            SpawnPiece(3, spawnPosition, Pouvoir.Standard);
+        }else{
             int random = Random.Range(0, tetrominoes.Length);
             SpawnPiece(random, spawnPosition, Pouvoir.Standard);
-        }else{
-            SpawnPiece(3, spawnPosition, Pouvoir.Standard);
         }
         
     }

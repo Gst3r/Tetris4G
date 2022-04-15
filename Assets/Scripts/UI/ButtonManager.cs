@@ -108,14 +108,15 @@ public class ButtonManager : MonoBehaviour
     {
         //Démarage de l'animation
         animator.SetTrigger("Press");
-        
+
         //Génération de la pause
         float ms = Time.deltaTime;
         while(ms <= pressTime){
             ms += Time.deltaTime;
+            Debug.Log(Time.timeScale);
             yield return null;
         }
-        
+        //yield return null;
         //Chargement de la scène
         SceneManager.LoadScene(scene);
     }
