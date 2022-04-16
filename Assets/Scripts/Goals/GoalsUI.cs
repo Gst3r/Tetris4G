@@ -67,9 +67,9 @@ public class GoalsUI : MonoBehaviour
     /// Description : Méthode permettant l'initialisation des attributs de la classe qui sont les GameObjects manipulés par la classe
     /// </summary>
     public void InitializeElements(){
-        goalsLine = new Transform[25];
-        goalsText = new TMP_Text[25];
-        goalsState = new Image[25];
+        goalsLine = new Transform[23];
+        goalsText = new TMP_Text[23];
+        goalsState = new Image[23];
 
         int j=0;
         foreach (Transform child in goalsPanel.GetComponent<Transform>())

@@ -27,7 +27,7 @@ public class GoalsManager : MonoBehaviour
     private Dictionary<string,bool> successDico;
 
     private void Start(){
-        goals = new string[24];
+        goals = new string[22];
         successDico = new Dictionary<string,bool>();
         FillGoals(); //Remplir le tableau des objectifs non remplit et le dictionnaire avec le fichier json si il existe, manuellement sinon 
     }
@@ -249,8 +249,8 @@ public class GoalsManager : MonoBehaviour
     /// </return>
     public bool CheckFullGoal(out string intitule){
         foreach(bool state in successDico.Values){
-            if(!state && successDico[goals[22]] == false){    
-                intitule = goals[22];
+            if(!state && successDico[goals[21]] == false){    
+                intitule = goals[21];
                 return false;
             }
         }

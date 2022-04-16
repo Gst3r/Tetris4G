@@ -17,7 +17,12 @@ public enum Mode{
 /// Description : Cette classe permet l'interfacage entre les différents mode de jeu et le contrôleur.
 /// </summary>
 public abstract class IMode : MonoBehaviour
-{
+{   
+    /// <summary> 
+    /// Attribut contenant le manager du son
+    /// </summary>
+    protected SoundManager soundManager;
+
     /// <summary> 
     /// Attribut contenant la pièce courante qui est présente sur le plateau de jeu 
     /// </summary>
@@ -84,7 +89,11 @@ public abstract class IMode : MonoBehaviour
                 gameIsOver = true;
                 //Arrêt du temps lors de l'ouverture de l'interface de fin de jeu 
                 Time.timeScale=0f;
+
                 endGamePanel.SetActive(true);
+
+                //Lancement du son lié à la fin de partie
+                soundManager.PlaySound(soundManager.m_gameOverSound,0.5f);
             }
         }
     }

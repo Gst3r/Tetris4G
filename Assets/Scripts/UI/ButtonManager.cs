@@ -9,10 +9,10 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class ButtonManager : MonoBehaviour
 {   
-    /// <summary>
-    /// Variable contenant la source audio.
+    /// <summary> 
+    /// Attribut contenant le manager du son 
     /// </summary>
-    public AudioSource audioSource;
+    [SerializeField] private SoundManager soundManager;
 
     /// <summary>
     /// Variable contenant l'animateur lié aux animations exécutées lors de l'appui sur un bouton.
@@ -76,16 +76,17 @@ public class ButtonManager : MonoBehaviour
 
     void Start()
     {
-        //Récupétation de la source audio en relation avec le bouton
-        audioSource = GetComponent<AudioSource>();    
-        gameIsLoad=false;
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();   
     }
     
     /// <summary>
     /// Méthodes permettant de jouer le son lié à l'utilisation du bouton.
     /// </summary>
     public void PlaySound(AudioClip sound){
-        this.audioSource.PlayOneShot(sound);
+        if(soundManager.m_fxEnabled)
+        {
+            soundManager.PlaySound(sound);
+        }
     }
 
     /// <summary>

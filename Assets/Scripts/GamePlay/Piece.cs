@@ -4,11 +4,16 @@ using UnityEngine;
 using System;
 
 /// <summary> 
-/// Auteur : Seghir Nassima, Kusunga Malcom, Sterlingot Guillaume, Bae Jin-Young<br>
+/// Auteurs : Seghir Nassima, Kusunga Malcom, Sterlingot Guillaume, Bae Jin-Young<br>
 /// Description : Cette classe permet de controler le tetromino present sur la grille de jeu 
 /// </summary>
 public class Piece : MonoBehaviour
-{
+{   
+    /// <summary> 
+    /// Attribut contenant le manager du son 
+    /// </summary>
+    [SerializeField] private SoundManager soundManager;
+
     /// <summary> 
     /// Attribut contenant le plateau de jeu 
     /// </summary>
@@ -237,6 +242,12 @@ public class Piece : MonoBehaviour
         }
 
         previewManager.ChangePreview();
+
+        //Activation de l'effet sonore losqu'une piece est placée sur le board
+        if(soundManager.m_fxEnabled && soundManager.m_dropSound)
+        {
+            AudioSource.PlayClipAtPoint(soundManager.m_dropSound,Camera.main.transform.position,soundManager.m_fxVolume);
+        }
     }
 
     /// <summary>

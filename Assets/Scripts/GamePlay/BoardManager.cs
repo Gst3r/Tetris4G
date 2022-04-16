@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 using UnityEngine.SceneManagement;
 
 /// <summary> 
-/// Auteur : Sterlingot Guillaume<br>
+/// Auteurs : Seghir Nassima, Kusunga Malcom, Sterlingot Guillaume, Bae Jin-Young<br>
 /// Description : Cette enumération permet de distinguer les quatres gravités existantes dans le jeu
 /// </summary>
 public enum Gravity 
@@ -22,6 +22,7 @@ public enum Gravity
 /// </summary>
 public class BoardManager : MonoBehaviour
 {    
+
 //------------------------------------------------------------------BOARD------------------------------------------------
 
     /// <summary> 
@@ -103,6 +104,13 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     private static bool lockSpeed;
    
+//------------------------------------------------------------------Volume-----------------------------------------
+
+    /// <summary> 
+    /// Attribut contenant le manager du son 
+    /// </summary>
+    [SerializeField] private SoundManager soundManager;
+
 //---------------------------------------------------------------------------------------------------------------------
 
     private void Awake()
@@ -522,7 +530,13 @@ public class BoardManager : MonoBehaviour
         scoreManager.IncrementScore(nbLinesCleared, false, false);
         scoreManager.IncrementScore(nbLinesBonus, true, false);
         scoreManager.IncrementScore(nbLinesMalus, false, true);
-        totalLinesCleared +=nbLinesCleared; 
+        totalLinesCleared +=nbLinesCleared;
+        
+        //Activation de l'effet sonore lorsque un ou plusieurs lignes sont détruites
+        if(nbLinesCleared > 0)
+        {
+            soundManager.PlaySound(soundManager.m_clearRowSound,0.5f);
+        }
     }
 
     /// <summary> 

@@ -35,6 +35,7 @@ public class SprintManager : IMode
     /// Description : Méthode de départ du mode de jeu Sprint qui initialise les paramètres du mode de jeu
     /// </summary>
     public override void StartExecute(){
+        this.soundManager = GameObject.Find("GameManager").GetComponent<SoundManager>();
         this.controller = GameObject.Find("GameManager").GetComponent<Controller>();
         this.board = controller.GetBoard();
         this.activePiece = controller.GetActivePiece();

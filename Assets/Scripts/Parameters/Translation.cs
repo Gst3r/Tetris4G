@@ -12,7 +12,7 @@ public sealed class Translation : MonoBehaviour
     /// <summary> 
     /// Tableau contenant les differentes langues possibles
     /// </summary>
-    public static readonly SystemLanguage[] Languages = { SystemLanguage.English, SystemLanguage.French };
+    public static readonly SystemLanguage[] Languages = { SystemLanguage.English, SystemLanguage.French, SystemLanguage.Korean};
 
     /// <summary> 
     /// Dictionnaire contenant l'ensemble des traductions
@@ -39,6 +39,7 @@ public sealed class Translation : MonoBehaviour
     /// </summary>
     private static SystemLanguage language;
 
+    private static bool isInitialize = false;
 
     private void Start()
     {
@@ -62,23 +63,44 @@ public sealed class Translation : MonoBehaviour
         {
             // Recuperation de la langue selectionnee par le joueur
             actualLanguage = PlayerPrefs.GetString("Language");
-            
+
             // Selection du fichier de traduction
             if(actualLanguage.CompareTo("French") == 0)
             {
                 language = SystemLanguage.French;
-            }else{
+            }else if (actualLanguage.CompareTo("English") == 0){
                 language = SystemLanguage.English;
+            }else{
+                language = SystemLanguage.Korean;
             }
-
         }else{
-            // Selection de l'anglais comme langue de base
-            actualLanguage = "English";
-            language = SystemLanguage.English;
-            PlayerPrefs.SetString("Language","English");
+            // Selection de la langue en fonction de la langue du telephone de l'utilisateur
+            // Si la langue est disponible dans l'application elle sera selectionnee sinon le jeu sera en anglais
+            if (Array.IndexOf<SystemLanguage>(Languages, Application.systemLanguage) == -1)
+            {
+                language = SystemLanguage.English;
+                actualLanguage = "English";
+                PlayerPrefs.SetString("Language","English");
+            }else{
+                language = Languages[Array.IndexOf<SystemLanguage>(Languages, Application.systemLanguage)];
+                //Selection selon la langue detectee
+                switch(language)
+                {
+                    case SystemLanguage.English:actualLanguage = "English";
+                                                PlayerPrefs.SetString("Language","English");
+                                                break;
+                    case SystemLanguage.French:actualLanguage = "French";
+                                                PlayerPrefs.SetString("Language","French");
+                                                break;
+                    case SystemLanguage.Korean:actualLanguage = "Korean";
+                                                PlayerPrefs.SetString("Language","Korean");
+                                                break;
+                }
+            }
         }
-        
+
         previousLanguage = actualLanguage;
+        isInitialize = true;
     }
 
     /// <summary>
@@ -99,9 +121,12 @@ public sealed class Translation : MonoBehaviour
                 {
                     PlayerPrefs.SetString("Language","French");
                     language = SystemLanguage.French;
-                }else{
+                }else if(actualLanguage.CompareTo("English") == 0){
                     PlayerPrefs.SetString("Language","English");
                     language = SystemLanguage.English;
+                }else{
+                    PlayerPrefs.SetString("Language","Korean");
+                    language = SystemLanguage.Korean;
                 }
 
                 previousLanguage = actualLanguage;
@@ -119,19 +144,21 @@ public sealed class Translation : MonoBehaviour
     /// </summary>
     private static void LoadDictionnary()
     {
-        // Verifie si le dictionnaire a deja ete initialise
-        if (Translations != null)
-            return;
+        if(isInitialize){
+            // Verifie si le dictionnaire a deja ete initialise
+            if (Translations != null)
+                return;
 
-        // Creation du dictionnaire
-        Translations = new Dictionary<string, string>(); 
-   
-        // Recuperation du fichier contenant la traduction dans une certaine langue
-        var data = Resources.Load<TextAsset>($"Translations/{language}");
+            // Creation du dictionnaire
+            Translations = new Dictionary<string, string>();
 
-        // Lecture du fichier contenant les traductions
-        if (data != null)
-            ParseFile(data.text);
+            // Recuperation du fichier contenant la traduction dans une certaine langue
+            var data = Resources.Load<TextAsset>($"Translations/{language}");
+
+            // Lecture du fichier contenant les traductions
+            if (data != null)
+                ParseFile(data.text);
+        }
     }
 
     /// <summary> 
@@ -143,14 +170,18 @@ public sealed class Translation : MonoBehaviour
     /// </param>
     public static string Get(string key)
     {   
-        //Vérifie que la dictionnaire est initialisé
-        LoadDictionnary();
+        if(isInitialize){
+            //Vérifie que la dictionnaire est initialisé
+            LoadDictionnary();
 
-        //Récupération de la traduction
-        if (Translations.ContainsKey(key))
-            return Translations[key];
+            //Récupération de la traduction
+            if (Translations.ContainsKey(key))
+                return Translations[key];
 
-        //Renvoi le mot dans le cas le mot serait le meme entre les deux differentes langues
+            //Renvoi le mot dans le cas le mot serait le meme entre les deux differentes langues
+            return key;
+        }
+
         return key;
     }
 
