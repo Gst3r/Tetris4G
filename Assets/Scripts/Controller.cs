@@ -104,7 +104,8 @@ public class Controller : MonoBehaviour
     }
 
     /// <summary>
-    /// Méthodes permettant de lancer le decompte lors d'un retour vers l'interface de la grille de jeu
+    /// Auteur : Kusunga Malcom<br>
+    /// Méthodes permettant de lancer le décompte lors d'un retour vers l'interface de la grille de jeu
     /// </summary>
     public void LaunchCount(){
         StartCoroutine(LoadCount());
@@ -112,7 +113,7 @@ public class Controller : MonoBehaviour
 
     /// <summary>
     /// Auteur : Kusunga Malcom<br>
-    /// Description : Coroutine lié au lancement de l'animation lors du décompte
+    /// Description : Coroutine liée au lancement de l'animation lors du décompte
     /// </summary>
     /// <returns>
     /// Génere une pause de 2.35 secondes.

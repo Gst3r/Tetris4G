@@ -16,7 +16,7 @@ public sealed class TranslateText : MonoBehaviour
 
     private void Start()
     {
-        //Recuperation du texte
+        //Récupération du texte
         text = GetComponent<TMP_Text>();
 
         //Traduction du texte
@@ -25,7 +25,7 @@ public sealed class TranslateText : MonoBehaviour
 
     private void Update()
     {
-        //Traduction du texte en fonction de la langue selectionnee par le joueur
+        //Traduction du texte en fonction de la langue selectionnée par le joueur
         text.text = Translation.Get(text.text);
     }
 }

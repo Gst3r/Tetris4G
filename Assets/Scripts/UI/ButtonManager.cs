@@ -80,7 +80,7 @@ public class ButtonManager : MonoBehaviour
     }
     
     /// <summary>
-    /// Méthodes permettant de jouer le son lié à l'utilisation du bouton.
+    /// Méthode permettant de jouer le son lié à l'utilisation du bouton.
     /// </summary>
     public void PlaySound(AudioClip sound){
         if(soundManager.m_fxEnabled)
@@ -90,7 +90,7 @@ public class ButtonManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Méthodes permettant de changer de scène.
+    /// Méthode permettant de changer de scène.
     /// </summary>
     public void LaunchScene(string scene){
         if(Time.timeScale == 0f){
@@ -100,7 +100,7 @@ public class ButtonManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Coroutine de changement de scène lié au lancement de l'animation (menu principal vers interface de jeu ou inversement).
+    /// Coroutine de changement de scène liée au lancement de l'animation (menu principal vers interface de jeu ou inversement).
     /// </summary>
     /// <returns>
     /// Génere une pause de 0.38 secondes.
@@ -114,17 +114,17 @@ public class ButtonManager : MonoBehaviour
         float ms = Time.deltaTime;
         while(ms <= pressTime){
             ms += Time.deltaTime;
-            Debug.Log(Time.timeScale);
+            
             yield return null;
         }
-        //yield return null;
+        
         //Chargement de la scène
         SceneManager.LoadScene(scene);
     }
 
 
     /// <summary>
-    /// Méthodes permettant de lancer une animation pour les boutons.
+    /// Méthode permettant de lancer une animation pour les boutons.
     /// </summary>
     public void LaunchStart(){
         if(Time.timeScale == 0f){
@@ -132,12 +132,10 @@ public class ButtonManager : MonoBehaviour
         }
 
         StartCoroutine(LaodStart());
-
-        
     }
 
     /// <summary>
-    /// Coroutine de changement de scène lié au lancement de l'animation (menu principal vers interface de jeu ou inversement).
+    /// Coroutine de changement de scène liée au lancement de l'animation (menu principal vers interface de jeu ou inversement).
     /// </summary>
     /// <returns>
     /// Génere une pause de 0.38 secondes.
@@ -164,21 +162,21 @@ public class ButtonManager : MonoBehaviour
 
 
     /// <summary>
-    /// Méthodes permettant de lancer une animation pour les boutons.
+    /// Méthode permettant de lancer une animation pour les boutons.
     /// </summary>
     public void LaunchHighscores(){
         StartCoroutine(LoadHighscores());
     }
 
     /// <summary>
-    /// Méthodes permettant de lancer une animation pour les boutons.
+    /// Méthode permettant de lancer une animation pour les boutons.
     /// </summary>
     public void LaunchGoals(){
         StartCoroutine(LoadGoals());
     }
 
     /// <summary>
-    /// Coroutine de changement de scène lié au lancement de l'animation (menu principal vers interface de jeu ou inversement).
+    /// Coroutine de changement de scène liée au lancement de l'animation (menu principal vers interface de jeu ou inversement).
     /// </summary>
     /// <returns>
     /// Génere une pause de 0.38 secondes.
@@ -206,7 +204,7 @@ public class ButtonManager : MonoBehaviour
 
 
     /// <summary>
-    /// Coroutine de changement de scène lié au lancement de l'animation (menu principal vers interface de jeu ou inversement).
+    /// Coroutine de changement de scène liée au lancement de l'animation (menu principal vers interface de jeu ou inversement).
     /// </summary>
     /// <returns>
     /// Génere une pause de 0.38 secondes.
@@ -232,7 +230,7 @@ public class ButtonManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Méthodes permettant de lancer une animation pour les boutons.
+    /// Méthode permettant de lancer une animation pour les boutons.
     /// </summary>
     public void QuitPamameters()
     {
@@ -240,7 +238,7 @@ public class ButtonManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Coroutine de changement de scène lié au lancement de l'animation (menu principal vers interface de jeu ou inversement).
+    /// Coroutine de changement de scène liée au lancement de l'animation (menu principal vers interface de jeu ou inversement).
     /// </summary>
     /// <returns>
     /// Génere une pause de 0.38 secondes.
@@ -260,11 +258,17 @@ public class ButtonManager : MonoBehaviour
         //Modification de l'interface
         ParametersPanel.SetActive(false);
     }
-
+    
+    /// <summary>
+    /// Méthode permettant de définir si le jeu est lancé
+    /// </summary>
     public static void SetGameIsLoad(bool value){
         gameIsLoad=value;
     }
 
+    /// <summary>
+    /// Méthode permettant de récupérer l'attribut indiquant si le jeu est lancé
+    /// </summary>
     public static bool GetGameIsLoad(){
         return gameIsLoad;
     }

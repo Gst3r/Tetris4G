@@ -29,6 +29,9 @@ public class PauseMenu : MonoBehaviour
     /// </summary>
     private static bool gameIsPausing;
 
+    /// <summary>
+    /// Attribut contenant une instance du controller
+    /// </summary>
     public Controller controller;
 
     public void Start(){
@@ -36,8 +39,8 @@ public class PauseMenu : MonoBehaviour
     }
  
     /// <summary> 
+    /// Auteur : Seghir Nassima <br>
     /// Méthode qui permet de mettre le jeu en état de pause 
-    /// Auteur:Seghir Nassima
     /// </summary>
     public void Pause()
     {
@@ -47,8 +50,8 @@ public class PauseMenu : MonoBehaviour
     }
     
     /// <summary> 
+    /// Auteurs : Seghir Nassima,Malcom Kusunga <br>
     /// Méthode qui permet de reprendre la partie 
-    /// Auteur:Seghir Nassima,Malcom Kusunga
     /// </summary>
     public void Resume()
     {   
@@ -57,7 +60,7 @@ public class PauseMenu : MonoBehaviour
 
     /// <summary>
     /// Auteur: Malcom Kusunga
-    /// Coroutine lié au lancement de l'animation lorsque le bouton pour continuer la partie est selectionné
+    /// Coroutine liée au lancement de l'animation lorsque le bouton pour continuer la partie est selectionné
     /// </summary>
     /// <returns>
     /// Génere une pause de 0.38 secondes.
@@ -76,12 +79,13 @@ public class PauseMenu : MonoBehaviour
         //Fermeture du Menu pause
         pauseMenu.SetActive(false);
 
+        //Lancement du décompte
         controller.LaunchCount();
     }
     
     /// <summary> 
+    /// Auteur : Seghir Nassima <br>
     /// Méthode qui permet de commencer une nouvelle partie 
-    /// Auteur:Seghir Nassima
     /// </summary>
     public void Restart()
     {
@@ -90,10 +94,16 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(1); 
     }
 
+    /// <summary> 
+    /// Méthode qui permet de récupérer la variable indiquant lorsque le jeu est en pause
+    /// </summary>
     public static bool GetGameIsPausing(){
         return gameIsPausing;
     }
     
+    /// <summary> 
+    /// Méthode qui permet de modifier la variable indiquant lorsque le jeu est en pause
+    /// </summary>
     public static void SetGameIsPausing(bool value){
         gameIsPausing = value;
     }

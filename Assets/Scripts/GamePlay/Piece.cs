@@ -303,7 +303,9 @@ public class Piece : MonoBehaviour
     /// Description : Méthode permettant le déplacement vers la gauche du tetromino actuellement présent sur le plateau
     /// </summary>
     public void LeftShift(){
+        //Vérification du sens d'application de la gravité
         if(board.GetGravity() == Gravity.HAUT || board.GetGravity() == Gravity.BAS){
+            //Suppresion de la position précédente du tétromino sur la grille
             board.Clear(this);
             TouchSensitive.SetWantToRotate(false);
             Move(Vector2Int.left);
@@ -315,7 +317,9 @@ public class Piece : MonoBehaviour
     /// Description : Méthode permettant le déplacement vers le haut du tetromino actuellement présent sur le plateau
     /// </summary>
     public void TopShift(){
+        //Vérification du sens d'application de la gravité
         if(board.GetGravity() == Gravity.GAUCHE || board.GetGravity() == Gravity.DROITE){
+            //Suppresion de la position précédente du tétromino sur la grille
             board.Clear(this);
             TouchSensitive.SetWantToRotate(false);
             Move(Vector2Int.up);
@@ -327,7 +331,9 @@ public class Piece : MonoBehaviour
     /// Description : Méthode permettant le déplacement vers le bas du tetromino actuellement présent sur le plateau
     /// </summary>
     public void BotShift(){
+        //Vérification du sens d'application de la gravité
         if(board.GetGravity() == Gravity.GAUCHE || board.GetGravity() == Gravity.DROITE){
+            //Suppresion de la position précédente du tétromino sur la grille
             board.Clear(this);
             TouchSensitive.SetWantToRotate(false);
             Move(Vector2Int.down);
@@ -419,7 +425,7 @@ public class Piece : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Sterlingot Guillaume, Kusunga Malcom
+    /// Auteurs : Sterlingot Guillaume, Kusunga Malcom
     /// Description : Méthode permettant de restaurer la vitesse de déplacement du tetromino actuellement présent sur le plateau
     /// </summary>
     public void RestoreGravity(){

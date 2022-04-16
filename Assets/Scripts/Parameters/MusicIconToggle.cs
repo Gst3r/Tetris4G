@@ -4,13 +4,13 @@ using System.Collections;
 
 /// <summary>
 /// Auteur : Kusunga Malcom<br>
-/// Description : Cette classe permet la gestion de la musique du jeu a travers l'utilisation d'un toggle
+/// Description : Cette classe permet la gestion de la musique du jeu à travers l'utilisation d'un toggle
 /// </summary>
 [RequireComponent(typeof(Image))]
 public class MusicIconToggle : MonoBehaviour {
 
 	/// <summary>
-    /// Le sprite utiisé lorsque le Toggle est à False
+    /// Le sprite utiisé lorsque le Toggle est à True
     /// </summary>
 	public Sprite m_iconTrue;
 
@@ -31,11 +31,11 @@ public class MusicIconToggle : MonoBehaviour {
 
 
 	void Start () {
-		//Recuperation de l'image dans le toggle
+		//Récupération de l'image dans le toggle
 		m_image = GetComponent<Image>();
 		m_image.sprite = (m_defaultIconState) ? m_iconTrue : m_iconFalse;
 
-		//Verifie si des parametres ont ete definis
+		//Vérifie si des paramètres ont été définis
         if(PlayerPrefs.HasKey("Audio"))
         {	
 			//Application des paramètres enregistrés
@@ -57,10 +57,10 @@ public class MusicIconToggle : MonoBehaviour {
 	}
 
 	/// <summary>
-    /// Methode permettant de modfier l'etat du toggle
+    /// Méthode permettant de modfier l'etat du toggle
     /// </summary>
     /// <param name="state">
-    /// Booleen definissant si le toggle est actif ou non
+    /// Booleen définissant si le toggle est actif ou non
     /// </param>
 	public void ToggleIcon(bool state)
 	{

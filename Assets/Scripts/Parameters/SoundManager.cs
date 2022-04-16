@@ -3,17 +3,17 @@ using System.Collections;
 
 /// <summary> 
 /// Auteur : Kusunga Malcom<br>
-/// Description : Cette classe permet la gestion des différents sont présents dans le jeu
+/// Description : Cette classe permet la gestion des différents son présents dans le jeu
 /// </summary>
 public class SoundManager : MonoBehaviour {
 
 	/// <summary>
-    /// booleen qui determine lorsque si la musique est active
+    /// Booléen qui determine si la musique est activée
     /// </summary>
 	public bool m_musicEnabled = true;
 
 	/// <summary>
-    /// booleen qui determine lorsque si les effets sonores sont actifs
+    /// Booléen qui determine si les effets sonores sont actifs
     /// </summary>
 	public bool m_fxEnabled = true;
 
@@ -63,7 +63,7 @@ public class SoundManager : MonoBehaviour {
 	public FxIconToggle fxIconToggle;
 
 	private void Start () {
-		//Verifie si des parametres ont ete definis
+		//Vérifie si des paramètres ont été définis
         if(PlayerPrefs.HasKey("Audio"))
         {
 			//Application des paramètres enregistrés
@@ -78,7 +78,7 @@ public class SoundManager : MonoBehaviour {
 			PlayerPrefs.SetInt("Audio",1);
         }
 
-		//Verifie si des parametres ont ete definis
+		//Vérifie si des paramètres ont été définis
         if(PlayerPrefs.HasKey("AudioFx"))
         {
 			//Application des paramètres enregistrés
@@ -109,7 +109,7 @@ public class SoundManager : MonoBehaviour {
 
 	/// <summary>
     /// Auteur : Kusunga Malcom
-    /// Methode permettant le lancement de la musique de fond des l'apparition de la scéne
+    /// Methode permettant le lancement de la musique de fond des l'apparition de la scène
     /// </summary>
 	public void PlayBackgroundMusic(AudioClip musicClip)
 	{
@@ -136,11 +136,11 @@ public class SoundManager : MonoBehaviour {
 
 	/// <summary>
     /// Auteur : Kusunga Malcom
-    /// Methode permettant d'activer/desactiver la musique lorsque le joueur utilise le Toggle lié à la musique 
+    /// Méthode permettant d'activer/desactiver la musique lorsque le joueur utilise le Toggle lié à la musique 
     /// </summary>
 	private void UpdateMusic()
 	{	
-		//Si le parametre de gestion de la musique a été modifié
+		//Si le paramètre de gestion de la musique a été modifié
 		if (m_musicSource.isPlaying != m_musicEnabled) 
 		{
 			//Active/desactive la musique en fonction de l'option selectionnée par le joueur
@@ -160,7 +160,7 @@ public class SoundManager : MonoBehaviour {
     /// </summary>
 	public void ToggleMusic()
 	{
-		//Inversement de la valeur de la variable booleenne
+		//Inversement de la valeur de la variable booléenne
 		m_musicEnabled = !m_musicEnabled;
 		UpdateMusic();
 
@@ -181,11 +181,11 @@ public class SoundManager : MonoBehaviour {
 
 	/// <summary>
     /// Auteur : Kusunga Malcom
-    /// Methode permettant d'activer/desactiver le son des effets sonores
+    /// Méthode permettant d'activer/desactiver le son des effets sonores
     /// </summary>
 	public void ToggleFX()
 	{
-		//Inversement de la valeur de la variable booleenne
+		//Inversement de la valeur de la variable booléenne
 		m_fxEnabled = !m_fxEnabled;
 
 		//Mise à jour de l'affichage du toggle
@@ -209,7 +209,7 @@ public class SoundManager : MonoBehaviour {
     /// </summary>
 	public void PlaySound (AudioClip clip, float volMultiplier = 1.0f)
 	{	
-		//Verifie que le volume des effets est bien activée
+		//Vérifie que le volume des effets est bien activée
 		if (m_fxEnabled && clip) {
 			AudioSource.PlayClipAtPoint (clip, Camera.main.transform.position, Mathf.Clamp(m_fxVolume*volMultiplier,0.05f,1f));
 		}
