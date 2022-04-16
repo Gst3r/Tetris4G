@@ -5,7 +5,7 @@ using System.IO;
 
 /// <summary> 
 /// Auteur : Kusunga Malcom<br>
-/// Description : Cette classe contient l'ensemble des methodes necessaires a la traduction du jeu.
+/// Description : Cette classe contient l'ensemble des méthodes necessaires à la traduction du jeu.
 /// </summary>
 public sealed class Translation : MonoBehaviour
 {   
@@ -25,12 +25,12 @@ public sealed class Translation : MonoBehaviour
     [SerializeField] private LanguageDropdown ddLang;
 
     /// <summary> 
-    /// Chaine de caracteres contenant la langue actuelle du jeu
+    /// Chaîne de caractères contenant la langue actuelle du jeu
     /// </summary>
     private string actualLanguage;
 
     /// <summary> 
-    /// Chaine de caracteres contenant la langue du jeu avant un possible changement dans la liste deroulante
+    /// Chaîne de caractères contenant la langue du jeu avant un possible changement dans la liste deroulante
     /// </summary>
     private string previousLanguage;
 
@@ -39,6 +39,9 @@ public sealed class Translation : MonoBehaviour
     /// </summary>
     private static SystemLanguage language;
 
+    /// <summary> 
+    /// Booleen permettant de définir si le dictionnaire contenant les traductions est initialisé
+    /// </summary>
     private static bool isInitialize = false;
 
     private void Start()
@@ -49,22 +52,22 @@ public sealed class Translation : MonoBehaviour
 
     private void Update()
     {
-        // Verifie si un changement du parametre langue a lieu
+        // Vérifie si un changement du paramètre langue a lieu
         CheckLanguage();
     }
 
     /// <summary>
-    /// Methode permettant d'initialiser le jeu dans une certaine langue
+    /// Méthode permettant d'initialiser le jeu dans une certaine langue
     /// </summary>
     private void InitializeLanguage()
     {   
-        // Vefifie Si le joueur a deja defini des parametres pour la langue
+        // Véfifie Si le joueur a déjà défini des paramètres pour la langue
         if(PlayerPrefs.HasKey("Language"))
         {
-            // Recuperation de la langue selectionnee par le joueur
+            // Récupération de la langue selectionnée par le joueur
             actualLanguage = PlayerPrefs.GetString("Language");
 
-            // Selection du fichier de traduction
+            // Sélection du fichier de traduction
             if(actualLanguage.CompareTo("French") == 0)
             {
                 language = SystemLanguage.French;
@@ -74,8 +77,8 @@ public sealed class Translation : MonoBehaviour
                 language = SystemLanguage.Korean;
             }
         }else{
-            // Selection de la langue en fonction de la langue du telephone de l'utilisateur
-            // Si la langue est disponible dans l'application elle sera selectionnee sinon le jeu sera en anglais
+            // Sélection de la langue en fonction de la langue du téléphone de l'utilisateur
+            // Si la langue est disponible dans l'application elle sera selectionnée sinon le jeu sera en anglais
             if (Array.IndexOf<SystemLanguage>(Languages, Application.systemLanguage) == -1)
             {
                 language = SystemLanguage.English;
@@ -83,7 +86,7 @@ public sealed class Translation : MonoBehaviour
                 PlayerPrefs.SetString("Language","English");
             }else{
                 language = Languages[Array.IndexOf<SystemLanguage>(Languages, Application.systemLanguage)];
-                //Selection selon la langue detectee
+                //Sélection selon la langue détectée
                 switch(language)
                 {
                     case SystemLanguage.English:actualLanguage = "English";
@@ -104,19 +107,19 @@ public sealed class Translation : MonoBehaviour
     }
 
     /// <summary>
-    /// Methode permettant de verifier si le joueur selectionne une nouvelle langue
+    /// Méthode permettant de vérifier si le joueur sélectionne une nouvelle langue
     /// </summary>
     private void CheckLanguage()
     {   
         if(ddLang.getLanguage() != null)
         {   
-            // Recuperation de la langue selectionnee dans la liste deroulante
+            // Récuperation de la langue selectionnée dans la liste deroulante
             actualLanguage = ddLang.getLanguage();
 
-            // Verification que la langue selectionnee est differente de la langue actuelle
+            // Verification que la langue selectionnée est differente de la langue actuelle
             if(actualLanguage.CompareTo(previousLanguage) != 0)
             {
-                // Selection du fichier de traduction
+                // Sélection du fichier de traduction
                 if(actualLanguage.CompareTo("French") == 0)
                 {
                     PlayerPrefs.SetString("Language","French");
@@ -131,7 +134,7 @@ public sealed class Translation : MonoBehaviour
 
                 previousLanguage = actualLanguage;
 
-                // Mise a jour du dictionnaire contenant une traduction pour l'ensemble des mots
+                // Mise à jour du dictionnaire contenant une traduction pour l'ensemble des mots
                 Translations = null;
                 LoadDictionnary();
             }
@@ -140,19 +143,19 @@ public sealed class Translation : MonoBehaviour
 
     /// <summary> 
     /// Auteur: Kusunga Malcom
-    /// Methode qui permet de recuperer le dictionnaire afin d'effectuer la traduction
+    /// Méthode qui permet de récupérer le dictionnaire afin d'effectuer la traduction
     /// </summary>
     private static void LoadDictionnary()
     {
         if(isInitialize){
-            // Verifie si le dictionnaire a deja ete initialise
+            // Vérifie si le dictionnaire à déjà été initialisé
             if (Translations != null)
                 return;
 
-            // Creation du dictionnaire
+            // Création du dictionnaire
             Translations = new Dictionary<string, string>();
 
-            // Recuperation du fichier contenant la traduction dans une certaine langue
+            // Récuperation du fichier contenant la traduction dans une certaine langue
             var data = Resources.Load<TextAsset>($"Translations/{language}");
 
             // Lecture du fichier contenant les traductions
@@ -163,7 +166,7 @@ public sealed class Translation : MonoBehaviour
 
     /// <summary> 
     /// Auteur: Kusunga Malcom
-    /// Methode qui retourne la traduction d'un mot
+    /// Méthode qui retourne la traduction d'un mot
     /// </summary>
     /// <param name="key">
     /// Le mot dont pour lequel la traduction est renvoyée
@@ -171,23 +174,22 @@ public sealed class Translation : MonoBehaviour
     public static string Get(string key)
     {   
         if(isInitialize){
-            //Vérifie que la dictionnaire est initialisé
+            // Vérifie que la dictionnaire est initialisé
             LoadDictionnary();
 
-            //Récupération de la traduction
+            // Récupération de la traduction
             if (Translations.ContainsKey(key))
                 return Translations[key];
 
-            //Renvoi le mot dans le cas le mot serait le meme entre les deux differentes langues
-            return key;
         }
 
+        // Renvoi le mot dans le cas le mot serait le même entre les deux differentes langues
         return key;
     }
 
     /// <summary> 
     /// Auteur: Kusunga Malcom
-    /// Methode qui lit le fichier contenant l'ensemble des tractuctions pour une langue
+    /// Méthode qui lit le fichier contenant l'ensemble des tractuctions pour une langue
     /// </summary>
     /// <param name="data">
     /// Le fichier contenant la traduction pour une langue
@@ -196,7 +198,7 @@ public sealed class Translation : MonoBehaviour
     {
         using (var stream = new StringReader(data))
         {   
-            //Lecture de la premiere ligne
+            //Lecture de la première ligne
             var line = stream.ReadLine();
 
             //Tableau contenant un mot et sa traduction
@@ -216,15 +218,15 @@ public sealed class Translation : MonoBehaviour
                     continue;
                 }
 
-                //Recuperation du mot et de sa traduction
+                //Récupération du mot et de sa traduction
                 wordsTab = line.Split('=');
 
                 if (wordsTab.Length == 2)
                 {   
-                    //Recuperation du mot 
+                    //Récupération du mot 
                     key = wordsTab[0].Trim();
 
-                    //Recuperation de sa traduction
+                    //Récupération de sa traduction
                     value = wordsTab[1].Trim();
 
                     if (value == string.Empty)

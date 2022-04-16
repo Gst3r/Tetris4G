@@ -17,7 +17,7 @@ public enum Gravity
 }
  
 /// <summary> 
-/// Auteur : Sterlingot Guillaume, Bae Jin-Young, Nassima Seghir, Malcom Kusunga<br>
+/// Auteurs : Sterlingot Guillaume, Bae Jin-Young, Nassima Seghir, Malcom Kusunga<br>
 /// Description : Cette classe permet de la gestion de l'ensemble de la grille de jeu
 /// </summary>
 public class BoardManager : MonoBehaviour
@@ -735,7 +735,7 @@ public class BoardManager : MonoBehaviour
 
 
     /// <summary>
-    /// Auteur : Bae Jin-Young, Kusunga Malcom
+    /// Auteurs : Bae Jin-Young, Kusunga Malcom
     /// Méthode permettant de bloquer les gravités pour les cotés complets
     /// </summary>
     public void StopGravity()

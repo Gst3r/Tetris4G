@@ -3113,10 +3113,6 @@ MonoBehaviour:
     m_Height: 1
   - m_X: 89
     m_Y: 720
-    m_Width: 162
-    m_Height: 63
-  - m_X: 89
-    m_Y: 720
     m_Width: 21
     m_Height: 76
   - m_X: 188

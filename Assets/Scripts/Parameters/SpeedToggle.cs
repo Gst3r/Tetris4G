@@ -11,7 +11,7 @@ public class SpeedToggle : MonoBehaviour
 {
     private void Start()
     {
-        //Recuperation du Toggle Speed present dans l'interface de pause
+        //Récuperation du Toggle Speed present dans l'interface de pause
         Toggle speedToggle = GetComponent<Toggle>();
 
         //Vérifie si l'augmentation de la gravité est bloquée
@@ -22,10 +22,10 @@ public class SpeedToggle : MonoBehaviour
     }
 
     /// <summary>
-    /// Methode permettant de bloquer l'augmentation de la gravité
+    /// Méthode permettant de bloquer l'augmentation de la gravité
     /// </summary>
     /// <param name="unlock">
-    /// Booleen definissant si l'on bloque ou active l'augmentation de la gravité
+    /// Booléen definissant si l'on bloque ou active l'augmentation de la gravité
     /// </param>
     public void ToggleSpeedOnValueChanged(bool lockS)
     {   

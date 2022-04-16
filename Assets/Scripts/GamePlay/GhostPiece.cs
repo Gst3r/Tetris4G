@@ -55,23 +55,23 @@ public class GhostPiece : MonoBehaviour
         //Mise à jour des cellules de la ghost piece
         CopyPieceOnBoard();
         
-        //Place la piece a l'extremite de la grille dans le sens de la gravite
+        //Place la pièce à l'extremite de la grille dans le sens de la gravite
         ProjectPiece();
 
-        //Retire la ghost piece dans gille de jeu
+        //Place la ghost piece dans gille de jeu
         SetGhost();
     }
 
     /// <summary> 
     /// Auteur : Kusunga Malcom
-    /// Méthode permettant de definir la ghost piece sur la grille de jeu secondaire
+    /// Méthode permettant de définir la ghost piece sur la grille de jeu secondaire
     /// </summary>
     public void SetGhost()
     {
         //Parcours des cellules de la ghost piece
         for (int i = 0; i < this.cells.Length; i++)
         {
-            //Recuperation de la position de la cellule
+            //Récupération de la position de la cellule
             Vector3Int tilePosition = this.cells[i] + this.position;
             //Enregistrement de la cellule sur la grille de jeu
             this.tilemap.SetTile(tilePosition, this.tile);
@@ -87,7 +87,7 @@ public class GhostPiece : MonoBehaviour
         //Parcours des cellules de la ghost piece
         for (int i = 0; i < this.cells.Length; i++)
         {
-            //Recuperation de la position de la cellule
+            //Récupération de la position de la cellule
             Vector3Int tilePosition = this.cells[i] + this.position;
             //Suppression de la cellule sur la grille de jeu
             this.tilemap.SetTile(tilePosition, null);
@@ -103,7 +103,7 @@ public class GhostPiece : MonoBehaviour
         //Parcours des cellules de la ghost piece
         for (int i = 0; i < this.cells.Length; i++)
         {
-            //Copie des données de la piece sur la grille dans la ghost piece
+            //Copie des données de la pièce sur la grille dans la ghost piece
             this.cells[i] = this.pieceOnBoard.cells[i];
         }
     }
@@ -123,7 +123,7 @@ public class GhostPiece : MonoBehaviour
             //Récupération de la ligne sur laquelle se trouve la piece actuelle
             int currentRow = position.y;
 
-            //Récupération de la derniere ligne de la grille de jeu
+            //Récupération de la dernière ligne de la grille de jeu
             int lastRow = -this.board.GetSize().y / 2 - 1;
 
             //Efface temporairement la piece actuelle de la grille de jeu au cas où il y aurait superposition avec la ghost piece
@@ -141,7 +141,7 @@ public class GhostPiece : MonoBehaviour
                 }
             }
 
-            //Replace la piece actuelle dans la grille de jeu
+            //Replace la pièce actuelle dans la grille de jeu
             if (this.pieceOnBoard.GetPouvoir() == Pouvoir.Standard)
             {
                 this.board.Set(this.pieceOnBoard, this.pieceOnBoard.GetData().tile);
@@ -180,7 +180,7 @@ public class GhostPiece : MonoBehaviour
                 }
             }
 
-            //Replace la piece actuelle dans la grille de jeu
+            //Replace la pièce actuelle dans la grille de jeu
             if (this.pieceOnBoard.GetPouvoir() == Pouvoir.Standard)
             {
                 this.board.Set(this.pieceOnBoard, this.pieceOnBoard.GetData().tile);
@@ -198,13 +198,13 @@ public class GhostPiece : MonoBehaviour
         //GRAVITE GAUCHE
         else if(board.GetGravity() == Gravity.GAUCHE){
 
-            //Récupération de la colonne sur laquelle se trouve la piece actuelle
+            //Récupération de la colonne sur laquelle se trouve la pièce actuelle
             int currentCol = position.x;
 
             //Récupération de la première ligne de la grille de jeu
             int firstCol = -this.board.GetSize().x / 2 - 1;
 
-            //Efface temporairement la piece actuelle de la grille de jeu au cas où il y aurait superposition avec la ghost piece
+            //Efface temporairement la pièce actuelle de la grille de jeu au cas où il y aurait superposition avec la ghost piece
             this.board.Clear(this.pieceOnBoard);
 
             for(int col = currentCol; col >= firstCol; col--)
@@ -219,7 +219,7 @@ public class GhostPiece : MonoBehaviour
                 }
             }
 
-            //Replace la piece actuelle dans la grille de jeu
+            //Replace la pièce actuelle dans la grille de jeu
             if (this.pieceOnBoard.GetPouvoir() == Pouvoir.Standard)
             {
                 this.board.Set(this.pieceOnBoard, this.pieceOnBoard.GetData().tile);
@@ -237,13 +237,13 @@ public class GhostPiece : MonoBehaviour
         //GRAVITE DROITE
         else if(board.GetGravity() == Gravity.DROITE){
 
-            //Récupération de la colonne sur laquelle se trouve la piece actuelle
+            //Récupération de la colonne sur laquelle se trouve la pièce actuelle
             int currentCol = position.x;
 
             //Récupération de la première ligne de la grille de jeu
             int lastCol = this.board.GetSize().x / 2 - 1;
 
-            //Efface temporairement la piece actuelle de la grille de jeu au cas où il y aurait superposition avec la ghost piece
+            //Efface temporairement la pièce actuelle de la grille de jeu au cas où il y aurait superposition avec la ghost piece
             this.board.Clear(this.pieceOnBoard);
 
             for(int col = currentCol; col <= lastCol; col++)
@@ -258,7 +258,7 @@ public class GhostPiece : MonoBehaviour
                 }
             }
 
-            //Replace la piece actuelle dans la grille de jeu
+            //Replace la pièce actuelle dans la grille de jeu
             if (this.pieceOnBoard.GetPouvoir() == Pouvoir.Standard)
             {
                 this.board.Set(this.pieceOnBoard, this.pieceOnBoard.GetData().tile);

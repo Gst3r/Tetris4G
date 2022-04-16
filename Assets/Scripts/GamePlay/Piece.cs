@@ -410,7 +410,7 @@ public class Piece : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Sterlingot Guillaume, Kusunga Malcom
+    /// Auteurs : Sterlingot Guillaume, Kusunga Malcom
     /// Description : Méthode permettant de restaurer la vitesse de déplacement du tetromino actuellement présent sur le plateau
     /// </summary>
     public void RestoreGravity(){
