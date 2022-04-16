@@ -17,6 +17,7 @@ public class GoalsInitialize : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        goalsUI.CreateJsonFile();
         goalsUI.InitializeElements();
         goalsUI.FillPanel();
     }

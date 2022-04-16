@@ -249,6 +249,7 @@ public class TutorialManager : MonoBehaviour
     /// </summary>
     public void SetTutorial(){
         StopGame();
+        explainPrev=true;
         explainPanel.SetActive(false);
         hidePanel.SetActive(false);
         goalPanel.SetActive(false);

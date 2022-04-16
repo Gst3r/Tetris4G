@@ -43,12 +43,6 @@ public class GoalsUI : MonoBehaviour
     /// </summary>
     [SerializeField] private Sprite valideZone;
 
-    // Start is called before the first frame update
-    public void Start()
-    {
-        CreateJsonFile();
-    }
-
     /// <summary>
     /// Auteur : Sterlingot Guillaume<br>
     /// Description : Cette méthode permet de créer un fichier json dans les données du téléphone si il n'existe pas déjà<br>
