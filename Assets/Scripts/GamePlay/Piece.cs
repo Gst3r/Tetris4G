@@ -115,9 +115,9 @@ public class Piece : MonoBehaviour
         this.previewManager = FindObjectOfType<PreviewManager>();
         this.holdManager = FindObjectOfType<HoldManager>();
 
-        paliers_booleen = new bool[50];
+        paliers_booleen = new bool[100];
 
-        for (int i = 0; i < 50; i++)
+        for (int i = 0; i < paliers_booleen.Length; i++)
         {
             this.paliers_booleen[i] = false;
         }

@@ -77,6 +77,7 @@ public class Controller : MonoBehaviour
         }
 
         mode.Execute();
+        board.CountTime();
     }
 
     /// <summary> 

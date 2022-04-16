@@ -70,6 +70,9 @@ public class BoardManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Le temps depuis le début de la partie en secondes
+    /// </summary>
     private static float time;
 
 //------------------------------------------------------------------COTE COMPLET-----------------------------------------
@@ -175,7 +178,6 @@ public class BoardManager : MonoBehaviour
 
     }
 
-
     /// <summary> 
     /// Méthode qui permet de fixer la piece sur la grille de jeu 
     /// Auteur:Seghir Nassima
@@ -218,6 +220,10 @@ public class BoardManager : MonoBehaviour
         this.size = new Vector2Int(16,22);
     }
 
+    /// <summary>
+    /// Auteurs : Seghir Nassima, Bae Jin-Young
+    /// Méthode permettant d'incrémenter le temps à chaque seconde
+    /// </summary>
     public void CountTime()
     {
         if (!PauseMenu.GetGameIsPausing())
