@@ -162,9 +162,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: NotoSansArabic-Medium SDF
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: 834264494
   material: {fileID: -2338351259192073700}
-  materialHashCode: 0
+  materialHashCode: 682957262
   m_Version: 1.1.0
   m_SourceFontFileGUID: 27af5d449da44874083512e77c0cc691
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 27af5d449da44874083512e77c0cc691,
@@ -267,7 +267,7 @@ MonoBehaviour:
     italicTypeface: {fileID: 0}
   - regularTypeface: {fileID: 0}
     italicTypeface: {fileID: 0}
-  - regularTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 11400000, guid: adaf542325ca71944b62b25206dc5c64, type: 2}
     italicTypeface: {fileID: 0}
   - regularTypeface: {fileID: 0}
     italicTypeface: {fileID: 0}

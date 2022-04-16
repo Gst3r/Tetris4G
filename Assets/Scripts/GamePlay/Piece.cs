@@ -83,6 +83,7 @@ public class Piece : MonoBehaviour
     /// Le pouvoir de la piece
     /// </summary>
     private Pouvoir pouvoir;
+
     private static bool gravityIsModified;
 
     /// <summary> 
@@ -114,9 +115,9 @@ public class Piece : MonoBehaviour
         this.previewManager = FindObjectOfType<PreviewManager>();
         this.holdManager = FindObjectOfType<HoldManager>();
 
-        paliers_booleen = new bool[3];
+        paliers_booleen = new bool[50];
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 50; i++)
         {
             this.paliers_booleen[i] = false;
         }
@@ -225,17 +226,36 @@ public class Piece : MonoBehaviour
         board.StopGravity();
         holdManager.SetStatusHold();
 
-        //generation de la prochaine piece selon le score
-        if (ScoreManager.GetScore() >= 100 && paliers_booleen[0] == false)
+        //uniquement en mode Marathon
+        if (Controller.GetGameMode() == Mode.MARATHON)
         {
-            board.SpawnPiece(previewManager.GetNextPiece(), board.GetSpawnPosition(), Pouvoir.Bonus);
-            paliers_booleen[0] = true;
+            //toutes les 50 secondes
+            int tps = (int)board.GetTime() / 50;
+
+            //apparition d'un malus si tps est un multiple de 2
+            if (tps % 2 == 0 && paliers_booleen[tps] == false && tps != 0)
+            {
+                board.SpawnPiece(previewManager.GetNextPiece(), board.GetSpawnPosition(), Pouvoir.Malus);
+                paliers_booleen[tps] = true;
+
+            }
+
+            //apparition d'un bonus si tps n'est pas un multiple de 2
+            else if (tps % 2 == 1 && paliers_booleen[tps] == false)
+            {
+                board.SpawnPiece(previewManager.GetNextPiece(), board.GetSpawnPosition(), Pouvoir.Bonus);
+                paliers_booleen[tps] = true;
+
+            }
+
+            // le reste du temps, des pièces standards
+            else
+            {
+                board.SpawnPiece(previewManager.GetNextPiece(), board.GetSpawnPosition(), Pouvoir.Standard);
+            }
         }
-        else if (ScoreManager.GetScore() >= 200 && paliers_booleen[1] == false)
-        {
-            board.SpawnPiece(previewManager.GetNextPiece(), board.GetSpawnPosition(), Pouvoir.Malus);
-            paliers_booleen[1] = true;
-        }
+
+        //si le mode different de Marathon, apparition de pieces standards
         else
         {
             board.SpawnPiece(previewManager.GetNextPiece(), board.GetSpawnPosition(), Pouvoir.Standard);

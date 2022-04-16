@@ -56,21 +56,27 @@ public class ScoreManager : MonoBehaviour
         this.sd = JsonUtility.FromJson<ScoreData>(json);
         return this; 
     }
-   
+
     /// <summary>
     /// Auteur : Seghir Nassima, Bae Jin-Young
     /// Méthode permettant d'incrémenter le score selon le nombre de lignes éliminées
     /// </summary>
-     public void IncrementScore(int nmbLines, bool isBonus, bool isMalus)
+    /// <param name="isBonus">
+    /// Booleen mis a TRUE si les lignes sont de nature "bonus"
+    /// </param>
+    /// <param name="isMalus">
+    /// Booleen mis a TRUE si les lignes sont de nature "malus"
+    /// </param>
+    /// <param name="nmbLines">
+    /// Le nombre de lignes supprimées
+    /// </param>
+    public void IncrementScore(int nmbLines, bool isBonus, bool isMalus)
     {
-
+          // si les lignes sont standards
           if (!isBonus && !isMalus)
         {
             switch (nmbLines)
             {
-                case -1:
-                    score += -40;
-                    break;
                 case 1:
                     score += 40;
                     break;
@@ -88,6 +94,7 @@ public class ScoreManager : MonoBehaviour
             }
         }
 
+          //si les lignes sont bonus, doubles des points standards
          if (isBonus)
         {
             switch (nmbLines)
@@ -109,6 +116,7 @@ public class ScoreManager : MonoBehaviour
             }
         }
 
+         //si les lignes sont malus, le negatifs de points standards
          if (isMalus)
         {
             switch (nmbLines)
@@ -130,13 +138,10 @@ public class ScoreManager : MonoBehaviour
             }
         }
 
+         //le score est mis a jour
           ChangeScore();
-
-
-
-
        
-    }
+     }
 
     /// <summary> 
     /// Méthode qui retourne la liste des scores dans l'ordre decroissant 

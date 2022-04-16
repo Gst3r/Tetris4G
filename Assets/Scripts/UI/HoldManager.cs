@@ -11,7 +11,7 @@ public class HoldManager : MonoBehaviour
 {
 
     /// <summary>
-    /// Tableau des sprites des t�trominoes + un sprite vide
+    /// Tableau des sprites des tetrominoes + un sprite vide
     /// </summary>
     public Sprite[] tetrominoes;
 
@@ -41,14 +41,14 @@ public class HoldManager : MonoBehaviour
     private BoardManager board;
 
     /// <summary>
-    /// Booleen repr�sentant le status du hold qui ne peut �tre chang� qu'une fois avant un Lock de la piece active
+    /// Booleen representant le status du hold qui ne peut etre change qu'une fois avant un Lock de la piece active
     /// </summary>
     private bool changed;
 
     // Start is called before the first frame update
     void Start()
     {
-        //recherche des diff�rents �l�ments n�cessaires � ce script
+        //recherche des differents elements necessaires a ce script
         activePiece = FindObjectOfType<Piece>();
         previewManager = FindObjectOfType<PreviewManager>();
         board = FindObjectOfType<BoardManager>();
@@ -59,7 +59,7 @@ public class HoldManager : MonoBehaviour
     }
 
     /// <summary>
-    /// M�thode permettant de stocker la piece active dans la zone de hold
+    /// Methode permettant de stocker la piece active dans la zone de hold
     /// </summary>
     public void ChangeHold()
     {
@@ -100,10 +100,10 @@ public class HoldManager : MonoBehaviour
     }
 
     /// <summary>
-    /// M�thode permettant de changer le sprite de la zone de hold
+    /// Methode permettant de changer le sprite de la zone de hold
     /// </summary>
     /// <param name="indice">
-    /// L'indice du sprite qui va �tre stock�
+    /// L'indice du sprite qui va etre stocke
     /// </param>
     public void ChangeSprite(int indice)
     {
@@ -111,7 +111,7 @@ public class HoldManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Methode permettant d'afficher une nouvelle piece sur le board apr�s avoir effacer la piece actuelle
+    /// Methode permettant d'afficher une nouvelle piece sur le board apres avoir effacer la piece actuelle
     /// </summary>
     /// <param name="indice">
     /// L'indice de la nouvelle piece
@@ -123,7 +123,7 @@ public class HoldManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Methode permettant de remettre le booleen changed � false, apr�s le positionnement d'une piece
+    /// Methode permettant de remettre le booleen changed a false, apres le positionnement d'une piece
     /// </summary>
     public void SetStatusHold()
     {

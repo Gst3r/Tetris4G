@@ -231,6 +231,9 @@ public class BoardManager : MonoBehaviour
     /// Auteur : Bae Jin-Young
     /// Méthode qui permet de vérifier si une ligne a été complétée dans la grille de jeu
     /// </summary>
+    /// <param name="row">
+    /// La ligne que l'on examine
+    /// </param>
     /// <returns>
     /// un booléen qui indique TRUE si une ligne a été complétée sur la grille de jeu, FALSE sinon
     /// </returns>
@@ -257,6 +260,9 @@ public class BoardManager : MonoBehaviour
     /// Auteur : Bae Jin-Young
     /// Méthode qui permet de détruire la ligne complétée et d'appliquer la gravité sur toute la grille
     /// </summary>
+    /// <param name="row">
+    /// La ligne complete a effacer
+    /// </param>
     public void ClearRow(int row)
     {
         RectInt bornes = Bornes;
@@ -316,6 +322,9 @@ public class BoardManager : MonoBehaviour
     /// Auteur : Bae Jin-Young
     /// Méthode qui permet de vérifier si une colonne a été complétée dans la grille de jeu
     /// </summary>
+    /// <param name="col">
+    /// La colonne que l'on examine
+    /// </param>
     /// <returns>
     /// un booléen qui indique TRUE si une colonne a été complétée sur la grille de jeu, FALSE sinon
     /// </returns>
@@ -342,6 +351,9 @@ public class BoardManager : MonoBehaviour
     /// Auteur : Bae Jin-Young
     /// Méthode qui permet de détruire la colonne complétée et d'appliquer la gravité sur toute la grille
     /// </summary>
+    /// <param name="col">
+    /// La colonne complete a effacer
+    /// </param>
     public void ClearCol(int col)
     {
         RectInt bornes = Bornes;
@@ -404,63 +416,76 @@ public class BoardManager : MonoBehaviour
     public void ClearCompleteLine()
     {
         RectInt bornes = Bornes;
-        int nbLinesCleared=0; //correspond au nombre de lignes effacées au total
-        
 
+        //Le nombre de lignes sans bonus ni malus effacées au total
+        int nbLinesCleared =0; 
+        
+        //Le nombre de lignes contenant un bonus
         int nbLinesBonus = 0;
+
+        //Le nombre de lignes contenant un malus
         int nbLinesMalus = 0;
 
         // les lignes :
         int row = bornes.yMin;
         while (row < bornes.yMax)
         {
-            /*bool isBonus = false;
-            bool isMalus = false;*/
 
             // si une ligne est complète, elle est détruite
             if (RowIsComplete(row))
             {
+                //on compte le nombre de tuiles standards, bonus et malus dans la ligne supprimee
                 int nbTileBonus = 0;
                 int nbTileMalus = 0;
                 int nbTileNormal = 0;
+
                 for (int colonne = bornes.xMin; colonne < bornes.xMax; colonne++)
                 {
                     Vector3Int cur_pos = new Vector3Int(colonne, row, -2);
 
+                    //Incrementation du nombre de cellules bonus
                     if (board.GetTile(cur_pos) == activePiece.GetData().bonus_tile)
                     {
                         nbTileBonus++;
                   
                     }
 
+                    //Incrementation du nombre de cellules malus
                     else if (board.GetTile(cur_pos) == activePiece.GetData().malus_tile)
                     {
                         nbTileMalus++;
                         
                     }
 
-                    else 
+                    //Incrementation du nombre de cellules standards
+                    else
                     {
                         nbTileNormal++;
                     }
                 }
 
+                //on efface la ligne complète
                 ClearRow(row);
 
+                //si la ligne ne contient que des tetrominoes standards, la ligne est consideree comme standard 
                 if (nbTileNormal == 16)
                 {
                     nbLinesCleared++;
                 }
 
+                //si la ligne contient des malus, elle est consideree comme malus
                 if (nbTileMalus > 0)
                 {
                     nbLinesMalus++;
                 }
 
+                //si la ligne contient des bonus, elle est consideree comme bonus
                 if (nbTileBonus > 0)
                 {
                     nbLinesBonus++;
                 }
+
+                //une ligne consideree comme malus ET bonus rapporte le meme score qu'une ligne standard
                  
             }
 
@@ -478,6 +503,7 @@ public class BoardManager : MonoBehaviour
             // si une colonne est complète, elle est détruite
             if (ColIsComplete(col))
             {
+                //on compte le nombre de tuiles standards, bonus et malus dans la colonne supprimee
                 int nbTileBonus = 0;
                 int nbTileMalus = 0;
                 int nbTileNormal = 0;
@@ -485,48 +511,56 @@ public class BoardManager : MonoBehaviour
                 {
                     Vector3Int cur_pos = new Vector3Int(col, ligne, -2);
 
+                    //Incrementation du nombre de cellules bonus
                     if (board.GetTile(cur_pos) == activePiece.GetData().bonus_tile)
                     {
                         nbTileBonus++;
 
                     }
 
+                    //Incrementation du nombre de cellules malus
                     else if (board.GetTile(cur_pos) == activePiece.GetData().malus_tile)
                     {
                         nbTileMalus++;
 
                     }
 
+                    //Incrementation du nombre de cellules standards
                     else
                     {
                         nbTileNormal++;
                     }
                 }
 
+                //on efface la colonne complete
                 ClearCol(col);
 
-
+                //si la colonne ne contient que des tetrominoes standards, elle est consideree comme standard 
                 if (nbTileNormal == 22)
                 {
                     nbLinesCleared++;
                 }
 
+                //si la colonne contient des malus, elle est consideree comme malus
                 if (nbTileMalus > 0)
                 {
                     nbLinesMalus++;
                 }
 
+                //si la colonne contient des bonus, elle est consideree comme bonus
                 if (nbTileBonus > 0)
                 {
                     nbLinesBonus++;
                 }
             }
 
+            //sinon on passe a la prochaine colonne
             else
             {
                 col++;
             }
         }
+        //Calcul du score selon le nombre et la nature des lignes/colonnes completees 
         scoreManager.IncrementScore(nbLinesCleared, false, false);
         scoreManager.IncrementScore(nbLinesBonus, true, false);
         scoreManager.IncrementScore(nbLinesMalus, false, true);
@@ -613,6 +647,12 @@ public class BoardManager : MonoBehaviour
     /// Auteur : Bae Jin-Young
     /// Description : Méthode permettant de vérifier si un côté de l'écran est rempli
     /// </summary>
+    /// <param name="gravity_is_vertical">
+    /// Booleen permettant d'identifier la nature de la gravite, TRUE si la gravite est celle du BAS ou du HAUT
+    /// </param>
+    /// <param name="num_row_col">
+    /// Le numero de la ligne/colonne qu'il faut examiner
+    /// </param>
     /// <returns>
     /// Booléen qui return TRUE si un côté est rempli, retourne FALSE sinon
     /// </returns>
