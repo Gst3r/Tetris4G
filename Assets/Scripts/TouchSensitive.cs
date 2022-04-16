@@ -14,10 +14,11 @@ public class TouchSensitive : MonoBehaviour
     /// </summary>
     [SerializeField] private Piece activePiece;
 
+//-----------------------------------------------------TOUCH SENSITIVE SCHEDULING------------------------------------------------------------------- 
     /// <summary> 
-    /// Vecteur de nombre réel à deux dimensions qui enregistre la position de départ du doigt lorsqu'il entre en contact avec l'écran
+    /// Un nombre réel qui indique une échelle de vitesse du doigt qui se déplace sur l'écran
     /// </summary>
-    private Vector2 startPos;
+    private float fast;
 
     /// <summary> 
     /// Booléen indiquant TRUE si le joueur cherche à tourner le tetromino (analyse du comportement du doigt sur l'écran), FALSE sinon
@@ -25,9 +26,25 @@ public class TouchSensitive : MonoBehaviour
     private static bool wantToRotate;
 
     /// <summary> 
-    /// Un nombre réel qui indique une échelle de vitesse du doigt qui se déplace sur l'écran
+    /// Booléen indiquant TRUE si la pièce n'est pas entrain de bouger, FALSE sinon
     /// </summary>
-    private float fast;
+    private static bool isNotMoved;
+
+    /// <summary> 
+    /// Booléen indiquant TRUE si le joueur cherche à déplacer le tetromino (analyse du comportement du doigt sur l'écran), FALSE sinon
+    /// </summary>
+    private static bool wantToShift;
+
+    /// <summary> 
+    /// Booléen indiquant TRUE si le joueur cherche à accélerer le tetromino (analyse du comportement du doigt sur l'écran), FALSE sinon
+    /// </summary>
+    private static bool wantToAccelerate;
+
+    /*/// <summary> 
+    /// Booléen indiquant TRUE si le joueur cherche à ralentir le tetromino (analyse du comportement du doigt sur l'écran), FALSE sinon
+    /// </summary>
+    private static bool wantToSlow;*/
+//---------------------------------------------------------------------------------------------------------------------------------------------
 
     // Update is called once per frame
     void Update()
@@ -40,6 +57,8 @@ public class TouchSensitive : MonoBehaviour
     /// Description : Méthode condensant les fonctionnalités tactiles
     /// </summary>
     public void TouchSensitiveProcess(){
+        //Condition de déclenchement des fonctionnalités tactiles selon l'état du jeu
+        // Si il est en pause, si il est en game over, si il n'est pas lancé, si le tutoriel l'autorise
         if(!PauseMenu.GetGameIsPausing()&&!IMode.GetGameIsOver()&&ButtonManager.GetGameIsLoad()&&TutorialManager.canTouchSensitive){
             TouchSensitiveRotate();
             TouchSensitiveShift();
@@ -54,13 +73,21 @@ public class TouchSensitive : MonoBehaviour
         if(Input.touchCount>0){
             Touch touch = Input.GetTouch(0);
             
+            // Si le doigt du joueur n'est pas en mouvement sur l'écran l'objectif du joueur est interprété comme étant inconnue et donc les booléens sont automatiquement remis à TRUE
+            // Si le doigt du joueur est en mouvement on considère qu'il ne cherche pas à tourner la pièce
             switch (touch.phase)
             {
                 // Record initial touch position.
                 case TouchPhase.Began:
+                    wantToShift=true;
+                    wantToAccelerate=true;
+                    //wantToSlow=true;
                     break;
 
                 case TouchPhase.Stationary:
+                    wantToShift=true;
+                    wantToAccelerate=true;
+                    //wantToSlow=true;
                     break;
 
                 // Determine direction by comparing the current touch position with the initial one.
@@ -71,10 +98,13 @@ public class TouchSensitive : MonoBehaviour
 
                 // Report that a direction has been chosen when the finger is lifted.
                 case TouchPhase.Ended:
+                    wantToShift=true;
+                    wantToAccelerate=true;
+                    //wantToSlow=true;
                     activePiece.RestoreGravity();
                     break;
             }
-        }else
+        }else// Si le doigt du joueur ne touche pas l'écran on considère qu'il peut décider de réaliser une rotation de tetromino 
             wantToRotate=true;
     }
 
@@ -83,10 +113,12 @@ public class TouchSensitive : MonoBehaviour
     /// Description : Méthode permettant de tourner le tetromino courant (fonctionnalités tactile)
     /// </summary>
     public void TouchSensitiveRotate(){
-        if(Input.touchCount>0){
-            Touch touch = Input.GetTouch(0);
-            if(touch.phase.Equals(TouchPhase.Ended)&&wantToRotate){
-                activePiece.Rotate();
+        if(Input.touchCount>0){ //Si le joueur touche l'écran
+            Touch touch = Input.GetTouch(0); // on récupère les informations liés au contact entre le doigt et l'écran dans une variable
+            if(touch.phase.Equals(TouchPhase.Ended)&&wantToRotate){ // On vérifie si le joueur lève bien son doigt de l'écran et ne le met pas en mouvement grâce au booléen
+                wantToRotate=false;
+                activePiece.Rotate(); // On lance une rotation de la pièce
+                wantToRotate=true;
             }
         }
     }
@@ -104,39 +136,81 @@ public class TouchSensitive : MonoBehaviour
         int fastY = FindFast(compareFastY);
 
         switch(board.GetGravity()){
-            case Gravity.HAUT: 
-                fast = fastX;
-                
-                if(touch.deltaPosition.x>0 && Time.frameCount%(20-fast)==0)
+            case Gravity.HAUT:
+                if(touch.deltaPosition.x>0 && Time.frameCount%(20-fastX)==0 && wantToShift){
+                    wantToAccelerate=false;
+                    //wantToSlow=false;
                     activePiece.RightShift();
-                else if(touch.deltaPosition.x<0 && Time.frameCount%(20-fast)==0)
+                }else if(touch.deltaPosition.x<0 && Time.frameCount%(20-fastX)==0 && wantToShift){
+                    wantToAccelerate=false;
+                    //wantToSlow=false;
                     activePiece.LeftShift();
-                //else if(touch.azimuthAngle==0f)
-                //    activePiece.ModifyGravityT();
+                }else if(touch.azimuthAngle==0f && Time.frameCount%(20-fastY)==0 && wantToAccelerate && touch.deltaPosition.y>0){
+                    wantToShift=false;
+                    //wantToSlow=false;
+                    activePiece.TopShift();
+                }/*else if(touch.azimuthAngle==0f && Time.frameCount%(20-fastX)==0 && wantToSlow && touch.deltaPosition.y<0){
+                    wantToShift=false;
+                    activePiece.ModifyGravityT();
+                }*/
                     
                 break;
-            case Gravity.BAS:
-                fast = fastX;             
-                if(touch.deltaPosition.x>0 && Time.frameCount%(20-fast)==0)
+            case Gravity.BAS:      
+                if(touch.deltaPosition.x>0 && Time.frameCount%(20-fastX)==0 && wantToShift){
+                    //wantToSlow=false;
+                    wantToAccelerate=false;
                     activePiece.RightShift();
-                else if(touch.deltaPosition.x<0 && Time.frameCount%(20-fast)==0)
+                }else if(touch.deltaPosition.x<0 && Time.frameCount%(20-fastX)==0 && wantToShift){
+                    //wantToSlow=false;
+                    wantToAccelerate=false;
                     activePiece.LeftShift();
-                //else if(touch.azimuthAngle==0f)
-                //    activePiece.ModifyGravityB();
+                }else if(touch.azimuthAngle==0f && Time.frameCount%(20-fastY)==0 && wantToAccelerate && touch.deltaPosition.y<0){
+                    //wantToSlow=false;
+                    wantToShift=false;
+                    activePiece.BotShift();
+                }/*else if(touch.azimuthAngle==0f && Time.frameCount%(20-fastX)==0 && wantToSlow && touch.deltaPosition.y>0){
+                    wantToShift=false;
+                    activePiece.ModifyGravityB();
+                }*/
+                    
                 break;
             case Gravity.GAUCHE:
-                fast = fastY;
-                if(touch.deltaPosition.y>0 && Time.frameCount%(18-fast)==0)
+                if(touch.deltaPosition.y>0 && Time.frameCount%(18-fastY)==0 && wantToShift){
+                    wantToAccelerate=false;
+                    //wantToSlow=false;
                     activePiece.TopShift();
-                else if(Time.frameCount%(18-fast)==0)
+                }else if(Time.frameCount%(18-fastY)==0 && wantToShift){
+                    wantToAccelerate=false;
+                    //wantToSlow=false;
                     activePiece.BotShift();
+                }else if(touch.azimuthAngle==0f && Time.frameCount%(20-fastX)==0 && wantToAccelerate && touch.deltaPosition.x<0){
+                    wantToShift= false;
+                    //wantToSlow=false;
+                    activePiece.LeftShift();
+                }/*else if(touch.azimuthAngle==0f && Time.frameCount%(21-fastX)==0 && wantToSlow && touch.deltaPosition.x>0){
+                    wantToShift=false;
+                    activePiece.ModifyGravityL();
+                }*/
+                 
                 break;
             case Gravity.DROITE:
                 fast = fastY;
-                if(touch.deltaPosition.y>0 && Time.frameCount%(18-fast)==0)
+                if(touch.deltaPosition.y>0 && Time.frameCount%(18-fastY)==0 && wantToShift){
+                    wantToAccelerate=false;
+                    //wantToSlow=false;
                     activePiece.TopShift();
-                else if(Time.frameCount%(18-fast)==0)
+                }else if(Time.frameCount%(18-fastY)==0 && wantToShift){
+                    wantToAccelerate=false;
+                    //wantToSlow=false;
                     activePiece.BotShift();
+                }else if(touch.azimuthAngle==0f && Time.frameCount%(20-fastX)==0 && wantToAccelerate && touch.deltaPosition.x>0){
+                    wantToShift= false;
+                    //wantToSlow=false;
+                    activePiece.RightShift();
+                }/*else if(touch.azimuthAngle==0f && Time.frameCount%(21-fastX)==0 && wantToSlow && touch.deltaPosition.x<0){
+                    wantToShift=false;
+                    activePiece.ModifyGravityR();
+                }*/
                 break;
             default:break;
         }

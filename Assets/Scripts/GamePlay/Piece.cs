@@ -289,13 +289,10 @@ public class Piece : MonoBehaviour
     /// Description : Méthode permettant le déplacement vers la droite du tetromino actuellement présent sur le plateau
     /// </summary>
     public void RightShift(){
-        //Vérification du sens d'application de la gravité
-        if(board.GetGravity() == Gravity.HAUT || board.GetGravity() == Gravity.BAS){
-            //Suppresion de la position précédente du tétromino sur la grille
-            board.Clear(this);
-            TouchSensitive.SetWantToRotate(false);
-            Move(Vector2Int.right);
-        } 
+        //Suppression de la position précédente du tétromino sur la grille
+        board.Clear(this);
+        TouchSensitive.SetWantToRotate(false);
+        Move(Vector2Int.right);
     }
 
     /// <summary> 
@@ -303,11 +300,9 @@ public class Piece : MonoBehaviour
     /// Description : Méthode permettant le déplacement vers la gauche du tetromino actuellement présent sur le plateau
     /// </summary>
     public void LeftShift(){
-        if(board.GetGravity() == Gravity.HAUT || board.GetGravity() == Gravity.BAS){
-            board.Clear(this);
-            TouchSensitive.SetWantToRotate(false);
-            Move(Vector2Int.left);
-        }
+        board.Clear(this);
+        TouchSensitive.SetWantToRotate(false);
+        Move(Vector2Int.left);
     }
 
     /// <summary> 
@@ -315,11 +310,9 @@ public class Piece : MonoBehaviour
     /// Description : Méthode permettant le déplacement vers le haut du tetromino actuellement présent sur le plateau
     /// </summary>
     public void TopShift(){
-        if(board.GetGravity() == Gravity.GAUCHE || board.GetGravity() == Gravity.DROITE){
-            board.Clear(this);
-            TouchSensitive.SetWantToRotate(false);
-            Move(Vector2Int.up);
-        }
+        board.Clear(this);
+        TouchSensitive.SetWantToRotate(false);
+        Move(Vector2Int.up);
     }
 
     /// <summary> 
@@ -327,11 +320,9 @@ public class Piece : MonoBehaviour
     /// Description : Méthode permettant le déplacement vers le bas du tetromino actuellement présent sur le plateau
     /// </summary>
     public void BotShift(){
-        if(board.GetGravity() == Gravity.GAUCHE || board.GetGravity() == Gravity.DROITE){
-            board.Clear(this);
-            TouchSensitive.SetWantToRotate(false);
-            Move(Vector2Int.down);
-        }
+        board.Clear(this);
+        TouchSensitive.SetWantToRotate(false);
+        Move(Vector2Int.down);
     }
 
     /// <summary> 
@@ -432,25 +423,31 @@ public class Piece : MonoBehaviour
     /// Description : Méthode qui permet la rotation de la pièce de tetromino actuellement présente sur le plateau
     /// </summary>
     public void Rotate(){
-        Vector2Int/*[]*/ pivot; //On initialise un tableau de pivot
-        //pivots = FillPivot(); //On remplie le tableau de pivot dans le bonne ordre
-
-        if(data.tetromino.CompareTo(Tetromino.I)==0)
-            pivot = new Vector2Int(1,1);
-            //pivots[0] = new Vector2Int(1,1);
-        else
-            pivot = new Vector2Int(0,0);
-            //pivots[0] = new Vector2Int(0,0);
+        Vector2Int[] pivots; //On initialise un tableau de pivot
+        pivots = FillPivot(); //On remplie le tableau de pivot dans le bonne ordre
 
         //On vérifie si le tétromino O est présent en pièce active
         if(!data.tetromino.Equals(Tetromino.O)){
-            /*int j=0;
-            while(!Pivot(pivots[j])){
-                Debug.Log(pivots[j]);
-                j++;
-            }*/
+            int j=-1;
+                        
             board.Clear(this);
-            Pivot(pivot);
+            while(j<=3){
+                if(j==-1)
+                    if(data.tetromino.Equals(Tetromino.I))
+                        if(Pivot(new Vector2Int(1,1)))
+                            j=4;
+                        else
+                            j++;
+                    else
+                        if(Pivot(new Vector2Int(0,0)))
+                            j=4;
+                        else
+                            j++;
+                else if(Pivot(pivots[j]))
+                    j=4;
+                else
+                    j++;
+            }
         }
     }
 
@@ -461,23 +458,17 @@ public class Piece : MonoBehaviour
     /// <returns> 
     /// un tableau de vecteur d'entier à deux dimensions contenant les positions de chaque tuile du tétromino qui correspondent à un tableau de pivots
     /// </returns>
-    /*public Vector2Int[] FillPivot(){
+    public Vector2Int[] FillPivot(){
         Vector2Int[] pivots = new Vector2Int[4];
-
-        if(data.tetromino.CompareTo(Tetromino.I)==0)
-            pivots[0] = new Vector2Int(1,1);
-        else
-            pivots[0] = new Vector2Int(0,0);
         
-        int i=1;
-        foreach(Vector2Int tile in data.cellules){
-            if(!tile.Equals(pivots[0])){
-                pivots[i] = tile;
-                i++;
-            }
+        int i=0;
+        foreach(Vector2Int tile in cells){
+            pivots[i] = tile;
+            i++;
         }
+
         return pivots;
-    }*/
+    }
 
     /// <summary> 
     /// Auteur : Sterlingot Guillaume
@@ -487,45 +478,21 @@ public class Piece : MonoBehaviour
     /// un booléen qui indique TRUE si la position de la pièce est valide, FALSE sinon
     /// </returns>
     public bool Pivot(Vector2Int pivot){
-        Vector3Int[] newCells = new Vector3Int[data.cellules.Length];
-        Array.Copy(cells, newCells, data.cellules.Length);
+        Vector3Int[] newCells = new Vector3Int[cells.Length];
+        Array.Copy(cells, newCells, cells.Length);
 
         for(int i=0;i<4;i++){
+            int newX = cells[i].x, newY = cells[i].y;
 
             //Calcul de l'écart en x et en y entre la pièce pivot et la pièce à faire tourner autour
-            int ecartX = Mathf.Abs(pivot.x - cells[i].x);
-            int ecartY = Mathf.Abs(pivot.y - cells[i].y);
-            int newX = newCells[i].x, newY = newCells[i].y;
-
-            //Différenciation des quatres rotations effectifs sur le plateau avant que la pièce retourne à son point de départ
-            //Pour chaque cas, on calcul les nouvelles coordonnées de la cellules selon les coordonnées du pivot
-
-            //CAS OU ON SE SITUE DANS le VOISINAGE aligné horizontalement ou verticalement avec le pivot
-            if(newCells[i].y==pivot.y&&newCells[i].x<pivot.x){ //Condition qui indique la rotation a effectuer
-                newX = pivot.x;
-                newY = ecartX+newCells[i].y;
-            }else if(newCells[i].x==pivot.x&&newCells[i].y>pivot.y){ //Condition qui indique la rotation a effectuer
-                newX = ecartY+newCells[i].x;
-                newY = pivot.y;
-            }else if(newCells[i].y==pivot.y&&newCells[i].x>pivot.x){ //Condition qui indique la rotation a effectuer
-                newX = pivot.x;
-                newY = newCells[i].y-ecartX;
-            }else if(newCells[i].x==pivot.x&&newCells[i].y<pivot.y){ //Condition qui indique la rotation a effectuer
-                newX = newCells[i].x - ecartY;
-                newY = pivot.y;
-            }
-            //CAS OU ON SE SITUE DANS le VOISINAGE non aligné avec le pivot
-            else if(newCells[i].y>pivot.y&&newCells[i].x<pivot.x)
-                newX = newCells[i].x+2*ecartX;
-            else if(newCells[i].y>pivot.y&&newCells[i].x>pivot.x)
-                newY = newCells[i].y-2*ecartY;
-            else if(newCells[i].y<pivot.y&&newCells[i].x>pivot.x)
-                newX = newCells[i].x-2*ecartX;
-            else
-                newY = newCells[i].y+2*ecartY;
+            int ecartX = pivot.x - cells[i].x;
+            int ecartY = pivot.y - cells[i].y;
+            
+            newX = pivot.x+newCells[i].y;
+            newY = ecartX;
 
             bool valid = board.ValideTilePos(new Vector3Int(newX+position.x, newY+position.y, -2));
-            if (valid){
+            if(valid){
                 newCells[i].x = newX;
                 newCells[i].y = newY;
             }else{

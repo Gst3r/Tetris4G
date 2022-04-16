@@ -114,7 +114,6 @@ public class ButtonManager : MonoBehaviour
         float ms = Time.deltaTime;
         while(ms <= pressTime){
             ms += Time.deltaTime;
-            Debug.Log(Time.timeScale);
             yield return null;
         }
         //yield return null;
