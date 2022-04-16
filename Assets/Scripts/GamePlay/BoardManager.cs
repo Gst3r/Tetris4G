@@ -134,10 +134,10 @@ public class BoardManager : MonoBehaviour
         time = 0f;
         chooseRandomGravity();
         if(SceneManager.GetActiveScene().name=="Tutorial"){
-            SpawnPiece(3, spawnPosition, Pouvoir.Standard);
+            SpawnPiece(3, Pouvoir.Standard);
         }else{
             int random = Random.Range(0, tetrominoes.Length);
-            SpawnPiece(random, spawnPosition, Pouvoir.Standard);
+            SpawnPiece(random, Pouvoir.Standard);
         }
         
     }
@@ -151,17 +151,14 @@ public class BoardManager : MonoBehaviour
     /// <param name="random">
     /// l'indice du tetromino dans le tableau de tetrominoes
     /// </param>
-    /// <param name="position">
-    /// la position à laquelle le tetromino sera generee
-    /// </param>
     /// <param name="pouvoir">
     /// le pouvoir de la piece
     /// </param>
-    public void SpawnPiece(int random, Vector3Int position, Pouvoir pouvoir)
+    public void SpawnPiece(int random, Pouvoir pouvoir)
     {
         TetrominoData data = this.tetrominoes[random];
 
-        this.activePiece.Initialize(this, position, data, random, pouvoir);
+        this.activePiece.Initialize(this, spawnPosition, data, random, pouvoir);
 
         if (pouvoir == Pouvoir.Standard)
         {

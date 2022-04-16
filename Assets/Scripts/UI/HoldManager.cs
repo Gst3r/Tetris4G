@@ -119,7 +119,7 @@ public class HoldManager : MonoBehaviour
     public void NewSpawn(int indice)
     {
         activePiece.Remove();
-        board.SpawnPiece(indice, activePiece.GetPiecePosition(), Pouvoir.Standard);
+        board.SpawnPiece(indice, Pouvoir.Standard);
     }
 
     /// <summary>

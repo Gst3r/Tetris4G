@@ -235,7 +235,7 @@ public class Piece : MonoBehaviour
             //apparition d'un malus si tps est un multiple de 2
             if (tps % 2 == 0 && paliers_booleen[tps] == false && tps != 0)
             {
-                board.SpawnPiece(previewManager.GetNextPiece(), board.GetSpawnPosition(), Pouvoir.Malus);
+                board.SpawnPiece(previewManager.GetNextPiece(), Pouvoir.Malus);
                 paliers_booleen[tps] = true;
 
             }
@@ -243,7 +243,7 @@ public class Piece : MonoBehaviour
             //apparition d'un bonus si tps n'est pas un multiple de 2
             else if (tps % 2 == 1 && paliers_booleen[tps] == false)
             {
-                board.SpawnPiece(previewManager.GetNextPiece(), board.GetSpawnPosition(), Pouvoir.Bonus);
+                board.SpawnPiece(previewManager.GetNextPiece(), Pouvoir.Bonus);
                 paliers_booleen[tps] = true;
 
             }
@@ -251,14 +251,14 @@ public class Piece : MonoBehaviour
             // le reste du temps, des pièces standards
             else
             {
-                board.SpawnPiece(previewManager.GetNextPiece(), board.GetSpawnPosition(), Pouvoir.Standard);
+                board.SpawnPiece(previewManager.GetNextPiece(), Pouvoir.Standard);
             }
         }
 
         //si le mode different de Marathon, apparition de pieces standards
         else
         {
-            board.SpawnPiece(previewManager.GetNextPiece(), board.GetSpawnPosition(), Pouvoir.Standard);
+            board.SpawnPiece(previewManager.GetNextPiece(), Pouvoir.Standard);
         }
 
         previewManager.ChangePreview();

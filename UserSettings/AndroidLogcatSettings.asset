@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "R5CRC1D0F2E",
         "name": "com.JGMN.Tetris4G",
-        "processId": 6009,
+        "processId": 11386,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -24,6 +24,12 @@
             "deviceId": "R5CRC1D0F2E",
             "name": "com.JGMN.Tetris4G",
             "processId": 6009,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CRC1D0F2E",
+            "name": "com.JGMN.Tetris4G",
+            "processId": 11386,
             "exited": false
         }
     ],

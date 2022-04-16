@@ -285,7 +285,7 @@ public class TutorialManager : MonoBehaviour
             canTouchSensitive=false;
             StartCoroutine(TutoCoroutine(1, delegate {TakeItRotation();}));
         });
-        explainText.text = "This Tetromino appear from this gate at the center ! Gravity will be applied on him and the piece just will move downward... We need to destroy him, but the only mean to get away the piece is to complete a row or column with other piece. I hope that other pieces will past throught the gate.";
+        explainText.text = "This Tetromino appears from this gate in the center ! Gravity will be applied on it and the piece will move downward... We need to destroy it, but the only way to do so is to complete a row or column with other pieces.";
         explainPanel.SetActive(true);
         hidePanel.SetActive(true);
         coverPauseMenuPanel.SetActive(true);
@@ -299,8 +299,8 @@ public class TutorialManager : MonoBehaviour
     /// </summary>
     public void TakeItRotation(){
         StopGame();
-        goalText.text = "Touch 1 time the screen"; 
-        explainText.text = "If the tetromino's sens doesn't match with the environment and the choosen strategy, you can rotate him at 90 degrees with one presure on the screen. To turn him at 180 degrees, you need to touch the screen two times and at 270 degrees, three times. The tetromino back to his first position with four pressure on the screen.";
+        goalText.text = "Touch the screen 1 time"; 
+        explainText.text = "If the tetromino's orientation doesn't match the environment and the choosen strategy, you can rotate it at 90 degrees with one presure on the screen. To turn him at 180 degrees, you need to touch the screen two times and at 270 degrees, three times. The tetromino is back to its first position by the fourth touch.";
         explainPanel.SetActive(true);
         continueButtonAsGameObject.SetActive(false);
         hidePanel.SetActive(true);
@@ -316,7 +316,7 @@ public class TutorialManager : MonoBehaviour
     public void TakeItShift(){
         StopGame();
         goalText.text = "Slide your finger on the screen"; 
-        explainText.text = "You masteries the environment according with the gravity so you can move the tetromino right or left by sliding your finger to the wished direction.";
+        explainText.text = "You masteries the environment according with the gravity. As a result, you can move the tetromino left and right by sliding your finger to the wished direction.";
         explainPanel.SetActive(true);
         continueButtonAsGameObject.SetActive(false);
         hidePanel.SetActive(true);
@@ -335,7 +335,7 @@ public class TutorialManager : MonoBehaviour
     public void TakeItHold(){
         StopGame();
         goalText.text = "Touch the hold zone";
-        explainText.text = "The piece can be hold in a storage zone and after can be swap with the the active piece on the board. This option add a management of the active piece.";
+        explainText.text = "The piece can be hold in a storage zone. Then, it can be swapped with the active piece on the board. This option helps to manage the active piece.";
         explainPanel.SetActive(true);
         continueButtonAsGameObject.SetActive(false);
         coverHoldPanel.SetActive(false);
@@ -358,7 +358,7 @@ public class TutorialManager : MonoBehaviour
                 canTouchSensitive=false;
                 ExplainScore();
             });
-            explainText.text = "This zone show three next pieces which will spawn on the board in the read sens. Your strategy can be adaptated with next pieces.";
+            explainText.text = "This zone shows the next three pieces which will spawn on the board from left to right. Your strategy can be adaptated with these.";
             explainPanel.SetActive(true);
             continueButtonAsGameObject.SetActive(true);
             showPanel[3].SetActive(false);
@@ -399,7 +399,7 @@ public class TutorialManager : MonoBehaviour
         pauseMenuButton.onClick.AddListener(() => {
             showPanel[6].SetActive(false);
             pauseGoalText.text = "Press one of the menu's button";
-            explainMenuPauseText.text = "From the pause menu, you can continue the tutorial, restart the tutorial or back to main menu to play a real game. You have also an option which allow you to stop the tetrominoes speed.";
+            explainMenuPauseText.text = "From the pause menu, you can continue the tutorial, restart it or go back to the main menu to play a real game. You also have the option to stop the tetrominoes' speed.";
             hidePanel.SetActive(false);
             explainPausePanel.SetActive(true);
             explainPanel.SetActive(false);
@@ -465,7 +465,7 @@ public class TutorialManager : MonoBehaviour
             StartCoroutine(TutoCoroutine(0.4f,delegate{Goal2();}));
         });
         StopGame();
-        explainText.text = "Our analyse tell us that pieces can also spawn in a different gravity... The gravity can be to the top or to the bottom.";
+        explainText.text = "As advertised in the title of the game, the tetrominoes can also be drawn by a different gravity... Now, the gravity can be the top or the bottom one.";
         explainPanel.SetActive(true);
         continueButtonAsGameObject.SetActive(true);
         goalPanel.SetActive(false);
@@ -500,7 +500,7 @@ public class TutorialManager : MonoBehaviour
             StartCoroutine(TutoCoroutine(0.4f,delegate{Goal3();}));
         });
         StopGame();
-        explainText.text = "We come with bad news... Unfortunately, the piece can sustain 4 gravities, to the top, to the bottom, to the right and to the left. Good luck to stop there progress.";
+        explainText.text = "Bad news... Unfortunately, the pieces can sustain 4 gravities, the top, the bottom, the right and the left one. Good luck !!";
         explainPanel.SetActive(true);
         continueButtonAsGameObject.SetActive(true);
         hidePanel.SetActive(true);
@@ -529,7 +529,7 @@ public class TutorialManager : MonoBehaviour
     /// </summary>
     public void ExplainEndGame(){
         pauseGoalText.text = "Press one of the menu's button";
-        explainMenuPauseText.text = "From the end game menu, you restart the tutorial or back to main menu to play a real game. You have also an option which allow you to register and share your score out of the game.";
+        explainMenuPauseText.text = "From the end game menu, you can restart the tutorial or go back to the main menu to play a real game. You have the option to register and share your score.";
         explainPanel.SetActive(false);
         continueButtonAsGameObject.SetActive(true);
         explainPausePanel.SetActive(true);
