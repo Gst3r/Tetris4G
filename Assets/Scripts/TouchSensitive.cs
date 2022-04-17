@@ -25,6 +25,11 @@ public class TouchSensitive : MonoBehaviour
     private float fast;
 
     /// <summary> 
+    /// Un réel qui indique le temps que le doigt passe sur l'écran
+    /// </summary>
+    private float fingerTime=0f;
+
+    /// <summary> 
     /// Booléen indiquant TRUE si le joueur cherche à tourner le tetromino (analyse du comportement du doigt sur l'écran), FALSE sinon
     /// </summary>
     private static bool wantToRotate;
@@ -83,6 +88,7 @@ public class TouchSensitive : MonoBehaviour
             {
                 // Record initial touch position.
                 case TouchPhase.Began:
+                    fingerTime=0;
                     wantToShift=true;
                     wantToAccelerate=true;
                     //wantToSlow=true;
@@ -96,9 +102,12 @@ public class TouchSensitive : MonoBehaviour
 
                 // Determine direction by comparing the current touch position with the initial one.
                 case TouchPhase.Moved:
-                    if(TutorialManager.activeMove)
+                    fingerTime+=Time.timeScale;
+
+                    if(fingerTime>0.2f && TutorialManager.activeMove){
                         Shift(touch);
-                    wantToRotate=false;
+                        wantToRotate=false;
+                    }
                     break;
 
                 // Report that a direction has been chosen when the finger is lifted.
@@ -243,21 +252,23 @@ public class TouchSensitive : MonoBehaviour
         else if(compareFast>17)
             localFast = 17;
         else if(compareFast>15)
-            localFast = 13;
+            localFast = 15;
         else if(compareFast>13)
-            localFast = 10;
+            localFast = 12;
         else if(compareFast>11)
-            localFast = 7;
+            localFast = 9;
         else if(compareFast>9)
-            localFast= 5;
+            localFast= 6;
         else if(compareFast>7)
-            localFast = 2;
+            localFast = 3;
         else if(compareFast>5)
-            localFast = -2;
+            localFast = 1;
         else if(compareFast>3)
-            localFast = -5;
+            localFast = -1;
+        else if(compareFast>1)
+            localFast = -3;
         else
-            localFast = -8;
+            localFast = -5;
 
         return localFast;
     }

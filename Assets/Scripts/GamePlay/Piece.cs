@@ -439,10 +439,7 @@ public class Piece : MonoBehaviour
         /*Vector2Int[] pivots; //On initialise un tableau de pivot
         pivots = FillPivot(); //On remplie le tableau de pivot dans le bonne ordre*/
         board.Clear(this);
-        if(data.tetromino.Equals(Tetromino.I))
-            Pivot(new Vector2Int(1,1));
-        else
-            Pivot(new Vector2Int(0,0));
+        Pivot(new Vector2Int(0,0));
                             
                 
         //On vérifie si le tétromino O est présent en pièce active

@@ -59,6 +59,11 @@ public class TutorialManager : MonoBehaviour
     /// </summary>
     [SerializeField]private GameObject coverHoldPanel;
 
+    /// <summary> 
+    /// Attribut contenant les images entourant les éléments d'interfaces pour le tutoriel
+    /// </summary>
+    [SerializeField] private GameObject[] showUI;
+
 //-------------------------------PAUSE------------------------------------------------------
     /// <summary> 
     /// Attribut contenant le Panel d'explication du menu pause
@@ -105,28 +110,28 @@ public class TutorialManager : MonoBehaviour
     public static bool canTouchSensitive=true;
 
     /// <summary> 
-    /// Attribut contenant le panel de fin de jeu
+    /// Booléen qui permet la gestion de l'explication de la prévisualisation pour déclencher une seule fois l'explication 
     /// </summary>
     public static bool explainPrev=true;
 
     /// <summary> 
-    /// Attribut contenant le panel de fin de jeu
+    /// Booléen qui indique qu'on peut activer la fonctionnalité tactile d'acceleration
     /// </summary>
     public static bool activeAccelerate=true;
 
 
     /// <summary> 
-    /// Attribut contenant le panel de fin de jeu
+    /// Booléen qui indique qu'on peut activer la fonctionnalité tactile de déplacement
     /// </summary>
     public static bool activeMove=true;
 
     /// <summary> 
-    /// Attribut contenant le panel de fin de jeu
+    /// Un entier qui permet la synchronisation des lancements d'explication et d'objectifs dans le tutoriel
     /// </summary>
-    public static int startUpdate = 0;
+    public static int semaphore = 0;
 
     /// <summary> 
-    /// Attribut contenant le panel de fin de jeu
+    /// Un entier qui permet d'enregistrer le précédent score atteind dans le précédant objectif du tutoriel
     /// </summary>
     public static int prevScore = 0;
 
@@ -152,20 +157,20 @@ public class TutorialManager : MonoBehaviour
     public void CheckEndTutorial(){
         if(ScoreManager.GetScore()==0 && !board.GetBotIsFull())
             BoardManager.SetGravity(Gravity.BAS);
-        else if(ScoreManager.GetScore()==0 && board.GetBotIsFull() && startUpdate!=0){
-            startUpdate=0;
+        else if(ScoreManager.GetScore()==0 && board.GetBotIsFull() && semaphore!=0){
+            semaphore=0;
             Time.timeScale=0;
             ExplainEndGame();
-        }else if(startUpdate==5 && !board.GetTopIsFull()){
+        }else if(semaphore==5 && !board.GetTopIsFull()){
             BoardManager.SetGravity(Gravity.HAUT);
-        }else if(startUpdate==5 && board.GetTopIsFull() && !board.GetBotIsFull()){
+        }else if(semaphore==5 && board.GetTopIsFull() && !board.GetBotIsFull()){
             BoardManager.SetGravity(Gravity.BAS);
-        }else if(startUpdate==5 && board.GetTopIsFull() && board.GetBotIsFull() && startUpdate!=0){
-            startUpdate=0;
+        }else if(semaphore==5 && board.GetTopIsFull() && board.GetBotIsFull() && semaphore!=0){
+            semaphore=0;
             Time.timeScale=0;
             ExplainEndGame();
-        }else if(startUpdate==6 && board.GetTopIsFull() && board.GetTopIsFull() && board.GetRightIsFull() && board.GetLeftIsFull() && startUpdate!=0){
-            startUpdate=0;
+        }else if(semaphore==6 && board.GetTopIsFull() && board.GetTopIsFull() && board.GetRightIsFull() && board.GetLeftIsFull() && semaphore!=0){
+            semaphore=0;
             Time.timeScale=0;
             ExplainEndGame();
         }
@@ -194,10 +199,10 @@ public class TutorialManager : MonoBehaviour
 
                 // Report that a direction has been chosen when the finger is lifted.
                 case TouchPhase.Ended:
-                    if(startUpdate==-1)
-                        startUpdate=2;
-                    else if(startUpdate==-2)
-                        startUpdate=3;
+                    if(semaphore==-1)
+                        semaphore=2;
+                    else if(semaphore==-2)
+                        semaphore=3;
                     break;
             }
 
@@ -213,17 +218,18 @@ public class TutorialManager : MonoBehaviour
     /// Description : Cette méthode permet de vérifier si un objectif parmis les 3 à faire pendant le tuto est remplit ou non
     /// </summary>
     public void CheckGoalIsDone(){
-        if(startUpdate==4 && ScoreManager.GetScore()>=40){
-            startUpdate=0;
+        if(semaphore==4 && ScoreManager.GetScore()>=40){
+            semaphore=0;
             prevScore=ScoreManager.GetScore();
             StartCoroutine(TutoCoroutine(0.4f,delegate{Explain2Direction();}));
-        }else if(startUpdate==5 && ScoreManager.GetScore()>=40+prevScore){
-            startUpdate=0;
+        }else if(semaphore==5 && ScoreManager.GetScore()>=40+prevScore){
+            semaphore=0;
             prevScore=ScoreManager.GetScore();
             Debug.Log(prevScore);
             StartCoroutine(TutoCoroutine(0.4f,delegate{Explain4Direction();}));
-        }else if(startUpdate==6 && ScoreManager.GetScore()>=40+prevScore){
-            startUpdate=0;
+        }else if(semaphore==6 && ScoreManager.GetScore()>=40+prevScore){
+            semaphore=0;
+            Time.timeScale=0f;
             ExplainEndGame();
         }   
     }
@@ -237,12 +243,12 @@ public class TutorialManager : MonoBehaviour
     /// </param>
     public void CheckRotatePiece(Touch touch){
         //Précondition déterminant si on peut déclencher les fonctionnalités tactiles pour la rotation de la pièce
-        if(touch.phase==TouchPhase.Ended && startUpdate==1 && TouchSensitive.GetWantToRotate()){
+        if(touch.phase==TouchPhase.Ended && semaphore==1 && TouchSensitive.GetWantToRotate()){
             explainPanel.SetActive(false);
             goalPanel.SetActive(false);
             tutoCharactere.SetActive(false);
             RestartGame();
-            startUpdate=0;
+            semaphore=0;
             StartCoroutine(TutoCoroutine(1,delegate{TakeItShift();}));
         }
     }
@@ -256,12 +262,12 @@ public class TutorialManager : MonoBehaviour
     /// </param>
     public void CheckShiftPiece(Touch touch){
         //Précondition déterminant si on peut déclencher les fonctionnalités tactiles pour le déplacement de la pièce
-        if(touch.phase==TouchPhase.Moved && startUpdate==2 && !TouchSensitive.GetWantToRotate()){
+        if(touch.phase==TouchPhase.Moved && semaphore==2 && !TouchSensitive.GetWantToRotate()){
             explainPanel.SetActive(false);
             goalPanel.SetActive(false);
             tutoCharactere.SetActive(false);
             RestartGame();
-            startUpdate=0;
+            semaphore=0;
             StartCoroutine(TutoCoroutine(1,delegate{TakeItAccelerate();}));
         }
     }
@@ -275,12 +281,12 @@ public class TutorialManager : MonoBehaviour
     /// </param>
     public void CheckAcceleratePiece(Touch touch){
         //Précondition déterminant si on peut déclencher les fonctionnalités tactiles pour la rotation de la pièce
-        if(startUpdate==3 && (int)touch.deltaPosition.x==0f && (int)touch.deltaPosition.y<=-7f){
+        if(semaphore==3 && (int)touch.deltaPosition.x==0f && (int)touch.deltaPosition.y<=-7f){
             explainPanel.SetActive(false);
             goalPanel.SetActive(false);
             tutoCharactere.SetActive(false);
             RestartGame();
-            startUpdate=0;        
+            semaphore=0;        
             StartCoroutine(TutoCoroutine(2f,delegate{TakeItHold();}));
         }
     }
@@ -343,7 +349,7 @@ public class TutorialManager : MonoBehaviour
         continueButtonAsGameObject.SetActive(false);
         tutoCharactere.SetActive(true);
         goalPanel.SetActive(true);
-        startUpdate=1;
+        semaphore=1;
     }
 
     /// <summary>
@@ -360,9 +366,9 @@ public class TutorialManager : MonoBehaviour
         tutoCharactere.SetActive(true);
         goalPanel.SetActive(true);
         if(Input.touchCount>0)
-            startUpdate=-1;
+            semaphore=-1;
         else
-            startUpdate=2;
+            semaphore=2;
     } 
 
     /// <summary>
@@ -380,9 +386,9 @@ public class TutorialManager : MonoBehaviour
         goalPanel.SetActive(true);
         TouchSensitive.SetWantToAccelerate(true);
         if(Input.touchCount>0)
-            startUpdate=-2;
+            semaphore=-2;
         else
-            startUpdate=3;
+            semaphore=3;
     } 
 
     /// <summary>
@@ -395,6 +401,7 @@ public class TutorialManager : MonoBehaviour
         explainText.text = "The piece can be hold in a storage zone. Then, it can be swapped with the active piece on the board. This option is available once by spawn piece and helps to manage the active piece.";
         explainPanel.SetActive(true);
         tutoCharactere.SetActive(true);
+        showUI[0].SetActive(true);
         continueButtonAsGameObject.SetActive(false);
         coverHoldPanel.SetActive(false);
         goalPanel.SetActive(true);
@@ -416,6 +423,8 @@ public class TutorialManager : MonoBehaviour
             explainText.text = "This zone shows the next three pieces which will spawn on the board from left to right. Your strategy can be adaptated with these.";
             explainPanel.SetActive(true);
             tutoCharactere.SetActive(true);
+            showUI[0].SetActive(false);
+            showUI[1].SetActive(true);
             continueButtonAsGameObject.SetActive(true);
             goalPanel.SetActive(false);
             explainPrev=false;
@@ -437,6 +446,8 @@ public class TutorialManager : MonoBehaviour
         explainText.text = "The game score is displayed here.";
         explainPanel.SetActive(true);
         tutoCharactere.SetActive(true);
+        showUI[1].SetActive(false);
+        showUI[2].SetActive(true);
         continueButtonAsGameObject.SetActive(true);
         coverPauseMenuPanel.SetActive(true);
         coverHoldPanel.SetActive(true);
@@ -456,6 +467,7 @@ public class TutorialManager : MonoBehaviour
             continuePauseButtonAsGameObject.SetActive(false);
             tutoCharactere.SetActive(false);
             goalPanel.SetActive(false);
+            showUI[3].SetActive(false);
             coverHoldPanel.SetActive(false);
             pauseGoalPanel.SetActive(true);
             canTouchSensitive=true;
@@ -465,6 +477,8 @@ public class TutorialManager : MonoBehaviour
         explainText.text = "This icon represents the pause menu.";
         explainPanel.SetActive(true);
         tutoCharactere.SetActive(true);
+        showUI[2].SetActive(false);
+        showUI[3].SetActive(true);
         continueButtonAsGameObject.SetActive(false);
         coverPauseMenuPanel.SetActive(false);
         goalPanel.SetActive(true);
@@ -475,11 +489,11 @@ public class TutorialManager : MonoBehaviour
     /// Description : Cette méthode permet d'attribuer au bouton continuer du menu pause la capacité de reprendre les objectifs en cours
     /// </summary>
     public void ContinueGoal(){
-        if(startUpdate==4)
+        if(semaphore==4)
             Goal1();
-        else if(startUpdate==5)
+        else if(semaphore==5)
             Goal2();
-        else if(startUpdate==6)
+        else if(semaphore==6)
             Goal3();
         else 
             Goal1();
@@ -498,7 +512,7 @@ public class TutorialManager : MonoBehaviour
         tutoCharactere.SetActive(false);
         pauseGoalPanel.SetActive(false);
         coverHoldPanel.SetActive(false);
-        startUpdate=4;
+        semaphore=4;
         RestartGame();
     }
 
@@ -534,7 +548,7 @@ public class TutorialManager : MonoBehaviour
         continuePauseButtonAsGameObject.SetActive(false);
         goalPanel.SetActive(true);
         pauseGoalPanel.SetActive(false);
-        startUpdate=5;
+        semaphore=5;
         RestartGame();
     }
 
@@ -570,7 +584,7 @@ public class TutorialManager : MonoBehaviour
         continuePauseButtonAsGameObject.SetActive(false);
         goalPanel.SetActive(true);
         pauseGoalPanel.SetActive(false);
-        startUpdate=6;
+        semaphore=6;
         RestartGame();
     }
 

@@ -41,7 +41,7 @@ public class SprintManager : IMode
         this.activePiece = controller.GetActivePiece();
 
         countSec = 0;
-        this.activePiece.SetStepDelay(0.4f);
+        this.activePiece.SetStepDelay(0.6f);
         this.activePiece.SetBufferedStepDelay(this.activePiece.GetStepDelay());
         this.sprintTimePanel.GetComponent<Text>().text = "7:00";
     }
@@ -64,7 +64,7 @@ public class SprintManager : IMode
         if(!PauseMenu.GetGameIsPausing()){
             countSec+=Time.deltaTime;
             if((int)countSec!=0){
-                this.sprintTimePanel.GetComponent<Text>().text = ((int)(countMax-countSec)/60).ToString()+":"+((int)(countMax-countSec)%60).ToString();  
+                this.sprintTimePanel.GetComponent<Text>().text = ((int)(countMax-countSec)/60).ToString()+":"+((((int)(countMax-countSec))%60<10)?"0":"")+((int)(countMax-countSec)%60).ToString();  
             }
             ScoreManager.SetTime((int)countSec);
         }

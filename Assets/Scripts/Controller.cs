@@ -122,6 +122,7 @@ public class Controller : MonoBehaviour
     IEnumerator LoadCount()
     {
         Time.timeScale=0f;
+        ButtonManager.SetGameIsLoad(false);
         //Démarage de l'animation
         countPanel.SetActive(true);
     
