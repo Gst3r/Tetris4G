@@ -58,13 +58,34 @@ public class HoldManager : MonoBehaviour
 
     }
 
+    void Update()
+    {
+        activePiece = FindObjectOfType<Piece>();
+    }
+
+    /// <summary>
+    /// Methode permettant de verifier si une piece est speciale (car impossible de hold une piece speciale)
+    /// </summary>
+    /// <returns>
+    /// TRUE si la piece est speciale, FALSE sinon
+    /// </returns>
+    public bool IsSpecial()
+    {
+        if ((activePiece.GetPouvoir() == Pouvoir.Bonus) || (activePiece.GetPouvoir() == Pouvoir.Malus))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     /// <summary>
     /// Methode permettant de stocker la piece active dans la zone de hold
     /// </summary>
     public void ChangeHold()
     {
         //si le joueur n'a pas deja change la piece de la zone de hold
-        if (changed == false)
+        if (changed == false && !IsSpecial())
         {
             //si la case du hold ne contient aucune piece
             if (hold.GetComponent<Image>().sprite == tetrominoes[7])

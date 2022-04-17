@@ -187,7 +187,7 @@ public class GoalsManager : MonoBehaviour
     public bool CheckMarathonGoal(out string intitule){
         string intituleMarathonGoal;
 
-        if(CheckScoreGoal(out intituleMarathonGoal)){
+        if(CheckScoreGoal(out intituleMarathonGoal) && Mode.MARATHON==Controller.GetGameMode() && SceneManager.GetActiveScene().name!="Tutorial"){
             intitule = intituleMarathonGoal;
             return true;
         }else{ 
@@ -209,7 +209,7 @@ public class GoalsManager : MonoBehaviour
     public bool CheckSprintGoal(out string intitule){
         string intituleSprintGoal = "";
 
-        if(CheckTimeGoal(out intituleSprintGoal)){
+        if(CheckTimeGoal(out intituleSprintGoal) && Mode.SPRINT==Controller.GetGameMode() && SceneManager.GetActiveScene().name!="Tutorial"){
             intitule = intituleSprintGoal;
             return true;
         }else{
@@ -231,7 +231,7 @@ public class GoalsManager : MonoBehaviour
     public bool CheckUltraGoal(out string intitule){
         string intituleUltraGoal = "";
         
-        if(CheckLineGoal(out intituleUltraGoal)){
+        if(CheckLineGoal(out intituleUltraGoal) && Mode.ULTRA==Controller.GetGameMode() && SceneManager.GetActiveScene().name!="Tutorial"){
             intitule = intituleUltraGoal;
             return true;
         }else{ 

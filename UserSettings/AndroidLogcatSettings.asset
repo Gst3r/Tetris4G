@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "R5CRC1D0F2E",
         "name": "com.JGMN.Tetris4G",
-        "processId": 11386,
+        "processId": 790,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -30,6 +30,24 @@
             "deviceId": "R5CRC1D0F2E",
             "name": "com.JGMN.Tetris4G",
             "processId": 11386,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CRC1D0F2E",
+            "name": "com.JGMN.Tetris4G",
+            "processId": 23522,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CRC1D0F2E",
+            "name": "com.JGMN.Tetris4G",
+            "processId": 24494,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CRC1D0F2E",
+            "name": "com.JGMN.Tetris4G",
+            "processId": 790,
             "exited": false
         }
     ],

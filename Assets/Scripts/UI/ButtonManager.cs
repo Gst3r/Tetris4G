@@ -72,7 +72,7 @@ public class ButtonManager : MonoBehaviour
     /// <summary>
     /// Booléen indiquant TRUE si le jeu est lancé, FALSE sinon
     /// </summary>
-    private static bool gameIsLoad;
+    private static bool gameIsLoad = false;
 
     void Start()
     {
@@ -156,7 +156,7 @@ public class ButtonManager : MonoBehaviour
         TutorialButton.SetActive(false);
         HighScoresButton.SetActive(false);
         GoalsButton.SetActive(false);
-        modePanel.SetActive(true);
+        modePanel.SetActive(true);;
     }
 
 

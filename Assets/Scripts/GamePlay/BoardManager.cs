@@ -132,12 +132,14 @@ public class BoardManager : MonoBehaviour
         leftIsFull = false;
         rightIsFull = false;
         time = 0f;
-        chooseRandomGravity();
+        
+        // Si le joueur se trouve dans le tutoriel alors les règles d'apparition de pièce et de gravité sont déjà définis par le tutoriel
         if(SceneManager.GetActiveScene().name=="Tutorial"){
             SpawnPiece(3, Pouvoir.Standard);
         }else{
             int random = Random.Range(0, tetrominoes.Length);
             SpawnPiece(random, Pouvoir.Standard);
+            chooseRandomGravity();
         }
         
     }
