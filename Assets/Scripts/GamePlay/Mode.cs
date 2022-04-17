@@ -4,7 +4,7 @@ using UnityEngine;
 
 /// <summary>
 /// Auteur : Sterlingot Guillaume<br>
-/// Description : Cette enumération permet de distinguer les différents modes de jeu diponible
+/// Description : Cette enumération permet de distinguer les différents modes de jeu disponibles
 /// </summary>
 public enum Mode{
     MARATHON,
@@ -80,8 +80,8 @@ public abstract class IMode : MonoBehaviour
     }
 
     /// <summary> 
-    /// Méthode qui permet de vérifier si la partie est perdue 
-    /// Auteur: Malcom Kusunga
+    /// Auteur: Malcom Kusunga<br>
+    /// Description : Méthode qui permet de vérifier si la partie est perdue
     /// </summary>
     public void CheckGameOver(){
         if(!gameIsOver){
@@ -100,7 +100,7 @@ public abstract class IMode : MonoBehaviour
 
     /// <summary>
     /// Auteur : Kusunga Malcom<br>
-    /// Méthode permettant de déterminer si la partie est terminée
+    /// Description : Méthode permettant de déterminer si la partie est terminée
     /// </summary>
     /// <returns>
     /// Booléen qui retourne TRUE si tous les côtés sont remplis, FALSE sinon

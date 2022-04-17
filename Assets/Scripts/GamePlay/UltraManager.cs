@@ -72,7 +72,7 @@ public class UltraManager : IMode
     
     /// <summary>
     /// Auteur : Sterlingot Guillaume<br>
-    /// Méthode permettant de compter le nombre de ligne restante à détruire
+    /// Description : Méthode permettant de compter le nombre de ligne restante à détruire
     /// </summary>
     public void CountLine(){
         if(!PauseMenu.GetGameIsPausing()){
@@ -84,7 +84,7 @@ public class UltraManager : IMode
 
     /// <summary>
     /// Auteur : Sterlingot Guillaume<br>
-    /// Méthode permettant de compter le temps qui s'écoule depuis le début de la partie
+    /// Description : Méthode permettant de compter le temps qui s'écoule depuis le début de la partie
     /// </summary>
     public void CountTime(){
         if(!PauseMenu.GetGameIsPausing()){
@@ -98,7 +98,7 @@ public class UltraManager : IMode
 
     /// <summary>
     /// Auteur : Kusunga Malcom, Sterlingot Guillaume<br>
-    /// Méthode permettant de déterminer si la partie est terminée
+    /// Description : Méthode permettant de déterminer si la partie est terminée
     /// </summary>
     /// <returns>
     /// Booléen qui retourne TRUE si tous les côtés sont remplis et le score visé est atteind, FALSE sinon
@@ -110,11 +110,19 @@ public class UltraManager : IMode
         return false;
     }
 
+    /// <summary>
+    /// Auteur : Sterlingot Guillaume<br>
+    /// Description : Méthode permettant d'afficher les objectifs en jeu du mode Ultra
+    /// </summary>
     public void displayUltraGoalPanel(){
         ultraLinePanel.SetActive(true);
         ultraTimePanel.SetActive(true);
     }
 
+    /// <summary>
+    /// Auteur : Sterlingot Guillaume<br>
+    /// Description : Méthode permettant d'enelever l'affichage des objectifs en jeu du mode Ultra
+    /// </summary>
     public void closeUltraGoalPanel(){
         ultraLinePanel.SetActive(false);
         ultraTimePanel.SetActive(false);

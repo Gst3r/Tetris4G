@@ -5,11 +5,15 @@ using TMPro;
 using UnityEngine.UI;
 using System.IO;
 
+/// <summary>
+/// Auteur : Sterlingot Guillaume<br>
+/// Description : Cette classe permet le remplissage automatique des informations concernant les objectifs dans le script et à l'exterieur pour un affichage dynamique dans les interfaces
+/// </summary>
 public class GoalsUI : MonoBehaviour
 {
 
     /// <summary>
-    /// Tableau de panel représentant les fils du Container qui contient le script GoalsUI
+    /// Tableau de panel représentant le Panel contenant les objectifs du jeu
     /// </summary>
     [SerializeField] private GameObject goalsPanel;
 
@@ -34,7 +38,7 @@ public class GoalsUI : MonoBehaviour
     [SerializeField] private Sprite valideSprite;
 
     /// <summary>
-    /// sprite qui représente un rond rouge signe que l'objectif n'est pas validé
+    /// Sprite qui représente un rond rouge signe que l'objectif n'est pas validé
     /// </summary>
     [SerializeField] private Sprite unvalideSprite;
 

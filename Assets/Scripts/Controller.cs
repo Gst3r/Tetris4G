@@ -106,7 +106,7 @@ public class Controller : MonoBehaviour
 
     /// <summary>
     /// Auteur : Kusunga Malcom<br>
-    /// Méthodes permettant de lancer le décompte lors d'un retour vers l'interface de la grille de jeu
+    /// Description : Méthodes permettant de lancer le décompte lors d'un retour vers l'interface de la grille de jeu
     /// </summary>
     public void LaunchCount(){
         StartCoroutine(LoadCount());

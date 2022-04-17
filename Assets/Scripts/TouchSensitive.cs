@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Auteur : Sterlingot Guillaume<br>
+/// Description : Cette classe permet la gestion des fonctionnalités tactiles du jeu
+/// </summary>
 public class TouchSensitive : MonoBehaviour
 {
     /// <summary> 
@@ -53,8 +57,8 @@ public class TouchSensitive : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Sterlingot Guillaume
-    /// Description : Méthode condensant les fonctionnalités tactiles
+    /// Auteur : Sterlingot Guillaume<br>
+    /// Description : Méthode condensant les fonctionnalités tactiles et les conditionnants selon l'état du jeu
     /// </summary>
     public void TouchSensitiveProcess(){
         //Condition de déclenchement des fonctionnalités tactiles selon l'état du jeu
@@ -66,7 +70,7 @@ public class TouchSensitive : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Sterlingot Guillaume
+    /// Auteur : Sterlingot Guillaume<br>
     /// Description : Méthode permettant de choisir automatiquement le déplacement adapté selon la gravité (fonctionnalités tactile)
     /// </summary>
     public void TouchSensitiveShift(){
@@ -110,7 +114,7 @@ public class TouchSensitive : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Sterlingot Guillaume
+    /// Auteur : Sterlingot Guillaume<br>
     /// Description : Méthode permettant de tourner le tetromino courant (fonctionnalités tactile)
     /// </summary>
     public void TouchSensitiveRotate(){
@@ -126,10 +130,14 @@ public class TouchSensitive : MonoBehaviour
 
 
     /// <summary> 
-    /// Auteur : Sterlingot Guillaume
+    /// Auteur : Sterlingot Guillaume<br>
     /// Description : Méthode permettant de choisir automatiquement le déplacement adapté selon la gravité (fonctionnalités tactile)
     /// </summary>
+    /// <param name="touch"> 
+    /// un attribut permettant de manipuler les informations relatifs aux mouvements du doigts sur le dispositif Android
+    /// </param>
     public void Shift(Touch touch){
+        // Les compareFast permettent de déterminer une vitesse de glissement de doigt sur l'écran en récupérant a valeur absolue de la position de déplacement depuis la dernière frame
         int compareFastX = (int)Mathf.Abs(touch.deltaPosition.x);
         int fastX = FindFast(compareFastX);
 
@@ -184,7 +192,7 @@ public class TouchSensitive : MonoBehaviour
                     wantToAccelerate=false;
                     //wantToSlow=false;
                     activePiece.BotShift();
-                }else if(touch.azimuthAngle==0f && Time.frameCount%(20-fastX)==0 && wantToAccelerate && touch.deltaPosition.x<0){
+                }else if(touch.azimuthAngle==0f && Time.frameCount%(22-fastX)==0 && wantToAccelerate && touch.deltaPosition.x<0){
                     wantToShift= false;
                     //wantToSlow=false;
                     activePiece.LeftShift();
@@ -204,7 +212,7 @@ public class TouchSensitive : MonoBehaviour
                     wantToAccelerate=false;
                     //wantToSlow=false;
                     activePiece.BotShift();
-                }else if(touch.azimuthAngle==0f && Time.frameCount%(20-fastX)==0 && wantToAccelerate && touch.deltaPosition.x>0){
+                }else if(touch.azimuthAngle==0f && Time.frameCount%(22-fastX)==0 && wantToAccelerate && touch.deltaPosition.x>0){
                     wantToShift= false;
                     //wantToSlow=false;
                     activePiece.RightShift();
@@ -218,9 +226,15 @@ public class TouchSensitive : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Sterlingot Guillaume
-    /// Description : Méthode permettant de déterminer une vitesse pour le tactile
+    /// Auteur : Sterlingot Guillaume<br>
+    /// Description : Méthode permettant de déterminer la régulation pour le tactile en attributant une valeur modulaire selon la vitesse de déplacement du doigt sur l'écran
     /// </summary>
+    /// <param name="compareFast"> 
+    /// un attribut contenant la vitesse de déplacement du doigt sur l'écran
+    /// </param>
+    /// <returns> 
+    /// Un entier qui correspond à la valeur modulaire qui va conditionner l'entrée dans les méthodes de déplacement/accélération
+    /// </returns>
     public int FindFast(int compareFast){
         int localFast;
 

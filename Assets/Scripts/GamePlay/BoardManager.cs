@@ -583,7 +583,7 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Sterlingot Guillaume
+    /// Auteur : Sterlingot Guillaume<br>
     /// Description : Méthode qui permet la sélection aléatoire d'une des quatres gravités existantes
     /// </summary>
     public void chooseRandomGravity(){
@@ -607,6 +607,12 @@ public class BoardManager : MonoBehaviour
     /// Auteur : Seghir Nassima 
     /// Description : Méthode qui permet de vérifier si une position est valide 
     /// </summary>
+    /// <param name="piece">
+    /// une pièce qui contient le script de gestion des pièces 
+    /// </param>
+    /// <param name="position">
+    /// Un vecteur d'entier à 3 dimensions contenant la position d'un tetromino sur la TileMap
+    /// </param>
     /// <returns>
     /// un booléen qui indique FALSE si la poisition est occupée par un tetromino, 
     /// FALSE si la position est au-dela des limites de la grille, TRUE sinon
@@ -635,12 +641,14 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Sterlingot Guillaume 
+    /// Auteur : Sterlingot Guillaume <br>
     /// Description : Méthode qui permet de vérifier si la position d'une tile est valide 
     /// </summary>
+    /// <param name="tilePos">
+    /// Un vecteur d'entier à 3 dimensions contenant la position d'une tuile de la TileMap
+    /// </param>
     /// <returns>
-    /// un booléen qui indique FALSE si la position est occupée par un tetromino, 
-    /// FALSE si la position est au-dela des limites de la grille, TRUE sinon
+    /// un booléen qui indique FALSE si la position est occupée par un tetromino et si la position est au-dela des limites de la grille, TRUE sinon
     /// </returns>
     public bool ValideTilePos(Vector3Int tilePos){
         RectInt bounds = Bornes;// On récupère les bornes du plateau

@@ -436,11 +436,17 @@ public class Piece : MonoBehaviour
     /// Description : Méthode qui permet la rotation de la pièce de tetromino actuellement présente sur le plateau
     /// </summary>
     public void Rotate(){
-        Vector2Int[] pivots; //On initialise un tableau de pivot
-        pivots = FillPivot(); //On remplie le tableau de pivot dans le bonne ordre
-
+        /*Vector2Int[] pivots; //On initialise un tableau de pivot
+        pivots = FillPivot(); //On remplie le tableau de pivot dans le bonne ordre*/
+        board.Clear(this);
+        if(data.tetromino.Equals(Tetromino.I))
+            Pivot(new Vector2Int(1,1));
+        else
+            Pivot(new Vector2Int(0,0));
+                            
+                
         //On vérifie si le tétromino O est présent en pièce active
-        if(!data.tetromino.Equals(Tetromino.O)){
+        /*if(!data.tetromino.Equals(Tetromino.O)){
             int j=-1;
                         
             board.Clear(this);
@@ -461,10 +467,10 @@ public class Piece : MonoBehaviour
                 else
                     j++;
             }
-        }
+        }*/
     }
 
-    /// <summary> 
+    /*/// <summary> 
     /// Auteur : Sterlingot Guillaume
     /// Description : Méthode qui permet de remplir le tableau de pivot de la pièce courante sur le board
     /// </summary>
@@ -481,7 +487,7 @@ public class Piece : MonoBehaviour
         }
 
         return pivots;
-    }
+    }*/
 
     /// <summary> 
     /// Auteur : Sterlingot Guillaume

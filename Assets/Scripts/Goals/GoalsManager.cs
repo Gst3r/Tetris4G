@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Auteur : Sterlingot Guillaume<br>
-/// Description : Cette classe permet la gestion des objectifs du jeu
+/// Description : Cette classe permet la gestion des objectifs du jeu en cours de partie
 /// </summary>
 public class GoalsManager : MonoBehaviour
 {
@@ -129,9 +129,9 @@ public class GoalsManager : MonoBehaviour
     /// <param name="intitule">
     /// une chaîne de caractère correspondant à l'intitule de l'objectif atteind
     /// </param>
-    /// <return>
+    /// <returns>
     /// Un booléen qui indique TRUE si un objectif est remplis, FALSE sinon
-    /// </return>
+    /// </returns>
     public bool CheckGoals(out string intitule){
         string goalIntitule = "";
 
@@ -151,9 +151,9 @@ public class GoalsManager : MonoBehaviour
     /// <param name="intitule">
     /// une chaîne de caractère correspondant à l'intitule de l'objectif atteind
     /// </param>
-    /// <return>
+    /// <returns>
     /// Un booléen qui indique TRUE si un des objectifs de première partie de jeu est atteind, FALSE sinon
-    /// </return>
+    /// </returns>
     public bool CheckFirstGame(out string intitule){
         
         if(Controller.GetGameMode()==Mode.MARATHON && SceneManager.GetActiveScene().name=="Tutorial"  && successDico[goals[0]] == false){
@@ -181,9 +181,9 @@ public class GoalsManager : MonoBehaviour
     /// <param name="intitule">
     /// une chaîne de caractère correspondant à l'intitule de l'objectif atteind
     /// </param>
-    /// <return>
+    /// <returns>
     /// Un booléen qui indique TRUE si tout les objectifs du mode Marathon sont remplis, FALSE sinon
-    /// </return>
+    /// </returns>
     public bool CheckMarathonGoal(out string intitule){
         string intituleMarathonGoal;
 
@@ -203,9 +203,9 @@ public class GoalsManager : MonoBehaviour
     /// <param name="intitule">
     /// une chaîne de caractère correspondant à l'intitule de l'objectif atteind
     /// </param>
-    /// <return>
+    /// <returns>
     /// Un booléen qui indique TRUE si tout les objectifs du mode Sprint sont remplis, FALSE sinon
-    /// </return>
+    /// </returns>
     public bool CheckSprintGoal(out string intitule){
         string intituleSprintGoal = "";
 
@@ -225,9 +225,9 @@ public class GoalsManager : MonoBehaviour
     /// <param name="intitule">
     /// une chaîne de caractère correspondant à l'intitule de l'objectif atteind
     /// </param>
-    /// <return>
+    /// <returns>
     /// Un booléen qui indique TRUE si tout les objectifs du mode Ultra sont remplis, FALSE sinon
-    /// </return>
+    /// </returns>
     public bool CheckUltraGoal(out string intitule){
         string intituleUltraGoal = "";
         
@@ -244,9 +244,9 @@ public class GoalsManager : MonoBehaviour
     /// Auteur : Sterlingot Guillaume<br>
     /// Description : Cette méthode permet de déterminer si tout les objectifs ont été atteind.
     /// </summary>
-    /// <return>
+    /// <returns>
     /// Un booléen qui indique TRUE si tout les objectifs du jeu sont remplis, FALSE sinon
-    /// </return>
+    /// </returns>
     public bool CheckFullGoal(out string intitule){
         foreach(bool state in successDico.Values){
             if(!state && successDico[goals[21]] == false){    
@@ -265,9 +265,9 @@ public class GoalsManager : MonoBehaviour
     /// <param name="intitule">
     /// une chaîne de caractère correspondant à l'intitule de l'objectif atteind
     /// </param>
-    /// <return>
+    /// <returns>
     /// Un booléen qui indique TRUE si tout les objectifs de score du mode Marathon sont remplis, FALSE sinon
-    /// </return>
+    /// </returns>
     public bool CheckScoreGoal(out string intitule){
         int[] goalScores = {0, 0, 0, 0, 40, 120, 200, 360, 520, 760, 1000, 1200};
 
@@ -291,9 +291,9 @@ public class GoalsManager : MonoBehaviour
     /// <param name="intitule">
     /// une chaîne de caractère correspondant à l'intitule de l'objectif atteind
     /// </param>
-    /// <return>
+    /// <returns>
     /// Un booléen qui indique TRUE si tout les objectifs de temps du mode sprint sont remplis, FALSE sinon
-    /// </return>
+    /// </returns>
     public bool CheckTimeGoal(out string intitule){
         int[] goalTime = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 6, 8, 10};
         int[] goalLines = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 10, 15, 20};
@@ -318,9 +318,9 @@ public class GoalsManager : MonoBehaviour
     /// <param name="intitule">
     /// une chaîne de caractère correspondant à l'intitule de l'objectif atteind
     /// </param>
-    /// <return>
+    /// <returns>
     /// Un booléen qui indique TRUE si tout les objectifs de ligne du mode sprint sont remplis, FALSE sinon
-    /// </return>
+    /// </returns>
     public bool CheckLineGoal(out string intitule){
          int[] goalLines = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 5, 8, 13, 18, 23};
 

@@ -5,84 +5,88 @@ using TMPro;
 using UnityEngine.UI;
 using System;
 
+/// <summary>
+/// Auteur : Sterlingot Guillaume<br>
+/// Description : Cette classe permet la gestion complète du tutoriel du jeu
+/// </summary>
 public class TutorialManager : MonoBehaviour
 {
 
 //------------------------------GAME---------------------------------------------------
     
     /// <summary> 
-    /// Attribut contenant le panel de fin de jeu
+    /// Attribut contenant l'image du personnage du tuto
     /// </summary>
     [SerializeField]private GameObject tutoCharactere;
 
     /// <summary> 
-    /// Attribut contenant le panel de fin de jeu
+    /// Attribut contenant le panel d'explication du tutoriel
     /// </summary>
     [SerializeField]private GameObject explainPanel;
     
     /// <summary> 
-    /// Attribut contenant le panel de fin de jeu
+    /// Attribut contenant le panel d'affichage des objectifs à faire tout au long du tutoriel
     /// </summary>
     [SerializeField]private GameObject goalPanel;
     
     /// <summary> 
-    /// Attribut contenant le panel de fin de jeu
+    /// Attribut contenant le bouton continuer du tutoriel en tant que GameObject
     /// </summary>
     [SerializeField]private GameObject continueButtonAsGameObject;
     
     /// <summary> 
-    /// Attribut contenant le panel de fin de jeu
+    /// Attribut contenant la zone de texte du Panel affichant les objectifs à faire tout au long du tutoriel
     /// </summary>
     [SerializeField]private TMP_Text goalText;
     
     /// <summary> 
-    /// Attribut contenant le panel de fin de jeu
+    /// Attribut contenant le bouton continuer du tutoriel en tant que Button
     /// </summary>
     [SerializeField]private Button continueButton;
     
     /// <summary> 
-    /// Attribut contenant le panel de fin de jeu
+    /// Attribut contenant la zone de texte présente dans le panel d'explication
     /// </summary>
     [SerializeField]private TMP_Text explainText;
     
     /// <summary> 
-    /// Attribut contenant le panel de fin de jeu
+    /// Attribut contenant le Panel qui recouvre le bouton pause au début du tutoriel avant que celui-ci ne soit présenté
     /// </summary>
     [SerializeField]private GameObject coverPauseMenuPanel;
     
     /// <summary> 
-    /// Attribut contenant le panel de fin de jeu
+    /// Attribut contenant le Panel qui recouvre le bouton hold au début du tutoriel avant que celui-ci ne soit présenté
     /// </summary>
     [SerializeField]private GameObject coverHoldPanel;
 
 //-------------------------------PAUSE------------------------------------------------------
     /// <summary> 
-    /// Attribut contenant le panel de fin de jeu
+    /// Attribut contenant le Panel d'explication du menu pause
     /// </summary>
     [SerializeField]private GameObject explainPausePanel;
     
     /// <summary> 
-    /// Attribut contenant le panel de fin de jeu
+    /// Attribut contenant la zone de text du Panel d'explication du menu pause
     /// </summary>
     [SerializeField]private TMP_Text explainMenuPauseText;
     
     /// <summary> 
-    /// Attribut contenant le panel de fin de jeu
+    /// Attribut contenant le bouton continuer du tutoriel des menus en tant que GameObject
     /// </summary>
     [SerializeField]private GameObject continuePauseButtonAsGameObject;   
     
     /// <summary> 
-    /// Attribut contenant le panel de fin de jeu
+    /// Attribut contenant la zone de texte du Panel affichant les objectifs à faire dans les menus du tutoriel
     /// </summary>
     [SerializeField]private TMP_Text pauseGoalText; 
     
     /// <summary> 
-    /// Attribut contenant le panel de fin de jeu
+    /// Attribut contenant le Panel affichant les objectifs à faire tout au long du tutoriel
     /// </summary>
     [SerializeField]private GameObject pauseGoalPanel;
     
     /// <summary> 
-    /// Attribut contenant le panel de fin de jeu
+    /// Attribut contenant le bouton pause du jeu
     /// </summary>
     [SerializeField]private Button pauseMenuButton;
     
@@ -96,7 +100,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField]private BoardManager board;
 
     /// <summary> 
-    /// Attribut contenant le panel de fin de jeu
+    /// Booléen qui indique TRUE si le tutoriel permet au jeu d'activer les fonctionnalités tactiles, FALSE sinon
     /// </summary>
     public static bool canTouchSensitive=true;
 
