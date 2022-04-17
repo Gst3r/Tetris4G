@@ -104,7 +104,7 @@ public class TouchSensitive : MonoBehaviour
                 case TouchPhase.Moved:
                     fingerTime+=Time.timeScale;
 
-                    if(fingerTime>0.2f && TutorialManager.activeMove){
+                    if(fingerTime>0.3f && TutorialManager.activeMove){
                         Shift(touch);
                         wantToRotate=false;
                     }
@@ -262,13 +262,13 @@ public class TouchSensitive : MonoBehaviour
         else if(compareFast>7)
             localFast = 3;
         else if(compareFast>5)
-            localFast = 1;
+            localFast = 0;
         else if(compareFast>3)
-            localFast = -1;
-        else if(compareFast>1)
             localFast = -3;
-        else
+        else if(compareFast>1)
             localFast = -5;
+        else
+            localFast = -10;
 
         return localFast;
     }
