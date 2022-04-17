@@ -22,6 +22,10 @@ public class ScoreManager : MonoBehaviour
     /// </summary>
     [SerializeField] private static int nbLines = 0;
 
+    /// <summary> 
+    /// Attribut contenant le noombre de ligne détruite de la partie en cours 
+    /// </summary>
+    [SerializeField] private static int time = 0;
 
     /// <summary> 
     /// Attribut contenant le score de la partie en cours sous forme de texte
@@ -41,6 +45,7 @@ public class ScoreManager : MonoBehaviour
     private void Start(){
         score = 0;
         nbLines = 0;
+        time = 0;
     }
  
     /// <summary> 
@@ -64,30 +69,35 @@ public class ScoreManager : MonoBehaviour
     /// <param name="isBonus">
     /// Booleen mis a TRUE si les lignes sont de nature "bonus"
     /// </param>
+    /// <param name="isCol">
+    /// Booleen mis a TRUE si la ligne complété est une colonne, FALSE sinon
+    /// </param>
     /// <param name="isMalus">
     /// Booleen mis a TRUE si les lignes sont de nature "malus"
     /// </param>
     /// <param name="nmbLines">
     /// Le nombre de lignes supprimées
     /// </param>
-    public void IncrementScore(int nmbLines, bool isBonus, bool isMalus)
+    public void IncrementScore(int nmbLines, bool isCol, bool isBonus, bool isMalus)
     {
+        int scoreAdding = isCol?80:40; // Le score ajouté est 80 si le joueur a complété une colonne, 40 sinon
+
           // si les lignes sont standards
           if (!isBonus && !isMalus)
         {
             switch (nmbLines)
             {
                 case 1:
-                    score += 40;
+                    score += scoreAdding;
                     break;
                 case 2:
-                    score += 100;
+                    score += scoreAdding*2+20;
                     break;
                 case 3:
-                    score += 300;
+                    score += scoreAdding*7+20;
                     break;
                 case 4:
-                    score += 1200;
+                    score += scoreAdding*30;
                     break;
                 default:
                     break;
@@ -100,16 +110,16 @@ public class ScoreManager : MonoBehaviour
             switch (nmbLines)
             {
                 case 1:
-                    score += 80;
+                    score += scoreAdding*2;
                     break;
                 case 2:
-                    score += 200;
+                    score += scoreAdding*4+20;
                     break;
                 case 3:
-                    score += 600;
+                    score += scoreAdding*14+20;
                     break;
                 case 4:
-                    score += 2400;
+                    score += scoreAdding*60;
                     break;
                 default:
                     break;
@@ -122,24 +132,24 @@ public class ScoreManager : MonoBehaviour
             switch (nmbLines)
             {
                 case 1:
-                    score -= 40;
+                    score -= scoreAdding;
                     break;
                 case 2:
-                    score -= 100;
+                    score -= scoreAdding*2+20;
                     break;
                 case 3:
-                    score -= 300;
+                    score -= scoreAdding*7+20;
                     break;
                 case 4:
-                    score -= 1200;
+                    score -= scoreAdding*30;
                     break;
                 default:
                     break;
             }
         }
 
-         //le score est mis a jour
-          ChangeScore();
+        //le score est mis a jour
+        ChangeScore();
        
      }
 
@@ -188,6 +198,7 @@ public class ScoreManager : MonoBehaviour
         PlayerPrefs.SetString(key, json);
         
     }
+    
     /// <summary> 
     /// getter de l'objet sd
     /// </summary>
@@ -205,15 +216,42 @@ public class ScoreManager : MonoBehaviour
     } 
 
     /// <summary> 
-    /// getter du nomre de ligne
+    /// getter du nombre de ligne
     /// </summary>
     public static int GetNbLines()
     {
         return nbLines; 
     } 
 
+    /// <summary> 
+    /// getter du temps écoulé
+    /// </summary>
+    public static int GetTime()
+    {
+        return nbLines; 
+    }
 
+    /// <summary> 
+    /// setter du score
+    /// </summary>
+    public static void SetScore(int value)
+    {
+        score = value; 
+    } 
 
+    /// <summary> 
+    /// setter du nombre de ligne
+    /// </summary>
+    public static void SetNbLines(int value)
+    {
+        nbLines = value; 
+    } 
 
-
+    /// <summary> 
+    /// setter du temps écoulé
+    /// </summary>
+    public static void SetTime(int value)
+    {
+        time = value; 
+    }
 }

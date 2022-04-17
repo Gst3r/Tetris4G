@@ -156,7 +156,7 @@ public class GoalsManager : MonoBehaviour
     /// </return>
     public bool CheckFirstGame(out string intitule){
         
-        if(PlayerPrefs.GetInt("firstGame", 0)!=1 && successDico[goals[0]] == false){
+        if(Controller.GetGameMode()==Mode.MARATHON && SceneManager.GetActiveScene().name=="Tutorial"  && successDico[goals[0]] == false){
             intitule=goals[0];
             return true;
         }else if(Controller.GetGameMode()==Mode.MARATHON && SceneManager.GetActiveScene().name=="Game" && successDico[goals[1]] == false){
@@ -275,7 +275,7 @@ public class GoalsManager : MonoBehaviour
         for(int i=4;i<12;i++){
             //La première condition permet de vérifier si le score visé est atteind ou non
             //La deuxième condition permet de vérifier si l'objectif de scorer précédent a été atteind avant de valider l'objectif (synchro)
-            if(ScoreManager.GetScore()>=goalScores[i] && (i==3 || successDico[goals[i-1]] == true) && successDico[goals[i]] == false){
+            if(ScoreManager.GetScore()>=goalScores[i] && (i==4 || successDico[goals[i-1]] == true) && successDico[goals[i]] == false){
                 intitule=goals[i];
                 return true;
             }
@@ -295,18 +295,18 @@ public class GoalsManager : MonoBehaviour
     /// Un booléen qui indique TRUE si tout les objectifs de temps du mode sprint sont remplis, FALSE sinon
     /// </return>
     public bool CheckTimeGoal(out string intitule){
-        // A ECRIRE
-        //int[] goalTime = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, dfqfsqfqsdqsd};
+        int[] goalTime = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 6, 8, 10};
+        int[] goalLines = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 10, 15, 20};
 
         //On parcourt les intitulés de goals
-        /*for(int i=19;i<22;i++){
+        for(int i=19;i<22;i++){
             //La première condition permet de vérifier si le score visé est atteind ou non
             //La deuxième condition permet de vérifier si l'objectif de scorer précédent a été atteind avant de valider l'objectif (synchro)
-            if(ScoreManager.GetNbLines()>=goalLines[i] && (i==11 || successDico[goals[i-1]] == true) && successDico[goals[i]] == false){
+            if(ScoreManager.GetNbLines()>=goalLines[i] && ScoreManager.GetTime()<=goalTime[i] && (i==19 || successDico[goals[i-1]] == true) && successDico[goals[i]] == false){
                 intitule=goals[i];
                 return true;
             }
-        }*/
+        }
         intitule="";
         return false;
     }
@@ -328,7 +328,7 @@ public class GoalsManager : MonoBehaviour
         for(int i=12;i<19;i++){
             //La première condition permet de vérifier si le nombre de ligne visé est atteind ou non
             //La deuxième condition permet de vérifier si l'objectif de scorer précédent a été atteind avant de valider l'objectif (synchro)
-            if(ScoreManager.GetNbLines()>=goalLines[i] && (i==11 || successDico[goals[i-1]] == true) && successDico[goals[i]] == false){
+            if(ScoreManager.GetNbLines()>=goalLines[i] && (i==12 || successDico[goals[i-1]] == true) && successDico[goals[i]] == false){
                 intitule=goals[i];
                 return true;
             }

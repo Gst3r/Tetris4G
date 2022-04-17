@@ -78,6 +78,7 @@ public class UltraManager : IMode
         if(!PauseMenu.GetGameIsPausing()){
             countLine=BoardManager.GetTotalLinesCleared();
             this.ultraLinePanel.GetComponent<Text>().text = (maxLine-countLine).ToString();  
+            ScoreManager.SetNbLines(countLine);
         }
     }
 
@@ -91,6 +92,7 @@ public class UltraManager : IMode
             if((int)countTime!=0){
                 this.ultraTimePanel.GetComponent<Text>().text = ((int)(countTime)/60).ToString()+":"+((((int)countTime)%60<10)?"0":"")+((int)(countTime)%60).ToString();  
             }
+            ScoreManager.SetTime((int)countTime);
         }
     }
 
@@ -118,8 +120,13 @@ public class UltraManager : IMode
         ultraTimePanel.SetActive(false);
     }
 
-    public static int GetScore()
+    public static int GetTime()
     {
         return (int)countTime; 
+    }
+
+    public static int GetLine()
+    {
+        return (int)countLine; 
     }
 }

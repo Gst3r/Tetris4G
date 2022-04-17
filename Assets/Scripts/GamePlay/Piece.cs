@@ -145,8 +145,8 @@ public class Piece : MonoBehaviour
     }
 
     /// <summary> 
-    /// Méthode qui permet de bouger la piece sur la grille de jeu 
-    /// Auteur: Seghir Nassima 
+    /// Auteurs: Seghir Nassima, Kusunga Malcom <br>
+    /// Description : Méthode qui permet de bouger la piece sur la grille de jeu 
     /// </summary>
     /// <returns>
     /// un booléen qui indique TRUE si le mouvement a bien eu lieu, FALSE sinon
@@ -161,10 +161,23 @@ public class Piece : MonoBehaviour
 
         if(valid)
         {
-            position = newPosition;
-            lockTime = 0f; // a chaque mouvement de la piece il est remis a 0, comme ça quand elle atteint 
-            // le bord et qu'elle ne bouge plus, on la lock
-           
+            if(board.GetGravity()==Gravity.HAUT || board.GetGravity()==Gravity.BAS){
+                if(position.y==newPosition.y){
+                    position = newPosition;
+                }else{
+                    position = newPosition;
+                    lockTime = 0f; // a chaque mouvement de la piece il est remis a 0, comme ça quand elle atteint  
+                    // le bord et qu'elle ne bouge plus, on la lock 
+                }
+            }else{
+                if(position.x==newPosition.x){
+                    position = newPosition;
+                }else{
+                    position = newPosition;
+                    lockTime = 0f; // a chaque mouvement de la piece il est remis a 0, comme ça quand elle atteint  
+                    // le bord et qu'elle ne bouge plus, on la lock 
+                }
+            }
         }
 
         return valid;
@@ -193,7 +206,7 @@ public class Piece : MonoBehaviour
         }
         
         if (lockTime >= lockDelay) {
-           Lock();
+            Lock();
         }
     }
 

@@ -66,6 +66,7 @@ public class SprintManager : IMode
             if((int)countSec!=0){
                 this.sprintTimePanel.GetComponent<Text>().text = ((int)(countMax-countSec)/60).ToString()+":"+((int)(countMax-countSec)%60).ToString();  
             }
+            ScoreManager.SetTime((int)countSec);
         }
     }
 

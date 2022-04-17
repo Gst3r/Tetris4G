@@ -92,7 +92,8 @@ public class TouchSensitive : MonoBehaviour
 
                 // Determine direction by comparing the current touch position with the initial one.
                 case TouchPhase.Moved:
-                    Shift(touch);
+                    if(TutorialManager.activeMove)
+                        Shift(touch);
                     wantToRotate=false;
                     break;
 
@@ -164,7 +165,7 @@ public class TouchSensitive : MonoBehaviour
                     //wantToSlow=false;
                     wantToAccelerate=false;
                     activePiece.LeftShift();
-                }else if(touch.azimuthAngle==0f && Time.frameCount%(20-fastY)==0 && wantToAccelerate && touch.deltaPosition.y<0){
+                }else if(touch.azimuthAngle==0f && Time.frameCount%(20-fastY)==0 && wantToAccelerate && touch.deltaPosition.y<0 && TutorialManager.activeAccelerate){
                     //wantToSlow=false;
                     wantToShift=false;
                     activePiece.BotShift();
@@ -228,19 +229,21 @@ public class TouchSensitive : MonoBehaviour
         else if(compareFast>17)
             localFast = 17;
         else if(compareFast>15)
-            localFast = 14;
+            localFast = 13;
         else if(compareFast>13)
-            localFast = 12;
+            localFast = 10;
         else if(compareFast>11)
-            localFast = 9;
+            localFast = 7;
         else if(compareFast>9)
-            localFast= 6;
+            localFast= 5;
         else if(compareFast>7)
             localFast = 2;
         else if(compareFast>5)
-            localFast= -5;
+            localFast = -2;
+        else if(compareFast>3)
+            localFast = -5;
         else
-            localFast = -10;
+            localFast = -8;
 
         return localFast;
     }
@@ -248,7 +251,16 @@ public class TouchSensitive : MonoBehaviour
     public static bool GetWantToRotate(){
         return wantToRotate;
     }
-    public static void SetWantToRotate(bool wantToRot){
-        wantToRotate = wantToRot;
+
+    public static void SetWantToRotate(bool value){
+        wantToRotate = value;
+    }
+
+    public static bool GetWantToAccelerate(){
+        return wantToAccelerate;
+    }
+
+    public static void SetWantToAccelerate(bool value){
+        wantToRotate = value;
     }
 }

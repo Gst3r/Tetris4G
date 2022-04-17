@@ -172,7 +172,6 @@ public class BoardManager : MonoBehaviour
         {
             Set(activePiece, data.bonus_tile);
         }
-
     }
 
     /// <summary> 
@@ -420,6 +419,9 @@ public class BoardManager : MonoBehaviour
     {
         RectInt bornes = Bornes;
 
+        // Booleen qui indique si la ligne complété est une ligne ou une colonne
+        bool isCol=false;
+
         //Le nombre de lignes sans bonus ni malus effacées au total
         int nbLinesCleared =0; 
         
@@ -437,6 +439,8 @@ public class BoardManager : MonoBehaviour
             // si une ligne est complète, elle est détruite
             if (RowIsComplete(row))
             {
+                isCol=false;
+
                 //on compte le nombre de tuiles standards, bonus et malus dans la ligne supprimee
                 int nbTileBonus = 0;
                 int nbTileMalus = 0;
@@ -506,6 +510,8 @@ public class BoardManager : MonoBehaviour
             // si une colonne est complète, elle est détruite
             if (ColIsComplete(col))
             {
+                isCol=true;
+
                 //on compte le nombre de tuiles standards, bonus et malus dans la colonne supprimee
                 int nbTileBonus = 0;
                 int nbTileMalus = 0;
@@ -564,9 +570,9 @@ public class BoardManager : MonoBehaviour
             }
         }
         //Calcul du score selon le nombre et la nature des lignes/colonnes completees 
-        scoreManager.IncrementScore(nbLinesCleared, false, false);
-        scoreManager.IncrementScore(nbLinesBonus, true, false);
-        scoreManager.IncrementScore(nbLinesMalus, false, true);
+        scoreManager.IncrementScore(nbLinesCleared, isCol, false, false);
+        scoreManager.IncrementScore(nbLinesBonus, isCol, true, false);
+        scoreManager.IncrementScore(nbLinesMalus, isCol, false, true);
         totalLinesCleared +=nbLinesCleared;
         
         //Activation de l'effet sonore lorsque un ou plusieurs lignes sont détruites
