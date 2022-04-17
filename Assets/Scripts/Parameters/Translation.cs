@@ -142,7 +142,7 @@ public sealed class Translation : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur: Kusunga Malcom
+    /// Auteur: Kusunga Malcom <br>
     /// Méthode qui permet de récupérer le dictionnaire afin d'effectuer la traduction
     /// </summary>
     private static void LoadDictionnary()
@@ -165,7 +165,7 @@ public sealed class Translation : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur: Kusunga Malcom
+    /// Auteur: Kusunga Malcom <br>
     /// Méthode qui retourne la traduction d'un mot
     /// </summary>
     /// <param name="key">
@@ -188,7 +188,7 @@ public sealed class Translation : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur: Kusunga Malcom
+    /// Auteur: Kusunga Malcom <br>
     /// Méthode qui lit le fichier contenant l'ensemble des tractuctions pour une langue
     /// </summary>
     /// <param name="data">

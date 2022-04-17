@@ -98,9 +98,12 @@ public class SoundManager : MonoBehaviour {
 	}
 
 	/// <summary>
-    /// Auteur : Kusunga Malcom
+    /// Auteur : Kusunga Malcom <br>
     /// Methode permettant sélectionner aléatoirement la musique de fond
     /// </summary>
+	/// <returns>
+    /// La musique de fond selectionnée dans la liste
+    /// </returns>
 	public AudioClip GetRandomClip(AudioClip[] clips)
 	{
 		AudioClip randomClip = clips[Random.Range(0, clips.Length)];
@@ -108,7 +111,7 @@ public class SoundManager : MonoBehaviour {
 	}
 
 	/// <summary>
-    /// Auteur : Kusunga Malcom
+    /// Auteur : Kusunga Malcom <br>
     /// Methode permettant le lancement de la musique de fond des l'apparition de la scène
     /// </summary>
 	public void PlayBackgroundMusic(AudioClip musicClip)
@@ -135,7 +138,7 @@ public class SoundManager : MonoBehaviour {
 	} 
 
 	/// <summary>
-    /// Auteur : Kusunga Malcom
+    /// Auteur : Kusunga Malcom <br>
     /// Méthode permettant d'activer/desactiver la musique lorsque le joueur utilise le Toggle lié à la musique 
     /// </summary>
 	private void UpdateMusic()
@@ -155,7 +158,7 @@ public class SoundManager : MonoBehaviour {
 	}
 
 	/// <summary>
-    /// Auteur : Kusunga Malcom
+    /// Auteur : Kusunga Malcom <br>
     /// Methode permettant d'activer/desactiver la musique de fond
     /// </summary>
 	public void ToggleMusic()
@@ -180,7 +183,7 @@ public class SoundManager : MonoBehaviour {
 	}
 
 	/// <summary>
-    /// Auteur : Kusunga Malcom
+    /// Auteur : Kusunga Malcom <br>
     /// Méthode permettant d'activer/desactiver le son des effets sonores
     /// </summary>
 	public void ToggleFX()
@@ -204,7 +207,7 @@ public class SoundManager : MonoBehaviour {
 	}
 
 	/// <summary>
-    /// Auteur : Kusunga Malcom
+    /// Auteur : Kusunga Malcom <br>
     /// Methode permettant de jouer un son avec un multiplicateur de volume
     /// </summary>
 	public void PlaySound (AudioClip clip, float volMultiplier = 1.0f)

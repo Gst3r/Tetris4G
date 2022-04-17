@@ -63,8 +63,8 @@ public class GhostPiece : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Kusunga Malcom
-    /// Méthode permettant de définir la ghost piece sur la grille de jeu secondaire
+    /// Auteur : Kusunga Malcom <br>
+    /// Description : Méthode permettant de définir la ghost piece sur la grille de jeu secondaire
     /// </summary>
     public void SetGhost()
     {
@@ -79,8 +79,8 @@ public class GhostPiece : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Kusunga Malcom
-    /// Méthode permettant de supprimer la ghost piece de la grille de jeu secondaire
+    /// Auteur : Kusunga Malcom <br>
+    /// Description : Méthode permettant de supprimer la ghost piece de la grille de jeu secondaire
     /// </summary>
     public void ClearGhost()
     {
@@ -95,8 +95,8 @@ public class GhostPiece : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Kusunga Malcom
-    /// Méthode permettant de supprimer la ghost piece de la grille de jeu 
+    /// Auteur : Kusunga Malcom <br>
+    /// Description : Méthode permettant de supprimer la ghost piece de la grille de jeu 
     /// </summary>
     public void CopyPieceOnBoard()
     {
@@ -109,8 +109,8 @@ public class GhostPiece : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Kusunga Malcom, Seghir Nassima, Bae Jin-Young
-    /// Méthode permettant de projeter la ghost piece dans le sens exercé par la gravité  
+    /// Auteurs : Kusunga Malcom, Seghir Nassima, Bae Jin-Young <br>
+    /// Description : Méthode permettant de projeter la ghost piece dans le sens exercé par la gravité  
     /// </summary>
     public void ProjectPiece()
     {

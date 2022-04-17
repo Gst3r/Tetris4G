@@ -217,7 +217,7 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Auteurs : Seghir Nassima, Bae Jin-Young
+    /// Auteurs : Seghir Nassima, Bae Jin-Young <br>
     /// Méthode permettant d'incrémenter le temps à chaque seconde
     /// </summary>
     public void CountTime()
@@ -230,7 +230,7 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Bae Jin-Young
+    /// Auteur : Bae Jin-Young <br>
     /// Méthode qui permet de vérifier si une ligne a été complétée dans la grille de jeu
     /// </summary>
     /// <param name="row">
@@ -259,7 +259,7 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Bae Jin-Young
+    /// Auteur : Bae Jin-Young <br>
     /// Méthode qui permet de détruire la ligne complétée et d'appliquer la gravité sur toute la grille
     /// </summary>
     /// <param name="row">
@@ -321,7 +321,7 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Bae Jin-Young
+    /// Auteur : Bae Jin-Young <br>
     /// Méthode qui permet de vérifier si une colonne a été complétée dans la grille de jeu
     /// </summary>
     /// <param name="col">
@@ -350,7 +350,7 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Bae Jin-Young
+    /// Auteur : Bae Jin-Young <br>
     /// Méthode qui permet de détruire la colonne complétée et d'appliquer la gravité sur toute la grille
     /// </summary>
     /// <param name="col">
@@ -412,7 +412,7 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Auteur : Bae Jin-Young, Seghir Nassima
+    /// Auteur : Bae Jin-Young, Seghir Nassima <br>
     /// Méthode permettant de détruire une ligne/colonne complétée
     /// </summary>
     public void ClearCompleteLine()
@@ -583,7 +583,7 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Sterlingot Guillaume<br>
+    /// Auteur : Sterlingot Guillaume <br>
     /// Description : Méthode qui permet la sélection aléatoire d'une des quatres gravités existantes
     /// </summary>
     public void chooseRandomGravity(){
@@ -604,7 +604,7 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Seghir Nassima 
+    /// Auteur : Seghir Nassima <br>
     /// Description : Méthode qui permet de vérifier si une position est valide 
     /// </summary>
     /// <param name="piece">
@@ -661,7 +661,7 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Auteur : Bae Jin-Young
+    /// Auteur : Bae Jin-Young <br>
     /// Description : Méthode permettant de vérifier si un côté de l'écran est rempli
     /// </summary>
     /// <param name="gravity_is_vertical">
@@ -729,7 +729,7 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Auteur : Kusunga Malcom 
+    /// Auteur : Kusunga Malcom <br>
     /// Description : Méthode permettant de vérifier si tous les côtés sont remplis
     /// </summary>
     public void FullSides(){
@@ -752,7 +752,7 @@ public class BoardManager : MonoBehaviour
 
 
     /// <summary>
-    /// Auteurs : Bae Jin-Young, Kusunga Malcom
+    /// Auteurs : Bae Jin-Young, Kusunga Malcom <br>
     /// Méthode permettant de bloquer les gravités pour les cotés complets
     /// </summary>
     public void StopGravity()
@@ -776,7 +776,7 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Auteur : Bae Jin-Young
+    /// Auteur : Bae Jin-Young <br>
     /// Méthode permettant de nettoyer la zone d'apparition pour laisser la place aux nouvelles pièces
     /// </summary>
     public void ClearApparitionZone()

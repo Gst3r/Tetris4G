@@ -10,7 +10,6 @@ using TMPro;
 /// </summary>
 public class SprintManager : IMode
 {
-
     /// <summary> 
     /// Temps en seconde qui s'est écoulé depuis le début de la partie
     /// </summary>

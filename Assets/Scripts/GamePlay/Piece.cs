@@ -47,7 +47,7 @@ public class Piece : MonoBehaviour
     /// <summary> 
     /// Attribut determinant le delai avant le quel la piece se fixe définitivement sur la grille    
     /// </summary>
-    [SerializeField] private float lockDelay = 0.5f;
+    [SerializeField] private float lockDelay = 1f;
 
     /// <summary> 
     /// Attribut indiquant l'instant ou la pièce doit se deplacer     
@@ -158,6 +158,7 @@ public class Piece : MonoBehaviour
         newPosition.y += translation.y;
 
         bool valid = board.ValiderPosition(this, newPosition);
+        //bool valid = true;
 
         if(valid)
         {
@@ -211,7 +212,7 @@ public class Piece : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteurs : Seghir Nassima, Kusunga Malcom, Bae Jin-Young, Sterlingot Guillaume
+    /// Auteurs : Seghir Nassima, Kusunga Malcom, Bae Jin-Young, Sterlingot Guillaume <br>
     /// Méthode qui bloque le mouvement de la piece  
     /// </summary>
     private void Lock()
@@ -284,7 +285,7 @@ public class Piece : MonoBehaviour
     }
 
     /// <summary>
-    /// Auteur : Bae Jin-Young
+    /// Auteur : Bae Jin-Young <br>
     /// Methode permettant d'effacer une piece
     /// </summary>
     public void Remove()
@@ -298,7 +299,7 @@ public class Piece : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Kusunga Malcom 
+    /// Auteur : Kusunga Malcom <br>
     /// Description : Méthode permettant le déplacement vers la droite du tetromino actuellement présent sur le plateau
     /// </summary>
     public void RightShift(){
@@ -309,7 +310,7 @@ public class Piece : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Kusunga Malcom
+    /// Auteur : Kusunga Malcom <br>
     /// Description : Méthode permettant le déplacement vers la gauche du tetromino actuellement présent sur le plateau
     /// </summary>
     public void LeftShift(){
@@ -319,7 +320,7 @@ public class Piece : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Kusunga Malcom
+    /// Auteur : Kusunga Malcom <br>
     /// Description : Méthode permettant le déplacement vers le haut du tetromino actuellement présent sur le plateau
     /// </summary>
     public void TopShift(){
@@ -329,7 +330,7 @@ public class Piece : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Kusunga Malcom 
+    /// Auteur : Kusunga Malcom <br>
     /// Description : Méthode permettant le déplacement vers le bas du tetromino actuellement présent sur le plateau
     /// </summary>
     public void BotShift(){
@@ -339,8 +340,8 @@ public class Piece : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Kusunga Malcom
-    /// Description : Méthode permettant de modifier la force de la gravité du tetromino actuellement présent sur le plateau 
+    /// Auteur : Kusunga Malcom <br>
+    /// Description : Méthode permettant de modifier la force de la gravité du tetromino actuellement présent sur le plateau <br>
     ///               Bouton Droit  
     /// </summary>
     public void ModifyGravityR()
@@ -360,8 +361,8 @@ public class Piece : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Kusunga Malcom
-    /// Description : Méthode permettant de modifier la force de la graivté du tetromino actuellement présent sur le plateau 
+    /// Auteur : Kusunga Malcom <br>
+    /// Description : Méthode permettant de modifier la force de la graivté du tetromino actuellement présent sur le plateau <br>
     ///               Bouton Gauche
     /// </summary>
     public void ModifyGravityL()
@@ -380,9 +381,9 @@ public class Piece : MonoBehaviour
         }
     }
 
-    /// <summary> 
-    /// Auteur : Kusunga Malcom
-    /// Description : Méthode permettant de modifier la force de la gravité du tetromino actuellement présent sur le plateau 
+    /// <summary>  
+    /// Auteur : Kusunga Malcom <br>
+    /// Description : Méthode permettant de modifier la force de la gravité du tetromino actuellement présent sur le plateau <br>
     ///               Bouton Haut
     /// </summary>
     public void ModifyGravityT()
@@ -402,8 +403,8 @@ public class Piece : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteur : Kusunga Malcom
-    /// Description : Méthode permettant de modifier la force de la gravité du tetromino actuellement présent sur le plateau 
+    /// Auteur : Kusunga Malcom <br>
+    /// Description : Méthode permettant de modifier la force de la gravité du tetromino actuellement présent sur le plateau <br>
     ///               Bouton Bas
     /// </summary>
     public void ModifyGravityB()
@@ -423,7 +424,7 @@ public class Piece : MonoBehaviour
     }
 
     /// <summary> 
-    /// Auteurs : Sterlingot Guillaume, Kusunga Malcom
+    /// Auteurs : Sterlingot Guillaume, Kusunga Malcom <br>
     /// Description : Méthode permettant de restaurer la vitesse de déplacement du tetromino actuellement présent sur le plateau
     /// </summary>
     public void RestoreGravity(){
@@ -439,10 +440,8 @@ public class Piece : MonoBehaviour
         /*Vector2Int[] pivots; //On initialise un tableau de pivot
         pivots = FillPivot(); //On remplie le tableau de pivot dans le bonne ordre*/
         board.Clear(this);
-        if(data.tetromino.Equals(Tetromino.I))
-            Pivot(new Vector2Int(1,1));
-        else
-            Pivot(new Vector2Int(0,0));
+
+        Pivot(new Vector2Int(0,0));    
                             
                 
         //On vérifie si le tétromino O est présent en pièce active
